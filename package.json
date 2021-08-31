@@ -2,6 +2,7 @@
     "name": "wavy",
     "version": "0.1.0",
     "private": true,
+    "main": "src/index.tsx",
     "dependencies": {
         "@testing-library/jest-dom": "^5.11.4",
         "@testing-library/react": "^11.1.0",
@@ -23,7 +24,7 @@
         "react-chartjs-2": "^3.0.4",
         "react-dom": "^17.0.2",
         "react-router-dom": "^5.2.1",
-        "react-scripts": "^1.1.5",
+        "react-scripts": "^4.0.3",
         "react-transition-group": "^4.4.2",
         "recoil": "^0.4.1",
         "styled-components": "^5.3.1",
