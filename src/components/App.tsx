@@ -6,12 +6,14 @@ import GlobalStyle from "styles/global";
 // for recoil
 import { RecoilRoot } from "recoil";
 
+import Router from "router";
+
 function App() {
     return (
         <RecoilRoot>
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
-                <div></div>
+                <Router />
             </ThemeProvider>
         </RecoilRoot>
     );
