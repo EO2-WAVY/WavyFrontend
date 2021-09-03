@@ -7,13 +7,17 @@ import GlobalStyle from "styles/global";
 import { RecoilRoot } from "recoil";
 
 import Router from "router";
+import Mobile from "pages/Mobile";
+import useViewport from "hooks/useViewport";
 
 function App() {
+    const { width } = useViewport();
+
     return (
         <RecoilRoot>
             <ThemeProvider theme={theme}>
                 <GlobalStyle />
-                <Router />
+                {width > 700 ? <Router /> : <Mobile />}
             </ThemeProvider>
         </RecoilRoot>
     );

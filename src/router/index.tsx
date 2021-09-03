@@ -1,5 +1,6 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 
+// pages
 import Main from "pages/Main";
 import Auth from "pages/Auth";
 import MyInfo from "pages/MyInfo";
