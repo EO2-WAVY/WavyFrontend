@@ -10,6 +10,11 @@ const GlobalStyle = createGlobalStyle`
     body {
         overflow-x: hidden;
     }
+
+    a {
+        all: unset;
+        cursor: pointer;
+    }
 `;
 
 export default GlobalStyle;

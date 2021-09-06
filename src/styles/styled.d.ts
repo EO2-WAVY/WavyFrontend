@@ -5,5 +5,8 @@ declare module "styled-components" {
         color: {
             black: string;
         };
+        size: {
+            maxWidth: string;
+        };
     }
 }
