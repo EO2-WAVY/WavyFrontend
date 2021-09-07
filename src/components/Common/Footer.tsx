@@ -1,16 +1,20 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
+import theme from "styles/theme";
 
 const Footer = () => {
     return (
         <FooterWrapper>
-            <Link to="/terms/utilize">이용약관</Link>
-            <Link to="/terms/personal-information">개인정보처리방침</Link>
+            <FooterLayout>
+                <Link to="/terms/utilize">이용약관</Link>
+                <Link to="/terms/personal-information">개인정보처리방침</Link>
 
-            <InfoText>
-                본 프로젝트는 SW 마에스트로 사업의 지원을 받아 만들어졌습니다.
-            </InfoText>
-            <InfoText>문의 : wavy@example.com Team EO2</InfoText>
+                <InfoText>
+                    본 프로젝트는 SW 마에스트로 사업의 지원을 받아
+                    만들어졌습니다.
+                </InfoText>
+                <InfoText>문의 : wavy@example.com Team EO2</InfoText>
+            </FooterLayout>
         </FooterWrapper>
     );
 };
@@ -21,6 +25,12 @@ const FooterWrapper = styled.footer`
     width: 100vw;
     height: 300px;
     background-color: gray;
+`;
+
+const FooterLayout = styled.div`
+    max-width: ${theme.size.maxWidth};
+    height: 100%;
+    margin: 0 auto;
 `;
 
 const InfoText = styled.p`
