@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import theme from "styles/theme";
+import ScrollToTop from "utils/ScrollToTop";
 
 const Footer = () => {
     return (
@@ -14,6 +14,7 @@ const Footer = () => {
                     만들어졌습니다.
                 </InfoText>
                 <InfoText>문의 : wavy@example.com Team EO2</InfoText>
+                <button onClick={ScrollToTop}>TOP</button>
             </FooterLayout>
         </FooterWrapper>
     );
@@ -28,7 +29,7 @@ const FooterWrapper = styled.footer`
 `;
 
 const FooterLayout = styled.div`
-    max-width: ${theme.size.maxWidth};
+    max-width: ${({ theme }) => theme.size.maxWidth};
     height: 100%;
     margin: 0 auto;
 `;
