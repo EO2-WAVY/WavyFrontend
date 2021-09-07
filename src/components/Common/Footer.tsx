@@ -1,6 +1,6 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import ScrollToTop from "utils/ScrollToTop";
+import { ScrollToTop } from "utils/ScrollToTop";
 
 const Footer = () => {
     return (

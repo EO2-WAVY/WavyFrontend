@@ -1,4 +1,5 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
+import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
+import { useEffect } from "react";
 
 // pages
 import Main from "pages/Main";
@@ -9,10 +10,12 @@ import Challenge from "pages/Challenge";
 import Analysis from "pages/Analysis";
 import NotFound from "pages/NotFound";
 import Terms from "pages/Terms";
+import ScrollToTopElem from "utils/ScrollToTop";
 
 const Router = () => {
     return (
         <BrowserRouter>
+            <ScrollToTopElem />
             <Switch>
                 <Route exact path="/" component={Main} />
                 <Route path="/auth" component={Auth} />
