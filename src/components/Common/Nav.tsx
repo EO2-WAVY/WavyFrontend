@@ -1,6 +1,5 @@
 import { Link } from "react-router-dom";
 import styled from "styled-components";
-import theme from "styles/theme";
 
 const Nav = () => {
     return (
@@ -17,11 +16,11 @@ export default Nav;
 const Navbar = styled.nav`
     width: 100vw;
     height: 50px;
+    background-color: gray;
 `;
 
 const Layout = styled.div`
-    margin: 0 auto;
-    max-width: ${theme.size.maxWidth};
+    max-width: ${({ theme }) => theme.size.maxWidth};
     height: 100%;
-    background-color: gray;
+    margin: 0 auto;
 `;

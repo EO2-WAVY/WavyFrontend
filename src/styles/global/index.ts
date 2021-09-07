@@ -11,7 +11,7 @@ const GlobalStyle = createGlobalStyle`
         overflow-x: hidden;
     }
 
-    a {
+    a, button{
         all: unset;
         cursor: pointer;
     }
