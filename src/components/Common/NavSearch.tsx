@@ -1,12 +1,32 @@
+import React, { ChangeEvent, useRef, useState } from "react";
 import styled from "styled-components";
 
 const NavSearch = () => {
+    const [query, setQuery] = useState<string>("");
+
+    const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
+        const {
+            target: { value },
+        } = e;
+
+        setQuery(value);
+    };
+
+    const onClickCancel = () => {
+        setQuery("");
+    };
+
     return (
         <Wrapper>
-            <Input />
+            <Input onChange={onChangeQuery} value={query} />
             <ImgWrapper>
-                <MagnifyImg src="" alt="" />
-                <CancelImg src="" alt="" />
+                <CancelImg src="" alt="" query={query} />
+                <MagnifyImg
+                    src=""
+                    alt=""
+                    query={query}
+                    onClick={onClickCancel}
+                />
             </ImgWrapper>
             <BackLine />
             <OverLine />
@@ -36,7 +56,11 @@ const ImgWrapper = styled.div`
     height: 100%;
 `;
 
-const InputImg = styled.img`
+interface IInputImg {
+    query: string;
+}
+
+const InputImg = styled.img<IInputImg>`
     position: absolute;
     top: 0;
     left: 0;
@@ -46,10 +70,18 @@ const InputImg = styled.img`
 
 const MagnifyImg = styled(InputImg)`
     background-color: red;
+
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: ${({ query }) => query.length > 0 && "0"};
+    transform: ${({ query }) => query.length > 0 && "translateY(-6px)"};
 `;
 
 const CancelImg = styled(InputImg)`
     background-color: blue;
+
+    transition: transform 0.3s, opacity 0.3s;
+    opacity: ${({ query }) => query.length === 0 && "0"};
+    transform: ${({ query }) => query.length === 0 && "translateY(-6px)"};
 `;
 
 const BackLine = styled.span`

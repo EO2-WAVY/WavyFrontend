@@ -1,6 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import NavSearch from "./NavSearch";
+import NavSearch from "components/Common/NavSearch";
 
 const Nav = () => {
     const history = useHistory();
