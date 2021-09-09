@@ -1,5 +1,6 @@
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
+import NavSearch from "./NavSearch";
 
 const Nav = () => {
     const history = useHistory();
@@ -19,6 +20,7 @@ const Nav = () => {
                     <Link to="/">HOME</Link>
                 </LeftElem>
                 <RightElem>
+                    <NavSearch />
                     <Link to="auth">Auth</Link>
                 </RightElem>
             </Layout>
@@ -38,7 +40,7 @@ const Layout = styled.div`
     max-width: ${({ theme }) => theme.size.maxWidth};
     height: 100%;
     margin: 0 auto;
-    padding: 12px;
+    padding: 0 12px;
 
     display: flex;
     justify-content: space-between;
@@ -46,6 +48,7 @@ const Layout = styled.div`
 `;
 
 const LeftElem = styled.div`
+    height: 100%;
     display: flex;
     align-items: center;
     gap: 1vw;
@@ -57,6 +60,8 @@ const LeftElem = styled.div`
 `;
 
 const RightElem = styled.div`
+    height: 100%;
     display: flex;
     align-items: center;
+    gap: 1vw;
 `;
