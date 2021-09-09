@@ -8,7 +8,7 @@ export const ScrollToTop = () => {
     });
 };
 
-function ScrollToTopElem({ history }: RouterProps) {
+const ScrollToTopElem = ({ history }: RouterProps) => {
     useEffect(() => {
         const unlisten = history.listen(() => {
             window.scrollTo(0, 0);
@@ -19,6 +19,6 @@ function ScrollToTopElem({ history }: RouterProps) {
     }, []);
 
     return null;
-}
+};
 
 export default withRouter(ScrollToTopElem);
