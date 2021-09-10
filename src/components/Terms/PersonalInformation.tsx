@@ -1,3 +1,5 @@
+import withTemplate from "./withTemplate";
+
 const PersonalInformation = () => {
     return (
         <main>
@@ -54,4 +56,4 @@ const PersonalInformation = () => {
     );
 };
 
-export default PersonalInformation;
+export default withTemplate("개인정보처리방침")(PersonalInformation);
