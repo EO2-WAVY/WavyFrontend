@@ -5,10 +5,15 @@ interface IHeader {
 }
 
 const Header = ({ kind }: IHeader) => {
+    const paragraph: string =
+        kind === "로그인"
+            ? "WAVY에 로그인하시고 서비스를 이용하세요!"
+            : "WAVY에 가입하고 춤신춤왕으로 거듭나세요!";
+
     return (
         <HeaderWrapper>
             <Title>{kind}</Title>
-            <Span></Span>
+            <Span>{paragraph}</Span>
         </HeaderWrapper>
     );
 };

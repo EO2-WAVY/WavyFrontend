@@ -1,9 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
 
-import Footer from "components/Common/Footer";
 import Nav from "components/Common/Nav";
+import Footer from "components/Common/Footer";
 import Header from "components/Auth/Header";
+import Main from "components/Auth/Main";
 
 const Auth = () => {
     const [kind, setKind] = useState<"회원가입" | "로그인">("로그인");
@@ -13,6 +14,7 @@ const Auth = () => {
             <Nav />
             <Layout>
                 <Header kind={kind} />
+                <Main kind={kind} setKind={setKind} />
             </Layout>
             <Footer />
         </>
