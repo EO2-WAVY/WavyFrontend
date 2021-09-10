@@ -4,7 +4,6 @@ import NotFound from "pages/NotFound";
 import Nav from "components/Common/Nav";
 import Footer from "components/Common/Footer";
 import Utilize from "components/Terms/Utilize";
-import Template from "components/Terms/Template";
 import PersonalInformation from "components/Terms/PersonalInformation";
 
 type TermsParams = {
@@ -20,15 +19,8 @@ const Terms = () => {
     return (
         <>
             <Nav />
-            {termName === "utilize" && (
-                <Template title="이용약관" rule={<Utilize />} />
-            )}
-            {termName === "personal-information" && (
-                <Template
-                    title="개인정보처리방침"
-                    rule={<PersonalInformation />}
-                />
-            )}
+            {termName === "utilize" && <Utilize />}
+            {termName === "personal-information" && <PersonalInformation />}
             <Footer />
         </>
     );

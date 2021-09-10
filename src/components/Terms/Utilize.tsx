@@ -1,3 +1,5 @@
+import withTemplate from "./withTemplate";
+
 const Utilize = () => {
     return (
         <main>
@@ -8,7 +10,7 @@ const Utilize = () => {
                 Cumque omnis doloribus tempora culpa recusandae reprehenderit
                 temporibus, ipsam veniam similique sapiente.
             </p>
-            <br/>
+            <br />
             <p>제 2조</p>
             <p>
                 Lorem ipsum dolor sit, amet consectetur adipisicing elit.
@@ -54,4 +56,4 @@ const Utilize = () => {
     );
 };
 
-export default Utilize;
+export default withTemplate("이용약관")(Utilize);

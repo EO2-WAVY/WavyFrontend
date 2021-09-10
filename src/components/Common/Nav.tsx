@@ -21,7 +21,7 @@ const Nav = () => {
                 </LeftElem>
                 <RightElem>
                     <NavSearch />
-                    <Link to="auth">Auth</Link>
+                    <Link to="/auth">Auth</Link>
                 </RightElem>
             </Layout>
         </Navbar>
