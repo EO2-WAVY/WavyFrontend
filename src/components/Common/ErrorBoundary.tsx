@@ -1,21 +1,32 @@
 import { Component, ErrorInfo, ReactNode } from "react";
 
+type RenderFallbackProps<ErrorType extends Error = Error> = {
+    error: ErrorType;
+};
+
+type RenderFallbackType = <ErrorType extends Error>(
+    props: RenderFallbackProps<ErrorType>
+) => ReactNode;
+
 interface ErrorBoundaryProps {
     children: ReactNode;
+    renderFallback: RenderFallbackType;
 }
 
 interface ErrorBoundaryState {
-    hasError: boolean;
+    error: Error | null;
 }
+
+const initialState: ErrorBoundaryState = { error: null };
 
 class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     constructor(props: ErrorBoundaryProps) {
         super(props);
-        this.state = { hasError: false };
+        this.state = initialState;
     }
 
     static getDerivedStateFromError(error: Error): ErrorBoundaryState {
-        return { hasError: true };
+        return { error };
     }
 
     componentDidCatch(error: Error, errorInfo: ErrorInfo) {
@@ -23,8 +34,11 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
     }
 
     render() {
-        if (this.state.hasError) {
-            return <h1>error</h1>;
+        const { children, renderFallback } = this.props;
+        const { error } = this.state;
+
+        if (error !== null) {
+            return renderFallback({ error });
         }
 
         return this.props.children;
