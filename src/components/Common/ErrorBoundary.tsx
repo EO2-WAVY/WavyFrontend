@@ -1,4 +1,5 @@
 import { Component, ErrorInfo, ReactNode } from "react";
+import isDifferentArray from "utils/isDifferentArray";
 
 type RenderFallbackProps<ErrorType extends Error = Error> = {
     error: ErrorType;
@@ -35,15 +36,25 @@ class ErrorBoundary extends Component<ErrorBoundaryProps, ErrorBoundaryState> {
         console.log("Uncaught Error: ", error, errorInfo);
     }
 
+    resetErrorBoundary = () => {
+        this.setState(initialState);
+    };
+
+    componentDidUpdate(prevProps: ErrorBoundaryProps) {
+        if (this.state.error === null) return;
+        if (isDifferentArray(prevProps.resetKeys, this.props.resetKeys)) {
+        }
+    }
+
     render() {
         const { children, renderFallback } = this.props;
         const { error } = this.state;
 
         if (error !== null) {
-            return renderFallback({ error });
+            return renderFallback({ error, reset: this.resetErrorBoundary });
         }
 
-        return this.props.children;
+        return children;
     }
 }
 
