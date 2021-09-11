@@ -2,6 +2,7 @@ import { Component, ErrorInfo, ReactNode } from "react";
 
 type RenderFallbackProps<ErrorType extends Error = Error> = {
     error: ErrorType;
+    reset: (...args: unknown[]) => void;
 };
 
 type RenderFallbackType = <ErrorType extends Error>(
@@ -10,7 +11,8 @@ type RenderFallbackType = <ErrorType extends Error>(
 
 interface ErrorBoundaryProps {
     children: ReactNode;
-    renderFallback: RenderFallbackType;
+    renderFallback: RenderFallbackType; // fallback ui component
+    resetKeys: unknown[]; // error reset dependency array
 }
 
 interface ErrorBoundaryState {
