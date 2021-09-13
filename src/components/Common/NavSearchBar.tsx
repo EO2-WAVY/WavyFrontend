@@ -1,7 +1,7 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 
-const NavSearch = () => {
+const NavSearchBar = () => {
     const [query, setQuery] = useState<string>("");
 
     const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
@@ -20,10 +20,14 @@ const NavSearch = () => {
         <Wrapper>
             <Input onChange={onChangeQuery} value={query} />
             <ImgWrapper>
-                <CancelImg src="" alt="" query={query} />
+                <CancelImg
+                    src="/images/Nav/cancel.svg"
+                    alt="cancel"
+                    query={query}
+                />
                 <MagnifyImg
-                    src=""
-                    alt=""
+                    src="/images/Nav/magnify.svg"
+                    alt="submit"
                     query={query}
                     onClick={onClickCancel}
                 />
@@ -34,12 +38,12 @@ const NavSearch = () => {
     );
 };
 
-export default NavSearch;
+export default NavSearchBar;
 
 const Wrapper = styled.div`
     position: relative;
-    width: 200px;
-    height: 60%;
+    width: 278px;
+    height: 40%;
 
     display: flex;
     justify-content: space-between;
@@ -62,23 +66,20 @@ interface IInputImg {
 
 const InputImg = styled.img<IInputImg>`
     position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
+    top: 50%;
+    right: 0;
+    width: 20px;
+    height: 20px;
+    transform: translateY(-50%);
 `;
 
 const MagnifyImg = styled(InputImg)`
-    background-color: red;
-
     transition: transform 0.3s, opacity 0.3s;
     opacity: ${({ query }) => query.length > 0 && "0"};
     transform: ${({ query }) => query.length > 0 && "translateY(-6px)"};
 `;
 
 const CancelImg = styled(InputImg)`
-    background-color: blue;
-
     transition: transform 0.3s, opacity 0.3s;
     opacity: ${({ query }) => query.length === 0 && "0"};
     transform: ${({ query }) => query.length === 0 && "translateY(-6px)"};
@@ -91,7 +92,7 @@ const BackLine = styled.span`
 
     width: 100%;
     height: 2px;
-    background-color: black;
+    background-color: ${({ theme }) => theme.color.lightGray};
 `;
 
 const OverLine = styled.span`
@@ -101,7 +102,7 @@ const OverLine = styled.span`
 
     width: 100%;
     height: 2px;
-    background-color: blue;
+    background-color: ${({ theme }) => theme.color.purple};
 
     transform: scaleX(0);
     transform-origin: left;

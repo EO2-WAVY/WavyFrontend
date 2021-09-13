@@ -1,6 +1,7 @@
 import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
-import NavSearch from "components/Common/NavSearch";
+import NavSearchBar from "components/Common/NavSearchBar";
+import NavAuthBtn from "./NavAuthBtn";
 
 const Nav = () => {
     const history = useHistory();
@@ -13,15 +14,17 @@ const Nav = () => {
             <Layout>
                 <LeftElem>
                     <img
-                        src="/images/logo.png"
+                        src="/images/logo_full.svg"
                         alt="wavy logo"
                         onClick={onClickLogo}
                     />
                     <Link to="/">HOME</Link>
+                    <Link to="/">HOME</Link>
+                    <Link to="/">HOME</Link>
                 </LeftElem>
                 <RightElem>
-                    <NavSearch />
-                    <Link to="/auth">Auth</Link>
+                    <NavSearchBar />
+                    <NavAuthBtn />
                 </RightElem>
             </Layout>
         </Navbar>
@@ -32,8 +35,9 @@ export default Nav;
 
 const Navbar = styled.nav`
     width: 100vw;
-    height: 50px;
-    background-color: gray;
+    height: 104px;
+    background-color: ${({ theme }) => theme.color.white};
+    box-shadow: 0px 10px 25px 4px rgba(0, 0, 0, 0.03);
 `;
 
 const Layout = styled.div`
@@ -51,11 +55,15 @@ const LeftElem = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 1vw;
+    gap: 40px;
 
     & > img {
-        height: 30px;
         cursor: pointer;
+    }
+
+    & > a {
+        color: ${({ theme }) => theme.color.gray};
+        text-transform: uppercase;
     }
 `;
 

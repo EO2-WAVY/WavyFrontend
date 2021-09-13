@@ -5,6 +5,10 @@ declare module "styled-components" {
         color: {
             black: string;
             white: string;
+            gray: string;
+            lightGray: string;
+            purple: string;
+            lightPurple: string;
         };
         size: {
             maxWidth: string;
