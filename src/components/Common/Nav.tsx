@@ -40,7 +40,7 @@ const Layout = styled.div`
     max-width: ${({ theme }) => theme.size.maxWidth};
     height: 100%;
     margin: 0 auto;
-    padding: 0 12px;
+    padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
 
     display: flex;
     justify-content: space-between;

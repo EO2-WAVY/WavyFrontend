@@ -17,5 +17,5 @@ const Main = () => {
 export default Main;
 
 const Test = styled.div`
-    height: 200vw;
+    height: 10vw;
 `;
