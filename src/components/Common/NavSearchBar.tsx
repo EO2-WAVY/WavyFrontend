@@ -71,6 +71,7 @@ const InputImg = styled.img<IInputImg>`
     width: 20px;
     height: 20px;
     transform: translateY(-50%);
+    cursor: pointer;
 `;
 
 const MagnifyImg = styled(InputImg)`
