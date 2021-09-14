@@ -8,10 +8,24 @@ const Main = () => {
     return (
         <>
             <Nav />
-            <TagSection />
+            <Layout>
+                <TagSection />
+                <Test />
+            </Layout>
             <Footer />
         </>
     );
 };
 
 export default Main;
+
+const Layout = styled.div`
+    width: 100vw;
+    max-width: ${({ theme }) => theme.size.maxWidth};
+    padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
+    margin: 0 auto;
+`;
+
+const Test = styled.div`
+    height: 200vh;
+`;
