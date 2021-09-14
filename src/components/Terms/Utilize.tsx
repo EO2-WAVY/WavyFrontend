@@ -2,7 +2,7 @@ import withTemplate from "./withTemplate";
 
 const Utilize = () => {
     return (
-        <main>
+        <>
             <p>제 1장 총칙</p>
             <p>
                 Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eos,
@@ -52,7 +52,7 @@ const Utilize = () => {
                 quidem? At nihil quod, delectus minima porro laboriosam
                 veritatis alias?
             </p>
-        </main>
+        </>
     );
 };
 

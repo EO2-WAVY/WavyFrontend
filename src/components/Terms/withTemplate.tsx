@@ -1,3 +1,4 @@
+import Hr from "components/Common/Hr";
 import React, { ComponentType, FC } from "react";
 import styled from "styled-components";
 
@@ -10,9 +11,11 @@ const withTemplate =
                     <Header>
                         <Title>{title}</Title>
                     </Header>
+                    <Hr />
                     <Main>
                         <Component {...(props as P)} />
                     </Main>
+                    <Hr margin="0 0 180px 0" />
                 </TemplateLayout>
             );
         };
@@ -27,15 +30,20 @@ const TemplateLayout = styled.div`
 
 const Header = styled.header`
     width: 100%;
-    height: 300px;
-
+    height: 280px;
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
 `;
 
-const Title = styled.h1``;
+const Title = styled.h1`
+    font-size: 40px;
+`;
 
 const Main = styled.main`
-    margin: 30px 0 120px 0;
+    padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
+    margin: 60px 0;
+    font-size: 24px;
+    color: #424242;
 `;
