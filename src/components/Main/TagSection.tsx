@@ -10,9 +10,9 @@ const TagSection = () => {
 
     return (
         <Wrapper>
-            <LeftBtn onClick={onClickLeft}>
+            <CarouselBtn onClick={onClickLeft}>
                 <img src="/images/Main/carousel_left.svg" alt="left" />
-            </LeftBtn>
+            </CarouselBtn>
             <Carousel ref={wrapperRef}>
                 <TagElem title="BTS" />
                 <TagElem title="BTS" />
@@ -29,9 +29,9 @@ const TagSection = () => {
                 <TagElem title="BTS" />
                 <TagElem title="BTS" />
             </Carousel>
-            <RightBtn onClick={onClickRight}>
+            <CarouselBtn onClick={onClickRight}>
                 <img src="/images/Main/carousel_right.svg" alt="right" />
-            </RightBtn>
+            </CarouselBtn>
         </Wrapper>
     );
 };
@@ -47,14 +47,27 @@ const Wrapper = styled.section`
     margin: 60px 0 0 0;
 `;
 
-const LeftBtn = styled.button`
-    position: sticky;
+const CarouselBtn = styled.button`
+    position: relative;
     left: 0;
-`;
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    background-color: rgba(201, 201, 201, 0);
+    transition: background-color 0.3s;
 
-const RightBtn = styled.button`
-    position: sticky;
-    right: 0;
+    & > img {
+        position: absolute;
+        top: 50%;
+        left: 50%;
+        width: 70%;
+        height: 70%;
+        transform: translate(-50%, -50%);
+    }
+
+    &:hover {
+        background-color: rgba(201, 201, 201, 0.2);
+    }
 `;
 
 const Carousel = styled.div`

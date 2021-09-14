@@ -32,4 +32,6 @@ const Item = styled.div`
     background-color: #c4c4c4;
 `;
 
-const Title = styled.span``;
+const Title = styled.span`
+    font-size: 1.5rem;
+`;
