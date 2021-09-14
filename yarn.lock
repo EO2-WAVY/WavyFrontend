@@ -4642,6 +4642,13 @@
     "domelementtype" "^2.0.1"
     "entities" "^2.0.0"
 
+"dom7@^4.0.0":
+  "integrity" "sha512-xOJ0LAHFwktyj8Xljz4R2wzRI+Y9mR0plkMP0WlqtwqAkqn/vbdAyRifiW/w8mXe17LGktntcAwsQ5fKVDBNYg=="
+  "resolved" "https://registry.npmjs.org/dom7/-/dom7-4.0.0.tgz"
+  "version" "4.0.0"
+  dependencies:
+    "ssr-window" "^4.0.0"
+
 "domain-browser@^1.1.1":
   "integrity" "sha512-jnjyiM6eRyZl2H+W8Q/zLMA481hzi0eszAaBUzIVnmYVDBbnLxVNnfu1HgEBvCbL+71FrxMl3E6lpKH7Ge3OXA=="
   "resolved" "https://registry.npmjs.org/domain-browser/-/domain-browser-1.2.0.tgz"
@@ -10983,6 +10990,11 @@
   "resolved" "https://registry.npmjs.org/sprintf-js/-/sprintf-js-1.0.3.tgz"
   "version" "1.0.3"
 
+"ssr-window@^4.0.0":
+  "integrity" "sha512-qCg6wJNeGNTVcPK2KFNfwtHU1gA3UZDZdxogu+Ys5+Ue5PMOENxUb7sscpAWWo4mWOBkJRCwQ50IlyA7qZ0hxw=="
+  "resolved" "https://registry.npmjs.org/ssr-window/-/ssr-window-4.0.0.tgz"
+  "version" "4.0.0"
+
 "ssri@^6.0.1":
   "integrity" "sha512-cepbSq/neFK7xB6A50KHN0xHDotYzq58wWCa5LeWqnPrHG8GzfEjO/4O8kpmcGW+oaxkvhEJCWgbgNk4/ZV93Q=="
   "resolved" "https://registry.npmjs.org/ssri/-/ssri-6.0.2.tgz"
@@ -11331,6 +11343,14 @@
     "stable" "^0.1.8"
     "unquote" "~1.1.1"
     "util.promisify" "~1.0.0"
+
+"swiper@^7.0.5":
+  "integrity" "sha512-ERFXjBwUZ4ZDYjGbYjuMBfwy/s80zVCDkf229NG7ycptgJ4r5WgOh6WCILf/1iMwkV8afxYZW7QUru/b0bdD6g=="
+  "resolved" "https://registry.npmjs.org/swiper/-/swiper-7.0.5.tgz"
+  "version" "7.0.5"
+  dependencies:
+    "dom7" "^4.0.0"
+    "ssr-window" "^4.0.0"
 
 "swr@^1.0.0":
   "integrity" "sha512-v55Dr+vxIFiUyGxC5W4uN5falxHxYdbpb/R3bO+bSG+svbC9bUWmupy4NM/2pER7X8OvgwJWu0AiSoGy0ND9ew=="
