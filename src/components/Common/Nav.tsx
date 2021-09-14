@@ -34,8 +34,12 @@ const Nav = () => {
 export default Nav;
 
 const Navbar = styled.nav`
+    position: -webkit-sticky;
+    position: sticky;
+    top: 0px;
     width: 100vw;
     height: 104px;
+
     background-color: ${({ theme }) => theme.color.white};
     box-shadow: 0px 10px 25px 4px rgba(0, 0, 0, 0.03);
 `;
