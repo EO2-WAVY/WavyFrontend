@@ -25,9 +25,9 @@ const TagSection = () => {
 
     return (
         <Wrapper style={{ position: wrapperPosition }}>
-            <CarouselBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
+            <LeftBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
                 <img src="/images/Main/carousel_left.svg" alt="left" />
-            </CarouselBtn>
+            </LeftBtn>
             <Carousel ref={wrapperRef}>
                 <TagElem title="BTS" />
                 <TagElem title="BSSTS" />
@@ -44,9 +44,9 @@ const TagSection = () => {
                 <TagElem title="BTS" />
                 <TagElem title="BTS" />
             </Carousel>
-            <CarouselBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
+            <RightBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
                 <img src="/images/Main/carousel_right.svg" alt="right" />
-            </CarouselBtn>
+            </RightBtn>
         </Wrapper>
     );
 };
@@ -54,16 +54,19 @@ const TagSection = () => {
 export default TagSection;
 
 const Wrapper = styled(motion.section)`
+    position: relative;
     top: -20px;
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
-
     margin: 60px 0 0 0;
+
+    overflow: hidden;
 `;
 
 const CarouselBtn = styled(motion.button)`
+    position: relative;
     width: 50px;
     height: 50px;
     border-radius: 50%;
@@ -82,6 +85,31 @@ const CarouselBtn = styled(motion.button)`
 
     &:hover {
         background-color: rgba(201, 201, 201, 0.2);
+    }
+`;
+
+const LeftBtn = styled(CarouselBtn)`
+    &::after {
+        /* background: linear-gradient(
+            to right,
+            rgba(255, 255, 255, 1) 20%,
+            rgba(33, 33, 33, 0) 80%
+        ); */
+    }
+`;
+
+const RightBtn = styled(CarouselBtn)`
+    &::before {
+        content: "";
+        position: absolute;
+        width: 50px;
+        height: 200px;
+        right: 100%;
+        background: linear-gradient(
+            to left,
+            rgba(255, 255, 255, 1) 20%,
+            rgba(33, 33, 33, 0) 80%
+        );
     }
 `;
 
