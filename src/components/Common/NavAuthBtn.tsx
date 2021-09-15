@@ -1,8 +1,11 @@
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 
 const NavAuthBtn = () => {
+    const history = useHistory();
+
     const onClickAuth = () => {
-        console.log("auth");
+        history.push("/auth");
     };
 
     return (
