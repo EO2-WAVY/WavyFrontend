@@ -15,17 +15,17 @@ const Router = () => {
     return (
         <BrowserRouter>
             <ScrollToTopElem />
-                <Switch>
-                    <Route exact path="/" component={Main} />
-                    <Route path="/auth" component={Auth} />
-                    <Route path="/info" component={MyInfo} />
-                    <Route path="/practice" component={Practice} />
-                    <Route path="/challenge" component={Challenge} />
-                    <Route path="/analysis" component={Analysis} />
-                    <Route path="/terms/:termName" component={Terms} />
-                    <Route path="/analysis" component={Analysis} />
-                    <Route component={NotFound} />
-                </Switch>
+            <Switch>
+                <Route exact path="/" component={Main} />
+                <Route path="/auth" component={Auth} />
+                <Route path="/info" component={MyInfo} />
+                <Route path="/practice" component={Practice} />
+                <Route path="/challenge" component={Challenge} />
+                <Route path="/analysis" component={Analysis} />
+                <Route path="/terms/:termName" component={Terms} />
+                <Route path="/analysis" component={Analysis} />
+                <Route component={NotFound} />
+            </Switch>
         </BrowserRouter>
     );
 };

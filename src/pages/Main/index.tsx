@@ -12,6 +12,10 @@ const Main = () => {
                 <TagSection />
 
                 <Test />
+                <Test1 />
+                <Test />
+                <Test1 />
+                <Test />
             </Layout>
             <Footer />
         </>
@@ -28,5 +32,11 @@ const Layout = styled.div`
 `;
 
 const Test = styled.div`
-    height: 200vh;
+    height: 50vh;
+`;
+
+const Test1 = styled.div`
+    height: 40vh;
+    width: 100px;
+    background-color: red;
 `;

@@ -21,8 +21,7 @@ const TagSection = () => {
     });
 
     // for button
-    const btnYposAnim = useTransform(scrollY, [0, 183, 9999], [0, 71, 71]);
-
+    const btnYposAnim = useTransform(scrollY, [0, 183, 9999], [0, 70, 70]);
 
     return (
         <Wrapper style={{ position: wrapperPosition }}>
@@ -33,7 +32,7 @@ const TagSection = () => {
                 <TagElem title="BTS" />
                 <TagElem title="BSSTS" />
                 <TagElem title="BS" />
-                <TagElem title="BSSSSSTS" />
+                <TagElem title="BSSSTS" />
                 <TagElem title="BSTS" />
                 <TagElem title="BTSS" />
                 <TagElem title="BTS" />
