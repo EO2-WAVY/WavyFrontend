@@ -28,7 +28,7 @@ export const defaultPageFadeInVariants: Variants = {
     },
 };
 
-export const tagFadeInUpVariants: Variants = {
+export const defaultFadeInUpVariants: Variants = {
     initial: {
         y: 60,
         opacity: 0,

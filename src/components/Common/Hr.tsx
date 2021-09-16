@@ -5,25 +5,21 @@ interface IHr {
 }
 
 const Hr = ({ margin = "0" }: IHr) => {
-    return (
-        <HrWrapper>
-            <StyledHr margin={margin} />
-        </HrWrapper>
-    );
+    return <StyledHr margin={margin} />;
 };
 
 export default Hr;
 
-const HrWrapper = styled.div`
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
-`;
+// const HrWrapper = styled.div`
+//     width: 100%;
+//     display: flex;
+//     justify-content: center;
+//     padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
+// `;
 
 const StyledHr = styled.hr<IHr>`
     text-align: center;
     width: 100%;
     margin: ${({ margin }) => margin};
-    color: ${({theme}) => theme.color.lightGray}
+    color: ${({ theme }) => theme.color.lightGray};
 `;

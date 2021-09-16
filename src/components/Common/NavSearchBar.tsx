@@ -9,6 +9,8 @@ const NavSearchBar = () => {
     const inputRef = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<string>("");
 
+    // url로 접근헀을 때 redirect ?
+
     const debouncedPush = debounce((value) => {
         setQuery(value);
         history.push(`/search?q=${value}`);

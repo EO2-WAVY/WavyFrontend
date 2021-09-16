@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useState } from "react";
-import { staggerOne, tagFadeInUpVariants } from "constants/motionUtils";
+import { staggerOne, defaultFadeInUpVariants } from "constants/motionUtils";
 
 interface ITagElem {
     title: string;
@@ -40,11 +40,11 @@ const TagElem = ({ title }: ITagElem) => {
                     opacity: CircleOpacityAnim,
                     width: CircleWidthAnim,
                 }}
-                variants={tagFadeInUpVariants}
+                variants={defaultFadeInUpVariants}
             />
             <Title
                 style={{ backgroundColor: titleBgColor, color: titleColor }}
-                variants={tagFadeInUpVariants}
+                variants={defaultFadeInUpVariants}
             >
                 {title}
             </Title>
