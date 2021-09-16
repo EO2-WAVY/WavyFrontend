@@ -1,32 +1,45 @@
-import { ChangeEvent, useState, useEffect } from "react";
+import { ChangeEvent, useState, useRef } from "react";
 import { useHistory } from "react-router";
+import { debounce } from "lodash";
+
 import styled from "styled-components";
 
 const NavSearchBar = () => {
     const history = useHistory();
-    
+    const inputRef = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<string>("");
 
-    // 디바운스 걸기
+    const debouncedPush = debounce((value) => {
+        setQuery(value);
+        history.push(`/search?q=${value}`);
+    }, 150);
+
+    const clear = () => {
+        history.push("/");
+        setQuery("");
+    };
+
     const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
         const {
             target: { value },
         } = e;
 
-        setQuery(value);
+        if (value === "") {
+            clear();
+            return;
+        }
+        debouncedPush(value);
     };
 
     const onClickCancel = () => {
-        setQuery("");
+        if (!inputRef.current) return;
+        inputRef.current.value = "";
+        clear();
     };
-
-    useEffect(() => {
-        console.log(query);
-    }, [query]);
 
     return (
         <Wrapper>
-            <Input onChange={onChangeQuery} value={query} />
+            <Input onChange={onChangeQuery} ref={inputRef} required />
             <ImgWrapper>
                 <CancelImg
                     src="/images/Nav/cancel.svg"
@@ -117,7 +130,8 @@ const OverLine = styled.span`
     transform-origin: left;
     transition: transform 0.3s;
 
-    ${Input}:focus ~ & {
+    ${Input}:focus ~ &,
+    ${Input}:valid ~ & {
         transform: scaleX(1);
     }
 `;
