@@ -1,9 +1,17 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
+
 import TagSection from "components/Main/TagSection";
+import { defaultPageFadeInVariants } from "constants/motionUtils";
 
 const Main = () => {
     return (
-        <Layout>
+        <Layout
+            variants={defaultPageFadeInVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
             <TagSection />
 
             <Test />
@@ -17,7 +25,7 @@ const Main = () => {
 
 export default Main;
 
-const Layout = styled.div`
+const Layout = styled(motion.div)`
     width: 100vw;
     max-width: ${({ theme }) => theme.size.maxWidth};
     padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
