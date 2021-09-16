@@ -18,7 +18,6 @@ const TagElem = ({ title }: ITagElem) => {
     const CircleScaleAnim = useTransform(scrollY, [0, 183], [1, 0.6]);
     const CircleOpacityAnim = useTransform(scrollY, [0, 183], [1, 0]);
 
-    // state + useTransform 을 커스텀 훅화 ?
     const [titleBgColor, setTitleBgColor] = useState<"#fff" | "#9E61FF">(
         "#fff"
     );

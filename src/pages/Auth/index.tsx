@@ -10,14 +10,10 @@ const Auth = () => {
     const [kind, setKind] = useState<"회원가입" | "로그인">("로그인");
 
     return (
-        <>
-            <Nav />
-            <Layout>
-                <Header kind={kind} />
-                <Main kind={kind} setKind={setKind} />
-            </Layout>
-            <Footer />
-        </>
+        <Layout>
+            <Header kind={kind} />
+            <Main kind={kind} setKind={setKind} />
+        </Layout>
     );
 };
 

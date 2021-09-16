@@ -1,24 +1,17 @@
 import styled from "styled-components";
-
-import Nav from "components/Common/Nav";
-import Footer from "components/Common/Footer";
 import TagSection from "components/Main/TagSection";
 
 const Main = () => {
     return (
-        <>
-            <Nav />
-            <Layout>
-                <TagSection />
+        <Layout>
+            <TagSection />
 
-                <Test />
-                <Test1 />
-                <Test />
-                <Test1 />
-                <Test />
-            </Layout>
-            <Footer />
-        </>
+            <Test />
+            <Test1 />
+            <Test />
+            <Test1 />
+            <Test />
+        </Layout>
     );
 };
 
