@@ -32,9 +32,9 @@ const NavSearchBar = () => {
     };
 
     const onClickCancel = () => {
+        clear();
         if (!inputRef.current) return;
         inputRef.current.value = "";
-        clear();
     };
 
     return (
