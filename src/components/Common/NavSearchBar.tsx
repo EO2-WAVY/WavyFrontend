@@ -1,9 +1,13 @@
-import { ChangeEvent, useState } from "react";
+import { ChangeEvent, useState, useEffect } from "react";
+import { useHistory } from "react-router";
 import styled from "styled-components";
 
 const NavSearchBar = () => {
+    const history = useHistory();
+    
     const [query, setQuery] = useState<string>("");
 
+    // 디바운스 걸기
     const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
         const {
             target: { value },
@@ -15,6 +19,10 @@ const NavSearchBar = () => {
     const onClickCancel = () => {
         setQuery("");
     };
+
+    useEffect(() => {
+        console.log(query);
+    }, [query]);
 
     return (
         <Wrapper>

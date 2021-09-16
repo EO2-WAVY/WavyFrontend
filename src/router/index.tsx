@@ -3,6 +3,7 @@ import { AnimatePresence } from "framer-motion";
 
 // pages
 import Main from "pages/Main";
+import Search from "pages/Search";
 import Auth from "pages/Auth";
 import MyInfo from "pages/MyInfo";
 import Practice from "pages/Practice";
@@ -23,6 +24,7 @@ const Router = () => {
             <AnimatePresence exitBeforeEnter>
                 <Switch>
                     <Route exact path="/" component={Main} />
+                    <Route path="/search" component={Search} />
                     <Route path="/auth" component={Auth} />
                     <Route path="/info" component={MyInfo} />
                     <Route path="/practice" component={Practice} />
