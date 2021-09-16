@@ -1,5 +1,9 @@
+import { useRouterQuery } from "hooks/useRouterQuery";
+
 const Search = () => {
-    return <div>나는서치</div>;
+    const query = useRouterQuery("q");
+
+    return <div>나는{query}</div>;
 };
 
 export default Search;
