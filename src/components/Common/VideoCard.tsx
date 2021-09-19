@@ -26,35 +26,38 @@ const VideoCard = () => {
             onHoverEnd={onHoverEnd}
             variants={defaultFadeInUpVariants}
         >
-            <ReactPlayer
-                url="https://www.youtube.com/watch?v=xhztxmBJ9L4"
-                volume={0}
-                width="100%"
-                height="100%"
-                style={VideoStyle}
-                loop={true}
-                light={!isHover}
-                playing={isHover}
-                config={{
-                    youtube: {
-                        playerVars: { disablekb: 1 },
-                    },
-                }}
-            />
-
-            <AnimatePresence initial={false} exitBeforeEnter={true}>
-                {isHover && (
-                    <>
-                        <Overlay
-                            variants={cardOverlayVariants}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                        />
-                        <CardInfo />
-                    </>
-                )}
-            </AnimatePresence>
+            <VideoWrapper>
+                <ReactPlayer
+                    url="https://www.youtube.com/watch?v=xhztxmBJ9L4"
+                    volume={0}
+                    width="100%"
+                    height="100%"
+                    style={VideoStyle}
+                    loop={true}
+                    light={!isHover}
+                    playing={isHover}
+                    config={{
+                        youtube: {
+                            playerVars: { disablekb: 1 },
+                        },
+                    }}
+                />
+                <AnimatePresence initial={false} exitBeforeEnter={true}>
+                    {isHover && (
+                        <>
+                            <Overlay
+                                variants={cardOverlayVariants}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                            />
+                            <CardInfo />
+                        </>
+                    )}
+                </AnimatePresence>
+            </VideoWrapper>
+            <Title>Butter - 방탄소년단</Title>
+            <Author>bts_official_bighit</Author>
         </Wrapper>
     );
 };
@@ -62,11 +65,19 @@ const VideoCard = () => {
 export default VideoCard;
 
 const Wrapper = styled(motion.article)`
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+`;
+
+const VideoWrapper = styled.section`
     position: relative;
     width: 281.25px;
     height: 500px;
     border-radius: 12px;
     overflow: hidden;
+
+    margin-bottom: 12px;
 `;
 
 const Overlay = styled(motion.div)`
@@ -86,3 +97,16 @@ const VideoStyle: CSSProperties = {
     top: "0",
     left: "0",
 };
+
+const Title = styled.h2`
+    font-size: 16px;
+    font-weight: normal;
+    color: ${({ theme }) => theme.color.black};
+    margin-bottom: 4px;
+`;
+
+const Author = styled.h3`
+    font-size: 12px;
+    font-weight: normal;
+    color: ${({ theme }) => theme.color.black};
+`;
