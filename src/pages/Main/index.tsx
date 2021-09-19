@@ -4,11 +4,15 @@ import TagSection from "components/Main/TagSection";
 import Layout from "components/Common/Layout";
 import VideoCard from "components/Common/VideoCard";
 
+// for test
+import { motion } from "framer-motion";
+import { staggerOne } from "constants/motionUtils";
+
 const Main = () => {
     return (
         <Layout>
             <TagSection />
-            <Test>
+            <Test variants={staggerOne}>
                 <VideoCard />
                 <VideoCard />
                 <VideoCard />
@@ -23,12 +27,12 @@ const Main = () => {
 
 export default Main;
 
-const Test = styled.div`
+const Test = styled(motion.div)`
     height: 100vh;
     width: 100%;
 
     display: flex;
-    justify-content: space-between;
+    justify-content: space-evenly;
     align-items: center;
 `;
 
