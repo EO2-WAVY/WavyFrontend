@@ -25,7 +25,11 @@ const TagSection = () => {
 
     return (
         <Wrapper style={{ position: wrapperPosition }}>
-            <LeftBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
+            <LeftBtn
+                onClick={onClickLeft}
+                style={{ y: btnYposAnim }}
+                whileTap={{ scale: 0.85 }}
+            >
                 <img src="/images/Main/carousel_left.svg" alt="left" />
             </LeftBtn>
             <Carousel ref={wrapperRef}>
@@ -44,7 +48,11 @@ const TagSection = () => {
                 <TagElem title="BTS" />
                 <TagElem title="BTS" />
             </Carousel>
-            <RightBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
+            <RightBtn
+                onClick={onClickRight}
+                style={{ y: btnYposAnim }}
+                whileTap={{ scale: 0.85 }}
+            >
                 <img src="/images/Main/carousel_right.svg" alt="right" />
             </RightBtn>
         </Wrapper>
@@ -76,7 +84,8 @@ const CarouselBtn = styled(motion.button)`
     justify-content: center;
     align-items: center;
 
-    transition: background-color 0.3s;
+    /* transition: background-color 0.3s; */
+    transition: all 0.3s;
 
     & > img {
         width: 70%;
@@ -99,7 +108,7 @@ const LeftBtn = styled(CarouselBtn)`
 `;
 
 const RightBtn = styled(CarouselBtn)`
-    &::before {
+    /* &::before {
         content: "";
         position: absolute;
         width: 50px;
@@ -110,7 +119,7 @@ const RightBtn = styled(CarouselBtn)`
             rgba(255, 255, 255, 1) 20%,
             rgba(33, 33, 33, 0) 80%
         );
-    }
+    } */
 `;
 
 const Carousel = styled(motion.div)`

@@ -23,7 +23,7 @@ export const defaultPageFadeInVariants: Variants = {
     },
     exit: {
         opacity: 0,
-        transition: { duration: 0.6, ease: defaultEasing },
+        transition: { duration: 0.3, ease: defaultEasing },
         willChange: "opacity, transform",
     },
 };
@@ -44,7 +44,7 @@ export const defaultFadeInUpVariants: Variants = {
     exit: {
         y: 60,
         opacity: 0,
-        transition: { duration: 0.8, ease: defaultEasing },
+        transition: { duration: 0.3, ease: defaultEasing },
         willChange: "opacity, transform",
     },
 };
