@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import { AnimatePresence, motion } from "framer-motion";
 import styled, { CSSProperties } from "styled-components";
 
-import CardNav from "components/Common/CardNav";
+import CardInfo from "components/Common/CardInfo";
 import {
     cardOverlayVariants,
     defaultFadeInUpVariants,
@@ -32,6 +32,7 @@ const VideoCard = () => {
                 width="100%"
                 height="100%"
                 style={VideoStyle}
+                loop={true}
                 light={!isHover}
                 playing={isHover}
                 config={{
@@ -40,7 +41,7 @@ const VideoCard = () => {
                     },
                 }}
             />
-            
+
             <AnimatePresence initial={false} exitBeforeEnter={true}>
                 {isHover && (
                     <>
@@ -50,7 +51,7 @@ const VideoCard = () => {
                             animate="animate"
                             exit="exit"
                         />
-                        <CardNav />
+                        <CardInfo />
                     </>
                 )}
             </AnimatePresence>
