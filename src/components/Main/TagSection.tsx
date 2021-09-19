@@ -69,8 +69,8 @@ const Wrapper = styled(motion.section)`
     justify-content: space-between;
     align-items: center;
     margin: 60px 0 0 0;
-
     overflow: hidden;
+    z-index: 998;
 `;
 
 const CarouselBtn = styled(motion.button)`
