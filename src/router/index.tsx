@@ -1,6 +1,7 @@
 import { BrowserRouter, Switch, Route } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
+import AnimateRouter from "./AnimateRouter";
 // pages
 import Main from "pages/Main";
 import Search from "pages/Search";
@@ -21,23 +22,33 @@ const Router = () => {
         <BrowserRouter>
             <Nav />
             <ScrollToTopElem />
-            <AnimatePresence exitBeforeEnter>
-                <Switch>
-                    <Route exact path="/" component={Main} />
-                    <Route path="/search" component={Search} />
-                    <Route path="/auth" component={Auth} />
-                    <Route path="/info" component={MyInfo} />
-                    <Route path="/practice" component={Practice} />
-                    <Route path="/challenge" component={Challenge} />
-                    <Route path="/analysis" component={Analysis} />
-                    <Route path="/terms/:termName" component={Terms} />
-                    <Route path="/analysis" component={Analysis} />
-                    <Route component={NotFound} />
-                </Switch>
-            </AnimatePresence>
+            <AnimateRouter />
             <Footer />
         </BrowserRouter>
     );
 };
+
+// no exit animation
+// const Router = () => {
+//     return (
+//         <BrowserRouter>
+//             <Nav />
+//             <ScrollToTopElem />
+//                 <Switch>
+//                     <Route exact path="/" component={Main} />
+//                     <Route path="/search" component={Search} />
+//                     <Route path="/auth" component={Auth} />
+//                     <Route path="/info" component={MyInfo} />
+//                     <Route path="/practice" component={Practice} />
+//                     <Route path="/challenge" component={Challenge} />
+//                     <Route path="/analysis" component={Analysis} />
+//                     <Route path="/terms/:termName" component={Terms} />
+//                     <Route path="/analysis" component={Analysis} />
+//                     <Route component={NotFound} />
+//                 </Switch>
+//             <Footer />
+//         </BrowserRouter>
+//     );
+// };
 
 export default Router;
