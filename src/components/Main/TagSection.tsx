@@ -68,6 +68,8 @@ const Wrapper = styled(motion.section)`
     display: flex;
     justify-content: space-between;
     align-items: center;
+    background-color: ${({ theme }) => theme.color.white};
+    padding: 0 0 8px 0;
     margin: 60px 0 0 0;
     overflow: hidden;
     z-index: 998;
