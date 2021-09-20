@@ -25,11 +25,7 @@ const TagSection = () => {
 
     return (
         <Wrapper style={{ position: wrapperPosition }}>
-            <LeftBtn
-                onClick={onClickLeft}
-                style={{ y: btnYposAnim }}
-                whileTap={{ scale: 0.85 }}
-            >
+            <LeftBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
                 <img src="/images/Main/carousel_left.svg" alt="left" />
             </LeftBtn>
             <Carousel ref={wrapperRef}>
@@ -48,11 +44,7 @@ const TagSection = () => {
                 <TagElem title="BTS" />
                 <TagElem title="BTS" />
             </Carousel>
-            <RightBtn
-                onClick={onClickRight}
-                style={{ y: btnYposAnim }}
-                whileTap={{ scale: 0.85 }}
-            >
+            <RightBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
                 <img src="/images/Main/carousel_right.svg" alt="right" />
             </RightBtn>
         </Wrapper>
@@ -85,17 +77,20 @@ const CarouselBtn = styled(motion.button)`
     display: flex;
     justify-content: center;
     align-items: center;
-
-    /* transition: background-color 0.3s; */
-    transition: all 0.3s;
+    transition: background-color 0.3s;
 
     & > img {
         width: 70%;
         height: 70%;
+        transition: transform 0.3s;
     }
 
     &:hover {
         background-color: rgba(201, 201, 201, 0.2);
+    }
+
+    &:active > img {
+        transform: scale(0.8);
     }
 `;
 

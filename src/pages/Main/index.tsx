@@ -14,8 +14,7 @@ const Main = () => {
             <TagSection />
             <Test variants={staggerOne}>
                 <VideoCard />
-                <VideoCard />
-                <VideoCard />
+                
             </Test>
             <Test1 />
             <Test />
