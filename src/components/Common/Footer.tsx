@@ -50,7 +50,7 @@ const FooterLayout = styled.div`
     margin: 0 auto;
 
     & > a {
-        font-size: 1rem;
+        font-size: 1.25em;
         font-weight: 700;
     }
 `;
@@ -58,7 +58,7 @@ const FooterLayout = styled.div`
 const InfoText = styled.p`
     margin-top: 80px;
     font-size: 0.875rem;
-    line-height: 38px;
+    line-height: 24px;
     color: ${({ theme }) => theme.color.white};
 `;
 

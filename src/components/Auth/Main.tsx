@@ -19,10 +19,18 @@ const Main = ({ kind }: IMain) => {
 
     return (
         <MainWrapper variants={staggerHalf}>
-            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
-            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
-            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
-            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
+            <ProviderBtn variants={defaultFadeInUpVariants} provider="google">
+                구글로 로그인
+            </ProviderBtn>
+            <ProviderBtn variants={defaultFadeInUpVariants} provider="naver">
+                네이버로 로그인
+            </ProviderBtn>
+            <ProviderBtn variants={defaultFadeInUpVariants} provider="kakao">
+                카카오톡으로 로그인
+            </ProviderBtn>
+            <ProviderBtn variants={defaultFadeInUpVariants} provider="facebook">
+                페이스북으로 로그인
+            </ProviderBtn>
             <Noti variants={defaultFadeInUpVariants}>
                 {notice}
                 <Link to={getLinkPath}> {noticeLink}</Link>
@@ -42,11 +50,33 @@ const MainWrapper = styled(motion.main)`
     align-items: center;
 `;
 
-const TESTBTN = styled(motion.button)`
+interface IProviderBtn {
+    provider: string;
+}
+
+const ProviderBtn = styled(motion.button)<IProviderBtn>`
+    position: relative;
     width: 320px;
     height: 56px;
     border: 1px solid ${({ theme }) => theme.color.lightGray};
     margin-bottom: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    &::before {
+        content: "";
+        position: absolute;
+        top: 50%;
+        left: 12px;
+        transform: translate(0, -50%);
+        width: 28px;
+        height: 28px;
+
+        background: url(${({ provider }) => `/images/Auth/${provider}.svg`});
+        background-size: cover;
+    }
 `;
 
 const Noti = styled(motion.span)`
