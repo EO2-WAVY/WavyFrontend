@@ -32,7 +32,7 @@ export default Footer;
 
 const FooterWrapper = styled.footer`
     width: 100vw;
-    height: 360px;
+    height: 300px;
     padding: 80px ${({ theme }) => theme.size.layoutHorizonPadding};
     background-color: ${({ theme }) => theme.color.black};
     color: ${({ theme }) => theme.color.white};
@@ -50,14 +50,14 @@ const FooterLayout = styled.div`
     margin: 0 auto;
 
     & > a {
-        font-size: 1.5rem;
+        font-size: 1rem;
         font-weight: 700;
     }
 `;
 
 const InfoText = styled.p`
-    margin-top: 90px;
-    font-size: 1.25rem;
+    margin-top: 80px;
+    font-size: 0.875rem;
     line-height: 38px;
     color: ${({ theme }) => theme.color.white};
 `;
