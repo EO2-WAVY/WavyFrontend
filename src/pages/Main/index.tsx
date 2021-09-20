@@ -6,7 +6,7 @@ import VideoCard from "components/Common/VideoCard";
 
 // for test
 import { motion } from "framer-motion";
-import { staggerOne } from "constants/motionUtils";
+import { staggerOne } from "constants/motions";
 
 const Main = () => {
     return (

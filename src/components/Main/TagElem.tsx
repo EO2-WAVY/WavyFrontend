@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useState } from "react";
-import { staggerOne, defaultFadeInUpVariants } from "constants/motionUtils";
+import { staggerOne, defaultFadeInUpVariants } from "constants/motions";
 
 interface ITagElem {
     title: string;

@@ -2,7 +2,7 @@ import { ReactNode } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import { defaultPageFadeInVariants } from "constants/motionUtils";
+import { defaultPageFadeInVariants } from "constants/motions";
 
 interface ILayout {
     children: ReactNode;

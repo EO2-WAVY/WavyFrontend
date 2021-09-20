@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import Hr from "components/Common/Hr";
-import { defaultFadeInUpVariants, staggerOne } from "constants/motionUtils";
+import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 
 interface INoneData {
     query: string | null;

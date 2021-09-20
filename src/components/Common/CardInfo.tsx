@@ -5,7 +5,7 @@ import {
     cardNavUpVariants,
     defaultFadeInUpVariants,
     staggerOne,
-} from "constants/motionUtils";
+} from "constants/motions";
 
 const CardInfo = () => {
     return (

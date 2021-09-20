@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import { defaultFadeInUpVariants, staggerOne } from "constants/motionUtils";
+import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 
 interface IHeader {
     kind: string;

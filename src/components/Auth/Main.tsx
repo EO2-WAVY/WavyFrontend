@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
 
-import { defaultFadeInUpVariants, staggerHalf } from "constants/motionUtils";
+import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
 
 interface IMain {
     kind: string;

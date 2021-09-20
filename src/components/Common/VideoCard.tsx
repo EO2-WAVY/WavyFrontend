@@ -7,7 +7,7 @@ import CardInfo from "components/Common/CardInfo";
 import {
     cardOverlayVariants,
     defaultFadeInUpVariants,
-} from "constants/motionUtils";
+} from "constants/motions";
 
 const VideoCard = () => {
     const [isHover, setIsHover] = useState<boolean>(false);
