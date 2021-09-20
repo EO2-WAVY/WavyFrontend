@@ -21,12 +21,8 @@ const VideoCard = () => {
     };
 
     return (
-        <Wrapper
-            onHoverStart={onHoverStart}
-            onHoverEnd={onHoverEnd}
-            variants={defaultFadeInUpVariants}
-        >
-            <VideoWrapper>
+        <Wrapper variants={defaultFadeInUpVariants}>
+            <VideoWrapper onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
                 <ReactPlayer
                     url="https://www.youtube.com/watch?v=xhztxmBJ9L4"
                     volume={0}
@@ -70,8 +66,9 @@ const Wrapper = styled(motion.article)`
     align-items: center;
 `;
 
-const VideoWrapper = styled.section`
+const VideoWrapper = styled(motion.section)`
     position: relative;
+    aspect-ratio: 9 / 16;
     width: 281.25px;
     height: 500px;
     border-radius: 12px;

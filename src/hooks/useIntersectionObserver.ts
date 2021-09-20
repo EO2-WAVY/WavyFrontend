@@ -1,23 +1,23 @@
-import { useEffect } from "react";
+import { RefObject, useEffect, useState } from "react";
 
-interface IUseIntersectionObserver {
+interface useIntersectionObserverProps {
     root?: null;
     rootMargin?: string;
     threshold?: number;
-    target: HTMLElement | null;
     onIntersect: IntersectionObserverCallback;
 }
 
 const useIntersectionObserver = ({
     root,
     rootMargin = "0px",
-    threshold = 1,
-    target,
+    threshold = 0,
     onIntersect,
-}: IUseIntersectionObserver) => {
+}: useIntersectionObserverProps) => {
+    const [target, setTarget] = useState<HTMLElement | null | undefined>(null);
+
     useEffect(() => {
         if (!target) return;
-        
+
         const observer: IntersectionObserver = new IntersectionObserver(
             onIntersect,
             { root, rootMargin, threshold }
@@ -26,6 +26,8 @@ const useIntersectionObserver = ({
 
         return () => observer.unobserve(target);
     }, [onIntersect, root, rootMargin, target, threshold]);
+
+    return { setTarget };
 };
 
 export default useIntersectionObserver;

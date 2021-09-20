@@ -1,11 +1,11 @@
 import styled from "styled-components";
+import { motion } from "framer-motion";
 
-import TagSection from "components/Main/TagSection";
 import Layout from "components/Common/Layout";
+import TagSection from "components/Main/TagSection";
+import LinkSection from "components/Main/LinkSection";
 import VideoCard from "components/Common/VideoCard";
 
-// for test
-import { motion } from "framer-motion";
 import { staggerOne } from "constants/motions";
 
 const Main = () => {
@@ -14,8 +14,11 @@ const Main = () => {
             <TagSection />
             <Test variants={staggerOne}>
                 <VideoCard />
-                
+                <VideoCard />
+                <VideoCard />
             </Test>
+
+            <LinkSection />
             <Test1 />
             <Test />
             <Test1 />
@@ -38,5 +41,4 @@ const Test = styled(motion.div)`
 const Test1 = styled.div`
     height: 40vh;
     width: 100px;
-    background-color: red;
 `;
