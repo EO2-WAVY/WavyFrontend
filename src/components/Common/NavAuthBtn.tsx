@@ -5,7 +5,7 @@ const NavAuthBtn = () => {
     const history = useHistory();
 
     const onClickAuth = () => {
-        history.push("/auth");
+        history.push("/login");
     };
 
     return (

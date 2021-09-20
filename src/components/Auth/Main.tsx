@@ -1,55 +1,61 @@
-import React from "react";
 import styled from "styled-components";
+import { motion } from "framer-motion";
+import { Link } from "react-router-dom";
+
+import { defaultFadeInUpVariants, staggerHalf } from "constants/motionUtils";
 
 interface IMain {
     kind: string;
-    setKind: React.Dispatch<React.SetStateAction<"회원가입" | "로그인">>;
 }
 
-const Main = ({ kind, setKind }: IMain) => {
+const Main = ({ kind }: IMain) => {
     const notice: string =
         kind === "로그인" ? "계정이 없으신가요?" : "계정이 있으신가요?";
     const noticeLink: string = kind === "로그인" ? "회원가입" : "로그인";
 
-    const onClickLink = () => {
-        setKind(kind === "로그인" ? "회원가입" : "로그인");
+    const getLinkPath = () => {
+        return kind === "회원가입" ? "/login" : "/signup";
     };
 
     return (
-        <MainWrapper>
-            <TESTBTN></TESTBTN>
-            <TESTBTN></TESTBTN>
-            <TESTBTN></TESTBTN>
-            <TESTBTN></TESTBTN>
-            <Span>
-                {notice} 
-                <span onClick={onClickLink}> {noticeLink}</span>
-            </Span>
+        <MainWrapper variants={staggerHalf}>
+            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
+            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
+            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
+            <TESTBTN variants={defaultFadeInUpVariants}></TESTBTN>
+            <Noti variants={defaultFadeInUpVariants}>
+                {notice}
+                <Link to={getLinkPath}> {noticeLink}</Link>
+            </Noti>
         </MainWrapper>
     );
 };
 
 export default Main;
 
-const MainWrapper = styled.main`
+const MainWrapper = styled(motion.main)`
     width: 100%;
-    padding: 20px 12px;
 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    gap: 12px;
 `;
 
-const TESTBTN = styled.div`
-    width: 300px;
-    height: 60px;
-    background-color: gray;
+const TESTBTN = styled(motion.button)`
+    width: 320px;
+    height: 56px;
+    border: 1px solid ${({ theme }) => theme.color.lightGray};
+    margin-bottom: 16px;
 `;
 
-const Span = styled.span`
-    & > span {
+const Noti = styled(motion.span)`
+    font-size: 14px;
+    margin: 8px 0 120px 0;
+    color: ${({ theme }) => theme.color.lightGray};
+
+    & > a {
         cursor: pointer;
+        text-decoration: underline;
     }
 `;
