@@ -1,10 +1,12 @@
 import { ChangeEvent, FormEvent, useState } from "react";
+import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import { defaultFadeInUpVariants } from "constants/motions";
 
 const LinkInput = () => {
+    const history = useHistory();
     const [value, setValue] = useState<string>("");
     const youtubeRegex =
         /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -20,7 +22,13 @@ const LinkInput = () => {
             return;
         }
 
-        console.log(value.match(youtubeRegex) ? "pass" : "nopass");
+        const youtubeCode: string[] = [];
+        for (let word of value.split("").reverse()) {
+            if (word === "=") break;
+            youtubeCode.unshift(word);
+        }
+
+        history.push(`/link?y=${youtubeCode.join("")}`)
     };
 
     return (

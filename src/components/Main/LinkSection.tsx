@@ -13,7 +13,7 @@ const LinkSection = () => {
                     <strong>링크</strong> 입력
                 </Title>
                 <Dsc variants={defaultFadeInUpVariants}>
-                    원하는 YouTUbe 댄스영상 링크를 입력하세요
+                    원하는 YouTube 댄스영상 링크를 입력하세요
                 </Dsc>
                 <LinkInput />
             </InputSection>

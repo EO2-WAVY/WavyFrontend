@@ -1,4 +1,4 @@
-import { BrowserRouter, Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 // pages
@@ -7,6 +7,7 @@ import Search from "pages/Search";
 import Auth from "pages/Auth";
 import MyInfo from "pages/MyInfo";
 import Practice from "pages/Practice";
+import Link from "pages/Link";
 import Challenge from "pages/Challenge";
 import Analysis from "pages/Analysis";
 import NotFound from "pages/NotFound";
@@ -24,6 +25,7 @@ const AnimateRouter = () => {
                 <Route path="/signup" component={Auth} />
                 <Route path="/info" component={MyInfo} />
                 <Route path="/practice" component={Practice} />
+                <Route path="/link" component={Link} />
                 <Route path="/challenge" component={Challenge} />
                 <Route path="/analysis" component={Analysis} />
                 <Route path="/terms/:termName" component={Terms} />
