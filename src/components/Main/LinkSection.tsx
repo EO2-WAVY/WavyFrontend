@@ -2,26 +2,22 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import LinkVideo from "./LinkVideo";
+import LinkInput from "./LinkInput";
+import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 
 const LinkSection = () => {
     return (
         <Wrapper>
-            <InputSection>
-                <Title>
+            <InputSection variants={staggerOne}>
+                <Title variants={defaultFadeInUpVariants}>
                     <strong>링크</strong> 입력
                 </Title>
-                <Dsc>원하는 YouTUbe 댄스영상 링크를 입력하세요</Dsc>
-                <InputWrapper>
-                    <Input />
-                    <Submit
-                        whileHover={{ scale: 1.05 }}
-                        whileTap={{ scale: 1 }}
-                    >
-                        연습하기
-                    </Submit>
-                </InputWrapper>
+                <Dsc variants={defaultFadeInUpVariants}>
+                    원하는 YouTUbe 댄스영상 링크를 입력하세요
+                </Dsc>
+                <LinkInput />
             </InputSection>
-            <VideoSection>
+            <VideoSection variants={staggerOne}>
                 <LinkVideo
                     url="/videos/Main/vid1.mp4"
                     inputRange={[0, 1]}
@@ -67,30 +63,6 @@ const Dsc = styled(motion.span)`
     font-size: 18px;
     color: ${({ theme }) => theme.color.lightGray};
     margin-bottom: 40px;
-`;
-
-const InputWrapper = styled(motion.div)`
-    display: flex;
-    gap: 12px;
-`;
-
-const Input = styled(motion.input)`
-    width: 500px;
-    height: 60px;
-
-    border: solid 1px black;
-    border-radius: 50px;
-    background-color: ${({ theme }) => theme.color.white};
-`;
-
-const Submit = styled(motion.button)`
-    width: 140px;
-    height: 60px;
-    text-align: center;
-
-    color: ${({ theme }) => theme.color.white};
-    border-radius: 50px;
-    background-color: ${({ theme }) => theme.color.purple};
 `;
 
 const VideoSection = styled(motion.div)`
