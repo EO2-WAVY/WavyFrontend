@@ -1,7 +1,11 @@
-import { Link, useHistory } from "react-router-dom";
+import { Link, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
+
 import NavSearchBar from "components/Common/NavSearchBar";
 import NavAuthBtn from "./NavAuthBtn";
+import { navVariants } from "constants/motions";
+import { dancePathnames } from "constants/dancePathnames";
 
 const Nav = () => {
     const history = useHistory();
@@ -9,31 +13,42 @@ const Nav = () => {
         history.push("/");
     };
 
+    const { pathname } = useLocation();
+    if (dancePathnames.includes(pathname))
+        return <AnimatePresence exitBeforeEnter></AnimatePresence>;
+
     return (
-        <Navbar>
-            <Layout>
-                <LeftElem>
-                    <img
-                        src="/images/logo_full.svg"
-                        alt="wavy logo"
-                        onClick={onClickLogo}
-                    />
-                    <Link to="/">HOME</Link>
-                    <Link to="/">HOME</Link>
-                    <Link to="/">HOME</Link>
-                </LeftElem>
-                <RightElem>
-                    <NavSearchBar />
-                    <NavAuthBtn />
-                </RightElem>
-            </Layout>
-        </Navbar>
+        <AnimatePresence exitBeforeEnter>
+            <Navbar
+                variants={navVariants}
+                initial="initial"
+                animate="animate"
+                exit="exit"
+            >
+                <Layout>
+                    <LeftElem>
+                        <img
+                            src="/images/logo_full.svg"
+                            alt="wavy logo"
+                            onClick={onClickLogo}
+                        />
+                        <Link to="/">HOME</Link>
+                        <Link to="/">HOME</Link>
+                        <Link to="/">HOME</Link>
+                    </LeftElem>
+                    <RightElem>
+                        <NavSearchBar />
+                        <NavAuthBtn />
+                    </RightElem>
+                </Layout>
+            </Navbar>
+        </AnimatePresence>
     );
 };
 
 export default Nav;
 
-const Navbar = styled.nav`
+const Navbar = styled(motion.nav)`
     position: -webkit-sticky;
     position: sticky;
     top: 0px;

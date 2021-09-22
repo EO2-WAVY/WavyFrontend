@@ -89,3 +89,21 @@ export const cardOverlayVariants: Variants = {
         willChange: "opacity",
     },
 };
+
+export const navVariants: Variants = {
+    initial: {
+        y: -100,
+        transition: { duration: 0.8, ease: defaultEasing },
+        willChange: "transform",
+    },
+    animate: {
+        y: 0,
+        transition: { duration: 0.8, ease: defaultEasing },
+        willChange: "transform",
+    },
+    exit: {
+        y: -100,
+        transition: { duration: 0.8, ease: defaultEasing },
+        willChange: "transform",
+    },
+};

@@ -69,12 +69,16 @@ const Wrapper = styled(motion.article)`
 const VideoWrapper = styled(motion.section)`
     position: relative;
     aspect-ratio: 9 / 16;
-    width: 281.25px;
-    height: 500px;
+    width: 270px;
+    /* width: 281.25px; */
     border-radius: 12px;
     overflow: hidden;
-
     margin-bottom: 12px;
+
+    /* transition: box-shadow 1s;
+    &:hover {
+        box-shadow: 0px 0px 35px 5px rgba(101, 0, 230, 0.6);
+    } */
 `;
 
 const Overlay = styled(motion.div)`

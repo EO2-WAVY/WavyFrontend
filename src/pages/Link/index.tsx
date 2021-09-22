@@ -4,7 +4,7 @@ import { useRouterQuery } from "hooks/useRouterQuery";
 const Link = () => {
     const youtubeCode = useRouterQuery("y");
 
-    return <Layout>{youtubeCode}</Layout>;
+    return <div>{youtubeCode}</div>;
 };
 
 export default Link;
