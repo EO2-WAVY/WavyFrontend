@@ -1,14 +1,23 @@
-import { useState, useRef } from "react";
+import { useState } from "react";
 import ReactPlayer from "react-player";
 import styled, { CSSProperties } from "styled-components";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 
 interface LinkVideoProps {
     url: string;
+    right?: number;
+    inputRange?: number[];
+    outputRange?: number[];
 }
 
-const LinkVideo = ({ url }: LinkVideoProps) => {
+const LinkVideo = ({
+    url,
+    right = 0,
+    inputRange = [0, 0],
+    outputRange = [0, 0],
+}: LinkVideoProps) => {
     const [isIntersect, setIsIntersect] = useState<boolean>(false);
 
     const onIntersect: IntersectionObserverCallback = ([
@@ -19,8 +28,15 @@ const LinkVideo = ({ url }: LinkVideoProps) => {
 
     const { setTarget } = useIntersectionObserver({ onIntersect });
 
+    const { scrollYProgress } = useViewportScroll();
+    const yAnim = useTransform(scrollYProgress, inputRange, outputRange);
+
     return (
-        <VideoWrapper ref={setTarget}>
+        <VideoWrapper
+            ref={setTarget}
+            right={right}
+            style={{ translateY: yAnim }}
+        >
             <VideoOverlay />
             <ReactPlayer
                 url={url}
@@ -28,7 +44,6 @@ const LinkVideo = ({ url }: LinkVideoProps) => {
                 width="100%"
                 height="100%"
                 style={VideoStyle}
-                light={!isIntersect}
                 playing={isIntersect}
                 loop={true}
                 config={{
@@ -43,13 +58,18 @@ const LinkVideo = ({ url }: LinkVideoProps) => {
 
 export default LinkVideo;
 
-const VideoWrapper = styled.div`
+interface VideoWrapperProps {
+    right: number;
+}
+
+const VideoWrapper = styled(motion.div)<VideoWrapperProps>`
     position: absolute;
-    left: 0;
+    top: 0;
+    right: ${({ right }) => right}px;
+
     aspect-ratio: 9 / 16;
     width: 200px;
     background-color: red;
-    opacity: 1;
 `;
 
 const VideoOverlay = styled.div`

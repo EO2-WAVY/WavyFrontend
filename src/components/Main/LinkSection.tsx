@@ -13,11 +13,26 @@ const LinkSection = () => {
                 <Dsc>원하는 YouTUbe 댄스영상 링크를 입력하세요</Dsc>
                 <InputWrapper>
                     <Input />
-                    <Submit>연습하기</Submit>
+                    <Submit
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 1 }}
+                    >
+                        연습하기
+                    </Submit>
                 </InputWrapper>
             </InputSection>
             <VideoSection>
-                {/* <LinkVideo url="https://www.youtube.com/watch?v=xhztxmBJ9L4" /> */}
+                <LinkVideo
+                    url="/videos/Main/vid1.mp4"
+                    inputRange={[0, 1]}
+                    outputRange={[0, 100]}
+                />
+                <LinkVideo
+                    url="/videos/Main/vid2.mp4"
+                    inputRange={[0, 1]}
+                    outputRange={[100, 0]}
+                    right={150}
+                />
             </VideoSection>
         </Wrapper>
     );
@@ -40,6 +55,7 @@ const Title = styled(motion.h2)`
     font-size: 36px;
     font-weight: normal;
     color: ${({ theme }) => theme.color.black};
+    margin-bottom: 12px;
 
     & > strong {
         font-weight: 600;
@@ -47,28 +63,38 @@ const Title = styled(motion.h2)`
 `;
 
 const Dsc = styled(motion.span)`
+    display: inline-block;
     font-size: 18px;
     color: ${({ theme }) => theme.color.lightGray};
+    margin-bottom: 40px;
 `;
 
 const InputWrapper = styled(motion.div)`
     display: flex;
+    gap: 12px;
 `;
 
 const Input = styled(motion.input)`
     width: 500px;
     height: 60px;
-    
+
     border: solid 1px black;
+    border-radius: 50px;
     background-color: ${({ theme }) => theme.color.white};
 `;
 
 const Submit = styled(motion.button)`
+    width: 140px;
+    height: 60px;
+    text-align: center;
+
     color: ${({ theme }) => theme.color.white};
+    border-radius: 50px;
     background-color: ${({ theme }) => theme.color.purple};
 `;
 
 const VideoSection = styled(motion.div)`
     position: relative;
     width: 400px;
+    height: 100%;
 `;

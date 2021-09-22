@@ -20,9 +20,9 @@ const Main = () => {
 
             <LinkSection />
             <Test1 />
-            <Test />
+            {/* <Test />
             <Test1 />
-            <Test />
+            <Test /> */}
         </Layout>
     );
 };
