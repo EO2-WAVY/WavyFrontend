@@ -1,19 +1,18 @@
-import { Link, useHistory, useLocation } from "react-router-dom";
+import { Link, useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
 import NavSearchBar from "components/Common/Nav/NavSearchBar";
 import NavAuthBtn from "components/Common/Nav/NavAuthBtn";
-import ConditionalNav from "components/Common/Nav/ConditionalNav";
 import { navVariants } from "constants/motions";
-import { dancePathnames } from "constants/dancePathnames";
 import useMousePosition from "hooks/useMousePosition";
+
+
 
 const Nav = () => {
     const history = useHistory();
     const onClickLogo = () => history.push("/");
 
-    const { pathname } = useLocation();
     const { mousePosition } = useMousePosition();
 
     return (
