@@ -1,25 +1,16 @@
 import styled, { CSSProperties } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactPlayer from "react-player";
-import { useRecoilState } from "recoil";
 
-import { layoutState } from "store/Dance";
 import { defaultBtnSwapVariants } from "constants/motions";
+import useLayout from "hooks/Dance/useLayout";
 
 interface YoutubePlayerProps {
     youtubeCode: string;
 }
 
 const YoutubePlayer = ({ youtubeCode }: YoutubePlayerProps) => {
-    const [layout, setLayout] = useRecoilState(layoutState);
-
-    const onClickLayoutBig = () => {
-        setLayout("drag");
-    };
-
-    const onClickLayoutSmall = () => {
-        setLayout("half");
-    };
+    const { layout, onClickLayoutBig, onClickLayoutSmall } = useLayout();
 
     return (
         <Wrapper>
@@ -55,12 +46,26 @@ const YoutubePlayer = ({ youtubeCode }: YoutubePlayerProps) => {
 
 export default YoutubePlayer;
 
-const Wrapper = styled.aside`
+const Wrapper = styled(motion.aside)`
     position: relative;
     height: 100%;
     aspect-ratio: 9 / 16;
     flex-shrink: 0;
     overflow: hidden;
+    z-index: 1;
+
+    /* position: absolute;
+    top:0;
+    left:0; */
+    &::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 85%;
+        z-index: 2;
+    }
 `;
 
 const VideoStyle: CSSProperties = {
