@@ -1,11 +1,15 @@
 import styled, { CSSProperties } from "styled-components";
 import ReactPlayer from "react-player";
 
-const YoutubePlayer = () => {
+interface YoutubePlayerProps {
+    youtubeCode: string;
+}
+
+const YoutubePlayer = ({ youtubeCode }: YoutubePlayerProps) => {
     return (
         <Wrapper>
             <ReactPlayer
-                url="https://www.youtube.com/watch?v=yCM4vEcDs_s"
+                url={`https://www.youtube.com/watch?v=${youtubeCode}`}
                 volume={0}
                 width="100%"
                 height="100%"

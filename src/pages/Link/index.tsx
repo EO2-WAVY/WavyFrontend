@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
+import { useHistory } from "react-router-dom";
 
 import Webcam from "components/Common/Dance/Webcam";
 import { useRouterQuery } from "hooks/useRouterQuery";
@@ -8,6 +9,12 @@ import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 
 const Link = () => {
     const youtubeCode = useRouterQuery("y");
+    const history = useHistory();
+
+    if (!youtubeCode) {
+        history.push("/");
+        return <></>;
+    }
 
     return (
         <AnimatePresence exitBeforeEnter>
@@ -17,7 +24,7 @@ const Link = () => {
                 animate="animate"
                 exit="exit"
             >
-                <YoutubePlayer />
+                <YoutubePlayer youtubeCode={youtubeCode} />
                 <Webcam />
             </Wrapper>
         </AnimatePresence>
