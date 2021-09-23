@@ -20,10 +20,12 @@ import ScrollToTopElem from "utils/ScrollToTop";
 const Router = () => {
     return (
         <BrowserRouter>
-            <Nav />
-            <ScrollToTopElem />
-            <AnimateRouter />
-            <Footer />
+            
+                <Nav />
+                <ScrollToTopElem />
+                <AnimateRouter />
+                <Footer />
+            
         </BrowserRouter>
     );
 };

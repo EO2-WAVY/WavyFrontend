@@ -2,20 +2,19 @@ import { Link, useHistory, useLocation } from "react-router-dom";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
-import NavSearchBar from "components/Common/NavSearchBar";
-import NavAuthBtn from "./NavAuthBtn";
+import NavSearchBar from "components/Common/Nav/NavSearchBar";
+import NavAuthBtn from "components/Common/Nav/NavAuthBtn";
+import ConditionalNav from "components/Common/Nav/ConditionalNav";
 import { navVariants } from "constants/motions";
 import { dancePathnames } from "constants/dancePathnames";
+import useMousePosition from "hooks/useMousePosition";
 
 const Nav = () => {
     const history = useHistory();
-    const onClickLogo = () => {
-        history.push("/");
-    };
+    const onClickLogo = () => history.push("/");
 
     const { pathname } = useLocation();
-    if (dancePathnames.includes(pathname))
-        return <AnimatePresence exitBeforeEnter></AnimatePresence>;
+    const { mousePosition } = useMousePosition();
 
     return (
         <AnimatePresence exitBeforeEnter>
@@ -56,7 +55,7 @@ const Navbar = styled(motion.nav)`
     height: 104px;
     background-color: ${({ theme }) => theme.color.white};
     box-shadow: 0px 10px 25px 4px rgba(0, 0, 0, 0.03);
-    z-index: 999;
+    z-index: 10;
 `;
 
 const Layout = styled.div`
