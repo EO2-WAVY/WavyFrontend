@@ -4,7 +4,6 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import NavSearchBar from "components/Common/Nav/NavSearchBar";
 import NavAuthBtn from "components/Common/Nav/NavAuthBtn";
-import { navVariants } from "constants/motions";
 import useMousePosition from "hooks/useMousePosition";
 import useNavCondition from "hooks/useNavCondition";
 
