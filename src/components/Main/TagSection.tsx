@@ -3,6 +3,7 @@ import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 import TagElem from "components/Main/TagElem";
 import useCarousel from "hooks/useCarousel";
+import useGetTags from "hooks/api/useGetTags";
 import { useState } from "react";
 
 const TagSection = () => {
@@ -23,26 +24,18 @@ const TagSection = () => {
     // for button
     const btnYposAnim = useTransform(scrollY, [0, 183, 9999], [0, 70, 70]);
 
+    const { data } = useGetTags();
+
     return (
         <Wrapper style={{ position: wrapperPosition }}>
             <LeftBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
                 <img src="/images/Main/carousel_left.svg" alt="left" />
             </LeftBtn>
             <Carousel ref={wrapperRef}>
-                <TagElem title="BTS" />
-                <TagElem title="BSSTS" />
-                <TagElem title="BS" />
-                <TagElem title="BSSSTS" />
-                <TagElem title="BSTS" />
-                <TagElem title="BTSS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
-                <TagElem title="BTS" />
+                <TagElem name="내닉네임" image="내닉네임" />
+                {data.map(({ name, image }) => (
+                    <TagElem name={name} image={image} />
+                ))}
             </Carousel>
             <RightBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
                 <img src="/images/Main/carousel_right.svg" alt="right" />

@@ -3,50 +3,72 @@ import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useState } from "react";
 import { staggerOne, defaultFadeInUpVariants } from "constants/motions";
 
-interface ITagElem {
-    title: string;
+interface TagElemProps {
+    name: string;
+    image: string;
 }
 
-const TagElem = ({ title }: ITagElem) => {
+const TagElem = ({ name, image }: TagElemProps) => {
     const { scrollY } = useViewportScroll();
 
-    const marginAnim = useTransform(scrollY, [0, 183, 400], [16, 16, 6]);
-    const CircleWidthAnim = useTransform(
+    const wrapperMarginAnim = useTransform(scrollY, [0, 183, 400], [16, 16, 6]);
+    const circleWidthAnim = useTransform(
         scrollY,
         [0, 183, 400],
         [120, 120, 60]
     );
-    const CircleScaleAnim = useTransform(scrollY, [0, 183], [1, 0.6]);
-    const CircleOpacityAnim = useTransform(scrollY, [0, 183], [1, 0]);
+    const circleScaleAnim = useTransform(scrollY, [0, 183], [1, 0.6]);
+    const circleOpacityAnim = useTransform(scrollY, [0, 183], [1, 0]);
 
     const [titleBgColor, setTitleBgColor] = useState<"#fff" | "#9E61FF">(
         "#fff"
     );
     const [titleColor, setTitleColor] = useState<"#242129" | "#fff">("#242129");
+    const titleVertPaddingAnim = useTransform(
+        scrollY,
+        [0, 183, 183],
+        [0, 9, 9]
+    );
+    const titleHoriPaddingAnim = useTransform(
+        scrollY,
+        [0, 183, 183],
+        [0, 30, 30]
+    );
 
     scrollY.onChange((yPos) => {
-        setTitleBgColor(yPos > 183 ? "#9E61FF" : "#fff");
-        setTitleColor(yPos > 183 ? "#fff" : "#242129");
+        setTitleBgColor(yPos > 143 ? "#9E61FF" : "#fff");
+        setTitleColor(yPos > 143 ? "#fff" : "#242129");
     });
 
     return (
         <Wrapper
-            style={{ marginRight: marginAnim, marginLeft: marginAnim }}
+            style={{
+                marginRight: wrapperMarginAnim,
+                marginLeft: wrapperMarginAnim,
+            }}
             variants={staggerOne}
         >
-            <Item
+            <Thumbnail
+                src={image}
                 style={{
-                    scale: CircleScaleAnim,
-                    opacity: CircleOpacityAnim,
-                    width: CircleWidthAnim,
+                    scale: circleScaleAnim,
+                    opacity: circleOpacityAnim,
+                    width: circleWidthAnim,
                 }}
                 variants={defaultFadeInUpVariants}
             />
             <Title
-                style={{ backgroundColor: titleBgColor, color: titleColor }}
+                style={{
+                    backgroundColor: titleBgColor,
+                    color: titleColor,
+                    paddingTop: titleVertPaddingAnim,
+                    paddingBottom: titleVertPaddingAnim,
+                    paddingLeft: titleHoriPaddingAnim,
+                    paddingRight: titleHoriPaddingAnim,
+                }}
                 variants={defaultFadeInUpVariants}
             >
-                {title}
+                {name}
             </Title>
         </Wrapper>
     );
@@ -59,22 +81,25 @@ const Wrapper = styled(motion.div)`
     flex-direction: column;
     align-items: center;
     gap: 20px;
-
     cursor: pointer;
 `;
 
-const Item = styled(motion.div)`
+const Thumbnail = styled(motion.img)`
     flex-shrink: 0;
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-color: #c4c4c4;
     transform-origin: bottom;
+    object-fit: cover;
 `;
 
 const Title = styled(motion.span)`
     font-size: 1.25rem;
-    padding: 9px 30px;
+    text-align: center;
     border-radius: 32px;
-    transition: background-color 0.3s, color 0.3s;
+    transition: background-color 0.5s, color 0.5s;
+
+    max-width: 100%;
+    white-space: nowrap;
 `;
