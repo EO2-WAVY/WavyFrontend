@@ -109,14 +109,13 @@ const ThumbnailWrapper = styled(motion.div)<{ isCurrentTag: boolean }>`
         top: 50%;
         left: 50%;
         transform: translate(-50%, -50%);
-        width: calc(100% + 6px);
-        height: calc(100% + 6px);
+        width: calc(100% + 10px);
+        height: calc(100% + 10px);
         border-radius: 50%;
+        background: linear-gradient(180deg, #d4c0f7 0%, #852bff 100%);
 
-        background: ${({ isCurrentTag }) =>
-            isCurrentTag
-                ? "linear-gradient(180deg, #d4c0f7 0%, #852bff 100%)"
-                : ""};
+        opacity: ${({ isCurrentTag }) => (isCurrentTag ? 1 : 0)};
+        transition: all 0.8s;
     }
 `;
 
