@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import Layout from "components/Common/Layout";
 import TagSection from "components/Main/TagSection";
@@ -7,17 +7,27 @@ import LinkSection from "components/Main/LinkSection";
 import VideoCard from "components/Common/VideoCard";
 
 import { staggerOne } from "constants/motions";
+import { useRecoilValue } from "recoil";
+import { currentTagState } from "store/Main";
 
 const Main = () => {
+    const currentTag = useRecoilValue(currentTagState);
     return (
         <Layout>
             <TagSection />
-            <Test variants={staggerOne}>
-                <VideoCard />
-                <VideoCard />
-                <VideoCard />
-            </Test>
-
+            <AnimatePresence exitBeforeEnter>
+                <Test
+                    variants={staggerOne}
+                    key={currentTag}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                >
+                    <VideoCard />
+                    <VideoCard />
+                    <VideoCard />
+                </Test>
+            </AnimatePresence>
             <LinkSection />
             <Test1 />
             {/* <Test />
@@ -30,11 +40,11 @@ const Main = () => {
 export default Main;
 
 const Test = styled(motion.div)`
-    height: 100vh;
     width: 100%;
-
+    margin-top: 60px;
     display: flex;
     justify-content: space-evenly;
+    flex-wrap: wrap;
     align-items: center;
 `;
 
