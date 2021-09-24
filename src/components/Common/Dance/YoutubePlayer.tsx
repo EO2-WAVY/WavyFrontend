@@ -13,7 +13,7 @@ const YoutubePlayer = ({ youtubeCode }: YoutubePlayerProps) => {
     const { layout, onClickLayoutBig, onClickLayoutSmall } = useLayout();
 
     return (
-        <Wrapper>
+        <Wrapper layoutType={layout} drag={layout === "drag"}>
             <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${youtubeCode}`}
                 volume={0}
@@ -46,17 +46,29 @@ const YoutubePlayer = ({ youtubeCode }: YoutubePlayerProps) => {
 
 export default YoutubePlayer;
 
-const Wrapper = styled(motion.aside)`
-    position: relative;
-    height: 100%;
+interface WrapperProps {
+    layoutType: "half" | "drag";
+}
+
+const Wrapper = styled(motion.aside)<WrapperProps>`
     aspect-ratio: 9 / 16;
     flex-shrink: 0;
     overflow: hidden;
     z-index: 1;
 
-    /* position: absolute;
-    top:0;
-    left:0; */
+    ${({ layoutType }) =>
+        layoutType === "half"
+            ? `
+    position: relative;
+    height: 100%;
+    `
+            : `
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 300px;
+    border-radius: 20px;
+
     &::before {
         content: "";
         position: absolute;
@@ -66,6 +78,7 @@ const Wrapper = styled(motion.aside)`
         height: 85%;
         z-index: 2;
     }
+    `}
 `;
 
 const VideoStyle: CSSProperties = {

@@ -69,8 +69,8 @@ const Wrapper = styled(motion.article)`
 const VideoWrapper = styled(motion.section)`
     position: relative;
     aspect-ratio: 9 / 16;
-    width: 270px;
-    /* width: 281.25px; */
+    /* width: 270px; */
+    width: 360px;
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;

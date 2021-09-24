@@ -16,7 +16,6 @@ const Main = () => {
                 <VideoCard />
                 <VideoCard />
                 <VideoCard />
-                <VideoCard />
             </Test>
 
             <LinkSection />
