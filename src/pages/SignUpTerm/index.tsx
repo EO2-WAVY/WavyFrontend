@@ -3,27 +3,28 @@ import { motion } from "framer-motion";
 
 import Layout from "components/Common/Layout";
 import Hr from "components/Common/Hr";
+import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 
 const SignUpTerm = () => {
     return (
         <Layout>
-            <Title>
+            <Title variants={defaultFadeInUpVariants}>
                 <strong>WAVY</strong> 회원가입
             </Title>
-            <Section>
-                <SubTitle>약관동의</SubTitle>
-                <InputWrapper>
+            <Section variants={staggerOne}>
+                <SubTitle variants={defaultFadeInUpVariants}>약관동의</SubTitle>
+                <InputWrapper variants={defaultFadeInUpVariants}>
                     <Checkbox type="checkbox" id="all" />
                     <label htmlFor="all" className="all">
                         <strong>WAVY</strong> 회원 약관에 모두 동의합니다
                     </label>
                 </InputWrapper>
-                <InputWrapper>
+                <InputWrapper variants={defaultFadeInUpVariants}>
                     <Checkbox type="checkbox" id="personal" />
                     <label htmlFor="personal">개인정보 이용약관</label>
                     <span>전문보기 {">"}</span>
                 </InputWrapper>
-                <InputWrapper>
+                <InputWrapper variants={defaultFadeInUpVariants}>
                     <Checkbox type="checkbox" id="marketing" />
                     <label htmlFor="marketing">
                         마케팅/홍보 수집 및 이용 (선택)
@@ -33,21 +34,27 @@ const SignUpTerm = () => {
             </Section>
             <Hr />
 
-            <Section>
-                <SubTitle>기본정보</SubTitle>
-                <InputWrapper>
+            <Section variants={staggerOne}>
+                <SubTitle variants={defaultFadeInUpVariants}>기본정보</SubTitle>
+                <InputWrapper variants={defaultFadeInUpVariants}>
                     <TextLabel>메일</TextLabel>
                     <TextInput disabled type="text" value="test@test.tst" />
                 </InputWrapper>
-                <InputWrapper>
+                <InputWrapper variants={defaultFadeInUpVariants}>
                     <TextLabel>별명</TextLabel>
                     <TextInput type="text" />
                 </InputWrapper>
             </Section>
             <Hr />
 
-            <SubmitSection>
-                <SubmitBtn>완료</SubmitBtn>
+            <SubmitSection variants={staggerOne}>
+                <SubmitBtn
+                    variants={defaultFadeInUpVariants}
+                    whileHover={{ scale: 1.05 }}
+                    whileTap={{ scale: 1 }}
+                >
+                    완료
+                </SubmitBtn>
             </SubmitSection>
         </Layout>
     );
