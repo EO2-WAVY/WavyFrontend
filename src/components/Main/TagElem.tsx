@@ -22,10 +22,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
     const circleScaleAnim = useTransform(scrollY, [80, 183], [1, 0.6]);
     const circleOpacityAnim = useTransform(scrollY, [80, 183], [1, 0]);
 
-    const [titleBgColor, setTitleBgColor] = useState<"#fff" | "#9E61FF">(
-        "#fff"
-    );
-    const [titleColor, setTitleColor] = useState<"#242129" | "#fff">("#242129");
+    const [isScrolled, setIsScrolled] = useState<boolean>(false);
     const titleVertPaddingAnim = useTransform(
         scrollY,
         [0, 183, 183],
@@ -38,8 +35,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
     );
 
     scrollY.onChange((yPos) => {
-        setTitleBgColor(yPos > 143 ? "#9E61FF" : "#fff");
-        setTitleColor(yPos > 143 ? "#fff" : "#242129");
+        setIsScrolled(yPos > 143);
     });
 
     const [currentTag, setCurrentTag] = useRecoilState(currentTagState);
@@ -68,9 +64,9 @@ const TagElem = ({ name, image }: TagElemProps) => {
                 <Thumbnail src={image} />
             </ThumbnailWrapper>
             <Title
+                isScrolled={isScrolled}
+                isCurrentTag={currentTag === name}
                 style={{
-                    backgroundColor: titleBgColor,
-                    color: titleColor,
                     paddingTop: titleVertPaddingAnim,
                     paddingBottom: titleVertPaddingAnim,
                     paddingLeft: titleHoriPaddingAnim,
@@ -130,12 +126,36 @@ const Thumbnail = styled(motion.img)`
     object-fit: cover;
 `;
 
-const Title = styled(motion.span)`
+interface TitleProps {
+    isScrolled: boolean;
+    isCurrentTag: boolean;
+}
+
+const Title = styled(motion.span)<TitleProps>`
     font-size: 1.25rem;
     text-align: center;
     border-radius: 32px;
-    transition: background-color 0.5s, color 0.5s;
+    transition: background-color 0.5s, color 0.5s, border 0.5s, text-weight 0.5s;
 
     max-width: 100%;
     white-space: nowrap;
+
+    font-weight: ${({ isScrolled }) => (isScrolled ? "bold" : "normal")};
+
+    background-color: ${({ isScrolled, isCurrentTag, theme }) => {
+        if (!isScrolled) return theme.color.white;
+        else if (isCurrentTag) return theme.color.lightPurple;
+        return theme.color.white;
+    }};
+
+    color: ${({ isScrolled, isCurrentTag, theme }) => {
+        if (!isScrolled) return theme.color.black;
+        else if (isCurrentTag) return theme.color.white;
+        return theme.color.lightPurple;
+    }};
+
+    border: ${({ isScrolled, isCurrentTag, theme }) =>
+        isScrolled && !isCurrentTag
+            ? `solid 1.75px ${theme.color.lightPurple}`
+            : `solid 1.75px ${theme.color.white}`};
 `;
