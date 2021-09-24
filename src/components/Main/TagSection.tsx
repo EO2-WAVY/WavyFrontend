@@ -34,7 +34,7 @@ const TagSection = () => {
             <Carousel ref={wrapperRef}>
                 <TagElem name="내닉네임" image="내닉네임" />
                 {data.map(({ name, image }) => (
-                    <TagElem name={name} image={image} />
+                    <TagElem key={name} name={name} image={image} />
                 ))}
             </Carousel>
             <RightBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
@@ -115,7 +115,7 @@ const RightBtn = styled(CarouselBtn)`
 const Carousel = styled(motion.div)`
     position: relative;
     width: 90%;
-
+    padding-top: 6px;
     display: flex;
     align-items: center;
     overflow: scroll;

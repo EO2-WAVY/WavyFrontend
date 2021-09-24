@@ -1,3 +1,7 @@
+import { useEffect } from "react";
+import { useSetRecoilState } from "recoil";
+import { currentTagState } from "store/Main";
+
 const dummyData: Tag[] = [
     {
         name: "BTS",
@@ -50,6 +54,12 @@ const dummyData: Tag[] = [
 ];
 
 const useGetTags = () => {
+    const setCurrentTag = useSetRecoilState(currentTagState);
+
+    useEffect(() => {
+        setCurrentTag(dummyData[0].name);
+    }, [setCurrentTag]);
+
     return { data: dummyData };
 };
 
