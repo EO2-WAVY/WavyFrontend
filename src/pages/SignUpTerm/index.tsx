@@ -11,19 +11,7 @@ import TextSection from "components/SignUpTerm/TextSection";
 
 const SignUpTerm = () => {
     const [checks, setChecks] = useState<boolean[]>([false, false, false]);
-    // 동의한 id에 따라 상태 적용
-    const onCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
-        const {
-            target: { id },
-        } = e;
-        const nId = parseInt(id);
-        if (![0, 1, 2].includes(nId)) return;
-
-        let tempArr = [...checks];
-        if (nId === 0) tempArr = Array(tempArr.length).fill(!tempArr[0]);
-        else tempArr[nId] = !tempArr[nId];
-        setChecks(tempArr);
-    };
+    const [nickname, setNickname] = useState<string>("");
 
     return (
         <Layout>
@@ -35,10 +23,15 @@ const SignUpTerm = () => {
                 Section={Section}
                 SubTitle={SubTitle}
                 checks={checks}
-                onCheckChange={onCheckChange}
+                setChecks={setChecks}
             />
             <Hr />
-            <TextSection Section={Section} SubTitle={SubTitle} />
+            <TextSection
+                Section={Section}
+                SubTitle={SubTitle}
+                nickname={nickname}
+                setNickname={setNickname}
+            />
             <Hr />
             <SubmitSection variants={staggerOne}>
                 <SubmitBtn

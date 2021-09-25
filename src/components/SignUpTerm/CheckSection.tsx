@@ -1,7 +1,7 @@
 import styled, { DefaultTheme, StyledComponent } from "styled-components";
 import { motion, ForwardRefComponent, HTMLMotionProps } from "framer-motion";
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
-import { ChangeEvent } from "react";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 
 interface CheckSectionProps {
     Section: StyledComponent<
@@ -17,15 +17,29 @@ interface CheckSectionProps {
         never
     >;
     checks: boolean[];
-    onCheckChange: (e: ChangeEvent<HTMLInputElement>) => void;
+    setChecks: Dispatch<SetStateAction<boolean[]>>;
 }
 
 const CheckSection = ({
     Section,
     SubTitle,
     checks,
-    onCheckChange,
+    setChecks,
 }: CheckSectionProps) => {
+    // 동의한 id에 따라 상태 적용
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {
+            target: { id },
+        } = e;
+        const nId = parseInt(id);
+        if (![0, 1, 2].includes(nId)) return;
+
+        let tempArr = [...checks];
+        if (nId === 0) tempArr = Array(tempArr.length).fill(!tempArr[0]);
+        else tempArr[nId] = !tempArr[nId];
+        setChecks(tempArr);
+    };
+
     return (
         <Section variants={staggerOne}>
             <SubTitle variants={defaultFadeInUpVariants}>약관동의</SubTitle>
@@ -34,7 +48,7 @@ const CheckSection = ({
                     type="checkbox"
                     id="0"
                     checked={checks[0]}
-                    onChange={onCheckChange}
+                    onChange={onChange}
                 />
                 <label htmlFor="0" className="all">
                     <strong>WAVY</strong> 회원 약관에 모두 동의합니다
@@ -46,7 +60,7 @@ const CheckSection = ({
                     type="checkbox"
                     id="1"
                     checked={checks[1]}
-                    onChange={onCheckChange}
+                    onChange={onChange}
                 />
                 <label htmlFor="1">개인정보 이용약관</label>
                 <span>전문보기 {">"}</span>
@@ -57,7 +71,7 @@ const CheckSection = ({
                     type="checkbox"
                     id="2"
                     checked={checks[2]}
-                    onChange={onCheckChange}
+                    onChange={onChange}
                 />
                 <label htmlFor="2">마케팅/홍보 수집 및 이용 (선택)</label>
                 <span>전문보기 {">"}</span>

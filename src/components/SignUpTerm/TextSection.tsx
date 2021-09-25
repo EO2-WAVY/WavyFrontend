@@ -1,3 +1,4 @@
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import { ForwardRefComponent, HTMLMotionProps, motion } from "framer-motion";
 import styled, { DefaultTheme, StyledComponent } from "styled-components";
 
@@ -16,9 +17,20 @@ interface TextSectionProps {
         {},
         never
     >;
+    nickname: string;
+    setNickname: Dispatch<SetStateAction<string>>;
 }
 
-const TextSection = ({ Section, SubTitle }: TextSectionProps) => {
+const TextSection = ({
+    Section,
+    SubTitle,
+    nickname,
+    setNickname,
+}: TextSectionProps) => {
+    const onChange = (e: ChangeEvent<HTMLInputElement>) => {
+        setNickname(e.target.value);
+    };
+
     return (
         <Section variants={staggerOne}>
             <SubTitle variants={defaultFadeInUpVariants}>기본정보</SubTitle>
@@ -28,7 +40,7 @@ const TextSection = ({ Section, SubTitle }: TextSectionProps) => {
             </InputWrapper>
             <InputWrapper variants={defaultFadeInUpVariants}>
                 <TextLabel>별명</TextLabel>
-                <TextInput type="text" />
+                <TextInput type="text" value={nickname} onChange={onChange} />
             </InputWrapper>
         </Section>
     );
