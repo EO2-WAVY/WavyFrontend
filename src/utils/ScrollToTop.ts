@@ -16,7 +16,7 @@ const ScrollToTopElem = ({ history }: RouterProps) => {
         return () => {
             unlisten();
         };
-    }, []);
+    }, [history]);
 
     return null;
 };
