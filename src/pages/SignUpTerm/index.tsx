@@ -1,19 +1,42 @@
+import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
+import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
+
 import Layout from "components/Common/Layout";
 import Hr from "components/Common/Hr";
-import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 import CheckSection from "components/SignUpTerm/CheckSection";
 import TextSection from "components/SignUpTerm/TextSection";
 
 const SignUpTerm = () => {
+    const [checks, setChecks] = useState<boolean[]>([false, false, false]);
+    // 동의한 id에 따라 상태 적용
+    const onCheckChange = (e: ChangeEvent<HTMLInputElement>) => {
+        const {
+            target: { id },
+        } = e;
+        const nId = parseInt(id);
+        if (![0, 1, 2].includes(nId)) return;
+
+        let tempArr = [...checks];
+        if (nId === 0) tempArr = Array(tempArr.length).fill(!tempArr[0]);
+        else tempArr[nId] = !tempArr[nId];
+        setChecks(tempArr);
+    };
+
     return (
         <Layout>
             <Title variants={defaultFadeInUpVariants}>
                 <strong>WAVY</strong> 회원가입
             </Title>
-            <CheckSection Section={Section} SubTitle={SubTitle} />
+
+            <CheckSection
+                Section={Section}
+                SubTitle={SubTitle}
+                checks={checks}
+                onCheckChange={onCheckChange}
+            />
             <Hr />
             <TextSection Section={Section} SubTitle={SubTitle} />
             <Hr />

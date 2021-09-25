@@ -1,6 +1,7 @@
 import styled, { DefaultTheme, StyledComponent } from "styled-components";
 import { motion, ForwardRefComponent, HTMLMotionProps } from "framer-motion";
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
+import { ChangeEvent } from "react";
 
 interface CheckSectionProps {
     Section: StyledComponent<
@@ -15,28 +16,50 @@ interface CheckSectionProps {
         {},
         never
     >;
+    checks: boolean[];
+    onCheckChange: (e: ChangeEvent<HTMLInputElement>) => void;
 }
 
-const CheckSection = ({ Section, SubTitle }: CheckSectionProps) => {
+const CheckSection = ({
+    Section,
+    SubTitle,
+    checks,
+    onCheckChange,
+}: CheckSectionProps) => {
     return (
         <Section variants={staggerOne}>
             <SubTitle variants={defaultFadeInUpVariants}>약관동의</SubTitle>
             <InputWrapper variants={defaultFadeInUpVariants}>
-                <Checkbox type="checkbox" id="all" />
-                <label htmlFor="all" className="all">
+                <Checkbox
+                    type="checkbox"
+                    id="0"
+                    checked={checks[0]}
+                    onChange={onCheckChange}
+                />
+                <label htmlFor="0" className="all">
                     <strong>WAVY</strong> 회원 약관에 모두 동의합니다
                 </label>
             </InputWrapper>
+
             <InputWrapper variants={defaultFadeInUpVariants}>
-                <Checkbox type="checkbox" id="personal" />
-                <label htmlFor="personal">개인정보 이용약관</label>
+                <Checkbox
+                    type="checkbox"
+                    id="1"
+                    checked={checks[1]}
+                    onChange={onCheckChange}
+                />
+                <label htmlFor="1">개인정보 이용약관</label>
                 <span>전문보기 {">"}</span>
             </InputWrapper>
+
             <InputWrapper variants={defaultFadeInUpVariants}>
-                <Checkbox type="checkbox" id="marketing" />
-                <label htmlFor="marketing">
-                    마케팅/홍보 수집 및 이용 (선택)
-                </label>
+                <Checkbox
+                    type="checkbox"
+                    id="2"
+                    checked={checks[2]}
+                    onChange={onCheckChange}
+                />
+                <label htmlFor="2">마케팅/홍보 수집 및 이용 (선택)</label>
                 <span>전문보기 {">"}</span>
             </InputWrapper>
         </Section>
