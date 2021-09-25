@@ -1,6 +1,6 @@
 import withTemplate from "components/Terms/withTemplate";
 
-const Utilize = () => {
+export const Utilize = () => {
     return (
         <>
             <p>제 1장 총칙</p>
@@ -56,4 +56,4 @@ const Utilize = () => {
     );
 };
 
-export default withTemplate("이용약관")(Utilize);
+export const UtilizePage = withTemplate("이용약관")(Utilize);

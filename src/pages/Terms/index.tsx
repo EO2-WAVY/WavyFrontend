@@ -1,8 +1,8 @@
 import { useParams } from "react-router-dom";
 
 import NotFound from "pages/NotFound";
-import Utilize from "components/Terms/Utilize";
-import PersonalInformation from "components/Terms/PersonalInformation";
+import {UtilizePage} from "components/Terms/Utilize";
+import {PersonalInformationPage} from "components/Terms/PersonalInformation";
 
 type TermsParams = {
     termName: string;
@@ -11,8 +11,8 @@ type TermsParams = {
 const Terms = () => {
     const { termName } = useParams<TermsParams>();
 
-    if (termName === "utilize") return <Utilize />;
-    if (termName === "personal-information") return <PersonalInformation />;
+    if (termName === "utilize") return <UtilizePage />;
+    if (termName === "personal-information") return <PersonalInformationPage />;
     return <NotFound />;
 };
 

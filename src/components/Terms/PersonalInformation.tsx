@@ -1,6 +1,6 @@
 import withTemplate from "components/Terms/withTemplate";
 
-const PersonalInformation = () => {
+export const PersonalInformation = () => {
     return (
         <>
             <p>제 1장 총칙 - 개인정보처리방침</p>
@@ -56,4 +56,5 @@ const PersonalInformation = () => {
     );
 };
 
-export default withTemplate("개인정보처리방침")(PersonalInformation);
+export const PersonalInformationPage =
+    withTemplate("개인정보처리방침")(PersonalInformation);

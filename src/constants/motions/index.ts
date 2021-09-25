@@ -141,7 +141,11 @@ export const modalCenterFadeInUpVariants: Variants = {
         opacity: 1,
         x: "-50%",
         y: "-50%",
-        transition: { duration: 0.6, ease: defaultEasing },
+        transition: {
+            duration: 0.6,
+            ease: defaultEasing,
+            staggerChildren: 0.1,
+        },
         willChange: "opacity, transform",
     },
     exit: {

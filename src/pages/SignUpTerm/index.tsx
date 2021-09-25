@@ -1,15 +1,17 @@
-import { ChangeEvent, useState } from "react";
+import { useState } from "react";
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
+import useToggle from "hooks/useToggle";
 
 import Layout from "components/Common/Layout";
 import Hr from "components/Common/Hr";
 import CheckSection from "components/SignUpTerm/CheckSection";
 import TextSection from "components/SignUpTerm/TextSection";
-import useToggle from "hooks/useToggle";
-import PersonalInfoModal from "components/SignUpTerm/PersonalInfoModal";
+import TermModal from "components/SignUpTerm/TermModal";
+import { Utilize } from "components/Terms/Utilize";
+import { PersonalInformation } from "components/Terms/PersonalInformation";
 
 const SignUpTerm = () => {
     const [checks, setChecks] = useState<boolean[]>([false, false, false]);
@@ -49,9 +51,18 @@ const SignUpTerm = () => {
                 </SubmitBtn>
             </SubmitSection>
 
-            <PersonalInfoModal
+            <TermModal
                 isShowing={personalModalIsShowing}
                 hide={togglePersonalModal}
+                title="이용약관"
+                information={<PersonalInformation />}
+            />
+
+            <TermModal
+                isShowing={marketingModalIsShowing}
+                hide={toggleMarketingModal}
+                title="마케팅/홍보 수집 약관"
+                information={<Utilize />}
             />
         </Layout>
     );
