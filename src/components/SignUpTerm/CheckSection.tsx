@@ -18,6 +18,8 @@ interface CheckSectionProps {
     >;
     checks: boolean[];
     setChecks: Dispatch<SetStateAction<boolean[]>>;
+    togglePersonalModal: VoidFunction;
+    toggleMarketingModal: VoidFunction;
 }
 
 const CheckSection = ({
@@ -25,6 +27,8 @@ const CheckSection = ({
     SubTitle,
     checks,
     setChecks,
+    togglePersonalModal,
+    toggleMarketingModal,
 }: CheckSectionProps) => {
     // 동의한 id에 따라 상태 적용
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -63,7 +67,7 @@ const CheckSection = ({
                     onChange={onChange}
                 />
                 <label htmlFor="1">개인정보 이용약관</label>
-                <span>전문보기 {">"}</span>
+                <span onClick={togglePersonalModal}>전문보기 {">"}</span>
             </InputWrapper>
 
             <InputWrapper variants={defaultFadeInUpVariants}>
@@ -74,7 +78,7 @@ const CheckSection = ({
                     onChange={onChange}
                 />
                 <label htmlFor="2">마케팅/홍보 수집 및 이용 (선택)</label>
-                <span>전문보기 {">"}</span>
+                <span onClick={toggleMarketingModal}>전문보기 {">"}</span>
             </InputWrapper>
         </Section>
     );

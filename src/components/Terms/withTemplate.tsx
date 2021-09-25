@@ -1,7 +1,8 @@
+import { ComponentType, FC } from "react";
+import styled from "styled-components";
+
 import Hr from "components/Common/Hr";
 import Layout from "components/Common/Layout";
-import React, { ComponentType, FC } from "react";
-import styled from "styled-components";
 
 const withTemplate =
     (title: string) =>

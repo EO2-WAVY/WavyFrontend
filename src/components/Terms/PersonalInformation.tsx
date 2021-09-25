@@ -1,4 +1,4 @@
-import withTemplate from "./withTemplate";
+import withTemplate from "components/Terms/withTemplate";
 
 const PersonalInformation = () => {
     return (

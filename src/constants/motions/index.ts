@@ -110,3 +110,45 @@ export const cardOverlayVariants: Variants = {
         willChange: "opacity",
     },
 };
+
+export const modalOverlayVariants: Variants = {
+    initial: {
+        opacity: 0,
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity",
+    },
+    animate: {
+        opacity: 0.4,
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity",
+    },
+    exit: {
+        opacity: 0,
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity",
+    },
+};
+
+export const modalCenterFadeInUpVariants: Variants = {
+    initial: {
+        opacity: 0,
+        x: "-50%",
+        y: "-45%",
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    animate: {
+        opacity: 1,
+        x: "-50%",
+        y: "-50%",
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    exit: {
+        opacity: 0,
+        x: "-50%",
+        y: "-45%",
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+};

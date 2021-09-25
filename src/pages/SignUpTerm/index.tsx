@@ -1,6 +1,6 @@
 import { ChangeEvent, useState } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 
@@ -8,10 +8,14 @@ import Layout from "components/Common/Layout";
 import Hr from "components/Common/Hr";
 import CheckSection from "components/SignUpTerm/CheckSection";
 import TextSection from "components/SignUpTerm/TextSection";
+import useToggle from "hooks/useToggle";
+import PersonalInfoModal from "components/SignUpTerm/PersonalInfoModal";
 
 const SignUpTerm = () => {
     const [checks, setChecks] = useState<boolean[]>([false, false, false]);
     const [nickname, setNickname] = useState<string>("");
+    const [personalModalIsShowing, togglePersonalModal] = useToggle(false);
+    const [marketingModalIsShowing, toggleMarketingModal] = useToggle(false);
 
     return (
         <Layout>
@@ -24,6 +28,8 @@ const SignUpTerm = () => {
                 SubTitle={SubTitle}
                 checks={checks}
                 setChecks={setChecks}
+                togglePersonalModal={togglePersonalModal}
+                toggleMarketingModal={toggleMarketingModal}
             />
             <Hr />
             <TextSection
@@ -42,6 +48,11 @@ const SignUpTerm = () => {
                     완료
                 </SubmitBtn>
             </SubmitSection>
+
+            <PersonalInfoModal
+                isShowing={personalModalIsShowing}
+                hide={togglePersonalModal}
+            />
         </Layout>
     );
 };
