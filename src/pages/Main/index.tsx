@@ -1,3 +1,4 @@
+import { useRecoilValue } from "recoil";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -7,7 +8,6 @@ import LinkSection from "components/Main/LinkSection";
 import VideoCard from "components/Common/VideoCard";
 
 import { staggerOne } from "constants/motions";
-import { useRecoilValue } from "recoil";
 import { currentTagState } from "store/Main";
 
 const Main = () => {
@@ -29,10 +29,6 @@ const Main = () => {
                 </Test>
             </AnimatePresence>
             <LinkSection />
-            <Test1 />
-            {/* <Test />
-            <Test1 />
-            <Test /> */}
         </Layout>
     );
 };
@@ -46,9 +42,4 @@ const Test = styled(motion.div)`
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-`;
-
-const Test1 = styled.div`
-    height: 40vh;
-    width: 100px;
 `;
