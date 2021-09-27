@@ -6,6 +6,7 @@ import Webcam from "components/Common/Dance/Webcam";
 import { useRouterQuery } from "hooks/useRouterQuery";
 import { defaultPageFadeInVariants } from "constants/motions";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
+import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 
 const Link = () => {
     const youtubeCode = useRouterQuery("y");
@@ -24,7 +25,10 @@ const Link = () => {
                 animate="animate"
                 exit="exit"
             >
-                <YoutubePlayer youtubeCode={youtubeCode} />
+                <RefVideoWrapper>
+                    <YoutubePlayer youtubeCode={youtubeCode} />
+                </RefVideoWrapper>
+
                 <Webcam />
             </Wrapper>
         </AnimatePresence>
