@@ -6,6 +6,7 @@ import {
     defaultFadeInUpVariants,
     staggerOne,
 } from "constants/motions";
+import Icon from "components/Common/Icon";
 
 const CardInfo = () => {
     return (
@@ -19,15 +20,15 @@ const CardInfo = () => {
             <OverrallSpan variants={defaultFadeInUpVariants}>46s</OverrallSpan>
             <NavWrapper variants={cardNavUpVariants}>
                 <NavElem>
-                    <img src="/images/Common/storage.svg" alt="storage" />
+                    <Icon name="common_storage" />
                     <span>보관</span>
                 </NavElem>
                 <NavElem>
-                    <img src="/images/Common/practice.svg" alt="practice" />
+                    <Icon name="common_practice" />
                     <span>연습</span>
                 </NavElem>
                 <NavElem>
-                    <img src="/images/Common/challenge.svg" alt="challenge" />
+                    <Icon name="common_challenge" />
                     <span>도전</span>
                 </NavElem>
             </NavWrapper>
@@ -96,18 +97,18 @@ const NavElem = styled(motion.div)`
     font-size: 14px;
     cursor: pointer;
 
-    & > img {
+    & > svg {
         width: 20px;
         height: 20px;
         margin-bottom: 6px;
         transition: transform 0.3s;
     }
 
-    &:hover > img {
+    &:hover > svg {
         transform: scale(1.1);
     }
 
-    &:active > img {
+    &:active > svg {
         transform: scale(0.9);
     }
 `;

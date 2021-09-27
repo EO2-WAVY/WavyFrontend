@@ -3,6 +3,7 @@ import { useHistory } from "react-router";
 import { debounce } from "lodash";
 
 import styled from "styled-components";
+import Icon from "components/Common/Icon";
 
 const NavSearchBar = () => {
     const history = useHistory();
@@ -41,17 +42,12 @@ const NavSearchBar = () => {
         <Wrapper>
             <Input onChange={onChangeQuery} ref={inputRef} required />
             <ImgWrapper>
-                <CancelImg
-                    src="/images/Nav/cancel.svg"
-                    alt="cancel"
-                    query={query}
-                />
-                <MagnifyImg
-                    src="/images/Nav/magnify.svg"
-                    alt="submit"
-                    query={query}
-                    onClick={onClickCancel}
-                />
+                <Cancel query={query}>
+                    <Icon name="nav_cancel" />
+                </Cancel>
+                <Magnify query={query} onClick={onClickCancel}>
+                    <Icon name="nav_magnify" />
+                </Magnify>
             </ImgWrapper>
             <BackLine />
             <OverLine />
@@ -81,11 +77,11 @@ const ImgWrapper = styled.div`
     height: 100%;
 `;
 
-interface IInputImg {
+interface IInputWrapper {
     query: string;
 }
 
-const InputImg = styled.img<IInputImg>`
+const InputWrapper = styled.div<IInputWrapper>`
     position: absolute;
     top: 50%;
     right: 0;
@@ -93,15 +89,21 @@ const InputImg = styled.img<IInputImg>`
     height: 20px;
     transform: translateY(-50%);
     cursor: pointer;
+
+    & > svg {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+    }
 `;
 
-const MagnifyImg = styled(InputImg)`
+const Magnify = styled(InputWrapper)`
     transition: transform 0.3s, opacity 0.3s;
     opacity: ${({ query }) => query.length > 0 && "0"};
     transform: ${({ query }) => query.length > 0 && "translateY(-6px)"};
 `;
 
-const CancelImg = styled(InputImg)`
+const Cancel = styled(InputWrapper)`
     transition: transform 0.3s, opacity 0.3s;
     opacity: ${({ query }) => query.length === 0 && "0"};
     transform: ${({ query }) => query.length === 0 && "translateY(-6px)"};

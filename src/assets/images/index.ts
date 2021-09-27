@@ -6,6 +6,7 @@ import { ReactComponent as auth_naver } from "assets/images/Auth/naver.svg";
 
 // Common
 import { ReactComponent as common_challenge } from "assets/images/Common/challenge.svg";
+import { ReactComponent as common_logo_full } from "assets/images/Common/logo_full.svg";
 import { ReactComponent as common_practice } from "assets/images/Common/practice.svg";
 import { ReactComponent as common_storage } from "assets/images/Common/storage.svg";
 
@@ -34,6 +35,7 @@ export {
     auth_kakao,
     auth_naver,
     common_challenge,
+    common_logo_full,
     common_practice,
     common_storage,
     dance_layout_big,

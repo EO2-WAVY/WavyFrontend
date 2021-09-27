@@ -1,10 +1,11 @@
+import { useState } from "react";
 import styled from "styled-components";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 
-import TagElem from "components/Main/TagElem";
 import useCarousel from "hooks/useCarousel";
 import useGetTags from "hooks/api/useGetTags";
-import { useState } from "react";
+import TagElem from "components/Main/TagElem";
+import Icon from "components/Common/Icon";
 
 const TagSection = () => {
     const { wrapperRef, onClickLeft, onClickRight } = useCarousel({
@@ -29,7 +30,7 @@ const TagSection = () => {
     return (
         <Wrapper style={{ position: wrapperPosition }}>
             <LeftBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
-                <img src="/images/Main/carousel_left.svg" alt="left" />
+                <Icon name="main_carousel_left" />
             </LeftBtn>
             <Carousel ref={wrapperRef}>
                 <TagElem name="내닉네임" image="내닉네임" />
@@ -38,7 +39,7 @@ const TagSection = () => {
                 ))}
             </Carousel>
             <RightBtn onClick={onClickRight} style={{ y: btnYposAnim }}>
-                <img src="/images/Main/carousel_right.svg" alt="right" />
+                <Icon name="main_carousel_right" />
             </RightBtn>
         </Wrapper>
     );
@@ -72,7 +73,7 @@ const CarouselBtn = styled(motion.button)`
     align-items: center;
     transition: background-color 0.3s;
 
-    & > img {
+    & > svg {
         width: 70%;
         height: 70%;
         transition: transform 0.3s;
@@ -82,7 +83,7 @@ const CarouselBtn = styled(motion.button)`
         background-color: rgba(201, 201, 201, 0.2);
     }
 
-    &:active > img {
+    &:active > svg {
         transform: scale(0.8);
     }
 `;

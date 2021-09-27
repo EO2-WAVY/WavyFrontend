@@ -6,6 +6,7 @@ import NavSearchBar from "components/Common/Nav/NavSearchBar";
 import NavAuthBtn from "components/Common/Nav/NavAuthBtn";
 import useMousePosition from "hooks/useMousePosition";
 import useNavCondition from "hooks/useNavCondition";
+import Icon from "components/Common/Icon";
 
 const Nav = () => {
     const history = useHistory();
@@ -22,11 +23,7 @@ const Nav = () => {
             >
                 <Layout>
                     <LeftElem>
-                        <img
-                            src="/images/logo_full.svg"
-                            alt="wavy logo"
-                            onClick={onClickLogo}
-                        />
+                        <Icon name="common_logo_full" onClick={onClickLogo} />
                         <Link to="/">HOME</Link>
                         <Link to="/">HOME</Link>
                         <Link to="/">HOME</Link>
@@ -84,7 +81,7 @@ const LeftElem = styled.div`
     align-items: center;
     gap: 40px;
 
-    & > img {
+    & > svg {
         cursor: pointer;
     }
 

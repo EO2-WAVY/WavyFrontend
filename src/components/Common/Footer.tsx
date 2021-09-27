@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { ScrollToTop } from "utils/ScrollToTop";
 import { defaultPageFadeInVariants } from "constants/motions";
 import { dancePathnames } from "constants/dancePathnames";
+import Icon from "./Icon";
 
 const Footer = () => {
     const { pathname } = useLocation();
@@ -34,10 +35,7 @@ const Footer = () => {
                     </InfoText>
 
                     <ScrollTopBtn onClick={ScrollToTop}>
-                        <img
-                            src="/images/Footer/ScrollTop.svg"
-                            alt="scroll to top"
-                        />
+                        <Icon name="footer_top" />
                     </ScrollTopBtn>
                 </FooterLayout>
             </FooterWrapper>

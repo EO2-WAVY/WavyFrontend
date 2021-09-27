@@ -1,5 +1,6 @@
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
+import Icon from "components/Common/Icon";
 
 const NavAuthBtn = () => {
     const history = useHistory();
@@ -10,9 +11,9 @@ const NavAuthBtn = () => {
 
     return (
         <Wrapper onClick={onClickAuth}>
-            <img src="/images/Nav/sign_before.svg" alt="sign in" />
+            <Icon name="nav_sign_before" />
             <Noti>
-                <img src="/images/Nav/hoverbg_before.svg" alt="bg" />
+                <Icon name="nav_hoverbg_before" />
                 <span>JOIN US</span>
             </Noti>
         </Wrapper>
