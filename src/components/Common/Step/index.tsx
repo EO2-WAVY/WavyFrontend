@@ -10,6 +10,7 @@ import {
 interface StepProps {
     children: ReactNode;
 }
+
 const Step = ({ children }: StepProps) => {
     const [currentIndex, setCurrentIndex] = useState<number>(0);
     const { length } = Children.toArray(children);

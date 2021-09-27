@@ -1,6 +1,12 @@
-import Webcam from "components/Common/Dance/Webcam";
-import useCapture from "hooks/Dance/useCapture";
 import styled from "styled-components";
+
+import useCapture from "hooks/Dance/useCapture";
+
+import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
+import Step from "components/Common/Step";
+import Ready from "components/Common/Dance/Ready";
+import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
+import Webcam from "components/Common/Dance/Webcam";
 
 const Challenge = () => {
     const { setWebcamRef, startCapture, stopCapture, downloadCaptured } =
@@ -8,13 +14,14 @@ const Challenge = () => {
 
     return (
         <Wrapper>
-            <TestWebcamWrapper>
-                <Webcam webcamRef={setWebcamRef} />
-            </TestWebcamWrapper>
+            <RefVideoWrapper>
+                <Step>
+                    <Ready />
+                    <YoutubePlayer youtubeCode={"yCM4vEcDs_s"} />
+                </Step>
+            </RefVideoWrapper>
 
-            <button onClick={startCapture}>start</button>
-            <button onClick={stopCapture}>STOP</button>
-            <button onClick={downloadCaptured}>DOWNLOAD</button>
+            <Webcam webcamRef={setWebcamRef} />
         </Wrapper>
     );
 };
@@ -30,9 +37,4 @@ const Wrapper = styled.main`
         background: green;
         margin: 10px;
     }
-`;
-
-const TestWebcamWrapper = styled.div`
-    width: 50%;
-    height: 100%;
 `;
