@@ -11,5 +11,6 @@ export const downloadBlob = ({ blob, fileName }: downloadBlogProps) => {
     a.href = url;
     a.download = fileName;
     a.click();
+    a.remove();
     window.URL.revokeObjectURL(url);
 };

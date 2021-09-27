@@ -2,6 +2,9 @@ import styled, { CSSProperties } from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import ReactPlayer from "react-player";
 
+import layout_big from "assets/images/Dance/layout_big.svg";
+import layout_small from "assets/images/Dance/layout_small.svg";
+
 import { defaultBtnSwapVariants } from "constants/motions";
 import useLayout from "hooks/Dance/useLayout";
 
@@ -96,11 +99,11 @@ const LayoutBtn = styled(motion.button)`
 `;
 
 const ToBigBtn = styled(LayoutBtn)`
-    background: url("/images/Dance/layout_big.svg");
+    background: url(${layout_big});
     background-size: cover;
 `;
 
 const ToSmallBtn = styled(LayoutBtn)`
-    background: url("/images/Dance/layout_small.svg");
+    background: url(${layout_small});
     background-size: cover;
 `;

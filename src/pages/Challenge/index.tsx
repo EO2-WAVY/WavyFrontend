@@ -35,5 +35,4 @@ const Wrapper = styled.main`
 const TestWebcamWrapper = styled.div`
     width: 50%;
     height: 100%;
-    overflow: hidden;
 `;
