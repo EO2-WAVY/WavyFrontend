@@ -1,4 +1,4 @@
-import { Dispatch, RefObject, SetStateAction } from "react";
+import { Dispatch, SetStateAction } from "react";
 import { default as ReactWebcam } from "react-webcam";
 import styled, { CSSProperties } from "styled-components";
 import { useRecoilValue } from "recoil";
@@ -6,7 +6,6 @@ import { useRecoilValue } from "recoil";
 import { layoutState } from "store/Dance";
 
 interface WebcamProps {
-    // webcamRef?: RefObject<ReactWebcam>;
     webcamRef?: Dispatch<SetStateAction<ReactWebcam | null>>;
 }
 
@@ -15,7 +14,11 @@ const Webcam = ({ webcamRef }: WebcamProps) => {
 
     return (
         <Wrapper layout={layout}>
-            <ReactWebcam mirrored style={WebcamStyle} ref={webcamRef && webcamRef} />
+            <ReactWebcam
+                mirrored
+                style={WebcamStyle}
+                ref={webcamRef && webcamRef}
+            />
         </Wrapper>
     );
 };
