@@ -3,7 +3,8 @@ import useCapture from "hooks/Dance/useCapture";
 import styled from "styled-components";
 
 const Challenge = () => {
-    const { setWebcamRef, startCapture, check } = useCapture();
+    const { setWebcamRef, startCapture, check, stopCapture, downloadCaptured } =
+        useCapture();
 
     return (
         <Wrapper>
@@ -13,6 +14,8 @@ const Challenge = () => {
 
             <button onClick={startCapture}>start</button>
             <button onClick={check}>check</button>
+            <button onClick={stopCapture}>STOP</button>
+            <button onClick={downloadCaptured}>DOWNLOAD</button>
         </Wrapper>
     );
 };

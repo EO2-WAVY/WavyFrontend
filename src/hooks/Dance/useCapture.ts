@@ -9,9 +9,9 @@ const useCapture = () => {
 
     const handleDataAvailable = useCallback(
         ({ data }) => {
-            console.log('data avaliable');
+            console.log("data avaliable");
             if (data.size > 0) {
-                console.log('data avaliable trueruerue');
+                console.log("data avaliable trueruerue");
                 setRecordedChunks((prev) => prev.concat(data));
             }
         },
@@ -33,14 +33,34 @@ const useCapture = () => {
         );
 
         mediaRecorderRef.current.start();
-
     }, [webcamRef, setCapturing, mediaRecorderRef, handleDataAvailable]);
 
     const check = () => {
         console.log(recordedChunks);
     };
 
-    return { setWebcamRef, startCapture, check };
+    const stopCapture = useCallback(() => {
+        mediaRecorderRef.current?.stop();
+        setCapturing(false);
+    }, [mediaRecorderRef, setCapturing]);
+
+    const downloadCaptured = useCallback(() => {
+        if (!recordedChunks.length) return;
+        const blob = new Blob(recordedChunks, { type: "video/webm" });
+
+        const url = URL.createObjectURL(blob);
+        const a = document.createElement("a");
+        document.body.appendChild(a);
+        a.setAttribute("style", "display: none;");
+        a.href = url;
+        a.download = "fuck";
+        a.click();
+        window.URL.revokeObjectURL(url);
+        setRecordedChunks([]);
+        
+    }, [recordedChunks]);
+
+    return { setWebcamRef, startCapture, check, stopCapture, downloadCaptured };
 };
 
 export default useCapture;
