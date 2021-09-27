@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
+import { useHistory } from "react-router";
 
 import {
     cardNavUpVariants,
@@ -9,6 +10,10 @@ import {
 import Icon from "components/Common/Icon";
 
 const CardInfo = () => {
+    const history = useHistory();
+
+    const onClickChallenge = () => history.push("/challenge");
+
     return (
         <Wrapper
             variants={staggerOne}
@@ -28,7 +33,7 @@ const CardInfo = () => {
                     <span>연습</span>
                 </NavElem>
                 <NavElem>
-                    <Icon name="common_challenge" />
+                    <Icon name="common_challenge" onClick={onClickChallenge} />
                     <span>도전</span>
                 </NavElem>
             </NavWrapper>
