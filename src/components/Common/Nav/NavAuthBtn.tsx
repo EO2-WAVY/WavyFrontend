@@ -30,7 +30,7 @@ const Noti = styled.div`
     opacity: 0;
     transform: translateY(8px);
     transition: all 0.3s;
-
+    
     & > span {
         position: absolute;
         top: 50%;

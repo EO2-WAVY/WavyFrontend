@@ -5,6 +5,9 @@ import LinkVideo from "./LinkVideo";
 import LinkInput from "./LinkInput";
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 
+import Vid1 from "assets/videos/Main/vid1.mp4";
+import Vid2 from "assets/videos/Main/vid2.mp4";
+
 const LinkSection = () => {
     return (
         <Wrapper>
@@ -19,12 +22,12 @@ const LinkSection = () => {
             </InputSection>
             <VideoSection variants={staggerOne}>
                 <LinkVideo
-                    url="/videos/Main/vid1.mp4"
+                    url={Vid1}
                     inputRange={[0, 1]}
                     outputRange={[0, 100]}
                 />
                 <LinkVideo
-                    url="/videos/Main/vid2.mp4"
+                    url={Vid2}
                     inputRange={[0, 1]}
                     outputRange={[100, 0]}
                     right={150}

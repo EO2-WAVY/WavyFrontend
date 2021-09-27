@@ -4,6 +4,11 @@ import { Link } from "react-router-dom";
 
 import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
 
+import google from "assets/images/Auth/google.svg";
+import naver from "assets/images/Auth/naver.svg";
+import kakao from "assets/images/Auth/kakao.svg";
+import facebook from "assets/images/Auth/facebook.svg";
+
 interface IMain {
     kind: string;
 }
@@ -19,16 +24,16 @@ const Main = ({ kind }: IMain) => {
 
     return (
         <MainWrapper variants={staggerHalf}>
-            <ProviderBtn variants={defaultFadeInUpVariants} provider="google">
+            <ProviderBtn variants={defaultFadeInUpVariants} provider={google}>
                 구글로 로그인
             </ProviderBtn>
-            <ProviderBtn variants={defaultFadeInUpVariants} provider="naver">
+            <ProviderBtn variants={defaultFadeInUpVariants} provider={naver}>
                 네이버로 로그인
             </ProviderBtn>
-            <ProviderBtn variants={defaultFadeInUpVariants} provider="kakao">
+            <ProviderBtn variants={defaultFadeInUpVariants} provider={kakao}>
                 카카오톡으로 로그인
             </ProviderBtn>
-            <ProviderBtn variants={defaultFadeInUpVariants} provider="facebook">
+            <ProviderBtn variants={defaultFadeInUpVariants} provider={facebook}>
                 페이스북으로 로그인
             </ProviderBtn>
             <Noti variants={defaultFadeInUpVariants}>
@@ -74,7 +79,7 @@ const ProviderBtn = styled(motion.button)<IProviderBtn>`
         width: 28px;
         height: 28px;
 
-        background: url(${({ provider }) => `/images/Auth/${provider}.svg`});
+        background: url(${({ provider }) => provider});
         background-size: cover;
     }
 `;
