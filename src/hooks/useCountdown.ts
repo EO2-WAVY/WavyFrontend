@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 
 interface useCountdownProps {
     endTime: number;
@@ -7,26 +7,32 @@ interface useCountdownProps {
 }
 
 const useCountdown = ({ endTime, onEnd, onChange }: useCountdownProps) => {
+    const [isCounting, setIsCounting] = useState<boolean>(true);
     const [remainTime, setRemainTime] = useState<number>(endTime);
 
+    const handleInterval = useCallback(() => {
+        if (!isCounting) return;
+
+        if (onChange) onChange();
+
+        if (remainTime - 1 === 0) {
+            setIsCounting(false);
+            if (onEnd) onEnd();
+        }
+
+        setRemainTime((prev) => prev - 1);
+    }, [isCounting, onChange, onEnd, remainTime]);
+
     useEffect(() => {
-        const handleInterval = () => {
-            if (onChange) onChange();
-
-            if (remainTime - 1 === 0) {
-                if (onEnd) onEnd();
-            }
-
-            setRemainTime(remainTime - 1);
-        };
-
         const interval = setInterval(handleInterval, 1000);
 
-        return () => clearInterval(interval);
-    }, [onChange, onEnd, remainTime]);
+        return () => {
+            clearInterval(interval);
+        };
+    }, [handleInterval, onChange, onEnd]);
 
     return {
-        remainTime
+        remainTime,
     };
 };
 

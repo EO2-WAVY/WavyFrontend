@@ -1,21 +1,26 @@
 import { CSSProperties } from "styled-components";
 
 import ReactPlayer from "react-player";
+import Countdown from "./Countdown";
 
 interface YoutubePlayerProps {
     youtubeCode: string;
+    isCountdown?: boolean;
 }
 
-const YoutubePlayer = ({ youtubeCode }: YoutubePlayerProps) => {
+const YoutubePlayer = ({ youtubeCode, isCountdown }: YoutubePlayerProps) => {
     return (
-        <ReactPlayer
-            url={`https://www.youtube.com/watch?v=${youtubeCode}`}
-            volume={0}
-            width="100%"
-            height="100%"
-            style={VideoStyle}
-            controls={true}
-        />
+        <>
+            <Countdown />
+            <ReactPlayer
+                url={`https://www.youtube.com/watch?v=${youtubeCode}`}
+                volume={0}
+                width="100%"
+                height="100%"
+                style={VideoStyle}
+                controls={false}
+            />
+        </>
     );
 };
 
