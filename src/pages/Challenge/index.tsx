@@ -22,6 +22,10 @@ const Challenge = () => {
             </RefVideoWrapper>
 
             <Webcam webcamRef={setWebcamRef} />
+            {/* <button onClick={startCapture}>start</button>
+            <button onClick={stopCapture}>stop</button>
+            <button onClick={downloadCaptured}>download</button> */}
+
         </Wrapper>
     );
 };
