@@ -1,6 +1,8 @@
 import { atom } from "recoil";
 
-export const layoutState = atom<"half" | "drag">({
+export type layoutType = "half" | "drag";
+
+export const layoutState = atom<layoutType>({
     key: "layoutState",
     default: "half",
 });

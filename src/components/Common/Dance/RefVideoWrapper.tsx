@@ -53,6 +53,8 @@ const Wrapper = styled(motion.aside)<WrapperProps>`
     overflow: hidden;
     z-index: 1;
 
+    font-size: ${({ layoutType }) => (layoutType === "drag" ? 14 : 16)}px;
+
     ${({ layoutType }) =>
         layoutType === "half"
             ? `
