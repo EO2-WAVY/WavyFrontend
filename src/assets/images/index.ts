@@ -15,6 +15,10 @@ import { ReactComponent as dance_layout_big } from "assets/images/Dance/layout_b
 import { ReactComponent as dance_layout_small } from "assets/images/Dance/layout_small.svg";
 import { ReactComponent as dance_ready_layout_big } from "assets/images/Dance/ready_layout_big.svg";
 import { ReactComponent as dance_ready_layout_small } from "assets/images/Dance/ready_layout_small.svg";
+import { ReactComponent as dance_note1 } from "assets/images/Dance/note1.svg";
+import { ReactComponent as dance_note2 } from "assets/images/Dance/note2.svg";
+import { ReactComponent as dance_note3 } from "assets/images/Dance/note3.svg";
+import { ReactComponent as dance_pictogram } from "assets/images/Dance/pictogram.svg";
 
 // Footer
 import { ReactComponent as footer_top } from "assets/images/Footer/top.svg";
@@ -42,6 +46,10 @@ export {
     common_storage,
     dance_layout_big,
     dance_layout_small,
+    dance_note1,
+    dance_note2,
+    dance_note3,
+    dance_pictogram,
     dance_ready_layout_big,
     dance_ready_layout_small,
     footer_top,
