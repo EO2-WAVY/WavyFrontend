@@ -7,7 +7,11 @@ import layout_small from "assets/images/Dance/layout_small.svg";
 
 import { defaultBtnSwapVariants } from "constants/motions";
 import useLayout from "hooks/Dance/useLayout";
+import useViewport from "hooks/useViewport";
 import Step from "../Step";
+
+const DRAG_WIDTH: number = 300;
+const DRAG_HEIGHT: number = (300 * 16) / 9;
 
 interface RefVideoWrapperProps {
     children: ReactNode;
@@ -16,8 +20,20 @@ interface RefVideoWrapperProps {
 const RefVideoWrapper = ({ children }: RefVideoWrapperProps) => {
     const { layout, onClickLayoutBig, onClickLayoutSmall } = useLayout();
 
+    const { width, height } = useViewport();
+
     return (
-        <Wrapper layoutType={layout} drag={layout === "drag"}>
+        <Wrapper
+            layoutType={layout}
+            drag={layout === "drag"}
+            layout
+            dragConstraints={{
+                top: 0,
+                bottom: height - DRAG_HEIGHT,
+                left: 0,
+                right: width - DRAG_WIDTH,
+            }}
+        >
             <Step>{children}</Step>
 
             <AnimatePresence exitBeforeEnter>
@@ -65,7 +81,7 @@ const Wrapper = styled(motion.aside)<WrapperProps>`
     position: absolute;
     top: 0;
     left: 0;
-    width: 300px;
+    width: ${DRAG_WIDTH}px;
     border-radius: 20px;
 
     &::before {
