@@ -1,7 +1,11 @@
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
+import useCountdown from "hooks/useCountdown";
 
 const ReadyProgressbar = () => {
+    const { remainTime } = useCountdown({ endTime: 10 });
+    
+
     return (
         <Wrapper>
             <ProgressOuter>

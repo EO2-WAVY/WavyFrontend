@@ -27,9 +27,12 @@ const Challenge = () => {
                 </RefVideoWrapper>
 
                 <Webcam webcamRef={setWebcamRef} />
-                {/* <button onClick={startCapture}>start</button>
-            <button onClick={stopCapture}>stop</button>
-            <button onClick={downloadCaptured}>download</button> */}
+
+                <TestWrapper>
+                    <button onClick={startCapture}>start</button>
+                    <button onClick={stopCapture}>stop</button>
+                    <button onClick={downloadCaptured}>download</button>
+                </TestWrapper>
             </AnimateSharedLayout>
         </Wrapper>
     );
@@ -41,9 +44,19 @@ const Wrapper = styled.main`
     width: 100vw;
     height: 100vh;
     display: flex;
+`;
+
+const TestWrapper = styled.div`
+    position: absolute;
+    bottom: 0;
+    right: 0;
+    width: 300px;
+    height: 100px;
+    background-color: white;
 
     & > button {
-        background: green;
+        background: lightblue;
+        padding: 5px 12px;
         margin: 10px;
     }
 `;
