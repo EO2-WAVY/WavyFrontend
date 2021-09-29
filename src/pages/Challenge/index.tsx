@@ -7,6 +7,7 @@ import Step from "components/Common/Step";
 import Ready from "components/Common/Dance/Ready";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 import Webcam from "components/Common/Dance/Webcam";
+import { AnimateSharedLayout } from "framer-motion";
 
 const Challenge = () => {
     const { setWebcamRef, startCapture, stopCapture, downloadCaptured } =
@@ -14,6 +15,7 @@ const Challenge = () => {
 
     return (
         <Wrapper>
+            <AnimateSharedLayout>
             <RefVideoWrapper>
                 <Step>
                     <Ready />
@@ -26,9 +28,10 @@ const Challenge = () => {
             </RefVideoWrapper>
 
             <Webcam webcamRef={setWebcamRef} />
-            <button onClick={startCapture}>start</button>
+            {/* <button onClick={startCapture}>start</button>
             <button onClick={stopCapture}>stop</button>
-            <button onClick={downloadCaptured}>download</button>
+            <button onClick={downloadCaptured}>download</button> */}
+            </AnimateSharedLayout>
         </Wrapper>
     );
 };

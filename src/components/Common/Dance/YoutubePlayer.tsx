@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { CSSProperties } from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 
 import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
@@ -16,11 +16,12 @@ const YoutubePlayer = ({
     startCapture = () => {},
 }: YoutubePlayerProps) => {
     const [isCounting, setIsCounting] = useState<boolean>(isCountdown);
+    const [playing, setPlaying] = useState<boolean>(false);
 
     const onCountdownEnd = () => {
         startCapture();
         setIsCounting(false);
-        console.log("end");
+        setPlaying(true);
     };
 
     return (
@@ -28,6 +29,8 @@ const YoutubePlayer = ({
             {isCountdown && isCounting && (
                 <Countdown onCountdownEnd={onCountdownEnd} />
             )}
+            
+            <Overlay />
 
             <ReactPlayer
                 key="player"
@@ -36,6 +39,7 @@ const YoutubePlayer = ({
                 width="100%"
                 height="100%"
                 style={VideoStyle}
+                playing={playing}
                 controls={false}
             />
         </>
@@ -49,3 +53,12 @@ const VideoStyle: CSSProperties = {
     top: "0",
     left: "0",
 };
+
+const Overlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 9;
+`;

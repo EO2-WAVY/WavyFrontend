@@ -102,6 +102,7 @@ const LayoutBtn = styled(motion.button)`
     right: 12px;
     width: 50px;
     height: 50px;
+    z-index: 10;
 `;
 
 const ToBigBtn = styled(LayoutBtn)`

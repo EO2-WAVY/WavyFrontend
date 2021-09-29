@@ -1,9 +1,10 @@
 import { Dispatch, SetStateAction } from "react";
 import { default as ReactWebcam } from "react-webcam";
 import styled, { CSSProperties } from "styled-components";
+import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilValue } from "recoil";
 
-import { layoutState } from "store/Dance";
+import { layoutState, layoutType } from "store/Dance";
 
 interface WebcamProps {
     webcamRef?: Dispatch<SetStateAction<ReactWebcam | null>>;
@@ -13,19 +14,22 @@ const Webcam = ({ webcamRef }: WebcamProps) => {
     const layout = useRecoilValue(layoutState);
 
     return (
-        <Wrapper layout={layout}>
-            <ReactWebcam
-                mirrored
-                style={WebcamStyle}
-                ref={webcamRef && webcamRef}
-            />
-        </Wrapper>
+        <AnimatePresence>
+            <Wrapper layoutType={layout} layout>
+                <ReactWebcam
+                    mirrored
+                    style={WebcamStyle}
+                    ref={webcamRef && webcamRef}
+                    onLoad={()=>{console.log("웹캠로드")}}
+                />
+            </Wrapper>
+        </AnimatePresence>
     );
 };
 
 export default Webcam;
 
-const Wrapper = styled.section<{ layout: "half" | "drag" }>`
+const Wrapper = styled(motion.section)<{ layoutType: layoutType }>`
     position: relative;
     width: 100%;
     height: 100%;
