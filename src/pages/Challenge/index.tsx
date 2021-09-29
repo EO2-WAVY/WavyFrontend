@@ -3,7 +3,6 @@ import styled from "styled-components";
 import useCapture from "hooks/Dance/useCapture";
 
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
-import Step from "components/Common/Step";
 import Ready from "components/Common/Dance/Ready";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 import Webcam from "components/Common/Dance/Webcam";
@@ -16,19 +15,19 @@ const Challenge = () => {
     return (
         <Wrapper>
             <AnimateSharedLayout>
-            <RefVideoWrapper>
-                <Step>
+                <RefVideoWrapper>
                     <Ready />
+
                     <YoutubePlayer
-                        youtubeCode={"yCM4vEcDs_s"}
+                        youtubeCode={"wGUjUztfLS8"}
                         isCountdown={true}
                         startCapture={startCapture}
+                        stopCapture={stopCapture}
                     />
-                </Step>
-            </RefVideoWrapper>
+                </RefVideoWrapper>
 
-            <Webcam webcamRef={setWebcamRef} />
-            {/* <button onClick={startCapture}>start</button>
+                <Webcam webcamRef={setWebcamRef} />
+                {/* <button onClick={startCapture}>start</button>
             <button onClick={stopCapture}>stop</button>
             <button onClick={downloadCaptured}>download</button> */}
             </AnimateSharedLayout>

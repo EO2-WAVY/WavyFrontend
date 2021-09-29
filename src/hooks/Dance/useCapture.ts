@@ -1,4 +1,4 @@
-import { useRef, useState, useCallback } from "react";
+import { useRef, useState, useCallback, useEffect } from "react";
 import Webcam from "react-webcam";
 import { downloadBlob } from "utils/downloadBlob";
 
@@ -11,6 +11,7 @@ const useCapture = () => {
     const handleDataAvailable = useCallback(
         ({ data }) => {
             if (!data.size) return;
+            console.log("capture data available");
             setRecordedChunks((prev) => prev.concat(data));
         },
         [setRecordedChunks]
@@ -30,20 +31,32 @@ const useCapture = () => {
         );
 
         mediaRecorderRef.current.start();
+        console.log("capture start");
     }, [webcamRef, setIsCapturing, mediaRecorderRef, handleDataAvailable]);
 
     const stopCapture = useCallback(() => {
         mediaRecorderRef.current?.stop();
         setIsCapturing(false);
+
+        console.log("stop");
     }, [mediaRecorderRef, setIsCapturing]);
 
     const downloadCaptured = useCallback(() => {
+        console.log(recordedChunks);
         if (!recordedChunks.length) return;
         const blob = new Blob(recordedChunks, { type: "video/webm" });
 
+        console.log("download");
         downloadBlob({ blob, fileName: "TESTFILENAME" });
         setRecordedChunks([]);
     }, [recordedChunks]);
+
+    // for ended download test
+    useEffect(() => {
+        if (!recordedChunks.length) return;
+
+        downloadCaptured();
+    }, [recordedChunks, downloadCaptured]);
 
     return {
         isCapturing,
