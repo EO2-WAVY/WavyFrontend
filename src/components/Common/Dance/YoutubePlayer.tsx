@@ -8,11 +8,16 @@ interface YoutubePlayerProps {
     isCountdown?: boolean;
 }
 
-const YoutubePlayer = ({ youtubeCode, isCountdown }: YoutubePlayerProps) => {
+const YoutubePlayer = ({
+    youtubeCode,
+    isCountdown = false,
+}: YoutubePlayerProps) => {
     return (
         <>
-            <Countdown />
+            {isCountdown && <Countdown />}
+
             <ReactPlayer
+                key="player"
                 url={`https://www.youtube.com/watch?v=${youtubeCode}`}
                 volume={0}
                 width="100%"

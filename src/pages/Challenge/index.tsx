@@ -12,12 +12,17 @@ const Challenge = () => {
     const { setWebcamRef, startCapture, stopCapture, downloadCaptured } =
         useCapture();
 
+    
+
     return (
         <Wrapper>
             <RefVideoWrapper>
                 <Step>
                     <Ready />
-                    <YoutubePlayer youtubeCode={"yCM4vEcDs_s"} />
+                    <YoutubePlayer
+                        youtubeCode={"yCM4vEcDs_s"}
+                        isCountdown={true}
+                    />
                 </Step>
             </RefVideoWrapper>
 
@@ -25,7 +30,6 @@ const Challenge = () => {
             {/* <button onClick={startCapture}>start</button>
             <button onClick={stopCapture}>stop</button>
             <button onClick={downloadCaptured}>download</button> */}
-
         </Wrapper>
     );
 };

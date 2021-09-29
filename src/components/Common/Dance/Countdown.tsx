@@ -2,6 +2,10 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import useCountdown from "hooks/useCountdown";
+import {
+    defaultFadeInUpVariants,
+    defaultPageFadeInVariants,
+} from "constants/motions";
 
 const COUNTDOWN_TIME: number = 3;
 
@@ -9,8 +13,16 @@ const Countdown = () => {
     const { remainTime } = useCountdown({ endTime: COUNTDOWN_TIME });
 
     return (
-        <Wrapper>
-            <RemainSpan>{remainTime}</RemainSpan>
+        <Wrapper
+            key="countdown"
+            variants={defaultPageFadeInVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
+            <RemainSpan key={remainTime} variants={defaultFadeInUpVariants}>
+                {remainTime}
+            </RemainSpan>
         </Wrapper>
     );
 };
@@ -34,4 +46,6 @@ const Wrapper = styled(motion.div)`
 
 const RemainSpan = styled(motion.span)`
     color: ${({ theme }) => theme.color.white};
+    font-size: 8rem;
+    font-weight: bold;
 `;
