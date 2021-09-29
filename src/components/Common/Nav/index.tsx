@@ -20,6 +20,7 @@ const Nav = () => {
             <Navbar
                 isConditional={isConditional}
                 isHover={mousePosition.y < 104}
+                
             >
                 <Layout>
                     <LeftElem>

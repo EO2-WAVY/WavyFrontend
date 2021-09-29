@@ -13,6 +13,8 @@ import { ReactComponent as common_storage } from "assets/images/Common/storage.s
 // Dance
 import { ReactComponent as dance_layout_big } from "assets/images/Dance/layout_big.svg";
 import { ReactComponent as dance_layout_small } from "assets/images/Dance/layout_small.svg";
+import { ReactComponent as dance_ready_layout_big } from "assets/images/Dance/ready_layout_big.svg";
+import { ReactComponent as dance_ready_layout_small } from "assets/images/Dance/ready_layout_small.svg";
 
 // Footer
 import { ReactComponent as footer_top } from "assets/images/Footer/top.svg";
@@ -40,6 +42,8 @@ export {
     common_storage,
     dance_layout_big,
     dance_layout_small,
+    dance_ready_layout_big,
+    dance_ready_layout_small,
     footer_top,
     main_carousel_left,
     main_carousel_right,

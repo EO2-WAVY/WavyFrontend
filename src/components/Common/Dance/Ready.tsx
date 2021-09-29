@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { defaultPageFadeInVariants } from "constants/motions";
+import Icon from "../Icon";
 
 interface ReadyProps {
     index?: number;
@@ -29,5 +30,6 @@ const Wrapper = styled(motion.aside)`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: red;
+    background: linear-gradient(180deg, #691ec9 17.7%, #410989 59.71%);
+    color: ${({ theme }) => theme.color.white};
 `;
