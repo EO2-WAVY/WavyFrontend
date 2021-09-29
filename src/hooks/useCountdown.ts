@@ -6,18 +6,21 @@ interface useCountdownProps {
     onChange?: () => void;
 }
 
-const useCountdown = ({ endTime, onEnd, onChange }: useCountdownProps) => {
+const useCountdown = ({
+    endTime,
+    onEnd = () => {},
+    onChange = () => {},
+}: useCountdownProps) => {
     const [isCounting, setIsCounting] = useState<boolean>(true);
     const [remainTime, setRemainTime] = useState<number>(endTime);
 
     const handleInterval = useCallback(() => {
         if (!isCounting) return;
 
-        if (onChange) onChange();
-
+        onChange();
         if (remainTime - 1 === 0) {
             setIsCounting(false);
-            if (onEnd) onEnd();
+            onEnd();
         }
 
         setRemainTime((prev) => prev - 1);

@@ -9,8 +9,15 @@ import {
 
 const COUNTDOWN_TIME: number = 3;
 
-const Countdown = () => {
-    const { remainTime } = useCountdown({ endTime: COUNTDOWN_TIME });
+interface CountdownProps {
+    onCountdownEnd: () => void;
+}
+
+const Countdown = ({ onCountdownEnd }: CountdownProps) => {
+    const { remainTime } = useCountdown({
+        endTime: COUNTDOWN_TIME,
+        onEnd: onCountdownEnd,
+    });
 
     return (
         <Wrapper

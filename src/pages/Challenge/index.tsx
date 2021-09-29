@@ -12,8 +12,6 @@ const Challenge = () => {
     const { setWebcamRef, startCapture, stopCapture, downloadCaptured } =
         useCapture();
 
-    
-
     return (
         <Wrapper>
             <RefVideoWrapper>
@@ -22,6 +20,7 @@ const Challenge = () => {
                     <YoutubePlayer
                         youtubeCode={"yCM4vEcDs_s"}
                         isCountdown={true}
+                        startCapture={startCapture}
                     />
                 </Step>
             </RefVideoWrapper>
