@@ -1,33 +1,35 @@
-import { useEffect, useState } from "react";
+import { useCallback, useEffect, useState } from "react";
 
 interface useProgressProps<T> {
-    initialValue: T;
+    currentValue: T;
     goalValue: T;
     onEnded?: () => void;
-    onEndedDelay?: number;
 }
 
 type valueType = number | boolean;
 
 const useProgress = ({
-    initialValue,
+    currentValue,
     goalValue,
     onEnded = () => {},
-    onEndedDelay = 0,
 }: useProgressProps<valueType>) => {
-    const [currentValue, setCurrentValue] =
-        useState<typeof initialValue>(initialValue);
+    const [percent, setPersent] = useState<number>(0);
 
-    const calcPersent = () => {
-        if (typeof initialValue !== "number")
+    const calcPersent = useCallback(() => {
+        if (typeof currentValue !== "number")
             return currentValue === goalValue ? 100 : 0;
-    };
 
-    const [percent, setPersent] = useState<number>();
+        const currentPercent = (currentValue * 100) / +goalValue;
+        if (currentPercent >= 100) onEnded();
 
-    useEffect(() => {}, [currentValue]);
+        return currentPercent;
+    }, [currentValue, goalValue, onEnded]);
 
-    return { percent, setCurrentValue };
+    useEffect(() => {
+        setPersent(calcPersent());
+    }, [calcPersent, currentValue]);
+
+    return { percent };
 };
 
 export default useProgress;

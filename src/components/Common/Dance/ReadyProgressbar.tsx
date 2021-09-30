@@ -1,15 +1,27 @@
 import styled, { keyframes } from "styled-components";
 import { motion } from "framer-motion";
 import useCountdown from "hooks/useCountdown";
+import useProgress from "hooks/useProgress";
 
-const ReadyProgressbar = () => {
-    const { remainTime } = useCountdown({ endTime: 10 });
-    
+interface ReadyProgressbarProps {
+    onEnded: () => void;
+}
+
+const GOAL_TIME: number = 6;
+
+const ReadyProgressbar = ({ onEnded }: ReadyProgressbarProps) => {
+    const { remainTime } = useCountdown({ endTime: GOAL_TIME });
+
+    const { percent } = useProgress({
+        currentValue: GOAL_TIME - remainTime,
+        goalValue: GOAL_TIME,
+        onEnded,
+    });
 
     return (
         <Wrapper>
             <ProgressOuter>
-                <ProgressInner />
+                <ProgressInner percent={percent} />
             </ProgressOuter>
         </Wrapper>
     );
@@ -45,12 +57,14 @@ const ProgressOverlay = keyframes`
     }
 `;
 
-const ProgressInner = styled.div`
+const ProgressInner = styled.div<{ percent: number }>`
     position: relative;
-    width: 50%;
+    width: ${({ percent }) => percent}%;
     height: 100%;
     background-color: ${({ theme }) => theme.color.lightPurple};
     border-radius: 40px;
+
+    transition: width 0.4s linear 0s;
 
     &::before {
         content: "";

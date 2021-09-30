@@ -33,7 +33,7 @@ const Ready = ({ index, setNextStep }: ReadyProps) => {
             <NotiDsc layoutType={layout}>
                 시작한 후 중간에 멈추거나 다시 출 수 없습니다
             </NotiDsc>
-            <ReadyProgressbar />
+            <ReadyProgressbar onEnded={setNextStep ? setNextStep : () => {}} />
             <SkipBtn
                 onClick={setNextStep}
                 whileHover={{ scale: 1.05 }}
