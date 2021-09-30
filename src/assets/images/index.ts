@@ -11,16 +11,16 @@ import { ReactComponent as common_practice } from "assets/images/Common/practice
 import { ReactComponent as common_storage } from "assets/images/Common/storage.svg";
 
 // Controller
-import { ReactComponent as back_key } from "assets/images/Controller/back_key.svg";
-import { ReactComponent as forward_key } from "assets/images/Controller/forward_key.svg";
-import { ReactComponent as fullscreen } from "assets/images/Controller/fullscreen.svg";
-import { ReactComponent as graph } from "assets/images/Controller/graph.svg";
-import { ReactComponent as loop } from "assets/images/Controller/loop.svg";
-import { ReactComponent as marker } from "assets/images/Controller/marker.svg";
-import { ReactComponent as play_circle } from "assets/images/Controller/play_circle.svg";
-import { ReactComponent as play_key } from "assets/images/Controller/play_key.svg";
-import { ReactComponent as stop_circle } from "assets/images/Controller/stop_circle.svg";
-import { ReactComponent as stop_key } from "assets/images/Controller/stop_key.svg";
+import { ReactComponent as controller_back_key } from "assets/images/Controller/back_key.svg";
+import { ReactComponent as controller_forward_key } from "assets/images/Controller/forward_key.svg";
+import { ReactComponent as controller_fullscreen } from "assets/images/Controller/fullscreen.svg";
+import { ReactComponent as controller_graph } from "assets/images/Controller/graph.svg";
+import { ReactComponent as controller_loop } from "assets/images/Controller/loop.svg";
+import { ReactComponent as controller_marker } from "assets/images/Controller/marker.svg";
+import { ReactComponent as controller_play_circle } from "assets/images/Controller/play_circle.svg";
+import { ReactComponent as controller_play_key } from "assets/images/Controller/play_key.svg";
+import { ReactComponent as controller_stop_circle } from "assets/images/Controller/stop_circle.svg";
+import { ReactComponent as controller_stop_key } from "assets/images/Controller/stop_key.svg";
 
 // Dance
 import { ReactComponent as dance_layout_big } from "assets/images/Dance/layout_big.svg";
@@ -56,16 +56,16 @@ export {
     common_logo_full,
     common_practice,
     common_storage,
-    back_key,
-    forward_key,
-    fullscreen,
-    graph,
-    loop,
-    marker,
-    play_circle,
-    play_key,
-    stop_circle,
-    stop_key,
+    controller_back_key,
+    controller_forward_key,
+    controller_fullscreen,
+    controller_graph,
+    controller_loop,
+    controller_marker,
+    controller_play_circle,
+    controller_play_key,
+    controller_stop_circle,
+    controller_stop_key,
     dance_layout_big,
     dance_layout_small,
     dance_note1,
