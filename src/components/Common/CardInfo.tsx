@@ -12,6 +12,8 @@ import Icon from "components/Common/Icon";
 const CardInfo = () => {
     const history = useHistory();
 
+    const onClickPractice = () => history.push("/practice");
+
     const onClickChallenge = () => history.push("/challenge");
 
     return (
@@ -29,7 +31,7 @@ const CardInfo = () => {
                     <span>보관</span>
                 </NavElem>
                 <NavElem>
-                    <Icon name="common_practice" />
+                    <Icon name="common_practice" onClick={onClickPractice} />
                     <span>연습</span>
                 </NavElem>
                 <NavElem>

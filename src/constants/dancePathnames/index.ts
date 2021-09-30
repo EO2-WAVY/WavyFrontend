@@ -1,1 +1,1 @@
-export const dancePathnames = ["/link", "/challenge"];
+export const dancePathnames = ["/link", "/challenge", "/practice"];

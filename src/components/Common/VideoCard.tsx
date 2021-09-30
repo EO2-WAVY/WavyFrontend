@@ -38,7 +38,7 @@ const VideoCard = () => {
                         },
                     }}
                 />
-                <AnimatePresence initial={false} exitBeforeEnter={true}>
+                <AnimatePresence exitBeforeEnter={true}>
                     {isHover && (
                         <>
                             <Overlay
