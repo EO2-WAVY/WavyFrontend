@@ -43,10 +43,10 @@ jobs:
                   aws s3 cp \
                     --recursive \
                     --region ${{ env.AWS_REGION }} \
-                    build s3://{{ env.AWS_S3_BUCKET_NAME }}
+                    build s3://${{ env.AWS_S3_BUCKET_NAME }}
 
             - name: CloudFront Invalidate # Cloud cache invalidate
               run: |
                   aws cloudfront create-invalidation \
-                    --distribution-id {{ env.AWS_CF_DISTRIBUTION_ID }} \
+                    --distribution-id ${{ env.AWS_CF_DISTRIBUTION_ID }} \
                     --paths "/*"
