@@ -9,8 +9,14 @@ import Webcam from "components/Common/Dance/Webcam";
 import { AnimateSharedLayout } from "framer-motion";
 
 const Challenge = () => {
-    const { setWebcamRef, startCapture, stopCapture, downloadCaptured } =
-        useCapture();
+    const {
+        setWebcamRef,
+        startCapture,
+        pauseCapture,
+        resumeCapture,
+        stopCapture,
+        downloadCaptured,
+    } = useCapture();
 
     return (
         <Wrapper>
@@ -22,6 +28,8 @@ const Challenge = () => {
                         youtubeCode={"wGUjUztfLS8"}
                         isCountdown={true}
                         startCapture={startCapture}
+                        pauseCapture={pauseCapture}
+                        resumeCapture={resumeCapture}
                         stopCapture={stopCapture}
                     />
                 </RefVideoWrapper>

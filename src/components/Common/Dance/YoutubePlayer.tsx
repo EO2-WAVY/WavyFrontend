@@ -9,6 +9,8 @@ interface YoutubePlayerProps {
     youtubeCode: string;
     isCountdown?: boolean;
     startCapture?: () => void;
+    pauseCapture?: () => void;
+    resumeCapture?: () => void;
     stopCapture?: () => void;
 }
 
@@ -16,6 +18,8 @@ const YoutubePlayer = ({
     youtubeCode,
     isCountdown = false,
     startCapture = () => {},
+    pauseCapture = () => {},
+    resumeCapture = () => {},
     stopCapture = () => {},
 }: YoutubePlayerProps) => {
     const [isCounting, setIsCounting] = useState<boolean>(isCountdown);
@@ -43,6 +47,8 @@ const YoutubePlayer = ({
                 playing={playing}
                 controls={false}
                 onEnded={stopCapture}
+                onBuffer={pauseCapture}
+                onBufferEnd={resumeCapture}
             />
         </>
     );

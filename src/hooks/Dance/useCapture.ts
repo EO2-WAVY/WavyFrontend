@@ -31,6 +31,16 @@ const useCapture = () => {
         console.log("capture start");
     }, [webcamRef, mediaRecorderRef, handleDataAvailable]);
 
+    const pauseCapture = useCallback(() => {
+        mediaRecorderRef.current?.pause();
+        console.log("pause capture");
+    }, []);
+
+    const resumeCapture = useCallback(() => {
+        mediaRecorderRef.current?.resume();
+        console.log("resume capture");
+    }, []);
+
     const stopCapture = useCallback(() => {
         mediaRecorderRef.current?.stop();
         isCapturing.current = false;
@@ -56,6 +66,8 @@ const useCapture = () => {
         isCapturing,
         setWebcamRef,
         startCapture,
+        pauseCapture,
+        resumeCapture,
         stopCapture,
         downloadCaptured,
     };
