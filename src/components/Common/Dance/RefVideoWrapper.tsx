@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
 
 import layout_big from "assets/images/Dance/layout_big.svg";
 import layout_small from "assets/images/Dance/layout_small.svg";
@@ -24,6 +24,7 @@ const RefVideoWrapper = ({ children }: RefVideoWrapperProps) => {
 
     return (
         <Wrapper
+            key="layout"
             layoutType={layout}
             drag={layout === "drag"}
             layout
@@ -34,7 +35,9 @@ const RefVideoWrapper = ({ children }: RefVideoWrapperProps) => {
                 right: width - DRAG_WIDTH,
             }}
         >
-            <Step>{children}</Step>
+            <AnimateSharedLayout>
+                <Step>{children}</Step>
+            </AnimateSharedLayout>
 
             <AnimatePresence exitBeforeEnter>
                 {layout === "half" ? (
