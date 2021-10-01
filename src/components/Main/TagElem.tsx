@@ -132,7 +132,7 @@ interface TitleProps {
 }
 
 const Title = styled(motion.span)<TitleProps>`
-    font-size: 1.25rem;
+    font-size: 1.125rem;
     text-align: center;
     border-radius: 32px;
     transition: background-color 0.5s, color 0.5s, border 0.5s, text-weight 0.5s;

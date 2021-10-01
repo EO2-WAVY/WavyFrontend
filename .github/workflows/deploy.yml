@@ -1,0 +1,52 @@
+name: deploy-on-s3
+
+on:
+    push:
+        branches:
+            - master
+jobs:
+    deploy:
+        runs-on: ubuntu-18.04
+        env:
+            AWS_S3_BUCKET_NAME: wavy-client
+            AWS_CF_DISTRIBUTION_ID: E21LSR6NXBZR13
+            AWS_REGION: ap-northeast-2
+
+        steps:
+            - name: Checkout master # branch checkout
+              uses: actions/checkout@master
+
+            - name: Cache node modules # node modules 캐싱
+              uses: actions/cache@v1
+              with:
+                  path: node_modules
+                  key: ${{ runner.OS }}-build-${{ hashFiles('**/package-lock.json') }}
+                  restore-keys: |
+                      ${{ runner.OS }}-build-
+                      ${{ runner.OS }}-
+
+            - name: Install Dependencies # dependency 설치
+              run: npm install
+
+            - name: Build Application # build
+              run: npm run build
+
+            - name: Configure AWS credentials # AWS 계정 설정
+              uses: aws-actions/configure-aws-credentials@v1
+              with:
+                  aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+                  aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+                  aws-region: ${{ env.AWS_REGION }}
+
+            - name: Deploy to S3 # s3 배포
+              run: |
+                  aws s3 cp \
+                    --recursive \
+                    --region ${{ env.AWS_REGION }} \
+                    build s3://{{ env.AWS_S3_BUCKET_NAME }}
+
+            - name: CloudFront Invalidate # Cloud cache invalidate
+              run: |
+                  aws cloudfront create-invalidation \
+                    --distribution-id {{ env.AWS_CF_DISTRIBUTION_ID }} \
+                    --paths "/*"
