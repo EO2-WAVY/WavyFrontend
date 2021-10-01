@@ -1,17 +1,6 @@
-import { BrowserRouter, Switch, Route } from "react-router-dom";
-import { AnimatePresence } from "framer-motion";
+import { BrowserRouter } from "react-router-dom";
 
 import AnimateRouter from "./AnimateRouter";
-// pages
-import Main from "pages/Main";
-import Search from "pages/Search";
-import Auth from "pages/Auth";
-import MyInfo from "pages/MyInfo";
-import Practice from "pages/Practice";
-import Challenge from "pages/Challenge";
-import Analysis from "pages/Analysis";
-import NotFound from "pages/NotFound";
-import Terms from "pages/Terms";
 
 import Nav from "components/Common/Nav";
 import Footer from "components/Common/Footer";
@@ -20,12 +9,10 @@ import ScrollToTopElem from "utils/ScrollToTop";
 const Router = () => {
     return (
         <BrowserRouter>
-            
-                <Nav />
-                <ScrollToTopElem />
-                <AnimateRouter />
-                <Footer />
-            
+            <Nav />
+            <ScrollToTopElem />
+            <AnimateRouter />
+            <Footer />
         </BrowserRouter>
     );
 };
