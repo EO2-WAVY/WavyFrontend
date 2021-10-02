@@ -5,6 +5,7 @@ import { AnimatePresence } from "framer-motion";
 import Main from "pages/Main";
 import Search from "pages/Search";
 import Auth from "pages/Auth";
+import KakaoRedirect from "pages/Auth/KakaoRedirect";
 import SignUpTerm from "pages/SignUpTerm";
 import MyInfo from "pages/MyInfo";
 import Practice from "pages/Practice";
@@ -24,6 +25,7 @@ const AnimateRouter = () => {
                 <Route path="/search" component={Search} />
                 <Route path="/login" component={Auth} />
                 <Route exact path="/signup" component={Auth} />
+                <Route exact path="/auth/kakaoLoginRedirect" component={KakaoRedirect} />
                 <Route path="/signup/term" component={SignUpTerm} />
                 <Route path="/info" component={MyInfo} />
                 <Route path="/practice" component={Practice} />

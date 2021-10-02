@@ -8,6 +8,7 @@ import google from "assets/images/Auth/google.svg";
 import naver from "assets/images/Auth/naver.svg";
 import kakao from "assets/images/Auth/kakao.svg";
 import facebook from "assets/images/Auth/facebook.svg";
+import useGetKakaoLogInUrl from "hooks/api/Auth/useGetKakaoLogInUrl";
 
 interface IMain {
     kind: string;
@@ -22,6 +23,8 @@ const Main = ({ kind }: IMain) => {
         return kind === "회원가입" ? "/login" : "/signup";
     };
 
+    const { onClickLoginBtn } = useGetKakaoLogInUrl();
+
     return (
         <MainWrapper variants={staggerHalf}>
             <ProviderBtn variants={defaultFadeInUpVariants} provider={google}>
@@ -30,7 +33,11 @@ const Main = ({ kind }: IMain) => {
             <ProviderBtn variants={defaultFadeInUpVariants} provider={naver}>
                 네이버로 로그인
             </ProviderBtn>
-            <ProviderBtn variants={defaultFadeInUpVariants} provider={kakao}>
+            <ProviderBtn
+                variants={defaultFadeInUpVariants}
+                provider={kakao}
+                onClick={onClickLoginBtn}
+            >
                 카카오톡으로 로그인
             </ProviderBtn>
             <ProviderBtn variants={defaultFadeInUpVariants} provider={facebook}>
