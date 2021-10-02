@@ -34,7 +34,8 @@ const TagSection = () => {
             </LeftBtn>
             <Carousel ref={wrapperRef}>
                 <TagElem name="내닉네임" image="내닉네임" />
-                {data?.map(({ tagName, tagUrl }) => (
+
+                {data?.tags.map(({ tagName, tagUrl }) => (
                     <TagElem key={tagName} name={tagName} image={tagUrl} />
                 ))}
             </Carousel>

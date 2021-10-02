@@ -8,13 +8,12 @@ const key = "/tags";
 
 const useGetTags = () => {
     const setCurrentTag = useSetRecoilState(currentTagState);
-    const response = useSWR<Tag[]>(key, fetcher);
-    console.log(response);
+    const response = useSWR<GetTags>(key, fetcher);
 
     useEffect(() => {
-        if (!response.data) return;
+        if (!response.data?.tags[0]) return;
 
-        setCurrentTag(response.data[0].tagName);
+        setCurrentTag(response.data.tags[0].tagName);
     }, [response?.data, setCurrentTag]);
 
     return response;
@@ -30,4 +29,10 @@ export interface Tag {
     tagSeq: string;
     tagName: string;
     tagUrl: string;
+}
+
+export interface GetTags {
+    ok: boolean;
+    tags: Tag[];
+    totalResults: number;
 }
