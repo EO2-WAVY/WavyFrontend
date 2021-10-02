@@ -1,8 +1,22 @@
-import axios, { AxiosResponse, AxiosError } from "axios";
+import axios, { AxiosResponse, AxiosError, AxiosRequestConfig } from "axios";
+import { LS_USER_TOKEN_KEY } from "constants/storageKey";
 
 const instance = axios.create({
     baseURL: process.env.REACT_APP_API_URL,
 });
+
+const interceptorsRequestFulfilled = (config: AxiosRequestConfig) => {
+    return {
+        ...config,
+        headers: {
+            Authorization: `Bearer ${localStorage.getItem(LS_USER_TOKEN_KEY)}`,
+        },
+    };
+};
+
+export const updateInstanceInterceptorsRequest = () => {
+    instance.interceptors.request.use(interceptorsRequestFulfilled);
+};
 
 const interceptorsResponseFulfilled = (res: AxiosResponse) => {
     if (res.status >= 200 && res.status < 300) {
@@ -14,7 +28,7 @@ const interceptorsResponseFulfilled = (res: AxiosResponse) => {
 
 const interceptorsResponseRejected = (error: AxiosError) => {
     if (error.response?.data?.message != null) {
-        return { message: error.response?.data?.message };
+        return { ...error.response.data, message: error.response?.data?.message };
     }
 
     return Promise.reject(new Error(error.response?.data?.message ?? error));

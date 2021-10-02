@@ -4,12 +4,15 @@ import { useHistory, useLocation } from "react-router-dom";
 import Header from "components/Auth/Header";
 import Main from "components/Auth/Main";
 import Layout from "components/Common/Layout";
+import useDecideUserPush from "hooks/api/Auth/useDecideUserPush";
 
 const Auth = () => {
     const history = useHistory();
     const location = useLocation();
 
     const [kind, setKind] = useState<"회원가입" | "로그인">("로그인");
+
+    useDecideUserPush();
 
     useEffect(() => {
         const { pathname } = location;

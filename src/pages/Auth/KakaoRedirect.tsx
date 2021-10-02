@@ -4,8 +4,9 @@ import saveToken from "utils/Auth/saveToken";
 const KakaoRedirect = () => {
     const code = useRouterQuery("code");
     saveToken(code ? code : "");
+
     window.close();
-    return <div>{code}</div>;
+    return <div></div>;
 };
 
 export default KakaoRedirect;
