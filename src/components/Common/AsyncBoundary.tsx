@@ -3,7 +3,7 @@ import ErrorBoundary from "./ErrorBoundary";
 
 type ErrorBoundaryProps = ComponentProps<typeof ErrorBoundary>;
 
-interface Props extends Omit<ErrorBoundaryProps, "renderFallback"> {
+interface AsyncBoundaryProps extends Omit<ErrorBoundaryProps, "renderFallback"> {
     pendingFallback: Component;
     rejectedFallback: ErrorBoundaryProps["renderFallback"];
 }
@@ -13,7 +13,7 @@ const AsyncBoundary = ({
     rejectedFallback,
     children,
     ...errorBoundaryProps
-}: Props) => {
+}: AsyncBoundaryProps) => {
     return (
         <ErrorBoundary
             renderFallback={rejectedFallback}

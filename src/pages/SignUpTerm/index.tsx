@@ -12,6 +12,7 @@ import TextSection from "components/SignUpTerm/TextSection";
 import TermModal from "components/SignUpTerm/TermModal";
 import { Utilize } from "components/Terms/Utilize";
 import { PersonalInformation } from "components/Terms/PersonalInformation";
+import useSignUp from "hooks/api/Auth/useSignUp";
 
 export interface UserInfo {
     email: string;
@@ -31,8 +32,11 @@ const SignUpTerm = () => {
     const [personalModalIsShowing, togglePersonalModal] = useToggle(false);
     const [marketingModalIsShowing, toggleMarketingModal] = useToggle(false);
 
+    // for sign up
+    const { signUp } = useSignUp({ userInfo, checks });
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
+        signUp();
     };
 
     return (
