@@ -1,31 +1,18 @@
-// for styled-components
-import { ThemeProvider } from "styled-components";
-import theme from "styles/theme";
 import GlobalStyle from "styles/global";
-
-// for recoil
-import { RecoilRoot } from "recoil";
-
-// for swr
-import { SWRConfig } from "swr";
-import swrConfig from "constants/swrConfig";
-
 import Router from "router";
 import Mobile from "pages/Mobile";
 import useViewport from "hooks/useViewport";
+import useCheckCurrentMember from "hooks/api/useCheckCurrentMember";
 
 function App() {
     const { width } = useViewport();
+    useCheckCurrentMember();
 
     return (
-        <SWRConfig value={swrConfig}>
-            <RecoilRoot>
-                <ThemeProvider theme={theme}>
-                    <GlobalStyle />
-                    {width > 700 ? <Router /> : <Mobile />}
-                </ThemeProvider>
-            </RecoilRoot>
-        </SWRConfig>
+        <>
+            <GlobalStyle />
+            {width > 700 ? <Router /> : <Mobile />}
+        </>
     );
 }
 

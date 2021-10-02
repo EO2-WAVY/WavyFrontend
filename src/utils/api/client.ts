@@ -14,9 +14,7 @@ const interceptorsRequestFulfilled = (config: AxiosRequestConfig) => {
     };
 };
 
-export const updateInstanceInterceptorsRequest = () => {
-    instance.interceptors.request.use(interceptorsRequestFulfilled);
-};
+instance.interceptors.request.use(interceptorsRequestFulfilled);
 
 const interceptorsResponseFulfilled = (res: AxiosResponse) => {
     if (res.status >= 200 && res.status < 300) {

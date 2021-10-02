@@ -1,29 +1,23 @@
-import { LS_USER_TOKEN_KEY } from "constants/storageKey";
-
 import { useEffect } from "react";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";
-import { currentUserTokenState } from "store/Auth";
-import { get, updateInstanceInterceptorsRequest } from "utils/api/client";
+import { currentUserState } from "store/Auth";
+import { get } from "utils/api/client";
+import { Member } from "../useCheckCurrentMember";
 
 const useDecideUserPush = () => {
-    const setCurrentUserToken = useSetRecoilState(currentUserTokenState);
-
     const history = useHistory();
+    const setCurrentUser = useSetRecoilState(currentUserState);
 
     useEffect(() => {
         const handleStorage = async () => {
-            const userToken = localStorage.getItem(LS_USER_TOKEN_KEY);
-            updateInstanceInterceptorsRequest();
-            setCurrentUserToken(userToken);
-
             const response = await get<ErrorMember>("/members/me");
             if (response.statusCode === 403) {
                 history.push("/signup/term");
                 return;
             }
 
-            // setCurrentUserInfo
+            setCurrentUser(response.member);
             history.push("/");
         };
 
@@ -32,14 +26,13 @@ const useDecideUserPush = () => {
         return () => {
             window.removeEventListener("storage", handleStorage);
         };
-    }, [history, setCurrentUserToken]);
-
-    useEffect(() => {}, []);
+    }, [history, setCurrentUser]);
 };
 
 export default useDecideUserPush;
 
 export interface ErrorMember {
+    member: Member;
     statusCode: number;
     message: string;
     error: string;

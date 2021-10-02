@@ -1,7 +1,6 @@
 import { useCallback, useEffect } from "react";
 import { get } from "utils/api/client";
 import saveToken from "utils/Auth/saveToken";
-import { Member } from "../useGetCurrentMember";
 
 const useGetServerToken = (code: string) => {
     const saveServerToken = useCallback(async () => {
@@ -9,7 +8,7 @@ const useGetServerToken = (code: string) => {
             params: { code },
         });
 
-        saveToken(response.token);
+        saveToken(response.token); // useDecide의 storage 이벤트 호출
         window.close();
     }, [code]);
 

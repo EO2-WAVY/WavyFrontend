@@ -3,9 +3,9 @@ import { UserInfo } from "pages/SignUpTerm";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";
 import { currentUserState } from "store/Auth";
-import { post, updateInstanceInterceptorsRequest } from "utils/api/client";
+import { post } from "utils/api/client";
 import saveToken from "utils/Auth/saveToken";
-import { Member } from "../useGetCurrentMember";
+import { Member } from "hooks/api/useCheckCurrentMember";
 
 interface useSignUpProps {
     userInfo: UserInfo;
@@ -29,7 +29,6 @@ const useSignUp = ({ userInfo, checks }: useSignUpProps) => {
         });
 
         saveToken(response.token);
-        updateInstanceInterceptorsRequest();
         setCurrentUser(response.member);
         history.push("/");
     };

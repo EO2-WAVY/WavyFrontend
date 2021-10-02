@@ -1,10 +1,5 @@
-import { Member } from "hooks/api/useGetCurrentMember";
+import { Member } from "hooks/api/useCheckCurrentMember";
 import { atom } from "recoil";
-
-export const currentUserTokenState = atom<string | null>({
-    key: "currentUserToken",
-    default: null,
-});
 
 export const currentUserState = atom<Member | null>({
     key: "currentUser",
