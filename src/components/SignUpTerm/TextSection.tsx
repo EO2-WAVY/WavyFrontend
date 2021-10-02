@@ -3,6 +3,7 @@ import { ForwardRefComponent, HTMLMotionProps, motion } from "framer-motion";
 import styled, { DefaultTheme, StyledComponent } from "styled-components";
 
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
+import { UserInfo } from "pages/SignUpTerm";
 
 interface TextSectionProps {
     Section: StyledComponent<
@@ -17,18 +18,19 @@ interface TextSectionProps {
         {},
         never
     >;
-    nickname: string;
-    setNickname: Dispatch<SetStateAction<string>>;
+    userInfo: UserInfo;
+    setUserInfo: Dispatch<SetStateAction<UserInfo>>;
 }
 
 const TextSection = ({
     Section,
     SubTitle,
-    nickname,
-    setNickname,
+    userInfo,
+    setUserInfo,
 }: TextSectionProps) => {
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
-        setNickname(e.target.value);
+        const { id, value } = e.target;
+        setUserInfo({ ...userInfo, [id]: value });
     };
 
     return (
@@ -36,11 +38,24 @@ const TextSection = ({
             <SubTitle variants={defaultFadeInUpVariants}>기본정보</SubTitle>
             <InputWrapper variants={defaultFadeInUpVariants}>
                 <TextLabel>메일</TextLabel>
-                <TextInput disabled type="text" value="test@test.tst" />
+                <TextInput
+                    type="email"
+                    id="email"
+                    required
+                    value={userInfo.email}
+                    onChange={onChange}
+                />
             </InputWrapper>
+
             <InputWrapper variants={defaultFadeInUpVariants}>
                 <TextLabel>별명</TextLabel>
-                <TextInput type="text" value={nickname} onChange={onChange} />
+                <TextInput
+                    type="text"
+                    id="nickname"
+                    required
+                    value={userInfo.nickname}
+                    onChange={onChange}
+                />
             </InputWrapper>
         </Section>
     );

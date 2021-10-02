@@ -63,6 +63,7 @@ const CheckSection = ({
                 <Checkbox
                     type="checkbox"
                     id="1"
+                    required
                     checked={checks[1]}
                     onChange={onChange}
                 />

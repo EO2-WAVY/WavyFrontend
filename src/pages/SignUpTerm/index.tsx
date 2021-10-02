@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { FormEvent, useState } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
@@ -13,11 +13,27 @@ import TermModal from "components/SignUpTerm/TermModal";
 import { Utilize } from "components/Terms/Utilize";
 import { PersonalInformation } from "components/Terms/PersonalInformation";
 
+export interface UserInfo {
+    email: string;
+    nickname: string;
+}
+
 const SignUpTerm = () => {
     const [checks, setChecks] = useState<boolean[]>([false, false, false]);
-    const [nickname, setNickname] = useState<string>("");
+
+    // for user info
+    const [userInfo, setUserInfo] = useState<UserInfo>({
+        email: "",
+        nickname: "",
+    });
+
+    // for modal
     const [personalModalIsShowing, togglePersonalModal] = useToggle(false);
     const [marketingModalIsShowing, toggleMarketingModal] = useToggle(false);
+
+    const onSubmit = (e: FormEvent<HTMLFormElement>) => {
+        e.preventDefault();
+    };
 
     return (
         <Layout>
@@ -25,31 +41,34 @@ const SignUpTerm = () => {
                 <strong>WAVY</strong> 회원가입
             </Title>
 
-            <CheckSection
-                Section={Section}
-                SubTitle={SubTitle}
-                checks={checks}
-                setChecks={setChecks}
-                togglePersonalModal={togglePersonalModal}
-                toggleMarketingModal={toggleMarketingModal}
-            />
-            <Hr />
-            <TextSection
-                Section={Section}
-                SubTitle={SubTitle}
-                nickname={nickname}
-                setNickname={setNickname}
-            />
-            <Hr />
-            <SubmitSection variants={staggerOne}>
-                <SubmitBtn
-                    variants={defaultFadeInUpVariants}
-                    whileHover={{ scale: 1.05 }}
-                    whileTap={{ scale: 1 }}
-                >
-                    완료
-                </SubmitBtn>
-            </SubmitSection>
+            <form onSubmit={onSubmit}>
+                <CheckSection
+                    Section={Section}
+                    SubTitle={SubTitle}
+                    checks={checks}
+                    setChecks={setChecks}
+                    togglePersonalModal={togglePersonalModal}
+                    toggleMarketingModal={toggleMarketingModal}
+                />
+                <Hr />
+                <TextSection
+                    Section={Section}
+                    SubTitle={SubTitle}
+                    userInfo={userInfo}
+                    setUserInfo={setUserInfo}
+                />
+                <Hr />
+                <SubmitSection variants={staggerOne}>
+                    <SubmitBtn
+                        type="submit"
+                        variants={defaultFadeInUpVariants}
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 1 }}
+                    >
+                        완료
+                    </SubmitBtn>
+                </SubmitSection>
+            </form>
 
             <TermModal
                 isShowing={personalModalIsShowing}
