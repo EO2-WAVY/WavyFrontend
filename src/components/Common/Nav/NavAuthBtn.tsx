@@ -4,16 +4,25 @@ import { useHistory } from "react-router-dom";
 
 import Icon from "components/Common/Icon";
 import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useSignOut from "hooks/api/Auth/useSignOut";
 
 const NavAuthBtn = () => {
     const history = useHistory();
     const isUserSignedIn = useIsUserSignedIn();
+    const { signOut } = useSignOut();
 
     const onClickIcon = () => {
         history.push(isUserSignedIn ? "/info" : "/login");
     };
 
-    const onClickPopBtn = () => {};
+    const onClickPopBtn = () => {
+        if (isUserSignedIn) {
+            signOut();
+            history.push("/");
+            return;
+        }
+        history.push("/login");
+    };
 
     return (
         <Wrapper isUserSignedIn={isUserSignedIn}>
