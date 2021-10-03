@@ -1,5 +1,4 @@
 import { useSetRecoilState } from "recoil";
-
 import { get } from "utils/api/client";
 
 import { currentUserState } from "store/Auth";
@@ -10,11 +9,12 @@ const key: string = "/auth/kakaoLogout";
 const useSignOut = () => {
     const setCurrentUser = useSetRecoilState(currentUserState);
 
-    const signOut = () => {
-        get<KakaouLogout>(key);
-
-        removeToken();
-        setCurrentUser(null);
+    const signOut = async () => {
+        const response = await get<KakaouLogout>(key);
+        if (response.ok) {
+            removeToken();
+            setCurrentUser(null);
+        }
     };
 
     return { signOut };
