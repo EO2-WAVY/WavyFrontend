@@ -7,24 +7,29 @@ import useGetTags from "hooks/api/useGetTags";
 import TagElem from "components/Main/TagElem";
 import Icon from "components/Common/Icon";
 
+export const TAG_SCROLLED_YPOS: number = 163;
+
 const TagSection = () => {
+    // for Carousel
     const { wrapperRef, onClickLeft, onClickRight } = useCarousel({
         dist: 304,
     });
 
+    // for animation
     const { scrollY } = useViewportScroll();
-
-    // for wrapper
     const [wrapperPosition, setWrapperPosition] = useState<"static" | "sticky">(
         "static"
     );
     scrollY.onChange((yPos) => {
-        setWrapperPosition(yPos > 183 ? "sticky" : "static");
+        setWrapperPosition(yPos > TAG_SCROLLED_YPOS ? "sticky" : "static");
     });
+    const btnYposAnim = useTransform(
+        scrollY,
+        [0, TAG_SCROLLED_YPOS, 9999],
+        [0, 70, 70]
+    );
 
-    // for button
-    const btnYposAnim = useTransform(scrollY, [0, 183, 9999], [0, 70, 70]);
-
+    // for fetch
     const { data } = useGetTags();
 
     return (
@@ -50,7 +55,7 @@ export default TagSection;
 
 const Wrapper = styled(motion.section)`
     position: relative;
-    top: -20px;
+    top: -30px; // 스크롤됐을 시 높이를 결정하는 요소입니다.
     width: 100%;
     display: flex;
     justify-content: space-between;

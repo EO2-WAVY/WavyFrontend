@@ -1,4 +1,4 @@
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, Redirect } from "react-router-dom";
 import { AnimatePresence } from "framer-motion";
 
 // pages
@@ -15,19 +15,45 @@ import Analysis from "pages/Analysis";
 import NotFound from "pages/NotFound";
 import Terms from "pages/Terms";
 
+import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+
 const AnimateRouter = () => {
     const location = useLocation();
+    const isUserSignedIn = useIsUserSignedIn();
+
+    const pushRootWhenSignedIn = (Page: JSX.Element) =>
+        isUserSignedIn ? <Redirect to="/" /> : Page;
+
+    const pushRootWhenNotSignedIn = (Page: JSX.Element) =>
+        !isUserSignedIn ? <Redirect to="/" /> : Page;
 
     return (
         <AnimatePresence initial exitBeforeEnter>
             <Switch location={location} key={location.pathname}>
                 <Route exact path="/" component={Main} />
                 <Route path="/search" component={Search} />
-                <Route path="/login" component={Auth} />
-                <Route exact path="/signup" component={Auth} />
-                <Route exact path="/auth/kakaoLoginRedirect" component={KakaoRedirect} />
-                <Route path="/signup/term" component={SignUpTerm} />
-                <Route path="/info" component={MyInfo} />
+                <Route
+                    path="/login"
+                    render={() => pushRootWhenSignedIn(<Auth />)}
+                />
+                <Route
+                    exact
+                    path="/signup"
+                    render={() => pushRootWhenSignedIn(<Auth />)}
+                />
+                <Route
+                    exact
+                    path="/auth/kakaoLoginRedirect"
+                    render={() => pushRootWhenSignedIn(<KakaoRedirect />)}
+                />
+                <Route
+                    path="/signup/term"
+                    render={() => pushRootWhenSignedIn(<SignUpTerm />)}
+                />
+                <Route
+                    path="/info"
+                    render={() => pushRootWhenNotSignedIn(<MyInfo />)}
+                />
                 <Route path="/practice" component={Practice} />
                 <Route path="/link" component={Link} />
                 <Route path="/challenge" component={Challenge} />

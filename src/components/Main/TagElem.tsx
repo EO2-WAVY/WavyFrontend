@@ -5,6 +5,8 @@ import { staggerOne, defaultFadeInUpVariants } from "constants/motions";
 import { useRecoilState } from "recoil";
 import { currentTagState } from "store/Main";
 
+import { TAG_SCROLLED_YPOS } from "components/Main/TagSection";
+
 interface TagElemProps {
     name: string;
     image: string;
@@ -13,24 +15,36 @@ interface TagElemProps {
 const TagElem = ({ name, image }: TagElemProps) => {
     const { scrollY } = useViewportScroll();
 
-    const wrapperMarginAnim = useTransform(scrollY, [0, 183, 400], [16, 16, 6]);
+    const wrapperMarginAnim = useTransform(
+        scrollY,
+        [0, TAG_SCROLLED_YPOS, 400],
+        [16, 16, 6]
+    );
     const circleWidthAnim = useTransform(
         scrollY,
-        [0, 183, 400],
+        [0, TAG_SCROLLED_YPOS, 400],
         [120, 120, 60]
     );
-    const circleScaleAnim = useTransform(scrollY, [80, 183], [1, 0.6]);
-    const circleOpacityAnim = useTransform(scrollY, [80, 183], [1, 0]);
+    const circleScaleAnim = useTransform(
+        scrollY,
+        [80, TAG_SCROLLED_YPOS],
+        [1, 0.6]
+    );
+    const circleOpacityAnim = useTransform(
+        scrollY,
+        [80, TAG_SCROLLED_YPOS],
+        [1, 0]
+    );
 
     const [isScrolled, setIsScrolled] = useState<boolean>(false);
     const titleVertPaddingAnim = useTransform(
         scrollY,
-        [0, 183, 183],
+        [0, TAG_SCROLLED_YPOS, TAG_SCROLLED_YPOS],
         [0, 9, 9]
     );
     const titleHoriPaddingAnim = useTransform(
         scrollY,
-        [0, 183, 183],
+        [0, TAG_SCROLLED_YPOS, TAG_SCROLLED_YPOS],
         [0, 30, 30]
     );
 

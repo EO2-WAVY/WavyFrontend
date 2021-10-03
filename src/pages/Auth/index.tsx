@@ -9,9 +9,8 @@ import useDecideUserPush from "hooks/api/Auth/useDecideUserPush";
 const Auth = () => {
     const history = useHistory();
     const location = useLocation();
-
     const [kind, setKind] = useState<"회원가입" | "로그인">("로그인");
-
+    
     useDecideUserPush();
 
     useEffect(() => {
