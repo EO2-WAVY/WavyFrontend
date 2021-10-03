@@ -38,7 +38,6 @@ const useCheckCurrentMember = () => {
 
         if (!data?.member) return;
         setCurrentUser(data.member);
-        console.log(data.member);
     }, [data?.member, data?.statusCode, setCurrentUser]);
 };
 

@@ -33,7 +33,6 @@ const AnimateRouter = () => {
                 <Route path="/challenge" component={Challenge} />
                 <Route path="/analysis" component={Analysis} />
                 <Route path="/terms/:termName" component={Terms} />
-                <Route path="/analysis" component={Analysis} />
                 <Route component={NotFound} />
             </Switch>
         </AnimatePresence>
