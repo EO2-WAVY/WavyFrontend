@@ -11,7 +11,6 @@ import {
 
 import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
 import formattingDuration from "utils/formatting/formattingDuration";
-import theme from "styles/theme";
 
 interface VideoCardProps {
     refVideo: IRefVideo;

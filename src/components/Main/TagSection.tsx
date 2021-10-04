@@ -6,6 +6,8 @@ import useCarousel from "hooks/useCarousel";
 import useGetTags from "hooks/api/useGetTags";
 import TagElem from "components/Main/TagElem";
 import Icon from "components/Common/Icon";
+import { useRecoilValue } from "recoil";
+import { currentUserState } from "store/Auth";
 
 export const TAG_SCROLLED_YPOS: number = 163;
 
@@ -32,13 +34,21 @@ const TagSection = () => {
     // for fetch
     const { data } = useGetTags();
 
+    // for LinkSection
+    const currentUser = useRecoilValue(currentUserState);
+
     return (
         <Wrapper style={{ position: wrapperPosition }}>
             <LeftBtn onClick={onClickLeft} style={{ y: btnYposAnim }}>
                 <Icon name="main_carousel_left" />
             </LeftBtn>
             <Carousel ref={wrapperRef}>
-                <TagElem name="내닉네임" image="내닉네임" />
+                {currentUser && (
+                    <TagElem
+                        name={currentUser?.mbrNickname}
+                        image={currentUser?.profileImageUrl}
+                    />
+                )}
 
                 {data?.tags.map(({ tagName, tagUrl }) => (
                     <TagElem key={tagName} name={tagName} image={tagUrl} />
