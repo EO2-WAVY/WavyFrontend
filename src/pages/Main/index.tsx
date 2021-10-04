@@ -7,22 +7,35 @@ import TagSection from "components/Main/TagSection";
 import LinkSection from "components/Main/LinkSection";
 import VideoCard from "components/Common/VideoCard";
 
-import { staggerOne } from "constants/motions";
+import { staggerHalf } from "constants/motions";
 import { currentTagState } from "store/Main";
+import useGetRefVideos from "hooks/api/Main/useGetRefVideos";
 
 const Main = () => {
     const currentTag = useRecoilValue(currentTagState);
+    const {refVideos, loadMore, isReachingEnd} = useGetRefVideos();
+
+    console.log(refVideos);
+
+
     return (
         <Layout>
             <TagSection />
             <AnimatePresence exitBeforeEnter>
                 <Test
-                    variants={staggerOne}
+                    variants={staggerHalf}
                     key={currentTag}
                     initial="initial"
                     animate="animate"
                     exit="exit"
                 >
+                    <VideoCard />
+                    <VideoCard />
+                    <VideoCard />
+                    <VideoCard />
+                    <VideoCard />
+                    <VideoCard />
+                    <VideoCard />
                     <VideoCard />
                     <VideoCard />
                     <VideoCard />
