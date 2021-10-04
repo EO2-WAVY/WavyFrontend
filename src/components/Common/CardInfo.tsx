@@ -8,6 +8,8 @@ import {
     staggerOne,
 } from "constants/motions";
 import Icon from "components/Common/Icon";
+import { gcRefVideoDifficulty } from "utils/groupCode";
+import formattingDuration from "utils/formatting/formattingDuration";
 
 interface CardInfoProps {
     rvSeq: string;
@@ -29,8 +31,12 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
             animate="animate"
             exit="exit"
         >
-            <LevelSpan variants={defaultFadeInUpVariants}>쉬움</LevelSpan>
-            <OverrallSpan variants={defaultFadeInUpVariants}>46s</OverrallSpan>
+            <LevelSpan variants={defaultFadeInUpVariants}>
+                {gcRefVideoDifficulty(rvDifficultyCd)}
+            </LevelSpan>
+            <OverrallSpan variants={defaultFadeInUpVariants}>
+                {formattingDuration(rvDuration)}s
+            </OverrallSpan>
             <NavWrapper variants={cardNavUpVariants}>
                 <NavElem>
                     <Icon name="common_storage" />
