@@ -9,7 +9,23 @@ import {
     defaultFadeInUpVariants,
 } from "constants/motions";
 
-const VideoCard = () => {
+import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
+
+interface VideoCardProps {
+    refVideo: IRefVideo;
+}
+
+const VideoCard = ({
+    refVideo: {
+        rvSeq,
+        rvSongName,
+        rvArtistName,
+        rvUrl,
+        rvSourceAccountName,
+        rvDuration,
+        rvDifficultyCd,
+    },
+}: VideoCardProps) => {
     const [isHover, setIsHover] = useState<boolean>(false);
 
     const onHoverStart = () => {
@@ -24,7 +40,7 @@ const VideoCard = () => {
         <Wrapper variants={defaultFadeInUpVariants}>
             <VideoWrapper onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
                 <ReactPlayer
-                    url="https://www.youtube.com/watch?v=xhztxmBJ9L4"
+                    url={rvUrl}
                     volume={0}
                     width="100%"
                     height="100%"
@@ -47,13 +63,19 @@ const VideoCard = () => {
                                 animate="animate"
                                 exit="exit"
                             />
-                            <CardInfo />
+                            <CardInfo
+                                rvSeq={rvSeq}
+                                rvDuration={rvDuration}
+                                rvDifficultyCd={rvDifficultyCd}
+                            />
                         </>
                     )}
                 </AnimatePresence>
             </VideoWrapper>
-            <Title>Butter - 방탄소년단</Title>
-            <Author>bts_official_bighit</Author>
+            <Title>
+                {rvSongName} - {rvArtistName}
+            </Title>
+            <Author>{rvSourceAccountName}</Author>
         </Wrapper>
     );
 };

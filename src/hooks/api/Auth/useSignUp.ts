@@ -1,4 +1,4 @@
-import { gcMarketingConsent, gcPrivacyConsent } from "constants/groupCode";
+import { gcMarketingConsent, gcPrivacyConsent } from "utils/groupCode";
 import { UserInfo } from "pages/SignUpTerm";
 import { useHistory } from "react-router";
 import { useSetRecoilState } from "recoil";

@@ -9,7 +9,13 @@ import {
 } from "constants/motions";
 import Icon from "components/Common/Icon";
 
-const CardInfo = () => {
+interface CardInfoProps {
+    rvSeq: string;
+    rvDuration: string;
+    rvDifficultyCd: string;
+}
+
+const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
     const history = useHistory();
 
     const onClickPractice = () => history.push("/practice");
