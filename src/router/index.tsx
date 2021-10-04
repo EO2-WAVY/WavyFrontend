@@ -5,7 +5,6 @@ import AnimateRouter from "./AnimateRouter";
 import Nav from "components/Common/Nav";
 import Footer from "components/Common/Footer";
 import ScrollToTopElem from "utils/ScrollToTop";
-import AsyncBoundary from "components/Common/AsyncBoundary";
 
 const Router = () => {
     return (

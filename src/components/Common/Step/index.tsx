@@ -30,6 +30,7 @@ const Step = ({ children }: StepProps) => {
             {Children.map(children, (child, index) => {
                 if (isValidElement(child) && currentIndex === index) {
                     return cloneElement(child, {
+                        key: index,
                         setNextStep,
                         setPrevStep,
                         index,

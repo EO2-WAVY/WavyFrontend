@@ -1,6 +1,5 @@
 import { useRecoilValue } from "recoil";
 import { currentTagState } from "store/Main";
-import { AnimatePresence } from "framer-motion";
 
 import Layout from "components/Common/Layout";
 import TagSection from "components/Main/TagSection";
@@ -15,13 +14,12 @@ const Main = () => {
     return (
         <Layout>
             <TagSection />
-            <AnimatePresence exitBeforeEnter>
-                {currentTag === currentUser?.mbrNickname ? (
-                    <MyTagSection />
-                ) : (
-                    <RefVideoSection />
-                )}
-            </AnimatePresence>
+
+            {currentTag === currentUser?.mbrNickname ? (
+                <MyTagSection />
+            ) : (
+                <RefVideoSection />
+            )}
         </Layout>
     );
 };

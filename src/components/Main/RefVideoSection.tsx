@@ -34,13 +34,16 @@ const RefVideoSection = () => {
                 animate="animate"
                 exit="exit"
             >
-                {refVideos.map((refVideo) => (
-                    <VideoCard refVideo={refVideo} />
+                {refVideos.map((refVideo, index) => (
+                    <VideoCard
+                        key={`${index}${refVideo.rvSeq}`}
+                        refVideo={refVideo}
+                    />
                 ))}
             </VideoCardWrapper>
 
-            {isReachingEnd && <NoMoreSection />}
-            <div ref={setTarget}></div>
+            {isReachingEnd && <NoMoreSection key="NoMoreSection" />}
+            <div key="observerTarget" ref={setTarget}></div>
         </AnimatePresence>
     );
 };
