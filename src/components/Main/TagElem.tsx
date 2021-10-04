@@ -1,11 +1,11 @@
-import styled from "styled-components";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
 import { useState } from "react";
-import { staggerOne, defaultFadeInUpVariants } from "constants/motions";
 import { useRecoilState } from "recoil";
 import { currentTagState } from "store/Main";
+import styled from "styled-components";
+import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 import { TAG_SCROLLED_YPOS } from "components/Main/TagSection";
+import { staggerOne, defaultFadeInUpVariants } from "constants/motions";
 
 interface TagElemProps {
     name: string;

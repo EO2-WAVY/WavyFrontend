@@ -18,7 +18,7 @@ const NavAuthBtn = () => {
     const onClickPopBtn = () => {
         if (isUserSignedIn) {
             signOut();
-            history.push("/");
+            history.push("/login");
             return;
         }
         history.push("/login");

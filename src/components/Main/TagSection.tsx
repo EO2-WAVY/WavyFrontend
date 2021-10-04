@@ -1,6 +1,10 @@
 import { useState } from "react";
 import styled from "styled-components";
-import { motion, useViewportScroll, useTransform } from "framer-motion";
+import {
+    motion,
+    useViewportScroll,
+    useTransform,
+} from "framer-motion";
 
 import useCarousel from "hooks/useCarousel";
 import useGetTags from "hooks/api/useGetTags";
@@ -45,8 +49,9 @@ const TagSection = () => {
             <Carousel ref={wrapperRef}>
                 {currentUser && (
                     <TagElem
-                        name={currentUser?.mbrNickname}
-                        image={currentUser?.profileImageUrl}
+                        key={currentUser.mbrNickname}
+                        name={currentUser.mbrNickname}
+                        image={currentUser.profileImageUrl}
                     />
                 )}
 

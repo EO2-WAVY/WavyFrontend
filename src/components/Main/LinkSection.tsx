@@ -10,7 +10,7 @@ import Vid2 from "assets/videos/Main/vid2.mp4";
 
 const LinkSection = () => {
     return (
-        <Wrapper>
+        <Wrapper initial="initial" animate="animate" exit="exit">
             <InputSection variants={staggerOne}>
                 <Title variants={defaultFadeInUpVariants}>
                     <strong>링크</strong> 입력
