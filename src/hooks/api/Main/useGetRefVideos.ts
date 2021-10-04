@@ -6,7 +6,7 @@ import { fetcher } from "utils/api/fetch";
 const useGetRefVideos = () => {
     const currentTag = useRecoilValue(currentTagState);
 
-    const { data, size, setSize } = useSWRInfinite<IGetRefVideos>(
+    const { data, error, size, setSize } = useSWRInfinite<IGetRefVideos>(
         (index) => `/ref-videos?page=${index + 1}&tagName=${currentTag}`,
         fetcher
     );
@@ -15,16 +15,15 @@ const useGetRefVideos = () => {
     data?.forEach((tempData) => {
         refVideos.push(...tempData.refVideos);
     });
-    console.log("DATA",data);
 
     const PAGE_SIZE = data?.[0]?.totalPages;
+    const isLoadingInitialData = !data && !error;
     const isEmpty = data?.[0]?.refVideos.length === 0;
-    const isReachingEnd =
-        isEmpty ||
-        (data &&
-            data[data.length - 1]?.refVideos.length < (PAGE_SIZE as number));
+    const isReachingEnd = size >= (PAGE_SIZE as number);
 
     const loadMore = () => {
+        if (isReachingEnd) return;
+        if (isLoadingInitialData) return;
         setSize(size + 1);
     };
 

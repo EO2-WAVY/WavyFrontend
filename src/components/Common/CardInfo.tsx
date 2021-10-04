@@ -9,11 +9,11 @@ import {
 } from "constants/motions";
 import Icon from "components/Common/Icon";
 import { gcRefVideoDifficulty } from "utils/groupCode";
-import formattingDuration from "utils/formatting/formattingDuration";
+
 
 interface CardInfoProps {
     rvSeq: string;
-    rvDuration: string;
+    rvDuration: number;
     rvDifficultyCd: string;
 }
 
@@ -35,7 +35,7 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
                 {gcRefVideoDifficulty(rvDifficultyCd)}
             </LevelSpan>
             <OverrallSpan variants={defaultFadeInUpVariants}>
-                {formattingDuration(rvDuration)}s
+                {rvDuration}s
             </OverrallSpan>
             <NavWrapper variants={cardNavUpVariants}>
                 <NavElem>

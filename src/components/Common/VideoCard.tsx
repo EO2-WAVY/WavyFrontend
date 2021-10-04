@@ -10,6 +10,8 @@ import {
 } from "constants/motions";
 
 import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
+import formattingDuration from "utils/formatting/formattingDuration";
+import theme from "styles/theme";
 
 interface VideoCardProps {
     refVideo: IRefVideo;
@@ -65,17 +67,17 @@ const VideoCard = ({
                             />
                             <CardInfo
                                 rvSeq={rvSeq}
-                                rvDuration={rvDuration}
+                                rvDuration={formattingDuration(rvDuration)}
                                 rvDifficultyCd={rvDifficultyCd}
                             />
                         </>
                     )}
                 </AnimatePresence>
             </VideoWrapper>
-            <Title>
+            <Title isHover={isHover}>
                 {rvSongName} - {rvArtistName}
             </Title>
-            <Author>{rvSourceAccountName}</Author>
+            <Author isHover={isHover}>{rvSourceAccountName}</Author>
         </Wrapper>
     );
 };
@@ -96,11 +98,6 @@ const VideoWrapper = styled(motion.section)`
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;
-
-    /* transition: box-shadow 1s;
-    &:hover {
-        box-shadow: 0px 0px 35px 5px rgba(101, 0, 230, 0.6);
-    } */
 `;
 
 const Overlay = styled(motion.div)`
@@ -121,15 +118,27 @@ const VideoStyle: CSSProperties = {
     left: "0",
 };
 
-const Title = styled.h2`
+const Title = styled.h2<{ isHover: boolean }>`
     font-size: 16px;
     font-weight: normal;
     color: ${({ theme }) => theme.color.black};
     margin-bottom: 4px;
+
+    ${Wrapper}:hover & {
+        color: ${({ theme }) => theme.color.purple};
+    }
+
+    transition: color 0.3s;
 `;
 
-const Author = styled.h3`
+const Author = styled.h3<{ isHover: boolean }>`
     font-size: 12px;
     font-weight: normal;
     color: ${({ theme }) => theme.color.black};
+
+    ${Wrapper}:hover & {
+        color: ${({ theme }) => theme.color.purple};
+    }
+
+    transition: color 0.3s;
 `;

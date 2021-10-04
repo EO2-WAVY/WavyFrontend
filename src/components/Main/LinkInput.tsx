@@ -28,12 +28,17 @@ const LinkInput = () => {
             youtubeCode.unshift(word);
         }
 
-        history.push(`/link?y=${youtubeCode.join("")}`)
+        history.push(`/link?y=${youtubeCode.join("")}`);
     };
 
     return (
         <InputWrapper variants={defaultFadeInUpVariants} onSubmit={onSubmit}>
-            <Input required value={value} onChange={onChange} />
+            <Input
+                required
+                value={value}
+                onChange={onChange}
+                placeholder="https://www.youtube.com/watch?v=wavyisbest"
+            />
             <Submit
                 type="submit"
                 whileHover={{ scale: 1.05 }}
