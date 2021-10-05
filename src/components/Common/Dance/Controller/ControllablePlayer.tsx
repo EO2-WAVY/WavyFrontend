@@ -1,6 +1,8 @@
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
+import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import ReactPlayer from "react-player";
+import { refVideoRefState } from "store/Dance/Controller";
 
 import styled from "styled-components";
 
@@ -9,6 +11,8 @@ interface ControllablePlayerProps {
 }
 
 const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
+    const { setPlayer } = usePlayerInstance(refVideoRefState);
+
     const { isPlaying, setIsPlaying } = useControllerPlaying();
     const { setPlayedSecond } = useControllerPlayedSecond();
 
@@ -20,6 +24,7 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
         <>
             <Overlay />
             <ReactPlayer
+                ref={setPlayer}
                 url={url}
                 volume={0}
                 width="100%"
