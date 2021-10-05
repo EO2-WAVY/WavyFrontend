@@ -2,6 +2,7 @@ import styled from "styled-components";
 
 import Icon from "components/Common/Icon";
 import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
+import PlayingIcon from "./PlayingIcon";
 
 const Controller = () => {
     return (
@@ -10,7 +11,7 @@ const Controller = () => {
 
             <ControlWrapper>
                 <ControlLeft>
-                    <Icon name="controller_play_circle" />
+                    <PlayingIcon />
                     <TimeSpan>
                         <strong>00:15</strong> / 03:30
                     </TimeSpan>

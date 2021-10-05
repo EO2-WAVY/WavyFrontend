@@ -1,4 +1,5 @@
 import Controller from "components/Common/Dance/Controller";
+import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 import Webcam from "components/Common/Dance/Webcam";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
@@ -10,7 +11,9 @@ const Practice = () => {
         <Wrapper>
             <AnimateSharedLayout>
                 <RefVideoWrapper>
-                    <YoutubePlayer youtubeCode={"wGUjUztfLS8"} />
+                    <ControllablePlayer
+                        url={"https://www.youtube.com/watch?v=wGUjUztfLS8"}
+                    />
                 </RefVideoWrapper>
 
                 <Webcam />
