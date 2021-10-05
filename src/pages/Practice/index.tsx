@@ -1,10 +1,13 @@
+import styled from "styled-components";
+import { AnimateSharedLayout } from "framer-motion";
+
 import Controller from "components/Common/Dance/Controller";
 import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 import Webcam from "components/Common/Dance/Webcam";
-import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
-import { AnimateSharedLayout } from "framer-motion";
-import styled from "styled-components";
+
+// for test
+const rvDuration = 27;
 
 const Practice = () => {
     return (
@@ -12,14 +15,14 @@ const Practice = () => {
             <AnimateSharedLayout>
                 <RefVideoWrapper>
                     <ControllablePlayer
-                        url={"https://www.youtube.com/watch?v=wGUjUztfLS8"}
+                        url={"https://www.youtube.com/watch?v=_7lt0oDe_tY"}
                     />
                 </RefVideoWrapper>
 
                 <Webcam />
             </AnimateSharedLayout>
 
-            <Controller />
+            <Controller rvDuration={rvDuration} />
         </Wrapper>
     );
 };

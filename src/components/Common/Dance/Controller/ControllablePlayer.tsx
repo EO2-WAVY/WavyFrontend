@@ -1,5 +1,7 @@
+import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import ReactPlayer from "react-player";
+
 import styled from "styled-components";
 
 interface ControllablePlayerProps {
@@ -7,7 +9,12 @@ interface ControllablePlayerProps {
 }
 
 const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
-    const { isPlaying } = useControllerPlaying();
+    const { isPlaying, setIsPlaying } = useControllerPlaying();
+    const { setPlayedSecond } = useControllerPlayedSecond();
+
+    const onEnded = () => {
+        setIsPlaying(false);
+    };
 
     return (
         <>
@@ -17,8 +24,13 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
                 volume={0}
                 width="100%"
                 height="100%"
-                playing={isPlaying}
                 controls={false}
+                progressInterval={50}
+                playing={isPlaying}
+                onProgress={({ playedSeconds }) => {
+                    setPlayedSecond(playedSeconds);
+                }}
+                onEnded={onEnded}
             />
         </>
     );

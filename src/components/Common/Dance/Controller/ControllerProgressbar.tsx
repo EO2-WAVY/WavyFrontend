@@ -1,9 +1,21 @@
+import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
+import useProgress from "hooks/useProgress";
 import styled from "styled-components";
 
-const ControllerPorgressbar = () => {
+interface ControllerProgressbarProps {
+    rvDuration: number;
+}
+
+const ControllerPorgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
+    const { playedSecond } = useControllerPlayedSecond();
+    const { percent } = useProgress({
+        currentValue: playedSecond,
+        goalValue: rvDuration,
+    });
+
     return (
         <Outer>
-            <Inner />
+            <Inner percent={percent} />
         </Outer>
     );
 };
@@ -16,8 +28,8 @@ const Outer = styled.div`
     background-color: ${({ theme }) => theme.color.lightGray};
 `;
 
-const Inner = styled.div`
-    width: 50%;
+const Inner = styled.div<{ percent: number }>`
+    width: ${({ percent }) => percent}%;
     height: 100%;
     background-color: ${({ theme }) => theme.color.purple};
 `;

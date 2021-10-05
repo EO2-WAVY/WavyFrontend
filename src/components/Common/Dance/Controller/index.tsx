@@ -3,17 +3,24 @@ import styled from "styled-components";
 import Icon from "components/Common/Icon";
 import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
 import PlayingIcon from "./PlayingIcon";
+import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 
-const Controller = () => {
+interface ControllerProps {
+    rvDuration: number;
+}
+
+const Controller = ({ rvDuration }: ControllerProps) => {
+    const { playedSecond } = useControllerPlayedSecond();
+
     return (
         <Wrapper>
-            <ControllerPorgressbar />
+            <ControllerPorgressbar rvDuration={rvDuration} />
 
             <ControlWrapper>
                 <ControlLeft>
                     <PlayingIcon />
                     <TimeSpan>
-                        <strong>00:15</strong> / 03:30
+                        <strong>00:01</strong> / 03:30
                     </TimeSpan>
                 </ControlLeft>
 

@@ -5,4 +5,7 @@ export const isPlayingState = atom<boolean>({
     default: false,
 });
 
-
+export const playedSecondState = atom<number>({
+    key: "playedSecondState",
+    default: 0,
+});
