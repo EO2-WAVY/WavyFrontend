@@ -13,7 +13,7 @@ const Practice = () => {
     return (
         <Wrapper>
             <AnimateSharedLayout>
-                <RefVideoWrapper>
+                <RefVideoWrapper showLayoutBtn={false}>
                     <ControllablePlayer
                         url={"https://www.youtube.com/watch?v=_7lt0oDe_tY"}
                     />

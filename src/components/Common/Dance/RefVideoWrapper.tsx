@@ -15,9 +15,13 @@ const DRAG_HEIGHT: number = (300 * 16) / 9;
 
 interface RefVideoWrapperProps {
     children: ReactNode;
+    showLayoutBtn?: boolean;
 }
 
-const RefVideoWrapper = ({ children }: RefVideoWrapperProps) => {
+const RefVideoWrapper = ({
+    children,
+    showLayoutBtn = true,
+}: RefVideoWrapperProps) => {
     const { layout, onClickLayoutBig, onClickLayoutSmall } = useLayout();
 
     const { width, height } = useViewport();
@@ -39,23 +43,25 @@ const RefVideoWrapper = ({ children }: RefVideoWrapperProps) => {
                 <Step>{children}</Step>
             </AnimateSharedLayout>
 
-            <AnimatePresence exitBeforeEnter>
-                {layout === "half" ? (
-                    <ToBigBtn
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={onClickLayoutBig}
-                        variants={defaultBtnSwapVariants}
-                    />
-                ) : (
-                    <ToSmallBtn
-                        whileHover={{ scale: 1.1 }}
-                        whileTap={{ scale: 0.9 }}
-                        onClick={onClickLayoutSmall}
-                        variants={defaultBtnSwapVariants}
-                    />
-                )}
-            </AnimatePresence>
+            {showLayoutBtn && (
+                <AnimatePresence exitBeforeEnter>
+                    {layout === "half" ? (
+                        <ToBigBtn
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={onClickLayoutBig}
+                            variants={defaultBtnSwapVariants}
+                        />
+                    ) : (
+                        <ToSmallBtn
+                            whileHover={{ scale: 1.1 }}
+                            whileTap={{ scale: 0.9 }}
+                            onClick={onClickLayoutSmall}
+                            variants={defaultBtnSwapVariants}
+                        />
+                    )}
+                </AnimatePresence>
+            )}
         </Wrapper>
     );
 };

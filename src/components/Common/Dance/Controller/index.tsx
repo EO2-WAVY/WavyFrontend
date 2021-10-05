@@ -5,6 +5,7 @@ import ControllerPorgressbar from "components/Common/Dance/Controller/Controller
 import PlayingIcon from "./PlayingIcon";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import PlaybackRate from "./PlaybackRate";
+import LayoutIcon from "./LayoutIcon";
 
 interface ControllerProps {
     rvDuration: number;
@@ -30,7 +31,7 @@ const Controller = ({ rvDuration }: ControllerProps) => {
                     <Icon name="controller_graph" />
                     <Icon name="controller_marker" />
                     <PlaybackRate />
-                    <Icon name="controller_fullscreen" />
+                    <LayoutIcon />
                 </ControlRight>
             </ControlWrapper>
         </Wrapper>
@@ -89,4 +90,8 @@ const ControlRight = styled.div`
     align-items: center;
     display: flex;
     gap: 24px;
+
+    & > .checked path {
+        stroke: ${({ theme }) => theme.color.purple};
+    }
 `;

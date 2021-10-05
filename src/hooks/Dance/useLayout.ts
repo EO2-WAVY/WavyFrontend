@@ -12,7 +12,11 @@ const useLayout = () => {
         setLayout("half");
     };
 
-    return { layout, onClickLayoutBig, onClickLayoutSmall };
+    const toggleLayout = () => {
+        setLayout((prev) => (prev === "drag" ? "half" : "drag"));
+    };
+
+    return { layout, onClickLayoutBig, onClickLayoutSmall, toggleLayout };
 };
 
 export default useLayout;

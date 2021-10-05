@@ -38,6 +38,7 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
 export default ControllerProgressbar;
 
 const Outer = styled.div`
+    position: relative;
     width: 100%;
     height: 6px;
     background-color: ${({ theme }) => theme.color.lightGray};
@@ -45,6 +46,9 @@ const Outer = styled.div`
 `;
 
 const Inner = styled.div<{ percent: number }>`
+    position: absolute;
+    top: 0;
+    left: 0;
     width: ${({ percent }) => percent}%;
     height: 100%;
     background-color: ${({ theme }) => theme.color.purple};
