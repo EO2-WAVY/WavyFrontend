@@ -1,5 +1,6 @@
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
+import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import ReactPlayer from "react-player";
 import { refVideoRefState } from "store/Dance/Controller";
@@ -15,6 +16,7 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
 
     const { isPlaying, setIsPlaying } = useControllerPlaying();
     const { setPlayedSecond } = useControllerPlayedSecond();
+    const { playbackRate } = usePlaybackRate();
 
     const onEnded = () => {
         setIsPlaying(false);
@@ -32,6 +34,7 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
                 controls={false}
                 progressInterval={50}
                 playing={isPlaying}
+                playbackRate={playbackRate}
                 onProgress={({ playedSeconds }) => {
                     setPlayedSecond(playedSeconds);
                 }}

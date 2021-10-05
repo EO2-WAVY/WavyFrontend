@@ -16,3 +16,8 @@ export const playedSecondState = atom<number>({
     key: "playedSecondState",
     default: 0,
 });
+
+export const playbackRateState = atom<number>({
+    key: "playbackRateState",
+    default: 1,
+});

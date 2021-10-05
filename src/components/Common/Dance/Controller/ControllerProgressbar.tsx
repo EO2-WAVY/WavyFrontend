@@ -12,7 +12,6 @@ interface ControllerProgressbarProps {
 
 const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
     const barRef = useRef<HTMLDivElement>(null);
-
     const { seekTo } = usePlayerInstance(refVideoRefState);
 
     const { playedSecond } = useControllerPlayedSecond();

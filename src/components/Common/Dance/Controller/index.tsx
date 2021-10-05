@@ -4,6 +4,7 @@ import Icon from "components/Common/Icon";
 import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
 import PlayingIcon from "./PlayingIcon";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
+import PlaybackRate from "./PlaybackRate";
 
 interface ControllerProps {
     rvDuration: number;
@@ -28,7 +29,7 @@ const Controller = ({ rvDuration }: ControllerProps) => {
                     <Icon name="controller_loop" />
                     <Icon name="controller_graph" />
                     <Icon name="controller_marker" />
-                    <IconSpan>재생속도</IconSpan>
+                    <PlaybackRate />
                     <Icon name="controller_fullscreen" />
                 </ControlRight>
             </ControlWrapper>
@@ -88,9 +89,4 @@ const ControlRight = styled.div`
     align-items: center;
     display: flex;
     gap: 24px;
-`;
-
-const IconSpan = styled.span`
-    color: ${({ theme }) => theme.color.black};
-    font-size: 14px;
 `;
