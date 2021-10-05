@@ -17,10 +17,9 @@ const Webcam = ({ webcamRef }: WebcamProps) => {
         <AnimatePresence>
             <Wrapper layoutType={layout} layout>
                 <ReactWebcam
-                    mirrored
+                    mirrored={true}
                     style={WebcamStyle}
                     ref={webcamRef && webcamRef}
-                    onLoad={()=>{console.log("웹캠로드")}}
                 />
             </Wrapper>
         </AnimatePresence>

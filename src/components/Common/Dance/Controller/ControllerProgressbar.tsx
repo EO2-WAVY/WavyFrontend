@@ -1,4 +1,4 @@
-import { MouseEvent, useRef } from "react";
+import { MouseEvent, useEffect, useRef } from "react";
 import styled from "styled-components";
 
 import useProgress from "hooks/useProgress";
@@ -27,6 +27,13 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
         const seekTime = (clientX * rvDuration) / barRef.current.clientWidth;
         seekTo(seekTime);
     };
+
+    useEffect(() => {
+        if (!barRef.current) return;
+        barRef.current.addEventListener("keydown", () => {
+            console.log("keydown");
+        });
+    }, []);
 
     return (
         <Outer onClick={onClick} ref={barRef}>

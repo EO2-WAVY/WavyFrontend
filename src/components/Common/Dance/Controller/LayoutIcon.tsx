@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import Icon from "components/Common/Icon";
 import useLayout from "hooks/Dance/useLayout";
 

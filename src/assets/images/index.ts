@@ -11,10 +11,12 @@ import { ReactComponent as common_practice } from "assets/images/Common/practice
 import { ReactComponent as common_storage } from "assets/images/Common/storage.svg";
 
 // Controller
+import { ReactComponent as controller_active_marker } from "assets/images/Controller/active_marker.svg";
 import { ReactComponent as controller_back_key } from "assets/images/Controller/back_key.svg";
 import { ReactComponent as controller_forward_key } from "assets/images/Controller/forward_key.svg";
 import { ReactComponent as controller_fullscreen } from "assets/images/Controller/fullscreen.svg";
 import { ReactComponent as controller_graph } from "assets/images/Controller/graph.svg";
+import { ReactComponent as controller_loop_marker } from "assets/images/Controller/loop_marker.svg";
 import { ReactComponent as controller_loop } from "assets/images/Controller/loop.svg";
 import { ReactComponent as controller_marker } from "assets/images/Controller/marker.svg";
 import { ReactComponent as controller_play_circle } from "assets/images/Controller/play_circle.svg";
@@ -56,10 +58,12 @@ export {
     common_logo_full,
     common_practice,
     common_storage,
+    controller_active_marker,
     controller_back_key,
     controller_forward_key,
     controller_fullscreen,
     controller_graph,
+    controller_loop_marker,
     controller_loop,
     controller_marker,
     controller_play_circle,
