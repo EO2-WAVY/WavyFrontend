@@ -3,6 +3,7 @@ import styled from "styled-components";
 
 import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
+import Notification from "components/Common/Notification";
 
 interface YoutubePlayerProps {
     youtubeCode: string;
@@ -30,6 +31,17 @@ const YoutubePlayer = ({
         setPlaying(true);
     };
 
+    const [isBuffer, setIsBuffer] = useState<boolean>(false);
+    const onBuffer = () => {
+        pauseCapture();
+        setIsBuffer(true);
+    };
+
+    const onBufferEnd = () => {
+        resumeCapture();
+        setIsBuffer(false);
+    };
+
     return (
         <>
             {isCountdown && isCounting && (
@@ -46,8 +58,14 @@ const YoutubePlayer = ({
                 playing={playing}
                 controls={false}
                 onEnded={stopCapture}
-                onBuffer={pauseCapture}
-                onBufferEnd={resumeCapture}
+                onBuffer={onBuffer}
+                onBufferEnd={onBufferEnd}
+            />
+
+            <Notification
+                open={isBuffer}
+                message="버퍼링 시에는 녹화가 중지되니 걱정 안해도 돼요 :D"
+                handleClose={() => setIsBuffer(false)}
             />
         </>
     );

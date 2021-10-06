@@ -5,7 +5,7 @@ import {
     modalCenterFadeInUpVariants,
     modalOverlayVariants,
 } from "constants/motions";
-import ModalWrapper from "components/Modal/ModalWrapper";
+import ModalWrapper from "components/Common/Modal/ModalWrapper";
 interface TermModalProps {
     isShowing: boolean;
     hide: VoidFunction;

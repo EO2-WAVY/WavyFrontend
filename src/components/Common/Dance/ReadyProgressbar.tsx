@@ -7,7 +7,7 @@ interface ReadyProgressbarProps {
     onEnded: () => void;
 }
 
-const GOAL_TIME: number = 6;
+const GOAL_TIME: number = 10000;
 
 const ReadyProgressbar = ({ onEnded }: ReadyProgressbarProps) => {
     const { remainTime } = useCountdown({ endTime: GOAL_TIME });

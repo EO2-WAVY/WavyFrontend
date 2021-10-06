@@ -6,6 +6,7 @@ import PlayingIcon from "./PlayingIcon";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import PlaybackRate from "./PlaybackRate";
 import LayoutIcon from "./LayoutIcon";
+import useKeyControll from "hooks/Dance/Controller/useKeyControll";
 
 interface ControllerProps {
     rvDuration: number;
@@ -13,6 +14,8 @@ interface ControllerProps {
 
 const Controller = ({ rvDuration }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
+
+    useKeyControll();
 
     return (
         <Wrapper>

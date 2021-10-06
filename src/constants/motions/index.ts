@@ -156,3 +156,29 @@ export const modalCenterFadeInUpVariants: Variants = {
         willChange: "opacity, transform",
     },
 };
+
+export const leftInitUpExitVariants: Variants = {
+    initial: {
+        x: 90,
+        opacity: 0,
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    animate: {
+        x: 0,
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.6,
+            ease: defaultEasing,
+        },
+        willChange: "opacity, transform",
+    },
+    exit: {
+        x: 0,
+        y: -90,
+        opacity: 0,
+        transition: { duration: 0.5, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+};
