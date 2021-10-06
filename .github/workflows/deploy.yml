@@ -25,6 +25,14 @@ jobs:
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
 
+            - name: Generate environment variables # 환경변수 설정
+              run: |
+                  echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env.production
+                  echo "REACT_APP_KAKAO_CLIENT_ID=$REACT_APP_KAKAO_CLIENT_ID" >> .env.production
+              env:
+                  REACT_APP_API_URL: ${{ secrets.REACT_APP_API_URL }}
+                  REACT_APP_KAKAO_CLIENT_ID: ${{ secrets.REACT_APP_KAKAO_CLIENT_ID }}
+
             - name: Install Dependencies # dependency 설치
               run: npm install
 
