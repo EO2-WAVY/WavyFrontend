@@ -13,6 +13,9 @@ const theme: DefaultTheme = {
         maxWidth: "1200px",
         layoutHorizonPadding: "12px",
     },
+    shadow: {
+        over: "0 10px 20px rgba(0,0,0,0.19), 0 6px 6px rgba(0,0,0,0.23)",
+    },
 };
 
 export default theme;

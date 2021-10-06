@@ -40,6 +40,7 @@ import { ReactComponent as footer_top } from "assets/images/Footer/top.svg";
 // Main
 import { ReactComponent as main_carousel_left } from "assets/images/Main/carousel_left.svg";
 import { ReactComponent as main_carousel_right } from "assets/images/Main/carousel_right.svg";
+import { ReactComponent as main_sound } from "assets/images/Main/sound.svg";
 
 // Nav
 import { ReactComponent as nav_cancel } from "assets/images/Nav/cancel.svg";
@@ -81,6 +82,7 @@ export {
     footer_top,
     main_carousel_left,
     main_carousel_right,
+    main_sound,
     nav_cancel,
     nav_hoverbg_after,
     nav_hoverbg_before,

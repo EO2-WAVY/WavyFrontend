@@ -182,3 +182,20 @@ export const leftInitUpExitVariants: Variants = {
         willChange: "opacity, transform",
     },
 };
+
+export const videoCardVolumeVariants: Variants = {
+    hidden: {
+        opacity: 0,
+        scale: 0.8,
+
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    visible: {
+        opacity: 1,
+        scale: 1,
+
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+};

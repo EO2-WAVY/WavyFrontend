@@ -14,5 +14,8 @@ declare module "styled-components" {
             maxWidth: string;
             layoutHorizonPadding: string;
         };
+        shadow: {
+            over: string;
+        }
     }
 }

@@ -11,6 +11,7 @@ import {
 
 import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
 import {fmToSeconds} from "utils/formatting/formattingDuration";
+import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
 
 interface VideoCardProps {
     refVideo: IRefVideo;
@@ -27,6 +28,7 @@ const VideoCard = ({
         rvDifficultyCd,
     },
 }: VideoCardProps) => {
+    const {videoCardVolume} = useVideoCardVolume();
     const [isHover, setIsHover] = useState<boolean>(false);
 
     const onHoverStart = () => {
@@ -42,7 +44,7 @@ const VideoCard = ({
             <VideoWrapper onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
                 <ReactPlayer
                     url={rvUrl}
-                    volume={0}
+                    volume={videoCardVolume}
                     width="100%"
                     height="100%"
                     style={VideoStyle}

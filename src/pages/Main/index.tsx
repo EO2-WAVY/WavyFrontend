@@ -6,21 +6,25 @@ import TagSection from "components/Main/TagSection";
 import RefVideoSection from "components/Main/RefVideoSection";
 import { currentUserState } from "store/Auth";
 import MyTagSection from "components/Main/MyTagSection";
+import VolumePop from "components/Main/VolumePop";
 
 const Main = () => {
     const currentTag = useRecoilValue(currentTagState);
     const currentUser = useRecoilValue(currentUserState);
 
     return (
-        <Layout>
-            <TagSection />
+        <>
+            <Layout>
+                <TagSection />
 
-            {currentTag === currentUser?.mbrNickname ? (
-                <MyTagSection />
-            ) : (
-                <RefVideoSection />
-            )}
-        </Layout>
+                {currentTag === currentUser?.mbrNickname ? (
+                    <MyTagSection />
+                ) : (
+                    <RefVideoSection />
+                )}
+            </Layout>
+            <VolumePop />
+        </>
     );
 };
 
