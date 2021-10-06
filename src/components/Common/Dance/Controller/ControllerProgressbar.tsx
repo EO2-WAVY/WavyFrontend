@@ -1,5 +1,12 @@
-import { MouseEvent, useEffect, useRef } from "react";
+import {
+    MouseEvent as ReactMouseEvent,
+    useCallback,
+    useEffect,
+    useRef,
+    useState,
+} from "react";
 import styled from "styled-components";
+import { throttle } from "lodash";
 
 import useProgress from "hooks/useProgress";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
@@ -20,23 +27,49 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
         goalValue: rvDuration,
     });
 
-    const onClick = (e: MouseEvent<HTMLDivElement>) => {
-        if (!barRef.current) return;
+    const seekToWithPos = useCallback(
+        (clientX: number) => {
+            if (!barRef.current) return;
+            const seekTime =
+                (clientX * rvDuration) / barRef.current.clientWidth;
+            seekTo(seekTime);
+        },
+        [rvDuration, seekTo]
+    );
 
+    const onClick = (e: ReactMouseEvent<HTMLDivElement>) => {
         const { clientX } = e;
-        const seekTime = (clientX * rvDuration) / barRef.current.clientWidth;
-        seekTo(seekTime);
+        seekToWithPos(clientX);
     };
 
-    useEffect(() => {
-        if (!barRef.current) return;
-        barRef.current.addEventListener("keydown", () => {
-            console.log("keydown");
-        });
+    const [isMouseDown, setIsMouseDown] = useState<boolean>(false);
+
+    const onMouseDown = () => {
+        setIsMouseDown(true);
+    };
+
+    const onMouseUp = useCallback(() => {
+        setIsMouseDown(false);
     }, []);
 
+    useEffect(() => {
+        const throttleOnDrag = throttle((e: MouseEvent) => {
+            if (!isMouseDown) return;
+            const { clientX } = e;
+            seekToWithPos(clientX);
+        }, 100);
+
+        window.addEventListener("mousemove", throttleOnDrag);
+        window.addEventListener("mouseup", onMouseUp);
+
+        return () => {
+            window.removeEventListener("mousemove", throttleOnDrag);
+            window.removeEventListener("mouseup", onMouseUp);
+        };
+    }, [isMouseDown, onMouseUp, seekToWithPos]);
+
     return (
-        <Outer onClick={onClick} ref={barRef}>
+        <Outer onClick={onClick} ref={barRef} onMouseDown={onMouseDown}>
             <Inner percent={percent} />
         </Outer>
     );
