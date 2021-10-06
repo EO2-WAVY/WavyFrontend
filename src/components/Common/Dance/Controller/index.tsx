@@ -2,11 +2,13 @@ import styled from "styled-components";
 
 import Icon from "components/Common/Icon";
 import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
-import PlayingIcon from "./PlayingIcon";
+import PlayingIcon from "components/Common/Dance/Controller/PlayingIcon";
+import PlaybackRate from "components/Common/Dance/Controller/PlaybackRate";
+import LayoutIcon from "components/Common/Dance/Controller/LayoutIcon";
+import MirroredIcon from "components/Common/Dance/Controller/MirroredIcon";
+import KeyboardEffect from "components/Common/Dance/Controller/KeyboardEffect";
+
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
-import PlaybackRate from "./PlaybackRate";
-import LayoutIcon from "./LayoutIcon";
-import KeyboardEffect from "./KeyboardEffect";
 
 interface ControllerProps {
     rvDuration: number;
@@ -14,7 +16,6 @@ interface ControllerProps {
 
 const Controller = ({ rvDuration }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
-
 
     return (
         <Wrapper>
@@ -30,7 +31,7 @@ const Controller = ({ rvDuration }: ControllerProps) => {
 
                 <ControlRight>
                     <Icon name="controller_loop" />
-                    <Icon name="controller_graph" />
+                    <MirroredIcon />
                     <Icon name="controller_marker" />
                     <PlaybackRate />
                     <LayoutIcon />

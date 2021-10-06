@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useRecoilValue } from "recoil";
 
 import { layoutState, layoutType } from "store/Dance";
+import useMirrored from "hooks/Dance/Controller/useMirrored";
 
 interface WebcamProps {
     webcamRef?: Dispatch<SetStateAction<ReactWebcam | null>>;
@@ -12,12 +13,13 @@ interface WebcamProps {
 
 const Webcam = ({ webcamRef }: WebcamProps) => {
     const layout = useRecoilValue(layoutState);
+    const { isMirrored } = useMirrored();
 
     return (
         <AnimatePresence>
             <Wrapper layoutType={layout} layout>
                 <ReactWebcam
-                    mirrored={true}
+                    mirrored={isMirrored}
                     style={WebcamStyle}
                     ref={webcamRef && webcamRef}
                 />

@@ -21,3 +21,8 @@ export const playbackRateState = atom<number>({
     key: "playbackRateState",
     default: 1,
 });
+
+export const isMirroredState = atom<boolean>({
+    key: "isMirroredState",
+    default: true,
+});
