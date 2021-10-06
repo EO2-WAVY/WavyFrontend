@@ -10,7 +10,7 @@ import {
 } from "constants/motions";
 
 import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
-import formattingDuration from "utils/formatting/formattingDuration";
+import {fmToSeconds} from "utils/formatting/formattingDuration";
 
 interface VideoCardProps {
     refVideo: IRefVideo;
@@ -66,7 +66,7 @@ const VideoCard = ({
                             />
                             <CardInfo
                                 rvSeq={rvSeq}
-                                rvDuration={formattingDuration(rvDuration)}
+                                rvDuration={fmToSeconds(rvDuration)}
                                 rvDifficultyCd={rvDifficultyCd}
                             />
                         </>
