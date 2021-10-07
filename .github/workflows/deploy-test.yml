@@ -14,7 +14,9 @@ jobs:
 
         steps:
             - name: Checkout test # branch checkout
-              uses: actions/checkout@test
+              uses: actions/checkout@2
+              with:
+                  ref: test
 
             - name: Cache node modules # node modules 캐싱
               uses: actions/cache@v1
