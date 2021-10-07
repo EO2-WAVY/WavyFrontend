@@ -1,20 +1,20 @@
-name: deploy-on-s3
+name: deploy-test
 
 on:
     push:
         branches:
-            - master
+            - test
 jobs:
-    deploy:
+    deploy-test:
         runs-on: ubuntu-18.04
         env:
-            AWS_S3_BUCKET_NAME: wavy-client
-            AWS_CF_DISTRIBUTION_ID: E21LSR6NXBZR13
+            AWS_S3_BUCKET_NAME: wavy-client-test
+            AWS_CF_DISTRIBUTION_ID: E2U780VSD7MK4H
             AWS_REGION: ap-northeast-2
 
         steps:
-            - name: Checkout master # branch checkout
-              uses: actions/checkout@master
+            - name: Checkout test # branch checkout
+              uses: actions/checkout@test
 
             - name: Cache node modules # node modules 캐싱
               uses: actions/cache@v1
