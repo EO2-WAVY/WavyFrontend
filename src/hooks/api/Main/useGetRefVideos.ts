@@ -3,7 +3,15 @@ import { currentTagState } from "store/Main";
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
 
-const useGetRefVideos = (query?: string) => {
+interface useGetRefVideosProps {
+    query?: string;
+    suspense?: boolean;
+}
+
+const useGetRefVideos = ({
+    query = "",
+    suspense = false,
+}: useGetRefVideosProps) => {
     const currentTag = useRecoilValue(currentTagState);
 
     const { data, error, size, setSize } = useSWRInfinite<IGetRefVideos>(
@@ -11,7 +19,8 @@ const useGetRefVideos = (query?: string) => {
             query !== ""
                 ? `/ref-videos/search?page=${index + 1}&query=${query}`
                 : `/ref-videos?page=${index + 1}&tagName=${currentTag}`,
-        fetcher
+        fetcher,
+        { suspense: suspense }
     );
 
     const refVideos: IRefVideo[] = [];

@@ -8,7 +8,7 @@ import ScrollToTopElem from "utils/ScrollToTop";
 import VolumePop from "components/Common/VolumePop";
 
 import { ErrorBoundary } from "@sentry/react";
-import FullScreenError from "components/Common/FullScreenError";
+import FullScreenError from "components/Common/HandleAsync/FullScreenError";
 
 const Router = () => {
     return (
