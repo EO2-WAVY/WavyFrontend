@@ -14,7 +14,7 @@ jobs:
 
         steps:
             - name: Checkout test # branch checkout
-              uses: actions/checkout@2
+              uses: actions/checkout@v2
               with:
                   ref: test
 
