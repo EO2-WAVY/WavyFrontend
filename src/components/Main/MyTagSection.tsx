@@ -3,9 +3,9 @@ import LinkSection from "components/Main/LinkSection";
 
 const MyTagSection = () => {
     return (
-        <AnimatePresence exitBeforeEnter>
+        <>
             <LinkSection />
-        </AnimatePresence>
+        </>
     );
 };
 

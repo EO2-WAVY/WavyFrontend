@@ -1,5 +1,5 @@
-import { ChangeEvent, useState, useRef } from "react";
-import { useHistory } from "react-router";
+import { ChangeEvent, useState, useRef, useEffect } from "react";
+import { useHistory, useLocation } from "react-router-dom";
 import { debounce } from "lodash";
 
 import styled from "styled-components";
@@ -7,6 +7,8 @@ import Icon from "components/Common/Icon";
 
 const NavSearchBar = () => {
     const history = useHistory();
+    const { pathname } = useLocation();
+
     const inputRef = useRef<HTMLInputElement>(null);
     const [query, setQuery] = useState<string>("");
 
@@ -30,6 +32,8 @@ const NavSearchBar = () => {
             return;
         }
         debouncedPush(value);
+        // setQuery(value);
+        // history.push(`/search?q=${value}`);
     };
 
     const onClickCancel = () => {
@@ -37,6 +41,10 @@ const NavSearchBar = () => {
         if (!inputRef.current) return;
         inputRef.current.value = "";
     };
+
+    // useEffect(() => {
+    //     setQuery("");
+    // }, [pathname]);
 
     return (
         <Wrapper>

@@ -50,7 +50,7 @@ const useCapture = () => {
         console.log("download");
         if (!recordedChunks.length) return;
         const blob = new Blob(recordedChunks, { type: "video/webm" });
-
+        
         downloadBlob({ blob, fileName: "TESTFILENAME" });
         setRecordedChunks([]);
     }, [recordedChunks]);

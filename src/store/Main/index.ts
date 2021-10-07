@@ -7,5 +7,5 @@ export const currentTagState = atom<string>({
 
 export const videoCardVolumeState = atom<number>({
     key: "videoCardVolumeState",
-    default: 0.5,
+    default: 0.1,
 });

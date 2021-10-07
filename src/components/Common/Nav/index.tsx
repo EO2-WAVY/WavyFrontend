@@ -7,9 +7,11 @@ import NavAuthBtn from "components/Common/Nav/NavAuthBtn";
 import useMousePosition from "hooks/useMousePosition";
 import useNavCondition from "hooks/useNavCondition";
 import Icon from "components/Common/Icon";
+import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
 const Nav = () => {
     const history = useHistory();
+    const isUserSignedIn = useIsUserSignedIn();
     const onClickLogo = () => history.push("/");
 
     const { mousePosition } = useMousePosition();
@@ -20,14 +22,17 @@ const Nav = () => {
             <Navbar
                 isConditional={isConditional}
                 isHover={mousePosition.y < 104}
-                
             >
                 <Layout>
                     <LeftElem>
                         <Icon name="common_logo_full" onClick={onClickLogo} />
-                        <Link to="/">HOME</Link>
-                        <Link to="/">HOME</Link>
-                        <Link to="/">HOME</Link>
+                        <Link to="/">홈</Link>
+                        {isUserSignedIn && (
+                            <>
+                                <Link to="/">리뷰</Link>
+                                <Link to="/">보관함</Link>
+                            </>
+                        )}
                     </LeftElem>
                     <RightElem>
                         <NavSearchBar />

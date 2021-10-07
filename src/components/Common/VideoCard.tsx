@@ -10,7 +10,7 @@ import {
 } from "constants/motions";
 
 import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
-import {fmToSeconds} from "utils/formatting/formattingDuration";
+import { fmToSeconds } from "utils/formatting/formattingDuration";
 import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
 
 interface VideoCardProps {
@@ -28,11 +28,13 @@ const VideoCard = ({
         rvDifficultyCd,
     },
 }: VideoCardProps) => {
-    const {videoCardVolume} = useVideoCardVolume();
+    const { videoCardVolume } = useVideoCardVolume();
     const [isHover, setIsHover] = useState<boolean>(false);
+    const [isActivate, setIsActivate] = useState<boolean>(false);
 
     const onHoverStart = () => {
         setIsHover(true);
+        setIsActivate(true);
     };
 
     const onHoverEnd = () => {
@@ -41,16 +43,18 @@ const VideoCard = ({
 
     return (
         <Wrapper variants={defaultFadeInUpVariants}>
+            {/* onMouseOver={onHoverStart} onMouseMove={onHoverStart} onMouseLeave={onHoverEnd} */}
             <VideoWrapper onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
                 <ReactPlayer
                     url={rvUrl}
+                    playing={isHover}
                     volume={videoCardVolume}
                     width="100%"
                     height="100%"
                     style={VideoStyle}
                     loop={true}
-                    light={!isHover}
-                    playing={isHover}
+                    // light={!isHover}
+                    light={!isActivate}
                     config={{
                         youtube: {
                             playerVars: { disablekb: 1 },

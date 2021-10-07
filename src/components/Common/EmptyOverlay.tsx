@@ -11,9 +11,9 @@ const EmptyOverlay = ({ handleClose }: EmptyOverlayProps) => {
 export default EmptyOverlay;
 
 const Wrapper = styled.div`
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 200vw;
-    height: 200vh;
+    position: absolute;
+    top: -100vw;
+    left: -100vh;
+    width: 500vw;
+    height: 500vh;
 `;

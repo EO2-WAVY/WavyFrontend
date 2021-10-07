@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 
-import { dancePathnames } from "constants/dancePathnames";
+import { dancePathnames } from "constants/pathCondition";
 
 const useNavCondition = () => {
     const [isConditional, setIsConditional] = useState<boolean>(false);

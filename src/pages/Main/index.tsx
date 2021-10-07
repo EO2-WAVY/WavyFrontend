@@ -6,7 +6,6 @@ import TagSection from "components/Main/TagSection";
 import RefVideoSection from "components/Main/RefVideoSection";
 import { currentUserState } from "store/Auth";
 import MyTagSection from "components/Main/MyTagSection";
-import VolumePop from "components/Main/VolumePop";
 
 const Main = () => {
     const currentTag = useRecoilValue(currentTagState);
@@ -23,7 +22,6 @@ const Main = () => {
                     <RefVideoSection />
                 )}
             </Layout>
-            <VolumePop />
         </>
     );
 };

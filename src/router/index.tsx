@@ -5,6 +5,7 @@ import AnimateRouter from "./AnimateRouter";
 import Nav from "components/Common/Nav";
 import Footer from "components/Common/Footer";
 import ScrollToTopElem from "utils/ScrollToTop";
+import VolumePop from "components/Common/VolumePop";
 
 const Router = () => {
     return (
@@ -18,6 +19,7 @@ const Router = () => {
                 <AnimateRouter />
             {/* </AsyncBoundary> */}
             <Footer />
+            <VolumePop />
         </BrowserRouter>
     );
 };

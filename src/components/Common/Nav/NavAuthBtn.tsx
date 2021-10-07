@@ -15,9 +15,9 @@ const NavAuthBtn = () => {
         history.push(isUserSignedIn ? "/info" : "/login");
     };
 
-    const onClickPopBtn = () => {
+    const onClickPopBtn = async () => {
         if (isUserSignedIn) {
-            signOut();
+            await signOut();
             history.push("/login");
             return;
         }
@@ -25,12 +25,11 @@ const NavAuthBtn = () => {
     };
 
     return (
-        <Wrapper isUserSignedIn={isUserSignedIn}>
+        <Wrapper isUserSignedIn={isUserSignedIn} onClick={onClickIcon}>
             <Icon
                 name={`${
                     isUserSignedIn ? "nav_sign_after" : "nav_sign_before"
                 }`}
-                onClick={onClickIcon}
             />
             <PopBtn isUserSignedIn={isUserSignedIn} onClick={onClickPopBtn}>
                 <Icon

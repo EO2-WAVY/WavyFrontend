@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import { ScrollToTop } from "utils/ScrollToTop";
 import { defaultPageFadeInVariants } from "constants/motions";
-import { dancePathnames } from "constants/dancePathnames";
+import { dancePathnames } from "constants/pathCondition";
 import Icon from "./Icon";
 
 const Footer = () => {
