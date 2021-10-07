@@ -2,6 +2,7 @@ import { useRecoilValue } from "recoil";
 import { currentTagState } from "store/Main";
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
+import { IRefVideo } from "../useGetRefVideo";
 
 interface useGetRefVideosProps {
     query?: string;
@@ -48,22 +49,6 @@ const useGetRefVideos = ({
 };
 
 export default useGetRefVideos;
-
-export interface IRefVideo {
-    createdDate: string;
-    creatorSeq: string;
-    updatedDate: string;
-    updaterSeq: string;
-    rvSeq: string;
-    rvSourceCd: string;
-    rvSourceTitle: string;
-    rvSourceAccountName: string;
-    rvUrl: string;
-    rvDuration: string;
-    rvDifficultyCd: string;
-    rvSongName: string;
-    rvArtistName: string;
-}
 
 interface IGetRefVideos {
     ok: boolean;

@@ -3,13 +3,15 @@ import { AnimatePresence, motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 
 import Webcam from "components/Common/Dance/Webcam";
-import { useRouterQuery } from "hooks/useRouterQuery";
-import { defaultPageFadeInVariants } from "constants/motions";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 
+import { useRouterQuery } from "hooks/useRouterQuery";
+import { defaultPageFadeInVariants } from "constants/motions";
+import { RQ_LINK_YOUTUBUE_CODE } from "constants/routerQuery";
+
 const Link = () => {
-    const youtubeCode = useRouterQuery("y");
+    const youtubeCode = useRouterQuery(RQ_LINK_YOUTUBUE_CODE);
     const history = useHistory();
 
     if (!youtubeCode) {

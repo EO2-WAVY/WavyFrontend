@@ -9,7 +9,7 @@ import {
 } from "constants/motions";
 import Icon from "components/Common/Icon";
 import { gcRefVideoDifficulty } from "utils/groupCode";
-
+import { RQ_PRACTICE_REF_VIDEO_ID } from "constants/routerQuery";
 
 interface CardInfoProps {
     rvSeq: string;
@@ -20,7 +20,8 @@ interface CardInfoProps {
 const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
     const history = useHistory();
 
-    const onClickPractice = () => history.push("/practice");
+    const onClickPractice = () =>
+        history.push(`/practice?${RQ_PRACTICE_REF_VIDEO_ID}=${rvSeq}`);
 
     const onClickChallenge = () => history.push("/challenge");
 

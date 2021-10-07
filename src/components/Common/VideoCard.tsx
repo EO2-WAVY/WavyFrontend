@@ -9,7 +9,7 @@ import {
     defaultFadeInUpVariants,
 } from "constants/motions";
 
-import { IRefVideo } from "hooks/api/Main/useGetRefVideos";
+import { IRefVideo } from "hooks/api/useGetRefVideo";
 import { fmToSeconds } from "utils/formatting/formattingDuration";
 import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
 
@@ -43,7 +43,6 @@ const VideoCard = ({
 
     return (
         <Wrapper variants={defaultFadeInUpVariants}>
-            {/*  onMouseMove={onHoverStart} onMouseLeave={onHoverEnd} onHoverStart={onHoverStart} onHoverEnd={onHoverEnd} */}
             <VideoWrapper onMouseOver={onHoverStart} onMouseLeave={onHoverEnd}>
                 <ReactPlayer
                     url={rvUrl}

@@ -9,22 +9,26 @@ import MirroredIcon from "components/Common/Dance/Controller/MirroredIcon";
 import KeyboardEffect from "components/Common/Dance/Controller/KeyboardEffect";
 
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
-import { fmToMinAndSec } from "utils/formatting/formattingDuration";
+import {
+    fmToMinAndSec,
+    fmToSeconds,
+} from "utils/formatting/formattingDuration";
 import { useMemo } from "react";
 
 interface ControllerProps {
-    rvDuration: number;
+    rvDuration: string;
 }
 
 const Controller = ({ rvDuration }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
 
     const fmPlayedSecond = fmToMinAndSec(playedSecond);
-    const fmDuration = useMemo(() => fmToMinAndSec(rvDuration), [rvDuration]);
+    const numDuration = useMemo(() => fmToSeconds(rvDuration), [rvDuration]);
+    const fmDuration = useMemo(() => fmToMinAndSec(numDuration), [numDuration]);
 
     return (
         <Wrapper>
-            <ControllerPorgressbar rvDuration={rvDuration} />
+            <ControllerPorgressbar rvDuration={numDuration} />
 
             <ControlWrapper>
                 <ControlLeft>
