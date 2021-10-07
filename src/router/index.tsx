@@ -7,17 +7,19 @@ import Footer from "components/Common/Footer";
 import ScrollToTopElem from "utils/ScrollToTop";
 import VolumePop from "components/Common/VolumePop";
 
+import { ErrorBoundary } from "@sentry/react";
+import FullScreenError from "components/Common/FullScreenError";
+
 const Router = () => {
     return (
         <BrowserRouter>
             <Nav />
             <ScrollToTopElem />
-            {/* <AsyncBoundary
-                rejectedFallback={() => <div></div>}
-                pendingFallback={() => <div></div>}
-            > */}
+            <ErrorBoundary
+                fallback={({ error }) => <FullScreenError error={error} />}
+            >
                 <AnimateRouter />
-            {/* </AsyncBoundary> */}
+            </ErrorBoundary>
             <Footer />
             <VolumePop />
         </BrowserRouter>

@@ -9,6 +9,7 @@ import { staggerHalf } from "constants/motions";
 import VideoCard from "components/Common/VideoCard";
 import NoMoreSection from "components/Main/NoMoreSection";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
+import RefVideoSection from "components/Main/RefVideoSection";
 
 const Search = () => {
     const query = useRouterQuery("q");

@@ -7,6 +7,8 @@
     "-": "^0.0.1",
     "@babel/core": "7.12.3",
     "@pmmmwh/react-refresh-webpack-plugin": "0.4.3",
+    "@sentry/react": "^6.13.3",
+    "@sentry/tracing": "^6.13.3",
     "@svgr/webpack": "5.5.0",
     "@tensorflow-models/posenet": "^2.2.2",
     "@tensorflow/tfjs": "^3.9.0",
@@ -19,7 +21,7 @@
     "@types/lodash": "^4.14.173",
     "@types/node": "^16.9.4",
     "@types/rc-slider": "^9.3.1",
-    "@types/react": "^17.0.22",
+    "@types/react": "^17.0.27",
     "@types/react-dom": "^17.0.9",
     "@types/react-router-dom": "^5.1.9",
     "@types/react-webcam": "^3.0.0",
@@ -77,6 +79,7 @@
     "react-player": "^2.9.0",
     "react-refresh": "^0.8.3",
     "react-router-dom": "^5.3.0",
+    "react-scripts": "^4.0.3",
     "react-webcam": "^6.0.0",
     "recharts": "^2.1.4",
     "recoil": "^0.4.1",
@@ -99,9 +102,9 @@
     "workbox-webpack-plugin": "5.1.4"
   },
   "scripts": {
-    "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "test": "node scripts/test.js",
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
     "deploy": "aws s3 sync ./build s3://wavy-client --profile=client-deploy"
   },
   "eslintConfig": {

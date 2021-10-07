@@ -33,7 +33,7 @@ const VideoCard = ({
     const [isActivate, setIsActivate] = useState<boolean>(false);
 
     const onHoverStart = () => {
-        setIsHover(true);
+        if (!isHover) setIsHover(true);
         setIsActivate(true);
     };
 
@@ -43,8 +43,8 @@ const VideoCard = ({
 
     return (
         <Wrapper variants={defaultFadeInUpVariants}>
-            {/* onMouseOver={onHoverStart} onMouseMove={onHoverStart} onMouseLeave={onHoverEnd} */}
-            <VideoWrapper onHoverStart={onHoverStart} onHoverEnd={onHoverEnd}>
+            {/*  onMouseMove={onHoverStart} onMouseLeave={onHoverEnd} onHoverStart={onHoverStart} onHoverEnd={onHoverEnd} */}
+            <VideoWrapper onMouseOver={onHoverStart} onMouseLeave={onHoverEnd}>
                 <ReactPlayer
                     url={rvUrl}
                     playing={isHover}

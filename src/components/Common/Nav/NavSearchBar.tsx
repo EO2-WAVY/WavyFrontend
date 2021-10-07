@@ -13,13 +13,14 @@ const NavSearchBar = () => {
     const [query, setQuery] = useState<string>("");
 
     const debouncedPush = debounce((value) => {
-        setQuery(value);
         history.push(`/search?q=${value}`);
-    }, 150);
+    }, 350);
 
     const clear = () => {
         history.push("/");
         setQuery("");
+        if (!inputRef.current) return;
+        inputRef.current.value = "";
     };
 
     const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
@@ -31,24 +32,29 @@ const NavSearchBar = () => {
             clear();
             return;
         }
+        setQuery(value);
         debouncedPush(value);
-        // setQuery(value);
-        // history.push(`/search?q=${value}`);
     };
 
     const onClickCancel = () => {
         clear();
-        if (!inputRef.current) return;
-        inputRef.current.value = "";
     };
 
-    // useEffect(() => {
-    //     setQuery("");
-    // }, [pathname]);
+    useEffect(() => {
+        if (pathname === "/search") return;
+        if (!inputRef.current) return;
+        inputRef.current.value = "";
+        setQuery("");
+    }, [pathname]);
 
     return (
         <Wrapper>
-            <Input onChange={onChangeQuery} ref={inputRef} required />
+            <Input
+                onChange={onChangeQuery}
+                ref={inputRef}
+                value={query}
+                required
+            />
             <ImgWrapper>
                 <Cancel query={query}>
                     <Icon name="nav_cancel" />

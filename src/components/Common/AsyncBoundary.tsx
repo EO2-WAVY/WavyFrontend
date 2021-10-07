@@ -3,8 +3,9 @@ import ErrorBoundary from "./ErrorBoundary";
 
 type ErrorBoundaryProps = ComponentProps<typeof ErrorBoundary>;
 
-interface AsyncBoundaryProps extends Omit<ErrorBoundaryProps, "renderFallback"> {
-    pendingFallback: Component;
+interface AsyncBoundaryProps
+    extends Omit<ErrorBoundaryProps, "renderFallback"> {
+    pendingFallback: ComponentProps<typeof Suspense>;
     rejectedFallback: ErrorBoundaryProps["renderFallback"];
 }
 
