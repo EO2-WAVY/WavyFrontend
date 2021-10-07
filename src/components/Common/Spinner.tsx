@@ -54,7 +54,7 @@ const SpinElem = styled.div<ISpinElem>`
         height: 100%;
         border: 14px solid rgba(0, 0, 0, 0);
         border-radius: 50%;
-        border-top: 14px solid ${({theme}) => theme.color.purple};
+        border-top: 14px solid ${({ theme }) => theme.color.purple};
     }
 
     &::before {

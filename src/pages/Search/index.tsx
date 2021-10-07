@@ -2,8 +2,8 @@ import { useRouterQuery } from "hooks/useRouterQuery";
 import Layout from "components/Common/Layout";
 import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
 import SearchResult from "components/Search/SearchResult";
-import Spinner from "components/Common/Spinner";
 import DefaultRejectedScreen from "components/Common/HandleAsync/DefaultRejectedScreen";
+import FullScreenLoading from "components/Common/HandleAsync/FullScreenLoading";
 
 const Search = () => {
     const query = useRouterQuery("q");
@@ -11,7 +11,7 @@ const Search = () => {
     return (
         <Layout>
             <AsyncBoundary
-                PendingFallback={<Spinner widthPercent={20}/>}
+                PendingFallback={<FullScreenLoading />}
                 RejectedFallback={({ error, resetError }) => (
                     <DefaultRejectedScreen
                         error={error}
