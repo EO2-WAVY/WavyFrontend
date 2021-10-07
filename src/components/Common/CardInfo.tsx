@@ -2,14 +2,15 @@ import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useHistory } from "react-router";
 
+import Icon from "components/Common/Icon";
+import { gcRefVideoDifficulty } from "utils/groupCode";
+
 import {
     cardNavUpVariants,
     defaultFadeInUpVariants,
     staggerOne,
 } from "constants/motions";
-import Icon from "components/Common/Icon";
-import { gcRefVideoDifficulty } from "utils/groupCode";
-import { RQ_PRACTICE_REF_VIDEO_ID } from "constants/routerQuery";
+import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 
 interface CardInfoProps {
     rvSeq: string;
@@ -21,9 +22,10 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
     const history = useHistory();
 
     const onClickPractice = () =>
-        history.push(`/practice?${RQ_PRACTICE_REF_VIDEO_ID}=${rvSeq}`);
+        history.push(`/practice?${RQ_REF_VIDEO_ID}=${rvSeq}`);
 
-    const onClickChallenge = () => history.push("/challenge");
+    const onClickChallenge = () =>
+        history.push(`/challenge?${RQ_REF_VIDEO_ID}=${rvSeq}`);
 
     return (
         <Wrapper

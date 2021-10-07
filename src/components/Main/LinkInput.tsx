@@ -4,6 +4,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import { defaultFadeInUpVariants } from "constants/motions";
+import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
 
 const LinkInput = () => {
     const history = useHistory();
@@ -22,13 +23,9 @@ const LinkInput = () => {
             return;
         }
 
-        const youtubeCode: string[] = [];
-        for (let word of value.split("").reverse()) {
-            if (word === "=") break;
-            youtubeCode.unshift(word);
-        }
-
-        history.push(`/link?y=${youtubeCode.join("")}`);
+        const youtubeCode = fmYouTubeURLToCode(value);
+        
+        history.push(`/link?y=${youtubeCode}`);
     };
 
     return (

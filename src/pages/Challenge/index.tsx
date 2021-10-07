@@ -1,12 +1,19 @@
 import styled from "styled-components";
 
-import useCapture from "hooks/Dance/useCapture";
+import { useHistory } from "react-router";
+import { AnimatePresence, AnimateSharedLayout } from "framer-motion";
 
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 import Ready from "components/Common/Dance/Ready";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 import Webcam from "components/Common/Dance/Webcam";
-import { AnimateSharedLayout } from "framer-motion";
+import MotionLoading from "components/Common/MotionLoading";
+import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
+
+import useCapture from "hooks/Dance/useCapture";
+import useGetRefVideo from "hooks/api/useGetRefVideo";
+import { useRouterQuery } from "hooks/useRouterQuery";
+import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 
 const Challenge = () => {
     const {
@@ -18,31 +25,48 @@ const Challenge = () => {
         downloadCaptured,
     } = useCapture();
 
+    const history = useHistory();
+    const rvSeq = useRouterQuery(RQ_REF_VIDEO_ID);
+    const { data } = useGetRefVideo(rvSeq);
+
+    if (!rvSeq) {
+        history.push("/");
+        return <></>;
+    }
+
     return (
-        <Wrapper>
-            <AnimateSharedLayout>
-                <RefVideoWrapper>
-                    <Ready />
+        <AnimatePresence exitBeforeEnter>
+            {data ? (
+                <Wrapper>
+                    <AnimateSharedLayout>
+                        <RefVideoWrapper>
+                            <Ready />
 
-                    <YoutubePlayer
-                        youtubeCode={"wGUjUztfLS8"}
-                        isCountdown={true}
-                        startCapture={startCapture}
-                        pauseCapture={pauseCapture}
-                        resumeCapture={resumeCapture}
-                        stopCapture={stopCapture}
-                    />
-                </RefVideoWrapper>
+                            <YoutubePlayer
+                                youtubeCode={fmYouTubeURLToCode(
+                                    data.refVideo.rvUrl
+                                )}
+                                isCountdown={true}
+                                startCapture={startCapture}
+                                pauseCapture={pauseCapture}
+                                resumeCapture={resumeCapture}
+                                stopCapture={stopCapture}
+                            />
+                        </RefVideoWrapper>
 
-                <Webcam webcamRef={setWebcamRef} />
+                        <Webcam webcamRef={setWebcamRef} />
 
-                <TestWrapper>
-                    <button onClick={startCapture}>start</button>
-                    <button onClick={stopCapture}>stop</button>
-                    <button onClick={downloadCaptured}>download</button>
-                </TestWrapper>
-            </AnimateSharedLayout>
-        </Wrapper>
+                        <TestWrapper>
+                            <button onClick={startCapture}>start</button>
+                            <button onClick={stopCapture}>stop</button>
+                            <button onClick={downloadCaptured}>download</button>
+                        </TestWrapper>
+                    </AnimateSharedLayout>
+                </Wrapper>
+            ) : (
+                <MotionLoading key="motionLoading" />
+            )}
+        </AnimatePresence>
     );
 };
 
