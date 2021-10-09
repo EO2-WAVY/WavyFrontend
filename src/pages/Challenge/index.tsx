@@ -1,5 +1,3 @@
-import styled from "styled-components";
-
 import { useHistory } from "react-router";
 import { AnimatePresence } from "framer-motion";
 

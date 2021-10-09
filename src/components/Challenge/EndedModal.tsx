@@ -6,6 +6,7 @@ import ModalWrapper from "components/Common/Modal/ModalWrapper";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import { modalCenterFadeInUpVariants } from "constants/motions";
 import useViewport from "hooks/useViewport";
+import ModalImageWrapper from "./ModalImageWrapper";
 interface EndedModalProps {
     isEnded: boolean;
 }
@@ -15,7 +16,7 @@ const EndedModal = ({ isEnded }: EndedModalProps) => {
 
     return (
         <ModalWrapper isShowing={isEnded}>
-            <Confetti width={width} height={height} />
+            <Confetti width={width} height={height} key="confetti" />
             <ModalOverlay key="modalOverlay" handleClose={() => {}} />
             <ModalSection
                 key="modalSection"
@@ -24,7 +25,11 @@ const EndedModal = ({ isEnded }: EndedModalProps) => {
                 animate="animate"
                 exit="exit"
             >
-                끝났당
+                <ModalImageWrapper />
+
+                <Dsc>와 너무 잘 추셨는데요 !</Dsc>
+                <Dsc>분석 결과를 통해 부족한 부분을 메꿔봐요</Dsc>
+
             </ModalSection>
         </ModalWrapper>
     );
@@ -37,15 +42,19 @@ const ModalSection = styled(motion.section)`
     position: fixed;
     top: 50%;
     left: 50%;
-    aspect-ratio: 9 / 10;
-    height: 1000px;
+
+    width: 530px;
+    height: 600px;
     max-height: 80vh;
     background-color: white;
     border-radius: 10px;
-    padding: 30px 36px;
+    padding: 80px 36px 30px 36px;
+
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
     align-items: center;
     z-index: 999;
+`;
+
+const Dsc = styled.span`
 `;

@@ -40,12 +40,10 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
 
     useEffect(() => {
         // 챌린지 종료됐을 시 데이터 확인 후, 서버에 업로드 및 분석 요청
-        // if (!dataIsAvailable) return;
-
-        // const capturedBlob = getCaptured();
-        // if (!capturedBlob) return;
-
-        // uploadVideo({ blob: capturedBlob, rvSeq });
+        if (!dataIsAvailable) return;
+        const capturedBlob = getCaptured();
+        if (!capturedBlob) return;
+        uploadVideo({ blob: capturedBlob, rvSeq });
     }, [dataIsAvailable, getCaptured, rvSeq, uploadVideo]);
 
     if (!data) return null;
@@ -67,7 +65,7 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
 
                 <Webcam webcamRef={setWebcamRef} />
             </AnimateSharedLayout>
-
+둗
             <EndedModal isEnded={isEnded} />
         </Wrapper>
     );
