@@ -1,62 +1,67 @@
-import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { motion, AnimatePresence } from "framer-motion";
-import useCountdown from "hooks/useCountdown";
+import { motion } from "framer-motion";
+
 import useProgress from "hooks/useProgress";
 import { leftInitUpExitVariants } from "constants/motions";
+import { INotification } from "store/Common";
+import { useEffect, useState } from "react";
 
-interface NotificationProps {
-    open: boolean;
-    message: string;
+interface NotificationProps extends INotification {
     handleClose: () => void;
-    autoHideDuration?: number;
 }
 
 const Notification = ({
-    open,
-    message,
+    title,
+    description,
     handleClose,
-    autoHideDuration = 3,
+    autoHideDuration,
 }: NotificationProps) => {
-    const { remainTime } = useCountdown({
-        endTime: autoHideDuration,
-        onEnd: handleClose,
-    });
+    const [leftTime, setLeftTime] = useState<number>(0);
+
+    useEffect(() => {
+        const handleInterval = () => {
+            setLeftTime((prev) => prev + 0.2);
+        };
+
+        const interval = setInterval(handleInterval, 200);
+
+        return () => {
+            clearInterval(interval);
+        };
+    }, []);
+
+    useEffect(() => {
+        if (leftTime >= autoHideDuration) {
+            handleClose();
+        }
+    }, [autoHideDuration, handleClose, leftTime]);
 
     const { percent } = useProgress({
-        currentValue: autoHideDuration - remainTime + 1,
+        currentValue: leftTime,
         goalValue: autoHideDuration,
     });
 
-    return ReactDOM.createPortal(
-        <AnimatePresence exitBeforeEnter>
-            {open && (
-                <Wrapper
-                    variants={leftInitUpExitVariants}
-                    animate="animate"
-                    initial="initial"
-                    exit="exit"
-                >
-                    <Content>
-                        <p>{message}</p>
-                        <Progressbar percent={percent} />
-                    </Content>
-                </Wrapper>
-            )}
-        </AnimatePresence>,
-        document.body
+    return (
+        <Wrapper
+            layout
+            variants={leftInitUpExitVariants}
+            animate="animate"
+            initial="initial"
+            exit="exit"
+        >
+            <TitleSection>
+                <Title>{title}</Title>
+                <CloseBtn onClick={handleClose}>X</CloseBtn>
+            </TitleSection>
+            <p>{description}</p>
+            <Progressbar percent={percent} />
+        </Wrapper>
     );
 };
 
 export default Notification;
 
 const Wrapper = styled(motion.div)`
-    position: fixed;
-    top: 1.5rem;
-    right: 1.5rem;
-`;
-
-const Content = styled.div`
     position: relative;
     width: 384px;
     max-width: calc(100vw - 24px * 2);
@@ -67,6 +72,33 @@ const Content = styled.div`
     box-shadow: ${({ theme }) => theme.shadow.over};
 `;
 
+const TitleSection = styled.div`
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const Title = styled.h3`
+    color: ${({ theme }) => theme.color.purple};
+`;
+
+const CloseBtn = styled.button`
+    width: 30px;
+    height: 30px;
+    text-align: center;
+    border-radius: 50%;
+
+    color: ${({ theme }) => theme.color.black};
+    background-color: ${({ theme }) => theme.color.white};
+    transition: color 0.3s, background-color 0.3s;
+
+    &:hover {
+        color: ${({ theme }) => theme.color.white};
+        background-color: ${({ theme }) => theme.color.purple};
+    }
+`;
+
 const Progressbar = styled.div<{ percent: number }>`
     position: absolute;
     bottom: 0;
@@ -74,5 +106,5 @@ const Progressbar = styled.div<{ percent: number }>`
     width: ${({ percent }) => percent}%;
     height: 3px;
     background-color: ${({ theme }) => theme.color.purple};
-    transition: width 1s linear;
+    transition: width 0.2s linear;
 `;

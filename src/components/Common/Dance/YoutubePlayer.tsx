@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
 import Notification from "components/Common/Notification";
+import useNotification from "hooks/useNotification";
 
 interface YoutubePlayerProps {
     youtubeCode: string;
@@ -31,15 +32,18 @@ const YoutubePlayer = ({
         setPlaying(true);
     };
 
-    const [isBuffer, setIsBuffer] = useState<boolean>(false);
+    const { addNotification } = useNotification();
+
     const onBuffer = () => {
         pauseCapture();
-        setIsBuffer(true);
+        addNotification({
+            title: "걱정하지 마세요!",
+            description: "버퍼링 시 녹화는 일시 중지됩니다 :D",
+        });
     };
 
     const onBufferEnd = () => {
         resumeCapture();
-        setIsBuffer(false);
     };
 
     return (
@@ -60,12 +64,6 @@ const YoutubePlayer = ({
                 onEnded={stopCapture}
                 onBuffer={onBuffer}
                 onBufferEnd={onBufferEnd}
-            />
-
-            <Notification
-                open={isBuffer}
-                message="버퍼링 시에는 녹화가 중지되니 걱정 안해도 돼요 :D"
-                handleClose={() => setIsBuffer(false)}
             />
         </>
     );
