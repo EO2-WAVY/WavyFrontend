@@ -10,10 +10,11 @@ import useGetRefVideos from "hooks/api/Main/useGetRefVideos";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
 import { staggerHalf } from "constants/motions";
 
-
 const RefVideoSection = () => {
     const currentTag = useRecoilValue(currentTagState);
-    const { refVideos, loadMore, isReachingEnd } = useGetRefVideos({});
+    const { refVideos, loadMore, isReachingEnd } = useGetRefVideos({
+        suspense: true,
+    });
 
     const onIntersect: IntersectionObserverCallback = ([
         { isIntersecting },

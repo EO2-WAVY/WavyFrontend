@@ -1,12 +1,13 @@
-import { motion } from "framer-motion";
-import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import { useEffect, useState } from "react";
 import { Prompt, useHistory } from "react-router-dom";
-import { Location } from "history";
 import styled from "styled-components";
-import ModalWrapper from "../Common/Modal/ModalWrapper";
-import { modalCenterFadeInUpVariants } from "constants/motions";
+import { motion } from "framer-motion";
 
+import { Location } from "history";
+import ModalOverlay from "components/Common/Modal/ModalOverlay";
+import ModalWrapper from "components/Common/Modal/ModalWrapper";
+
+import { modalCenterFadeInUpVariants } from "constants/motions";
 interface RouteLeavingModalProps {
     when: boolean;
 }
@@ -42,7 +43,6 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
         if (!isConfirmed) return;
         if (!lastLocation) return;
         history.push(lastLocation);
-        
     }, [history, isConfirmed, lastLocation]);
 
     return (

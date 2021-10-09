@@ -1,10 +1,10 @@
 import { useRecoilValue } from "recoil";
 import { currentTagState } from "store/Main";
+import { currentUserState } from "store/Auth";
 
 import Layout from "components/Common/Layout";
 import TagSection from "components/Main/TagSection";
 import RefVideoSection from "components/Main/RefVideoSection";
-import { currentUserState } from "store/Auth";
 import MyTagSection from "components/Main/MyTagSection";
 import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
 import FullScreenLoading from "components/Common/HandleAsync/FullScreenLoading";

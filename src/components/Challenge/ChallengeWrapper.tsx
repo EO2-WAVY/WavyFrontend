@@ -13,6 +13,7 @@ import usePostUploadVideo from "hooks/api/usePostUploadVideo";
 import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
 
 import EndedModal from "./EndedModal";
+import RouteLeaveNotification from "./RouteLeaveNotification";
 
 interface ChallengeWrapperProps {
     rvSeq: string;
@@ -24,6 +25,7 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
     const [isEnded, setIsEnded] = useState<boolean>(false);
 
     const {
+        isCapturing,
         setWebcamRef,
         startCapture,
         pauseCapture,
@@ -40,10 +42,10 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
 
     useEffect(() => {
         // 챌린지 종료됐을 시 데이터 확인 후, 서버에 업로드 및 분석 요청
-        // if (!dataIsAvailable) return;
-        // const capturedBlob = getCaptured();
-        // if (!capturedBlob) return;
-        // uploadVideo({ blob: capturedBlob, rvSeq });
+        if (!dataIsAvailable) return;
+        const capturedBlob = getCaptured();
+        if (!capturedBlob) return;
+        uploadVideo({ blob: capturedBlob, rvSeq });
     }, [dataIsAvailable, getCaptured, rvSeq, uploadVideo]);
 
     if (!data) return null;
@@ -68,6 +70,11 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
             </AnimateSharedLayout>
 
             <EndedModal isEnded={isEnded} />
+
+            <RouteLeaveNotification
+                isCapturing={isCapturing.current}
+                isEnded={isEnded}
+            />
         </Wrapper>
     );
 };

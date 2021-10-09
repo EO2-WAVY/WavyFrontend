@@ -40,7 +40,7 @@ const EndedModal = ({ isEnded }: EndedModalProps) => {
                 <Dsc>와 너무 잘 추셨는데요 !</Dsc>
                 <Dsc>분석 결과를 통해 부족한 부분을 메꿔봐요</Dsc>
 
-                <ResultBtn>결과보기</ResultBtn>
+                <ResultBtn onClick={onClickReview}>결과보기</ResultBtn>
                 <MainBtn onClick={onClickMain}>메인으로</MainBtn>
             </ModalSection>
         </ModalWrapper>
