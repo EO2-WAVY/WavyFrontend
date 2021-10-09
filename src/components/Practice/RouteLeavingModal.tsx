@@ -1,7 +1,8 @@
 import { motion } from "framer-motion";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
-import { useState } from "react";
-import { Prompt } from "react-router-dom";
+import { useEffect, useState } from "react";
+import { Prompt, useHistory } from "react-router-dom";
+import { Location } from "history";
 import styled from "styled-components";
 import ModalWrapper from "../Common/Modal/ModalWrapper";
 import { modalCenterFadeInUpVariants } from "constants/motions";
@@ -11,9 +12,15 @@ interface RouteLeavingModalProps {
 }
 
 const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
+    const history = useHistory();
     const [isShowing, setIsShowing] = useState<boolean>(false);
+    const [lastLocation, setLastLocation] = useState<Location | null>(null);
+    const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
 
-    const handleBrockedNavigation = () => {
+    const handleBlockedNavigation = (lastLocation: Location) => {
+        if (isConfirmed) return true;
+
+        setLastLocation(lastLocation);
         setIsShowing(true);
         return false;
     };
@@ -22,9 +29,25 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
         setIsShowing(false);
     };
 
+    const handleConfirm = () => {
+        setIsConfirmed(true);
+        closeModal();
+        if (lastLocation) {
+            console.log(lastLocation);
+            history.push(lastLocation);
+        }
+    };
+
+    useEffect(() => {
+        if (!isConfirmed) return;
+        if (!lastLocation) return;
+        history.push(lastLocation);
+        
+    }, [history, isConfirmed, lastLocation]);
+
     return (
         <>
-            <Prompt when={when} message={handleBrockedNavigation} />
+            <Prompt when={when} message={handleBlockedNavigation} />
             <ModalWrapper isShowing={isShowing}>
                 <ModalOverlay key="modalOverlay" handleClose={closeModal} />
                 <ModalContent
@@ -36,6 +59,7 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
                 >
                     ㅎㅇ
                     <button onClick={closeModal}>닫기</button>
+                    <button onClick={handleConfirm}>그냥나갈래</button>
                 </ModalContent>
             </ModalWrapper>
         </>
