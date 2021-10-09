@@ -3,9 +3,9 @@ import { motion } from "framer-motion";
 import {
     defaultFadeInUpVariants,
     modalCenterFadeInUpVariants,
-    modalOverlayVariants,
 } from "constants/motions";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
+import ModalOverlay from "components/Common/Modal/ModalOverlay";
 interface TermModalProps {
     isShowing: boolean;
     hide: VoidFunction;
@@ -16,14 +16,8 @@ interface TermModalProps {
 const TermModal = ({ isShowing, hide, title, information }: TermModalProps) => {
     return (
         <ModalWrapper isShowing={isShowing}>
-            <Overlay
-                onClick={hide}
-                key="modalOverlay"
-                variants={modalOverlayVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-            />
+            <ModalOverlay key="modalOverlay" handleClose={hide} />
+
             <ModalSection
                 key="modalSection"
                 variants={modalCenterFadeInUpVariants}
@@ -49,17 +43,6 @@ const TermModal = ({ isShowing, hide, title, information }: TermModalProps) => {
 };
 
 export default TermModal;
-
-const Overlay = styled(motion.div)`
-    position: -webkit-sticky;
-    position: fixed;
-    top: 0px;
-    left: 0;
-    width: 100vw;
-    height: 100vh;
-    background-color: ${({ theme }) => theme.color.black};
-    z-index: 998;
-`;
 
 const ModalSection = styled(motion.section)`
     position: -webkit-sticky;

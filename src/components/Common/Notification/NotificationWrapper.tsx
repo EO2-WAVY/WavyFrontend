@@ -1,6 +1,6 @@
 import ReactDOM from "react-dom";
 import styled from "styled-components";
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import useNotification from "hooks/useNotification";
 import Notification from "components/Common/Notification";
 
