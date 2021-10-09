@@ -32,7 +32,7 @@ const useCountdown = ({
         return () => {
             clearInterval(interval);
         };
-    }, [handleInterval, onChange, onEnd]);
+    }, [handleInterval]);
 
     return {
         remainTime,

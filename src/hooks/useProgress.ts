@@ -27,7 +27,7 @@ const useProgress = ({
 
     useEffect(() => {
         setPersent(calcPersent());
-    }, [calcPersent, currentValue]);
+    }, [calcPersent]);
 
     return { percent };
 };

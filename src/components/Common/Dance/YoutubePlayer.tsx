@@ -61,12 +61,12 @@ const YoutubePlayer = ({
                 onBuffer={onBuffer}
                 onBufferEnd={onBufferEnd}
             />
-
+{/* 
             <Notification
                 open={isBuffer}
                 message="버퍼링 시에는 녹화가 중지되니 걱정 안해도 돼요 :D"
                 handleClose={() => setIsBuffer(false)}
-            />
+            /> */}
         </>
     );
 };

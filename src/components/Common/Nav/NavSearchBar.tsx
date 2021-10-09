@@ -14,7 +14,7 @@ const NavSearchBar = () => {
 
     const debouncedPush = debounce((value) => {
         history.push(`/search?q=${value}`);
-    }, 350);
+    }, 0);
 
     const clear = () => {
         history.push("/");

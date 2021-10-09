@@ -9,6 +9,7 @@ import VolumePop from "components/Common/VolumePop";
 
 import { ErrorBoundary } from "@sentry/react";
 import FullScreenError from "components/Common/HandleAsync/FullScreenError";
+import NotificationWrapper from "components/Common/Notification/NotificationWrapper";
 
 const Router = () => {
     return (
@@ -22,6 +23,7 @@ const Router = () => {
             </ErrorBoundary>
             <Footer />
             <VolumePop />
+            <NotificationWrapper />
         </BrowserRouter>
     );
 };
