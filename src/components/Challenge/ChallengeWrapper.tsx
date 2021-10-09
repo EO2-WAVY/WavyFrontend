@@ -13,6 +13,7 @@ import usePostUploadVideo from "hooks/api/usePostUploadVideo";
 import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
 
 import EndedModal from "./EndedModal";
+import RouteLeaveNotification from "./RouteLeaveNotification";
 
 interface ChallengeWrapperProps {
     rvSeq: string;
@@ -24,6 +25,7 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
     const [isEnded, setIsEnded] = useState<boolean>(false);
 
     const {
+        isCapturing,
         setWebcamRef,
         startCapture,
         pauseCapture,
@@ -47,6 +49,7 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
     }, [dataIsAvailable, getCaptured, rvSeq, uploadVideo]);
 
     if (!data) return null;
+
     return (
         <Wrapper>
             <AnimateSharedLayout>
@@ -65,8 +68,13 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
 
                 <Webcam webcamRef={setWebcamRef} />
             </AnimateSharedLayout>
-둗
+
             <EndedModal isEnded={isEnded} />
+
+            <RouteLeaveNotification
+                isCapturing={isCapturing.current}
+                isEnded={isEnded}
+            />
         </Wrapper>
     );
 };

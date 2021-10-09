@@ -2146,7 +2146,7 @@
   dependencies:
     "@types/react" "*"
 
-"@types/react-router-dom@^5.1.9":
+"@types/react-router-dom@^5.3.1":
   "integrity" "sha512-UvyRy73318QI83haXlaMwmklHHzV9hjl3u71MmM6wYNu0hOVk9NLTa0vGukf8zXUqnwz4O06ig876YSPpeK28A=="
   "resolved" "https://registry.npmjs.org/@types/react-router-dom/-/react-router-dom-5.3.1.tgz"
   "version" "5.3.1"
@@ -2155,7 +2155,7 @@
     "@types/react" "*"
     "@types/react-router" "*"
 
-"@types/react-router@*":
+"@types/react-router@*", "@types/react-router@^5.1.17":
   "integrity" "sha512-RNSXOyb3VyRs/EOGmjBhhGKTbnN6fHWvy5FNLzWfOWOGjgVUKqJZXfpKzLmgoU8h6Hj8mpALj/mbXQASOb92wQ=="
   "resolved" "https://registry.npmjs.org/@types/react-router/-/react-router-5.1.17.tgz"
   "version" "5.1.17"

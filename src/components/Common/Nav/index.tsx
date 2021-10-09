@@ -29,7 +29,7 @@ const Nav = () => {
                         <Link to="/">홈</Link>
                         {isUserSignedIn && (
                             <>
-                                <Link to="/">리뷰</Link>
+                                <Link to="/review">리뷰</Link>
                                 <Link to="/">보관함</Link>
                             </>
                         )}

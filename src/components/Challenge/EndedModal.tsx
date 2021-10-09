@@ -7,12 +7,22 @@ import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import { modalCenterFadeInUpVariants } from "constants/motions";
 import useViewport from "hooks/useViewport";
 import ModalImageWrapper from "./ModalImageWrapper";
+import { useHistory } from "react-router";
 interface EndedModalProps {
     isEnded: boolean;
 }
 
 const EndedModal = ({ isEnded }: EndedModalProps) => {
     const { width, height } = useViewport();
+    const history = useHistory();
+
+    const onClickReview = () => {
+        history.push("/review");
+    };
+
+    const onClickMain = () => {
+        history.push("/");
+    };
 
     return (
         <ModalWrapper isShowing={isEnded}>
@@ -30,6 +40,8 @@ const EndedModal = ({ isEnded }: EndedModalProps) => {
                 <Dsc>와 너무 잘 추셨는데요 !</Dsc>
                 <Dsc>분석 결과를 통해 부족한 부분을 메꿔봐요</Dsc>
 
+                <ResultBtn onClick={onClickReview}>결과보기</ResultBtn>
+                <MainBtn onClick={onClickMain}>메인으로</MainBtn>
             </ModalSection>
         </ModalWrapper>
     );
@@ -48,13 +60,33 @@ const ModalSection = styled(motion.section)`
     max-height: 80vh;
     background-color: white;
     border-radius: 10px;
-    padding: 80px 36px 30px 36px;
+    padding: 80px 18px 30px 18px;
 
     display: flex;
     flex-direction: column;
+    justify-content: flex-end;
     align-items: center;
     z-index: 999;
 `;
 
 const Dsc = styled.span`
+    font-size: 1.25rem;
+    color: ${({ theme }) => theme.color.black};
+    line-height: 2.25rem;
+`;
+
+const Btn = styled.button`
+    font-size: 1.25rem;
+    padding: 15px 62px;
+    border-radius: 100px;
+`;
+
+const ResultBtn = styled(Btn)`
+    background-color: ${({ theme }) => theme.color.lightPurple};
+    color: ${({ theme }) => theme.color.white};
+    margin-top: 30px;
+`;
+
+const MainBtn = styled(Btn)`
+    color: ${({ theme }) => theme.color.gray};
 `;

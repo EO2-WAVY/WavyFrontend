@@ -1,17 +1,15 @@
-import styled from "styled-components";
 import { useHistory } from "react-router";
-import { AnimatePresence, AnimateSharedLayout, motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
 
-import Controller from "components/Common/Dance/Controller";
-import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
-import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
-import Webcam from "components/Common/Dance/Webcam";
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 import MotionLoading from "components/Common/MotionLoading";
 
-import { defaultPageFadeInVariants } from "constants/motions";
 import { useRouterQuery } from "hooks/useRouterQuery";
 import useGetRefVideo from "hooks/api/useGetRefVideo";
+import PracticeWrapper from "components/Practice/PracticeWrapper";
+import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
+import Spinner from "components/Common/Spinner";
+import DefaultRejectedScreen from "components/Common/HandleAsync/DefaultRejectedScreen";
 
 const Practice = () => {
     const history = useHistory();
@@ -26,23 +24,17 @@ const Practice = () => {
     return (
         <AnimatePresence exitBeforeEnter>
             {data ? (
-                <Wrapper
-                    variants={defaultPageFadeInVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                    key="player"
+                <AsyncBoundary
+                    PendingFallback={<Spinner />}
+                    RejectedFallback={({ error, resetError }) => (
+                        <DefaultRejectedScreen
+                            error={error}
+                            resetError={resetError}
+                        />
+                    )}
                 >
-                    <AnimateSharedLayout>
-                        <RefVideoWrapper showLayoutBtn={false}>
-                            <ControllablePlayer url={data.refVideo.rvUrl} />
-                        </RefVideoWrapper>
-
-                        <Webcam />
-                    </AnimateSharedLayout>
-
-                    <Controller rvDuration={data.refVideo.rvDuration} />
-                </Wrapper>
+                    <PracticeWrapper rvSeq={rvSeq} />
+                </AsyncBoundary>
             ) : (
                 <MotionLoading key="motionLoading" />
             )}
@@ -51,9 +43,3 @@ const Practice = () => {
 };
 
 export default Practice;
-
-const Wrapper = styled(motion.main)`
-    width: 100vw;
-    height: 100vh;
-    display: flex;
-`;
