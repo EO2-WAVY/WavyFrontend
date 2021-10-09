@@ -1,13 +1,12 @@
 import { useEffect, useState } from "react";
 import { Prompt, useHistory } from "react-router-dom";
-import styled from "styled-components";
-import { motion } from "framer-motion";
 
 import { Location } from "history";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
 
-import { modalCenterFadeInUpVariants } from "constants/motions";
+import RouteLeavingModalContent from "./RouteLeavingModalContent";
+
 interface RouteLeavingModalProps {
     when: boolean;
 }
@@ -47,42 +46,22 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
 
     return (
         <>
-            <Prompt when={when} message={handleBlockedNavigation} />
+            <Prompt
+                key="prompt"
+                when={when}
+                message={handleBlockedNavigation}
+            />
             <ModalWrapper isShowing={isShowing}>
                 <ModalOverlay key="modalOverlay" handleClose={closeModal} />
-                <ModalContent
-                    key="routeLeavingModal"
-                    variants={modalCenterFadeInUpVariants}
-                    initial="initial"
-                    animate="animate"
-                    exit="exit"
-                >
-                    ㅎㅇ
-                    <button onClick={closeModal}>닫기</button>
-                    <button onClick={handleConfirm}>그냥나갈래</button>
-                </ModalContent>
+
+                <RouteLeavingModalContent
+                    key="modalContent"
+                    closeModal={closeModal}
+                    handleConfirm={handleConfirm}
+                />
             </ModalWrapper>
         </>
     );
 };
 
 export default RouteLeavingModal;
-
-const ModalContent = styled(motion.div)`
-    position: -webkit-sticky;
-    position: fixed;
-    top: 50%;
-    left: 50%;
-
-    width: 530px;
-    height: 600px;
-    max-height: 80vh;
-    background-color: white;
-    border-radius: 10px;
-    padding: 30px 18px 30px 18px;
-
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    z-index: 999;
-`;

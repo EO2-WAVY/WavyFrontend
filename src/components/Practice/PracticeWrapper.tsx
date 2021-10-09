@@ -6,6 +6,8 @@ import RouteLeavingModal from "components/Practice/RouteLeavingModal";
 import { defaultPageFadeInVariants } from "constants/motions";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import useGetRefVideo from "hooks/api/useGetRefVideo";
+import usePracticeStartTime from "hooks/Practice/usePracticeStartTime";
+import { useEffect } from "react";
 import styled from "styled-components";
 
 interface PracticeWrapperProps {
@@ -14,6 +16,11 @@ interface PracticeWrapperProps {
 
 const PracticeWrapper = ({ rvSeq }: PracticeWrapperProps) => {
     const { data } = useGetRefVideo(rvSeq);
+    const { startPractice } = usePracticeStartTime();
+
+    useEffect(() => {
+        startPractice();
+    }, [startPractice]);
 
     if (!data) return null;
     return (
