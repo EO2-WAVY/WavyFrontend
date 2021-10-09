@@ -6,7 +6,7 @@ const MirroredIcon = () => {
 
     return (
         <Icon
-            name="controller_graph"
+            name="controller_mirror"
             onClick={toggleIsMirrored}
             className={isMirrored ? "checked" : ""}
         />

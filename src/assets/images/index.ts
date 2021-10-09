@@ -26,6 +26,7 @@ import { ReactComponent as controller_graph } from "assets/images/Controller/gra
 import { ReactComponent as controller_loop_marker } from "assets/images/Controller/loop_marker.svg";
 import { ReactComponent as controller_loop } from "assets/images/Controller/loop.svg";
 import { ReactComponent as controller_marker } from "assets/images/Controller/marker.svg";
+import { ReactComponent as controller_mirror } from "assets/images/Controller/mirror.svg";
 import { ReactComponent as controller_play_circle } from "assets/images/Controller/play_circle.svg";
 import { ReactComponent as controller_play_key } from "assets/images/Controller/play_key.svg";
 import { ReactComponent as controller_stop_circle } from "assets/images/Controller/stop_circle.svg";
@@ -79,6 +80,7 @@ export {
     controller_loop_marker,
     controller_loop,
     controller_marker,
+    controller_mirror,
     controller_play_circle,
     controller_play_key,
     controller_stop_circle,

@@ -107,5 +107,6 @@ const ControlRight = styled.div`
 
     & > .checked path {
         stroke: ${({ theme }) => theme.color.purple};
+        fill: ${({ theme }) => theme.color.purple};
     }
 `;
