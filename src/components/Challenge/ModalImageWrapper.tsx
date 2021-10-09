@@ -47,8 +47,9 @@ const RightHandKeyframe = keyframes`
 
 const ImageWrapper = styled.div`
     position: relative;
-    width: 360px;
-    height: 300px;
+    width: 350px;
+    height: 260px;
+    
 
     & > svg {
         position: absolute;

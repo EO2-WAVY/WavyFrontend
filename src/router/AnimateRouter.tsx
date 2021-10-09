@@ -14,6 +14,7 @@ import Challenge from "pages/Challenge";
 import Analysis from "pages/Analysis";
 import NotFound from "pages/NotFound";
 import Terms from "pages/Terms";
+import Review from "pages/Review";
 
 import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
@@ -57,6 +58,12 @@ const AnimateRouter = () => {
                 <Route path="/practice" component={Practice} />
                 <Route path="/link" component={Link} />
                 <Route path="/challenge" component={Challenge} />
+                
+                <Route
+                    path="/review"
+                    component={() => pushRootWhenNotSignedIn(<Review />)}
+                />
+
                 <Route path="/analysis" component={Analysis} />
                 <Route path="/terms/:termName" component={Terms} />
                 <Route component={NotFound} />
