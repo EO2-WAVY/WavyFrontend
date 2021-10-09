@@ -4,6 +4,13 @@ import { ReactComponent as auth_google } from "assets/images/Auth/google.svg";
 import { ReactComponent as auth_kakao } from "assets/images/Auth/kakao.svg";
 import { ReactComponent as auth_naver } from "assets/images/Auth/naver.svg";
 
+// Challenge
+import { ReactComponent as challenge_left_hand } from "assets/images/Challenge/left_hand.svg";
+import { ReactComponent as challenge_right_hand } from "assets/images/Challenge/right_hand.svg";
+import { ReactComponent as challenge_star1 } from "assets/images/Challenge/star1.svg";
+import { ReactComponent as challenge_star2 } from "assets/images/Challenge/star2.svg";
+import { ReactComponent as challenge_star3 } from "assets/images/Challenge/star3.svg";
+
 // Common
 import { ReactComponent as common_challenge } from "assets/images/Common/challenge.svg";
 import { ReactComponent as common_logo_full } from "assets/images/Common/logo_full.svg";
@@ -55,6 +62,11 @@ export {
     auth_google,
     auth_kakao,
     auth_naver,
+    challenge_left_hand,
+    challenge_right_hand,
+    challenge_star1,
+    challenge_star2,
+    challenge_star3,
     common_challenge,
     common_logo_full,
     common_practice,

@@ -1,17 +1,18 @@
-import { useRef, useState, useCallback, useEffect } from "react";
+import { useRef, useState, useCallback } from "react";
 import Webcam from "react-webcam";
-import { downloadBlob } from "utils/downloadBlob";
 
 const useCapture = () => {
     const [webcamRef, setWebcamRef] = useState<Webcam | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-    // const [isCapturing, setIsCapturing] = useState<boolean>(false);
     const isCapturing = useRef<boolean>(false);
     const [recordedChunks, setRecordedChunks] = useState([]);
+    const [dataIsAvailable, setDataIsAvailable] = useState<boolean>(false);
 
     const handleDataAvailable = useCallback(({ data }) => {
         if (!data.size) return;
         setRecordedChunks((prev) => prev.concat(data));
+        setDataIsAvailable(true);
+        console.log("data available!!!");
     }, []);
 
     const startCapture = useCallback(() => {
@@ -28,7 +29,7 @@ const useCapture = () => {
         );
 
         mediaRecorderRef.current.start();
-        console.log("capture start");
+        console.log("start capture");
     }, [webcamRef, mediaRecorderRef, handleDataAvailable]);
 
     const pauseCapture = useCallback(() => {
@@ -44,23 +45,16 @@ const useCapture = () => {
     const stopCapture = useCallback(() => {
         mediaRecorderRef.current?.stop();
         isCapturing.current = false;
+        console.log("stop capture");
     }, [mediaRecorderRef]);
 
-    const downloadCaptured = useCallback(() => {
-        console.log("download");
+    const getCaptured = useCallback(() => {
         if (!recordedChunks.length) return;
         const blob = new Blob(recordedChunks, { type: "video/webm" });
-        
-        downloadBlob({ blob, fileName: "TESTFILENAME" });
+
         setRecordedChunks([]);
+        return blob;
     }, [recordedChunks]);
-
-    // for ended download test
-    useEffect(() => {
-        if (!recordedChunks.length) return;
-
-        downloadCaptured();
-    }, [downloadCaptured, recordedChunks.length]);
 
     return {
         isCapturing,
@@ -69,7 +63,8 @@ const useCapture = () => {
         pauseCapture,
         resumeCapture,
         stopCapture,
-        downloadCaptured,
+        getCaptured,
+        dataIsAvailable,
     };
 };
 

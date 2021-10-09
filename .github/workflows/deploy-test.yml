@@ -26,7 +26,6 @@ jobs:
                   restore-keys: |
                       ${{ runner.OS }}-build-
                       ${{ runner.OS }}-
-
             - name: Generate environment variables # 환경변수 설정
               run: |
                   echo "REACT_APP_API_URL=$REACT_APP_API_URL" >> .env.production
@@ -56,7 +55,6 @@ jobs:
                     --recursive \
                     --region ${{ env.AWS_REGION }} \
                     build s3://${{ env.AWS_S3_BUCKET_NAME }}
-
             - name: CloudFront Invalidate # Cloud cache invalidate
               run: |
                   aws cloudfront create-invalidation \
