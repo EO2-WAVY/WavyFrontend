@@ -61,12 +61,12 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
                     <Icon name="common_storage" />
                     <span>보관</span>
                 </NavElem>
-                <NavElem>
-                    <Icon name="common_practice" onClick={onClickPractice} />
+                <NavElem onClick={onClickPractice}>
+                    <Icon name="common_practice" />
                     <span>연습</span>
                 </NavElem>
-                <NavElem>
-                    <Icon name="common_challenge" onClick={onClickChallenge} />
+                <NavElem onClick={onClickChallenge}>
+                    <Icon name="common_challenge" />
                     <span>도전</span>
                 </NavElem>
             </NavWrapper>

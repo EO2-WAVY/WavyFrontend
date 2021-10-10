@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import useGetAnalyses from "hooks/api/useGetAnalyses";
 import useIntersectionObserver from "hooks/useIntersectionObserver";
-import AnalysisVideoCard from "./AnalysisVideoCard";
+import AnalysisVideoCard from "../Common/VideoCard/AnalysisVideoCard";
 import { staggerHalf } from "constants/motions";
 import Icon from "components/Common/Icon";
 import useCarousel from "hooks/useCarousel";
