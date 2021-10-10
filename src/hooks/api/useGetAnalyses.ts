@@ -11,8 +11,10 @@ const useGetAnalyses = () => {
 
     const analyses: IAnalysis[] = [];
     data?.forEach((tempData) => {
+        console.log(tempData);
         analyses.push(...tempData.analyses);
     });
+    console.log(size);
 
     const PAGE_SIZE = data?.[0]?.totalPages;
     const isLoadingInitialData = !data && !error;
@@ -21,6 +23,7 @@ const useGetAnalyses = () => {
 
     const loadMore = () => {
         if (isLoadingInitialData) return;
+        if (isReachingEnd) return;
         setSize(size + 1);
     };
 

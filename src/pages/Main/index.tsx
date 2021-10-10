@@ -7,8 +7,9 @@ import TagSection from "components/Main/TagSection";
 import RefVideoSection from "components/Main/RefVideoSection";
 import MyTagSection from "components/Main/MyTagSection";
 import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
-import FullScreenLoading from "components/Common/HandleAsync/FullScreenLoading";
+
 import DefaultRejectedScreen from "components/Common/HandleAsync/DefaultRejectedScreen";
+import MotionLoading from "components/Common/MotionLoading";
 
 const Main = () => {
     const currentTag = useRecoilValue(currentTagState);
@@ -20,7 +21,7 @@ const Main = () => {
                 <TagSection />
 
                 <AsyncBoundary
-                    PendingFallback={<FullScreenLoading />}
+                    PendingFallback={<MotionLoading />}
                     RejectedFallback={({ error, resetError }) => (
                         <DefaultRejectedScreen
                             error={error}

@@ -24,12 +24,8 @@ const MotionLoading = () => {
 export default MotionLoading;
 
 const Wrapper = styled(motion.div)`
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100vw;
+    width: 100%;
     height: 100vh;
-    background-color: white;
 
     display: flex;
     justify-content: center;
