@@ -1,3 +1,4 @@
+import { useMemo } from "react";
 import styled from "styled-components";
 
 import Icon from "components/Common/Icon";
@@ -13,13 +14,16 @@ import {
     fmToMinAndSec,
     fmToSeconds,
 } from "utils/formatting/formattingDuration";
-import { useMemo } from "react";
 
 interface ControllerProps {
     rvDuration: string;
+    isLinkPractice?: boolean;
 }
 
-const Controller = ({ rvDuration }: ControllerProps) => {
+const Controller = ({
+    rvDuration,
+    isLinkPractice = false,
+}: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
 
     const fmPlayedSecond = fmToMinAndSec(playedSecond);
@@ -33,9 +37,12 @@ const Controller = ({ rvDuration }: ControllerProps) => {
             <ControlWrapper>
                 <ControlLeft>
                     <PlayingIcon />
-                    <TimeSpan>
-                        <strong>{fmPlayedSecond}</strong> / {fmDuration}
-                    </TimeSpan>
+
+                    {!isLinkPractice && (
+                        <TimeSpan>
+                            <strong>{fmPlayedSecond}</strong> / {fmDuration}
+                        </TimeSpan>
+                    )}
                 </ControlLeft>
 
                 <ControlRight>

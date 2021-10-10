@@ -1,16 +1,15 @@
 import { useHistory } from "react-router";
-import { AnimatePresence } from "framer-motion";
 
 import MotionLoading from "components/Common/MotionLoading";
-
-import useGetRefVideo from "hooks/api/useGetRefVideo";
-import { useRouterQuery } from "hooks/useRouterQuery";
-import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 import ChallengeWrapper from "components/Challenge/ChallengeWrapper";
 import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
 import Spinner from "components/Common/Spinner";
 import DefaultRejectedScreen from "components/Common/HandleAsync/DefaultRejectedScreen";
+
+import useGetRefVideo from "hooks/api/useGetRefVideo";
+import { useRouterQuery } from "hooks/useRouterQuery";
 import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 
 const Challenge = () => {
     const history = useHistory();
@@ -26,7 +25,7 @@ const Challenge = () => {
     }
 
     return (
-        <AnimatePresence exitBeforeEnter>
+        <>
             {data ? (
                 <AsyncBoundary
                     RejectedFallback={({ error, resetError }) => (
@@ -37,12 +36,12 @@ const Challenge = () => {
                     )}
                     PendingFallback={<Spinner />}
                 >
-                    <ChallengeWrapper rvSeq={rvSeq} />
+                    <ChallengeWrapper rvSeq={rvSeq} key="challengeWrapper" />
                 </AsyncBoundary>
             ) : (
                 <MotionLoading key="motionLoading" />
             )}
-        </AnimatePresence>
+        </>
     );
 };
 

@@ -1,15 +1,14 @@
 import { useHistory } from "react-router";
-import { AnimatePresence } from "framer-motion";
 
-import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
+import Spinner from "components/Common/Spinner";
 import MotionLoading from "components/Common/MotionLoading";
+import PracticeWrapper from "components/Practice/PracticeWrapper";
+import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
+import DefaultRejectedScreen from "components/Common/HandleAsync/DefaultRejectedScreen";
 
 import { useRouterQuery } from "hooks/useRouterQuery";
 import useGetRefVideo from "hooks/api/useGetRefVideo";
-import PracticeWrapper from "components/Practice/PracticeWrapper";
-import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
-import Spinner from "components/Common/Spinner";
-import DefaultRejectedScreen from "components/Common/HandleAsync/DefaultRejectedScreen";
+import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 
 const Practice = () => {
     const history = useHistory();
@@ -22,7 +21,7 @@ const Practice = () => {
     }
 
     return (
-        <AnimatePresence exitBeforeEnter>
+        <>
             {data ? (
                 <AsyncBoundary
                     PendingFallback={<Spinner />}
@@ -36,9 +35,9 @@ const Practice = () => {
                     <PracticeWrapper rvSeq={rvSeq} />
                 </AsyncBoundary>
             ) : (
-                <MotionLoading key="motionLoading" />
+                <MotionLoading />
             )}
-        </AnimatePresence>
+        </>
     );
 };
 
