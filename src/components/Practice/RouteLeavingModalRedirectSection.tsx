@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import { useHistory } from "react-router";
 
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
+import useCountdown from "hooks/useCountdown";
 
 interface RouteLeavingModalRedirectSectionProps {
     rvSeq: string;
@@ -26,13 +27,17 @@ const RouteLeavingModalRedirectSection = ({
         history.push(`/challenge?${RQ_REF_VIDEO_ID}=${rvSeq}`);
     };
 
+    const { remainTime } = useCountdown({ endTime: 10, onEnd: handleConfirm });
+
     return (
         <>
             <BtnWrapper>
                 <ReStartBtn onClick={closeModal}>다시 연습하기</ReStartBtn>
                 <ChallengeBtn onClick={onClickChallenge}>도전하기</ChallengeBtn>
             </BtnWrapper>
-            <RedirectDsc>응답이 없을 경우 10초후에 나가집니다</RedirectDsc>
+            <RedirectDsc>
+                응답이 없을 경우 {remainTime}초후에 나가집니다
+            </RedirectDsc>
             <MainBtn onClick={handleConfirm}>나가기</MainBtn>
         </>
     );
