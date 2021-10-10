@@ -41,7 +41,7 @@ const PracticeWrapper = ({ rvSeq }: PracticeWrapperProps) => {
 
             <Controller rvDuration={data.refVideo.rvDuration} />
 
-            <RouteLeavingModal when={true} />
+            <RouteLeavingModal />
         </Wrapper>
     );
 };

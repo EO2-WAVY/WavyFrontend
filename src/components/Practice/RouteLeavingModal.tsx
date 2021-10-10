@@ -5,16 +5,14 @@ import { Location } from "history";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
 import RouteLeavingModalContent from "./RouteLeavingModalContent";
+import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
-interface RouteLeavingModalProps {
-    when: boolean;
-}
-
-const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
+const RouteLeavingModal = () => {
     const history = useHistory();
     const [isShowing, setIsShowing] = useState<boolean>(false);
     const [lastLocation, setLastLocation] = useState<Location | null>(null);
     const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
+    const { isUserSignedIn } = useIsUserSignedIn();
 
     const handleBlockedNavigation = (lastLocation: Location) => {
         if (isConfirmed) return true;
@@ -47,7 +45,7 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
         <>
             <Prompt
                 key="prompt"
-                when={when}
+                when={isUserSignedIn}
                 message={handleBlockedNavigation}
             />
             <ModalWrapper isShowing={isShowing}>

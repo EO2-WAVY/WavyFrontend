@@ -10,7 +10,7 @@ import {
     defaultFadeInUpVariants,
     staggerOne,
 } from "constants/motions";
-import { RQ_ANALYSIS_ID, RQ_REF_VIDEO_ID } from "constants/routerQuery";
+import { RQ_ANALYSIS_ID } from "constants/routerQuery";
 import useNotification from "hooks/useNotification";
 
 interface AnalysisCardInfoProps {
