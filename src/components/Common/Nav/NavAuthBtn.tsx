@@ -8,7 +8,7 @@ import useSignOut from "hooks/api/Auth/useSignOut";
 
 const NavAuthBtn = () => {
     const history = useHistory();
-    const isUserSignedIn = useIsUserSignedIn();
+    const { isUserSignedIn } = useIsUserSignedIn();
     const { signOut } = useSignOut();
 
     const onClickIcon = () => {

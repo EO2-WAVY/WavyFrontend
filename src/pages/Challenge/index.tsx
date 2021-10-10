@@ -16,9 +16,9 @@ const Challenge = () => {
     const history = useHistory();
     const rvSeq = useRouterQuery(RQ_REF_VIDEO_ID);
     const { data } = useGetRefVideo(rvSeq);
-    
+
     // Router에서 핸들링 시 Prompt 작동 시 refresh되기 때문에 해당 위치 배치
-    const isUserSignedIn = useIsUserSignedIn();
+    const { isUserSignedIn } = useIsUserSignedIn();
 
     if (!rvSeq || !isUserSignedIn) {
         history.push("/");

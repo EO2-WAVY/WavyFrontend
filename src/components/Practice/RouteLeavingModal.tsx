@@ -4,7 +4,6 @@ import { Prompt, useHistory } from "react-router-dom";
 import { Location } from "history";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
-
 import RouteLeavingModalContent from "./RouteLeavingModalContent";
 
 interface RouteLeavingModalProps {
@@ -59,6 +58,7 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
                     key="modalContent"
                     closeModal={closeModal}
                     handleConfirm={handleConfirm}
+                    setIsConfirmed={setIsConfirmed}
                 />
             </ModalWrapper>
         </>

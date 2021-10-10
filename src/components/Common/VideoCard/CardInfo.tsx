@@ -21,7 +21,7 @@ interface CardInfoProps {
 }
 
 const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
-    const isSignedIn = useIsUserSignedIn();
+    const { isUserSignedIn } = useIsUserSignedIn();
     const { addNotification } = useNotification();
 
     const history = useHistory();
@@ -30,7 +30,7 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
         history.push(`/practice?${RQ_REF_VIDEO_ID}=${rvSeq}`);
 
     const onClickChallenge = () => {
-        if (isSignedIn) {
+        if (isUserSignedIn) {
             history.push(`/challenge?${RQ_REF_VIDEO_ID}=${rvSeq}`);
             return;
         }
