@@ -1,11 +1,16 @@
 import { useRecoilState } from "recoil";
-import { INotification, notificationsState } from "store/Common";
-
-let notificationIndex = 0;
+import {
+    INotification,
+    notificationIndexState,
+    notificationsState,
+} from "store/Common";
 
 const useNotification = () => {
     const [notifications, setNotifications] =
         useRecoilState(notificationsState);
+    const [notificationIndex, setNotificationIndex] = useRecoilState(
+        notificationIndexState
+    );
 
     const addNotification = ({
         title,
@@ -13,22 +18,19 @@ const useNotification = () => {
         autoHideDuration = 3,
     }: addNotificationProps) => {
         const newNoti: INotification = {
-            index: notificationIndex++,
+            index: notificationIndex,
             title,
             description,
             autoHideDuration,
         };
+        console.log(newNoti.index);
+        setNotificationIndex((prev) => prev + 1);
         setNotifications([...notifications, newNoti]);
     };
 
     const removeNotification = (id: number) => {
         setNotifications((prevNotifications) => {
-            const tempNotifications = [...prevNotifications];
-            tempNotifications.splice(
-                tempNotifications.findIndex((noti) => noti.index === id),
-                1
-            );
-            return tempNotifications;
+            return prevNotifications.filter((noti) => noti.index !== id);
         });
     };
 

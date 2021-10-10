@@ -1,10 +1,11 @@
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { AnimateSharedLayout, motion } from "framer-motion";
 import { useHistory } from "react-router-dom";
 
 import Webcam from "components/Common/Dance/Webcam";
-import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
+import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
+import Controller from "components/Common/Dance/Controller";
 
 import { useRouterQuery } from "hooks/useRouterQuery";
 import { defaultPageFadeInVariants } from "constants/motions";
@@ -20,20 +21,24 @@ const Link = () => {
     }
 
     return (
-        <AnimatePresence exitBeforeEnter>
-            <Wrapper
-                variants={defaultPageFadeInVariants}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-            >
+        <Wrapper
+            variants={defaultPageFadeInVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
+            <AnimateSharedLayout>
                 <RefVideoWrapper>
-                    <YoutubePlayer youtubeCode={youtubeCode} />
+                    <ControllablePlayer
+                        url={`https://www.youtube.com/watch?v=${youtubeCode}`}
+                    />
                 </RefVideoWrapper>
 
                 <Webcam />
-            </Wrapper>
-        </AnimatePresence>
+            </AnimateSharedLayout>
+
+            <Controller rvDuration="0" isLinkPractice={true} />
+        </Wrapper>
     );
 };
 

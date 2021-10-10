@@ -4,8 +4,8 @@ import { currentUserState } from "store/Auth";
 const useIsUserSignedIn = () => {
     const currentUser = useRecoilValue(currentUserState);
 
-    const isSignedIn: boolean = currentUser !== null;
-    return isSignedIn;
+    const isUserSignedIn: boolean = currentUser !== null;
+    return { isUserSignedIn, currentUser };
 };
 
 export default useIsUserSignedIn;

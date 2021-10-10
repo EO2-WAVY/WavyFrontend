@@ -20,7 +20,7 @@ import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
 const AnimateRouter = () => {
     const location = useLocation();
-    const isUserSignedIn = useIsUserSignedIn();
+    const { isUserSignedIn } = useIsUserSignedIn();
 
     const pushRootWhenSignedIn = (Page: JSX.Element) =>
         isUserSignedIn ? <Redirect to="/" /> : Page;
@@ -58,7 +58,7 @@ const AnimateRouter = () => {
                 <Route path="/practice" component={Practice} />
                 <Route path="/link" component={Link} />
                 <Route path="/challenge" component={Challenge} />
-                
+
                 <Route
                     path="/review"
                     component={() => pushRootWhenNotSignedIn(<Review />)}

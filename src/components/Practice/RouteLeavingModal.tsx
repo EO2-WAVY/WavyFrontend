@@ -4,18 +4,15 @@ import { Prompt, useHistory } from "react-router-dom";
 import { Location } from "history";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
-
 import RouteLeavingModalContent from "./RouteLeavingModalContent";
+import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
-interface RouteLeavingModalProps {
-    when: boolean;
-}
-
-const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
+const RouteLeavingModal = () => {
     const history = useHistory();
     const [isShowing, setIsShowing] = useState<boolean>(false);
     const [lastLocation, setLastLocation] = useState<Location | null>(null);
     const [isConfirmed, setIsConfirmed] = useState<boolean>(false);
+    const { isUserSignedIn } = useIsUserSignedIn();
 
     const handleBlockedNavigation = (lastLocation: Location) => {
         if (isConfirmed) return true;
@@ -48,16 +45,18 @@ const RouteLeavingModal = ({ when }: RouteLeavingModalProps) => {
         <>
             <Prompt
                 key="prompt"
-                when={when}
+                when={isUserSignedIn}
                 message={handleBlockedNavigation}
             />
             <ModalWrapper isShowing={isShowing}>
                 <ModalOverlay key="modalOverlay" handleClose={closeModal} />
 
+                {/* 여기서 로그인 상태에 따라 다르게 호출하자 */}
                 <RouteLeavingModalContent
                     key="modalContent"
                     closeModal={closeModal}
                     handleConfirm={handleConfirm}
+                    setIsConfirmed={setIsConfirmed}
                 />
             </ModalWrapper>
         </>

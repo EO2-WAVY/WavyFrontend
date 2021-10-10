@@ -15,7 +15,10 @@ import { ReactComponent as challenge_star3 } from "assets/images/Challenge/star3
 import { ReactComponent as common_challenge } from "assets/images/Common/challenge.svg";
 import { ReactComponent as common_logo_full } from "assets/images/Common/logo_full.svg";
 import { ReactComponent as common_practice } from "assets/images/Common/practice.svg";
+import { ReactComponent as common_refresh } from "assets/images/Common/refresh.svg";
+import { ReactComponent as common_share } from "assets/images/Common/share.svg";
 import { ReactComponent as common_storage } from "assets/images/Common/storage.svg";
+import { ReactComponent as common_trash } from "assets/images/Common/trash.svg";
 
 // Controller
 import { ReactComponent as controller_active_marker } from "assets/images/Controller/active_marker.svg";
@@ -71,7 +74,10 @@ export {
     common_challenge,
     common_logo_full,
     common_practice,
+    common_refresh,
+    common_share,
     common_storage,
+    common_trash,
     controller_active_marker,
     controller_back_key,
     controller_forward_key,

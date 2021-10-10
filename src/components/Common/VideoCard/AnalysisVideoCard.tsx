@@ -3,38 +3,44 @@ import ReactPlayer from "react-player";
 import { AnimatePresence, motion } from "framer-motion";
 import styled, { CSSProperties } from "styled-components";
 
-import CardInfo from "components/Common/CardInfo";
 import {
     cardOverlayVariants,
     defaultFadeInUpVariants,
 } from "constants/motions";
 
-import { IRefVideo } from "hooks/api/useGetRefVideo";
 import { fmToSeconds } from "utils/formatting/formattingDuration";
 import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
+import { IAnalysis } from "hooks/api/useGetAnalyses";
+import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
+import AnalysisCardInfo from "./AnalysisCardInfo";
 
-interface VideoCardProps {
-    refVideo: IRefVideo;
+interface AnalysisVideoCardProps {
+    analysis: IAnalysis;
 }
 
-const VideoCard = ({
-    refVideo: {
-        rvSeq,
-        rvSongName,
-        rvArtistName,
-        rvUrl,
-        rvSourceAccountName,
-        rvDuration,
-        rvDifficultyCd,
+const AnalysisVideoCard = ({
+    analysis: {
+        createdDate,
+        anSeq,
+        anScore,
+        anGradeCode,
+        refVideo: {
+            rvUrl,
+            rvSeq,
+            rvDuration,
+            rvDifficultyCd,
+            rvSongName,
+            rvArtistName,
+            rvSourceAccountName,
+        },
     },
-}: VideoCardProps) => {
+}: AnalysisVideoCardProps) => {
     const { videoCardVolume } = useVideoCardVolume();
     const [isHover, setIsHover] = useState<boolean>(false);
-    const [isActivate, setIsActivate] = useState<boolean>(false);
+    const { data } = useGetAnalysisUserVideo(anSeq);
 
     const onHoverStart = () => {
-        if (!isHover) setIsHover(true);
-        setIsActivate(true);
+        setIsHover(true);
     };
 
     const onHoverEnd = () => {
@@ -45,15 +51,12 @@ const VideoCard = ({
         <Wrapper variants={defaultFadeInUpVariants}>
             <VideoWrapper onMouseOver={onHoverStart} onMouseLeave={onHoverEnd}>
                 <ReactPlayer
-                    url={rvUrl}
+                    url={data?.signedUrl}
                     playing={isHover}
                     volume={videoCardVolume}
-                    width="100%"
                     height="100%"
                     style={VideoStyle}
                     loop={true}
-                    // light={!isHover}
-                    light={!isActivate}
                     config={{
                         youtube: {
                             playerVars: { disablekb: 1 },
@@ -69,24 +72,28 @@ const VideoCard = ({
                                 animate="animate"
                                 exit="exit"
                             />
-                            <CardInfo
-                                rvSeq={rvSeq}
-                                rvDuration={fmToSeconds(rvDuration)}
+                            <AnalysisCardInfo
+                                anSeq={anSeq}
+                                rvDuration={fmToSeconds(
+                                    rvDuration ? rvDuration : "0"
+                                )}
                                 rvDifficultyCd={rvDifficultyCd}
                             />
                         </>
                     )}
                 </AnimatePresence>
             </VideoWrapper>
+
             <Title isHover={isHover}>
                 {rvSongName} - {rvArtistName}
             </Title>
             <Author isHover={isHover}>{rvSourceAccountName}</Author>
+            <Author isHover={isHover}>{createdDate}</Author>
         </Wrapper>
     );
 };
 
-export default VideoCard;
+export default AnalysisVideoCard;
 
 const Wrapper = styled(motion.article)`
     display: flex;
@@ -94,11 +101,13 @@ const Wrapper = styled(motion.article)`
     align-items: center;
 `;
 
-const VideoWrapper = styled(motion.section)`
+const VideoWrapper = styled(motion.div)`
     position: relative;
     aspect-ratio: 9 / 16;
-    /* width: 270px; */
-    width: 360px;
+    width: 250px;
+
+    /* aspect-ratio: 12 / 9;
+    width: 250px; */
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;
@@ -119,7 +128,10 @@ const Overlay = styled(motion.div)`
 const VideoStyle: CSSProperties = {
     position: "absolute",
     top: "0",
-    left: "0",
+    left: "50%",
+    transform: "translate(-50%)",
+    objectFit: "contain",
+    aspectRatio: "9 / 16",
 };
 
 const Title = styled.h2<{ isHover: boolean }>`

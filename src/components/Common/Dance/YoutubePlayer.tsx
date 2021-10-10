@@ -4,6 +4,7 @@ import styled from "styled-components";
 import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
 import useNotification from "hooks/useNotification";
+import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
 
 interface YoutubePlayerProps {
     youtubeCode: string;
@@ -23,12 +24,13 @@ const YoutubePlayer = ({
     onEnded = () => {},
 }: YoutubePlayerProps) => {
     const [isCounting, setIsCounting] = useState<boolean>(isCountdown);
-    const [playing, setPlaying] = useState<boolean>(false);
+
+    const { isPlaying, setIsPlaying } = useIsChallengeVideoPlaying();
 
     const onCountdownEnd = () => {
         setIsCounting(false);
         startCapture();
-        setPlaying(true);
+        setIsPlaying(true);
     };
 
     const { addNotification } = useNotification();
@@ -58,7 +60,7 @@ const YoutubePlayer = ({
                 volume={0}
                 width="100%"
                 height="100%"
-                playing={playing}
+                playing={isPlaying}
                 controls={false}
                 onEnded={onEnded}
                 onBuffer={onBuffer}

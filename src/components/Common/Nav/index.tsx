@@ -11,7 +11,7 @@ import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
 const Nav = () => {
     const history = useHistory();
-    const isUserSignedIn = useIsUserSignedIn();
+    const { isUserSignedIn } = useIsUserSignedIn();
     const onClickLogo = () => history.push("/");
 
     const { mousePosition } = useMousePosition();

@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import styled from "styled-components";
-import { AnimateSharedLayout } from "framer-motion";
+import { AnimateSharedLayout, motion } from "framer-motion";
 
 import Ready from "components/Common/Dance/Ready";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
@@ -14,6 +14,7 @@ import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
 
 import EndedModal from "./EndedModal";
 import RouteLeaveNotification from "./RouteLeaveNotification";
+import { defaultPageFadeInVariants } from "constants/motions";
 
 interface ChallengeWrapperProps {
     rvSeq: string;
@@ -25,7 +26,6 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
     const [isEnded, setIsEnded] = useState<boolean>(false);
 
     const {
-        isCapturing,
         setWebcamRef,
         startCapture,
         pauseCapture,
@@ -51,7 +51,12 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
     if (!data) return null;
 
     return (
-        <Wrapper>
+        <Wrapper
+            variants={defaultPageFadeInVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
             <AnimateSharedLayout>
                 <RefVideoWrapper>
                     <Ready />
@@ -71,17 +76,14 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
 
             <EndedModal isEnded={isEnded} />
 
-            <RouteLeaveNotification
-                isCapturing={isCapturing.current}
-                isEnded={isEnded}
-            />
+            <RouteLeaveNotification isEnded={isEnded} />
         </Wrapper>
     );
 };
 
 export default ChallengeWrapper;
 
-const Wrapper = styled.main`
+const Wrapper = styled(motion.main)`
     width: 100vw;
     height: 100vh;
     display: flex;

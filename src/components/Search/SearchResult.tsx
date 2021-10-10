@@ -2,7 +2,7 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import { staggerHalf } from "constants/motions";
 
-import VideoCard from "components/Common/VideoCard";
+import VideoCard from "components/Common/VideoCard/VideoCard";
 import NoMoreSection from "components/Main/NoMoreSection";
 import NoneData from "./NoneData";
 

@@ -3,7 +3,7 @@ import { currentTagState } from "store/Main";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
-import VideoCard from "components/Common/VideoCard";
+import VideoCard from "components/Common/VideoCard/VideoCard";
 import NoMoreSection from "components/Main/NoMoreSection";
 
 import useGetRefVideos from "hooks/api/Main/useGetRefVideos";

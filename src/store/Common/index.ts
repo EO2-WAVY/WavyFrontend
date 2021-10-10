@@ -11,3 +11,8 @@ export const notificationsState = atom<INotification[]>({
     key: "notificationsState",
     default: [],
 });
+
+export const notificationIndexState = atom<number>({
+    key: "notificationIndexState",
+    default: 0,
+});
