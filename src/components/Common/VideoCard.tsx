@@ -30,11 +30,9 @@ const VideoCard = ({
 }: VideoCardProps) => {
     const { videoCardVolume } = useVideoCardVolume();
     const [isHover, setIsHover] = useState<boolean>(false);
-    const [isActivate, setIsActivate] = useState<boolean>(false);
 
     const onHoverStart = () => {
-        if (!isHover) setIsHover(true);
-        setIsActivate(true);
+        setIsHover(true);
     };
 
     const onHoverEnd = () => {
@@ -52,8 +50,7 @@ const VideoCard = ({
                     height="100%"
                     style={VideoStyle}
                     loop={true}
-                    // light={!isHover}
-                    light={!isActivate}
+                    light={!isHover}
                     config={{
                         youtube: {
                             playerVars: { disablekb: 1 },
@@ -78,6 +75,7 @@ const VideoCard = ({
                     )}
                 </AnimatePresence>
             </VideoWrapper>
+
             <Title isHover={isHover}>
                 {rvSongName} - {rvArtistName}
             </Title>

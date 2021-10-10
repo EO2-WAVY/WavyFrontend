@@ -6,6 +6,7 @@ const useGetTodayPracticeSum = () => {
             "/practices/today/sum",
         );
 
+        console.log(response);
         return response.practicesTodaySum;
     };
 

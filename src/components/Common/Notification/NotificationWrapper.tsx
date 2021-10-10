@@ -9,7 +9,7 @@ const NotificationWrapper = () => {
 
     return ReactDOM.createPortal(
         <Wrapper>
-            <AnimatePresence initial={false}>
+            <AnimatePresence>
                 {notifications.map((notification) => (
                     <Notification
                         key={notification.index}

@@ -15,11 +15,15 @@ const usePostUploadVideo = () => {
         console.log("업로드 중입니다", blob);
 
         const handleSended = async () => {
-            const response = await post("/analyses", {
-                rvSeq,
-                anUserVideoFilename: data.s3ObjectName,
-                mirrorEffect: isMirrored,
-            });
+            const response = await post(
+                "/analyses",
+                {
+                    rvSeq,
+                    anUserVideoFilename: data.s3ObjectName,
+                    mirrorEffect: isMirrored,
+                },
+                { timeout: 180000 }
+            );
 
             console.log("업로드", response);
         };

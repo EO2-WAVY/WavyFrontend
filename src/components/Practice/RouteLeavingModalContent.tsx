@@ -7,6 +7,7 @@ import usePostPracticeTime from "hooks/api/Practice/usePostPracticeTime";
 import { useRouterQuery } from "hooks/useRouterQuery";
 import useGetTodayPracticeSum from "hooks/Practice/useGetTodayPracticeSum";
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
+import useIsUserSignedIn from "hooks/useIsUserSignedIn";
 
 interface RouteLeavingModalContentProps {
     closeModal: () => void;
@@ -17,11 +18,14 @@ const RouteLeavingModalContent = ({
     closeModal,
     handleConfirm,
 }: RouteLeavingModalContentProps) => {
-    const rvSeq = useRouterQuery(RQ_REF_VIDEO_ID);
-    const { postPracticeTime } = usePostPracticeTime(rvSeq ? rvSeq : "");
-    const { getTodayPracticeSum } = useGetTodayPracticeSum();
-    const [practiceTime, setPracticeTime] = useState<string>("");
+    const isUserSignedIn = useIsUserSignedIn(); // 유저 로그인 확인
+    const rvSeq = useRouterQuery(RQ_REF_VIDEO_ID); // 해당 동영상 ID
+    const { postPracticeTime } = usePostPracticeTime(rvSeq ? rvSeq : ""); // 춘 시간 POST
+    const { getTodayPracticeSum } = useGetTodayPracticeSum(); // 오늘 총 춘 시간 GET
+    const [practiceTime, setPracticeTime] = useState<string>(""); // GET한 시간 보여줄 State
 
+    // 해당 컴포넌트가 렌더될 시가 Router Leave,
+    // 그렇기 때문에 useEffect에서 POST 후 GET
     useEffect(() => {
         const calcTodayPracticeSum = async () => {
             await postPracticeTime();
@@ -29,8 +33,8 @@ const RouteLeavingModalContent = ({
             setPracticeTime(tTime);
         };
 
-        calcTodayPracticeSum();
-    }, [getTodayPracticeSum, postPracticeTime]);
+        if (isUserSignedIn) calcTodayPracticeSum();
+    }, [getTodayPracticeSum, isUserSignedIn, postPracticeTime]);
 
     return (
         <Wrapper

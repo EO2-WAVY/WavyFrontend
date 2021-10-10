@@ -11,6 +11,8 @@ import {
     staggerOne,
 } from "constants/motions";
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
+import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useNotification from "hooks/useNotification";
 
 interface CardInfoProps {
     rvSeq: string;
@@ -19,13 +21,27 @@ interface CardInfoProps {
 }
 
 const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
+    const isSignedIn = useIsUserSignedIn();
+    const { addNotification } = useNotification();
+
     const history = useHistory();
 
     const onClickPractice = () =>
         history.push(`/practice?${RQ_REF_VIDEO_ID}=${rvSeq}`);
 
-    const onClickChallenge = () =>
-        history.push(`/challenge?${RQ_REF_VIDEO_ID}=${rvSeq}`);
+    const onClickChallenge = () => {
+        if (isSignedIn) {
+            history.push(`/challenge?${RQ_REF_VIDEO_ID}=${rvSeq}`);
+            return;
+        }
+
+        addNotification({
+            title: "로그인 후 사용가능 합니다",
+            description:
+                "도전하기는 AI 분석을 통해 부족한 점을 짚어주는 서비스입니다. 로그인 후 사용해보세요 !",
+            autoHideDuration: 6,
+        });
+    };
 
     return (
         <Wrapper

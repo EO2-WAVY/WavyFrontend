@@ -25,7 +25,6 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
     const [isEnded, setIsEnded] = useState<boolean>(false);
 
     const {
-        isCapturing,
         setWebcamRef,
         startCapture,
         pauseCapture,
@@ -71,10 +70,7 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
 
             <EndedModal isEnded={isEnded} />
 
-            <RouteLeaveNotification
-                isCapturing={isCapturing.current}
-                isEnded={isEnded}
-            />
+            <RouteLeaveNotification isEnded={isEnded} />
         </Wrapper>
     );
 };

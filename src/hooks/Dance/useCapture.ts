@@ -4,7 +4,6 @@ import Webcam from "react-webcam";
 const useCapture = () => {
     const [webcamRef, setWebcamRef] = useState<Webcam | null>(null);
     const mediaRecorderRef = useRef<MediaRecorder | null>(null);
-    const isCapturing = useRef<boolean>(false);
     const [recordedChunks, setRecordedChunks] = useState([]);
     const [dataIsAvailable, setDataIsAvailable] = useState<boolean>(false);
 
@@ -17,7 +16,6 @@ const useCapture = () => {
 
     const startCapture = useCallback(() => {
         if (!webcamRef?.stream) return;
-        isCapturing.current = true;
 
         mediaRecorderRef.current = new MediaRecorder(webcamRef.stream, {
             mimeType: "video/webm",
@@ -29,23 +27,18 @@ const useCapture = () => {
         );
 
         mediaRecorderRef.current.start();
-        console.log("start capture");
     }, [webcamRef, mediaRecorderRef, handleDataAvailable]);
 
     const pauseCapture = useCallback(() => {
         mediaRecorderRef.current?.pause();
-        console.log("pause capture");
     }, []);
 
     const resumeCapture = useCallback(() => {
         mediaRecorderRef.current?.resume();
-        console.log("resume capture");
     }, []);
 
     const stopCapture = useCallback(() => {
         mediaRecorderRef.current?.stop();
-        isCapturing.current = false;
-        console.log("stop capture");
     }, [mediaRecorderRef]);
 
     const getCaptured = useCallback(() => {
@@ -57,7 +50,6 @@ const useCapture = () => {
     }, [recordedChunks]);
 
     return {
-        isCapturing,
         setWebcamRef,
         startCapture,
         pauseCapture,
