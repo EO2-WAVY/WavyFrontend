@@ -5,12 +5,15 @@ import { motion } from "framer-motion";
 
 import { defaultFadeInUpVariants } from "constants/motions";
 import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
+import useNotification from "hooks/useNotification";
+
+const youtubeRegex =
+    /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
 
 const LinkInput = () => {
     const history = useHistory();
     const [value, setValue] = useState<string>("");
-    const youtubeRegex =
-        /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
+    const { addNotification } = useNotification();
 
     const onChange = (e: ChangeEvent<HTMLInputElement>) => {
         setValue(e.target.value);
@@ -19,12 +22,16 @@ const LinkInput = () => {
     const onSubmit = (e: FormEvent<HTMLFormElement>) => {
         e.preventDefault();
         if (!value.match(youtubeRegex)) {
-            alert("YouTube URL이 아님");
+            addNotification({
+                title: "올바른 URL이 아닙니다",
+                description: "YouTube URL을 입력해주세요",
+                autoHideDuration: 5,
+            });
             return;
         }
 
         const youtubeCode = fmYouTubeURLToCode(value);
-        
+
         history.push(`/link?y=${youtubeCode}`);
     };
 
