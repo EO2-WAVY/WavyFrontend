@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
-import useToggle from "hooks/useToggle";
+import useToggle from "hooks/Common/useToggle";
 
 import Layout from "components/Common/Layout";
 import Hr from "components/Common/Hr";

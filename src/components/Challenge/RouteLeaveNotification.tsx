@@ -1,5 +1,5 @@
 import { Prompt } from "react-router-dom";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
 
 interface RouteLeaveNotificationProps {

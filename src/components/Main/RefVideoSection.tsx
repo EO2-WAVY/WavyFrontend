@@ -7,7 +7,7 @@ import VideoCard from "components/Common/VideoCard/VideoCard";
 import NoMoreSection from "components/Main/NoMoreSection";
 
 import useGetRefVideos from "hooks/api/Main/useGetRefVideos";
-import useIntersectionObserver from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 import { staggerHalf } from "constants/motions";
 
 const RefVideoSection = () => {

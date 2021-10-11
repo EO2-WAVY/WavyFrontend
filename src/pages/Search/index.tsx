@@ -1,4 +1,4 @@
-import { useRouterQuery } from "hooks/useRouterQuery";
+import { useRouterQuery } from "hooks/Common/useRouterQuery";
 import Layout from "components/Common/Layout";
 import AsyncBoundary from "components/Common/HandleAsync/AsyncBoundary";
 import SearchResult from "components/Search/SearchResult";

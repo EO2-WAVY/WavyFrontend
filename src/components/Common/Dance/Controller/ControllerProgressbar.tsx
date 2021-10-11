@@ -8,10 +8,10 @@ import {
 import styled from "styled-components";
 import { throttle } from "lodash";
 
-import useProgress from "hooks/useProgress";
+import useProgress from "hooks/Common/useProgress";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
-import { refVideoRefState } from "store/Dance/Controller";
+import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 
 interface ControllerProgressbarProps {
     rvDuration: number;
@@ -20,6 +20,7 @@ interface ControllerProgressbarProps {
 const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
     const barRef = useRef<HTMLDivElement>(null);
     const { seekTo } = usePlayerInstance(refVideoRefState);
+    const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
 
     const { playedSecond } = useControllerPlayedSecond();
     const { percent } = useProgress({
@@ -33,8 +34,9 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
             const seekTime =
                 (clientX * rvDuration) / barRef.current.clientWidth;
             seekTo(seekTime);
+            userSeekTo(seekTime);
         },
-        [rvDuration, seekTo]
+        [rvDuration, seekTo, userSeekTo]
     );
 
     const onClick = (e: ReactMouseEvent<HTMLDivElement>) => {

@@ -7,6 +7,12 @@ export const refVideoRefState = atom<ReactPlayer | null | undefined>({
     dangerouslyAllowMutability: true,
 });
 
+export const userVideoRefState = atom<ReactPlayer | null | undefined>({
+    key: "userVideoRefState",
+    default: null,
+    dangerouslyAllowMutability: true,
+});
+
 export const isPlayingState = atom<boolean>({
     key: "isPlayingState",
     default: false,

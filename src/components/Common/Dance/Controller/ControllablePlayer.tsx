@@ -1,18 +1,25 @@
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
-import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
+import usePlayerInstance, {
+    PlayerState,
+} from "hooks/Dance/Controller/usePlayerInstance";
 import ReactPlayer from "react-player";
-import { refVideoRefState } from "store/Dance/Controller";
+import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 
 import styled from "styled-components";
 
 interface ControllablePlayerProps {
     url: string;
+    controllableVideoState?: PlayerState;
 }
 
-const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
-    const { setPlayer } = usePlayerInstance(refVideoRefState);
+const ControllablePlayer = ({
+    url,
+    controllableVideoState = refVideoRefState,
+}: ControllablePlayerProps) => {
+    const { setPlayer } = usePlayerInstance(controllableVideoState);
+    const { player } = usePlayerInstance(userVideoRefState);
 
     const { isPlaying, setIsPlaying } = useControllerPlaying();
     const { setPlayedSecond } = useControllerPlayedSecond();
@@ -20,6 +27,13 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
 
     const onEnded = () => {
         setIsPlaying(false);
+    };
+
+    const onBuffer = () => {
+        setIsPlaying(false);
+    };
+    const onBufferEnd = () => {
+        setIsPlaying(true);
     };
 
     return (
@@ -39,6 +53,8 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
                     setPlayedSecond(playedSeconds);
                 }}
                 onEnded={onEnded}
+                onBuffer={onBuffer}
+                onBufferEnd={onBufferEnd}
             />
         </>
     );

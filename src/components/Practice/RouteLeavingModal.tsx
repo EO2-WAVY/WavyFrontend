@@ -5,7 +5,7 @@ import { Location } from "history";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
 import RouteLeavingModalContent from "./RouteLeavingModalContent";
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 
 const RouteLeavingModal = () => {
     const history = useHistory();

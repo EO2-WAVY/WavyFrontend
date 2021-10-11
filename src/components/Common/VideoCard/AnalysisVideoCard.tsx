@@ -10,7 +10,7 @@ import {
 
 import { fmToSeconds } from "utils/formatting/formattingDuration";
 import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
-import { IAnalysis } from "hooks/api/useGetAnalyses";
+import { IAnalysis } from "hooks/api/useGetAnalysis";
 import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
 import AnalysisCardInfo from "./AnalysisCardInfo";
 

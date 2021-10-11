@@ -1,6 +1,6 @@
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
-import { IRefVideo } from "hooks/api/useGetRefVideo";
+import { IAnalysis } from "hooks/api/useGetAnalysis";
 
 const useGetAnalyses = () => {
     const { data, error, size, setSize } = useSWRInfinite<IGetAnalyses>(
@@ -31,17 +31,6 @@ const useGetAnalyses = () => {
 };
 
 export default useGetAnalyses;
-
-export interface IAnalysis {
-    createdDate: string;
-    anSeq: string;
-    anScore: null;
-    anGradeCode: null;
-    anUserVideoFilename: string;
-    refVideo: IRefVideo;
-    mbrSeq: string;
-    rvSeq: string;
-}
 
 interface IGetAnalyses {
     ok: boolean;

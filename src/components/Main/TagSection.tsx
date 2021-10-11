@@ -6,7 +6,7 @@ import {
     useTransform,
 } from "framer-motion";
 
-import useCarousel from "hooks/useCarousel";
+import useCarousel from "hooks/Common/useCarousel";
 import useGetTags from "hooks/api/useGetTags";
 import TagElem from "components/Main/TagElem";
 import Icon from "components/Common/Icon";

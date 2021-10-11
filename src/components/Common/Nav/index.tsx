@@ -4,10 +4,10 @@ import { AnimatePresence, motion } from "framer-motion";
 
 import NavSearchBar from "components/Common/Nav/NavSearchBar";
 import NavAuthBtn from "components/Common/Nav/NavAuthBtn";
-import useMousePosition from "hooks/useMousePosition";
-import useNavCondition from "hooks/useNavCondition";
+import useMousePosition from "hooks/Common/useMousePosition";
+import useNavCondition from "hooks/Common/useNavCondition";
 import Icon from "components/Common/Icon";
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 
 const Nav = () => {
     const history = useHistory();

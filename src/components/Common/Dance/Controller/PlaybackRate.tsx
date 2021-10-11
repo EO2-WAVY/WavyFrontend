@@ -2,7 +2,7 @@ import { MouseEvent } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
-import useToggle from "hooks/useToggle";
+import useToggle from "hooks/Common/useToggle";
 import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
 import { modalCenterFadeInUpVariants } from "constants/motions";
 

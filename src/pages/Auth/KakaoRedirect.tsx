@@ -1,7 +1,7 @@
 import Layout from "components/Common/Layout";
 import Spinner from "components/Common/Spinner";
 import useGetServerToken from "hooks/api/Auth/useGetServerToken";
-import { useRouterQuery } from "hooks/useRouterQuery";
+import { useRouterQuery } from "hooks/Common/useRouterQuery";
 
 const KakaoRedirect = () => {
     const code = useRouterQuery("code");

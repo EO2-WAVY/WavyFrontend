@@ -7,7 +7,7 @@ import NoMoreSection from "components/Main/NoMoreSection";
 import NoneData from "./NoneData";
 
 import useGetRefVideos from "hooks/api/Main/useGetRefVideos";
-import useIntersectionObserver from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 
 interface SearchResultProps {
     query: string;

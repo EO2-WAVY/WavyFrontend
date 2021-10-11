@@ -16,7 +16,7 @@ import NotFound from "pages/NotFound";
 import Terms from "pages/Terms";
 import Review from "pages/Review";
 
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 
 const AnimateRouter = () => {
     const location = useLocation();

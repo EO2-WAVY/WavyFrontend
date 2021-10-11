@@ -1,5 +1,5 @@
 import { useState, useEffect } from "react";
-import { refVideoRefState } from "store/Dance/Controller";
+import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useControllerPlayedSecond from "./useControllerPlayedSecond";
 import useControllerPlaying from "./useControllerPlaying";
 import usePlayerInstance from "./usePlayerInstance";
@@ -15,6 +15,7 @@ const useKeyControll = () => {
     const { isPlaying, toggleIsPlaying } = useControllerPlaying();
     const { playedSecond } = useControllerPlayedSecond();
     const { seekTo } = usePlayerInstance(refVideoRefState);
+    const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
 
     const [isEffect, setIsEffect] = useState<KeyType>(null);
     const [ms, setMs] = useState<number>(0);
@@ -36,11 +37,13 @@ const useKeyControll = () => {
                 case "ArrowLeft":
                     key = "controller_back_key";
                     seekTo(playedSecond - 5);
+                    userSeekTo(playedSecond - 5);
                     break;
 
                 case "ArrowRight":
                     key = "controller_forward_key";
                     seekTo(playedSecond + 5);
+                    userSeekTo(playedSecond + 5);
                     break;
 
                 default:

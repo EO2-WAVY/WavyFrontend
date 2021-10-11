@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 
 import { defaultFadeInUpVariants } from "constants/motions";
 import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 
 const youtubeRegex =
     /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;

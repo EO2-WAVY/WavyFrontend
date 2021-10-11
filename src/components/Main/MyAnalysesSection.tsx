@@ -1,11 +1,11 @@
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 import useGetAnalyses from "hooks/api/useGetAnalyses";
-import useIntersectionObserver from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 import AnalysisVideoCard from "../Common/VideoCard/AnalysisVideoCard";
 import { staggerHalf } from "constants/motions";
 import Icon from "components/Common/Icon";
-import useCarousel from "hooks/useCarousel";
+import useCarousel from "hooks/Common/useCarousel";
 
 const MyAnalysesSection = () => {
     const { analyses, loadMore } = useGetAnalyses();

@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { useHistory } from "react-router-dom";
 
 import Icon from "components/Common/Icon";
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 import useSignOut from "hooks/api/Auth/useSignOut";
 
 const NavAuthBtn = () => {

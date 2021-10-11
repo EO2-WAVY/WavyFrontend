@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
 
 interface YoutubePlayerProps {

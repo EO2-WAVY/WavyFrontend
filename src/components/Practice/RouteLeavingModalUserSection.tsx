@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 
 const RouteLeavingModalUserSection = () => {
     const { currentUser } = useIsUserSignedIn();

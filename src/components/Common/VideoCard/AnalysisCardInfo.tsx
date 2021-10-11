@@ -11,7 +11,7 @@ import {
     staggerOne,
 } from "constants/motions";
 import { RQ_ANALYSIS_ID } from "constants/routerQuery";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 
 interface AnalysisCardInfoProps {
     anSeq: string;
