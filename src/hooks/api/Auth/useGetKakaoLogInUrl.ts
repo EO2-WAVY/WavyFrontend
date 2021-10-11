@@ -10,7 +10,7 @@ const useGetKakaoLogInUrl = () => {
         console.log("get kakato login url", data);
 
         window.open(
-            `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=http://localhost:3000/auth/kakaoLoginRedirect&response_type=code`
+            `https://kauth.kakao.com/oauth/authorize?client_id=${process.env.REACT_APP_KAKAO_CLIENT_ID}&redirect_uri=${window.location.origin}/auth/kakaoLoginRedirect&response_type=code`
         );
     };
 

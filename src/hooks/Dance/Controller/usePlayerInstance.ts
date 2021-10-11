@@ -7,7 +7,7 @@ const usePlayerInstance = (playerState: PlayerState) => {
     const [player, setPlayer] = useRecoilState(playerState);
 
     const seekTo = (time: number) => {
-        player?.seekTo(time);
+        player?.seekTo(time, "seconds");
     };
 
     return { setPlayer, seekTo, player };

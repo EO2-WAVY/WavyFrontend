@@ -33,4 +33,6 @@ export default VideoSection;
 const Wrapper = styled.section`
     position: relative;
     display: flex;
+
+    height: 500px;
 `;

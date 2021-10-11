@@ -4,8 +4,7 @@ import { motion } from "framer-motion";
 import useRequiredRouterQuery from "hooks/Common/useRequiredRouterQuery";
 import { RQ_ANALYSIS_ID } from "constants/routerQuery";
 import useGetAnalysis from "hooks/api/useGetAnalysis";
-import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
-import { userVideoRefState } from "store/Dance/Controller";
+
 import Controller from "components/Common/Dance/Controller";
 import VideoSection from "components/Analysis/VideoSection";
 
@@ -28,6 +27,3 @@ export default Analysis;
 
 const Wrapper = styled(motion.main)``;
 
-const VideoWrapper = styled.section`
-    display: flex;
-`;

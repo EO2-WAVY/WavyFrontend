@@ -31,8 +31,12 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
     const seekToWithPos = useCallback(
         (clientX: number) => {
             if (!barRef.current) return;
+
             const seekTime =
                 (clientX * rvDuration) / barRef.current.clientWidth;
+
+            console.log(clientX, seekTime);
+
             seekTo(seekTime);
             userSeekTo(seekTime);
         },

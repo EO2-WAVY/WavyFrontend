@@ -1,3 +1,4 @@
+import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
 import { useState, useEffect } from "react";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useControllerPlayedSecond from "./useControllerPlayedSecond";
@@ -13,6 +14,8 @@ type KeyType =
 
 const useKeyControll = () => {
     const { isPlaying, toggleIsPlaying } = useControllerPlaying();
+    const { toggleIsUserVideoPlaying } = useUserVideoPlaying();
+
     const { playedSecond } = useControllerPlayedSecond();
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
@@ -32,6 +35,7 @@ const useKeyControll = () => {
                         ? "controller_stop_key"
                         : "controller_play_key";
                     toggleIsPlaying();
+                    toggleIsUserVideoPlaying();
                     break;
 
                 case "ArrowLeft":
@@ -58,7 +62,15 @@ const useKeyControll = () => {
         return () => {
             window.removeEventListener("keydown", handleKeydown);
         };
-    }, [isEffect, isPlaying, playedSecond, seekTo, toggleIsPlaying]);
+    }, [
+        isEffect,
+        isPlaying,
+        playedSecond,
+        seekTo,
+        toggleIsPlaying,
+        toggleIsUserVideoPlaying,
+        userSeekTo,
+    ]);
 
     return { isEffect, ms };
 };

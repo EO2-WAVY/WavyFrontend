@@ -18,6 +18,11 @@ export const isPlayingState = atom<boolean>({
     default: false,
 });
 
+export const isUserVideoPlayingState = atom<boolean>({
+    key: "isUserVideoPlayingState",
+    default: false,
+});
+
 export const playedSecondState = atom<number>({
     key: "playedSecondState",
     default: 0,

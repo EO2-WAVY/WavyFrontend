@@ -1,3 +1,4 @@
+import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
@@ -5,7 +6,7 @@ import usePlayerInstance, {
     PlayerState,
 } from "hooks/Dance/Controller/usePlayerInstance";
 import ReactPlayer from "react-player";
-import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
+import { refVideoRefState } from "store/Dance/Controller";
 
 import styled from "styled-components";
 
@@ -19,8 +20,6 @@ const ControllablePlayer = ({
     controllableVideoState = refVideoRefState,
 }: ControllablePlayerProps) => {
     const { setPlayer } = usePlayerInstance(controllableVideoState);
-    const { player } = usePlayerInstance(userVideoRefState);
-
     const { isPlaying, setIsPlaying } = useControllerPlaying();
     const { setPlayedSecond } = useControllerPlayedSecond();
     const { playbackRate } = usePlaybackRate();
@@ -29,11 +28,16 @@ const ControllablePlayer = ({
         setIsPlaying(false);
     };
 
+    // for analysis
+    const isUserVideo = controllableVideoState !== refVideoRefState;
+    const { isUserVideoPlaying, setIsUserVideoPlaying } = useUserVideoPlaying();
+
     const onBuffer = () => {
-        setIsPlaying(false);
+        setIsUserVideoPlaying(false);
     };
+
     const onBufferEnd = () => {
-        setIsPlaying(true);
+        setIsUserVideoPlaying(true);
     };
 
     return (
@@ -47,10 +51,10 @@ const ControllablePlayer = ({
                 height="100%"
                 controls={false}
                 progressInterval={50}
-                playing={isPlaying}
+                playing={isUserVideo ? isUserVideoPlaying : isPlaying}
                 playbackRate={playbackRate}
                 onProgress={({ playedSeconds }) => {
-                    setPlayedSecond(playedSeconds);
+                    if (!isUserVideo) setPlayedSecond(playedSeconds);
                 }}
                 onEnded={onEnded}
                 onBuffer={onBuffer}
