@@ -7,6 +7,7 @@ import useGetAnalysis from "hooks/api/useGetAnalysis";
 
 import Controller from "components/Common/Dance/Controller";
 import VideoSection from "components/Analysis/VideoSection";
+import { defaultPageFadeInVariants } from "constants/motions";
 
 const Analysis = () => {
     const anSeq = useRequiredRouterQuery(RQ_ANALYSIS_ID);
@@ -15,7 +16,13 @@ const Analysis = () => {
     if (!data) return <></>;
 
     return (
-        <Wrapper>
+        <Wrapper
+            variants={defaultPageFadeInVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            key="player"
+        >
             <VideoSection analysis={data.analysis} />
 
             <Controller rvDuration={data.analysis.refVideo.rvDuration} />
@@ -25,5 +32,8 @@ const Analysis = () => {
 
 export default Analysis;
 
-const Wrapper = styled(motion.main)``;
-
+const Wrapper = styled(motion.main)`
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+`;
