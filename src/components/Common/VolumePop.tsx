@@ -10,9 +10,9 @@ import {
     videoCardVolumeVariants,
 } from "constants/motions";
 import EmptyOverlay from "components/Common/EmptyOverlay";
-import useToggle from "hooks/useToggle";
+import useToggle from "hooks/Common/useToggle";
 import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
-import useVolumePopCondition from "hooks/useVolumePopCondition";
+import useVolumePopCondition from "hooks/Common/useVolumePopCondition";
 
 const VolumePop = () => {
     const { isConditional } = useVolumePopCondition();

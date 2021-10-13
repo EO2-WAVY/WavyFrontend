@@ -10,7 +10,7 @@ import {
 
 import { fmToSeconds } from "utils/formatting/formattingDuration";
 import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
-import { IAnalysis } from "hooks/api/useGetAnalyses";
+import { IAnalysis } from "hooks/api/useGetAnalysis";
 import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
 import AnalysisCardInfo from "./AnalysisCardInfo";
 
@@ -104,7 +104,8 @@ const Wrapper = styled(motion.article)`
 const VideoWrapper = styled(motion.div)`
     position: relative;
     aspect-ratio: 9 / 16;
-    width: 250px;
+    width: 260px;
+
 
     /* aspect-ratio: 12 / 9;
     width: 250px; */

@@ -11,8 +11,8 @@ import {
     staggerOne,
 } from "constants/motions";
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
-import useNotification from "hooks/useNotification";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
+import useNotification from "hooks/Common/useNotification";
 
 interface CardInfoProps {
     rvSeq: string;

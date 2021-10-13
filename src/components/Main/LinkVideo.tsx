@@ -3,7 +3,7 @@ import ReactPlayer from "react-player";
 import styled, { CSSProperties } from "styled-components";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 
-import useIntersectionObserver from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 import { defaultFadeInUpVariants } from "constants/motions";
 
 interface LinkVideoProps {

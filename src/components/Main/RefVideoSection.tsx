@@ -7,14 +7,15 @@ import VideoCard from "components/Common/VideoCard/VideoCard";
 import NoMoreSection from "components/Main/NoMoreSection";
 
 import useGetRefVideos from "hooks/api/Main/useGetRefVideos";
-import useIntersectionObserver from "hooks/useIntersectionObserver";
+import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 import { staggerHalf } from "constants/motions";
 
 const RefVideoSection = () => {
     const currentTag = useRecoilValue(currentTagState);
-    const { refVideos, loadMore, isReachingEnd } = useGetRefVideos({
-        suspense: true,
-    });
+    const { refVideos, loadMore, isReachingEnd, isLoadingMore } =
+        useGetRefVideos({
+            suspense: true,
+        });
 
     const onIntersect: IntersectionObserverCallback = ([
         { isIntersecting },
@@ -28,25 +29,30 @@ const RefVideoSection = () => {
         threshold: 1,
     });
     return (
-        <AnimatePresence exitBeforeEnter>
-            <VideoCardWrapper
-                variants={staggerHalf}
-                key={currentTag}
-                initial="initial"
-                animate="animate"
-                exit="exit"
-            >
-                {refVideos.map((refVideo, index) => (
-                    <VideoCard
-                        key={`${index}${refVideo.rvSeq}`}
-                        refVideo={refVideo}
-                    />
-                ))}
-            </VideoCardWrapper>
+        <>
+            <AnimatePresence exitBeforeEnter initial={false}>
+                <VideoCardWrapper
+                    variants={staggerHalf}
+                    key={`${currentTag}`}
+                    initial="initial"
+                    animate="animate"
+                    exit="exit"
+                >
+                    {refVideos.map((refVideo) => (
+                        <VideoCard
+                            key={`${currentTag}${refVideo.rvSeq}`}
+                            refVideo={refVideo}
+                        />
+                    ))}
+                </VideoCardWrapper>
+            </AnimatePresence>
 
-            {isReachingEnd && <NoMoreSection key="NoMoreSection" />}
-            <div key="observerTarget" ref={setTarget}></div>
-        </AnimatePresence>
+            {isReachingEnd && (
+                <NoMoreSection key={`${currentTag}NoMoreSection`} />
+            )}
+
+            {!isLoadingMore && <div key="observerTarget" ref={setTarget}></div>}
+        </>
     );
 };
 

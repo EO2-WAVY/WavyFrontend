@@ -8,9 +8,9 @@ import RouteLeavingModalUserSection from "./RouteLeavingModalUserSection";
 import RouteLeavingModalRedirectSection from "./RouteLeavingModalRedirectSection";
 
 import usePostPracticeTime from "hooks/api/Practice/usePostPracticeTime";
-import { useRouterQuery } from "hooks/useRouterQuery";
+import { useRouterQuery } from "hooks/Common/useRouterQuery";
 import useGetTodayPracticeSum from "hooks/Practice/useGetTodayPracticeSum";
-import useIsUserSignedIn from "hooks/useIsUserSignedIn";
+import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 
 interface RouteLeavingModalContentProps {

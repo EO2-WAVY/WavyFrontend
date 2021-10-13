@@ -1,3 +1,7 @@
+// Analysis
+import { ReactComponent as analysis_recorded } from "assets/images/Analysis/recorded.svg";
+import { ReactComponent as analysis_webcam } from "assets/images/Analysis/webcam.svg";
+
 // Auth
 import { ReactComponent as auth_facebook } from "assets/images/Auth/facebook.svg";
 import { ReactComponent as auth_google } from "assets/images/Auth/google.svg";
@@ -62,6 +66,8 @@ import { ReactComponent as nav_sign_after } from "assets/images/Nav/sign_after.s
 import { ReactComponent as nav_sign_before } from "assets/images/Nav/sign_before.svg";
 
 export {
+    analysis_recorded,
+    analysis_webcam,
     auth_facebook,
     auth_google,
     auth_kakao,

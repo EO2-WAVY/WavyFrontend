@@ -7,7 +7,7 @@ import layout_small from "assets/images/Dance/layout_small.svg";
 
 import { defaultBtnSwapVariants } from "constants/motions";
 import useLayout from "hooks/Dance/useLayout";
-import useViewport from "hooks/useViewport";
+import useViewport from "hooks/Common/useViewport";
 import Step from "../Step";
 
 const DRAG_WIDTH: number = 300;

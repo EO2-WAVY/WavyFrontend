@@ -1,11 +1,10 @@
 import { useState } from "react";
-import { useRecoilState } from "recoil";
-import { currentTagState } from "store/Main";
 import styled from "styled-components";
 import { motion, useViewportScroll, useTransform } from "framer-motion";
 
 import { TAG_SCROLLED_YPOS } from "components/Main/TagSection";
 import { staggerOne, defaultFadeInUpVariants } from "constants/motions";
+import useCurrentTag from "hooks/Common/useCurrentTag";
 
 interface TagElemProps {
     name: string;
@@ -52,7 +51,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
         setIsScrolled(yPos > 143);
     });
 
-    const [currentTag, setCurrentTag] = useRecoilState(currentTagState);
+    const {currentTag, setCurrentTag} = useCurrentTag();
     const onClick = () => {
         setCurrentTag(name);
     };

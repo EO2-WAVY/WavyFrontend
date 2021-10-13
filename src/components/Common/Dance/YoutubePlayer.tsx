@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
 
 interface YoutubePlayerProps {
@@ -31,6 +31,13 @@ const YoutubePlayer = ({
         setIsCounting(false);
         startCapture();
         setIsPlaying(true);
+    };
+
+    // ChallengeWrapper에서 setIsPlaying 사용 시, 시작할 때 드래그 위치 초기화 때문에
+    // 해당 컴포넌트에서 확장하여 사용
+    const onEndedExtend = () => {
+        onEnded();
+        setIsPlaying(false);
     };
 
     const { addNotification } = useNotification();
@@ -62,7 +69,7 @@ const YoutubePlayer = ({
                 height="100%"
                 playing={isPlaying}
                 controls={false}
-                onEnded={onEnded}
+                onEnded={onEndedExtend}
                 onBuffer={onBuffer}
                 onBufferEnd={onBufferEnd}
             />

@@ -1,8 +1,9 @@
 export const fmToSeconds = (duration: string): number => {
     let value: number = 0;
-    value += parseInt(duration.slice(0, 2)) * 60;
-    value += parseInt(duration.slice(3, 5));
-    value += parseInt(duration.slice(7, 9)) * 0.01;
+    
+    value += parseInt(duration.slice(0, 2)) * 3600;
+    value += parseInt(duration.slice(3, 5)) * 60;
+    value += parseInt(duration.slice(6, 8));
 
     return value;
 };

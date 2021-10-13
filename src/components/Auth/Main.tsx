@@ -9,7 +9,7 @@ import naver from "assets/images/Auth/naver.svg";
 import kakao from "assets/images/Auth/kakao.svg";
 import facebook from "assets/images/Auth/facebook.svg";
 import useGetKakaoLogInUrl from "hooks/api/Auth/useGetKakaoLogInUrl";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 
 interface IMain {
     kind: string;

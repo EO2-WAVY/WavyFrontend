@@ -16,12 +16,15 @@ const Router = () => {
         <BrowserRouter>
             <Nav />
             <ScrollToTopElem />
+
             <ErrorBoundary
-                fallback={({ error }) => <FullScreenError error={error} />}
+                fallback={({ error }) => <FullScreenError error={error}/>}
             >
                 <AnimateRouter />
             </ErrorBoundary>
+
             <Footer />
+            
             <VolumePop />
             <NotificationWrapper />
         </BrowserRouter>

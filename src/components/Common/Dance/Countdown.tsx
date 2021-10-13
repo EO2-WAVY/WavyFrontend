@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import useCountdown from "hooks/useCountdown";
+import useCountdown from "hooks/Common/useCountdown";
 import {
     defaultFadeInUpVariants,
     defaultPageFadeInVariants,

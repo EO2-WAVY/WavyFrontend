@@ -5,7 +5,7 @@ import Confetti from "react-confetti";
 import ModalWrapper from "components/Common/Modal/ModalWrapper";
 import ModalOverlay from "components/Common/Modal/ModalOverlay";
 import { modalCenterFadeInUpVariants } from "constants/motions";
-import useViewport from "hooks/useViewport";
+import useViewport from "hooks/Common/useViewport";
 import ModalImageWrapper from "./ModalImageWrapper";
 import { useHistory } from "react-router";
 interface EndedModalProps {

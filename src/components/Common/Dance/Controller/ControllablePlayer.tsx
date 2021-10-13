@@ -1,25 +1,43 @@
+import styled from "styled-components";
+import ReactPlayer from "react-player";
+
+import { refVideoRefState } from "store/Dance/Controller";
+import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
-import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
-import ReactPlayer from "react-player";
-import { refVideoRefState } from "store/Dance/Controller";
-
-import styled from "styled-components";
+import usePlayerInstance, {
+    PlayerState,
+} from "hooks/Dance/Controller/usePlayerInstance";
 
 interface ControllablePlayerProps {
     url: string;
+    controllableVideoState?: PlayerState;
 }
 
-const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
-    const { setPlayer } = usePlayerInstance(refVideoRefState);
-
+const ControllablePlayer = ({
+    url,
+    controllableVideoState = refVideoRefState,
+}: ControllablePlayerProps) => {
+    const { setPlayer } = usePlayerInstance(controllableVideoState);
     const { isPlaying, setIsPlaying } = useControllerPlaying();
     const { setPlayedSecond } = useControllerPlayedSecond();
     const { playbackRate } = usePlaybackRate();
 
     const onEnded = () => {
         setIsPlaying(false);
+    };
+
+    // for analysis
+    const isUserVideo = controllableVideoState !== refVideoRefState;
+    const { isUserVideoPlaying, setIsUserVideoPlaying } = useUserVideoPlaying();
+
+    const onBuffer = () => {
+        setIsUserVideoPlaying(false);
+    };
+
+    const onBufferEnd = () => {
+        if (isPlaying) setIsUserVideoPlaying(true);
     };
 
     return (
@@ -33,12 +51,14 @@ const ControllablePlayer = ({ url }: ControllablePlayerProps) => {
                 height="100%"
                 controls={false}
                 progressInterval={50}
-                playing={isPlaying}
+                playing={isUserVideo ? isUserVideoPlaying : isPlaying}
                 playbackRate={playbackRate}
                 onProgress={({ playedSeconds }) => {
-                    setPlayedSecond(playedSeconds);
+                    if (!isUserVideo) setPlayedSecond(playedSeconds);
                 }}
                 onEnded={onEnded}
+                onBuffer={onBuffer}
+                onBufferEnd={onBufferEnd}
             />
         </>
     );
@@ -52,5 +72,5 @@ const Overlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9;
+    /* z-index: 9; */
 `;

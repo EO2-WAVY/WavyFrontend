@@ -1,7 +1,7 @@
 import ReactDOM from "react-dom";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 import Notification from "components/Common/Notification";
 
 const NotificationWrapper = () => {

@@ -1,12 +1,9 @@
 import { Prompt } from "react-router-dom";
-import useNotification from "hooks/useNotification";
+import useNotification from "hooks/Common/useNotification";
 import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
 
-interface RouteLeaveNotificationProps {
-    isEnded: boolean;
-}
 
-const RouteLeaveNotification = ({ isEnded }: RouteLeaveNotificationProps) => {
+const RouteLeaveNotification = () => {
     const { addNotification } = useNotification();
     const { isPlaying } = useIsChallengeVideoPlaying();
 

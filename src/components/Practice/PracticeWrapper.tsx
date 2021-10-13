@@ -1,7 +1,7 @@
 import Controller from "components/Common/Dance/Controller";
 import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
-import Webcam from "components/Common/Dance/Webcam";
+import WrappedControllableWebcam from "components/Common/Dance/WrappedControllableWebcam";
 import RouteLeavingModal from "components/Practice/RouteLeavingModal";
 import { defaultPageFadeInVariants } from "constants/motions";
 import { AnimateSharedLayout, motion } from "framer-motion";
@@ -36,7 +36,7 @@ const PracticeWrapper = ({ rvSeq }: PracticeWrapperProps) => {
                     <ControllablePlayer url={data.refVideo.rvUrl} />
                 </RefVideoWrapper>
 
-                <Webcam />
+                <WrappedControllableWebcam />
             </AnimateSharedLayout>
 
             <Controller rvDuration={data.refVideo.rvDuration} />

@@ -3,10 +3,10 @@ import styled from "styled-components";
 
 import Icon from "components/Common/Icon";
 import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
-import PlayingIcon from "components/Common/Dance/Controller/PlayingIcon";
+import PlayingButton from "components/Common/Dance/Controller/PlayingButton";
 import PlaybackRate from "components/Common/Dance/Controller/PlaybackRate";
-import LayoutIcon from "components/Common/Dance/Controller/LayoutIcon";
-import MirroredIcon from "components/Common/Dance/Controller/MirroredIcon";
+import LayoutButton from "components/Common/Dance/Controller/LayoutButton";
+import MirroredButton from "components/Common/Dance/Controller/MirroredButton";
 import KeyboardEffect from "components/Common/Dance/Controller/KeyboardEffect";
 
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
@@ -14,15 +14,18 @@ import {
     fmToMinAndSec,
     fmToSeconds,
 } from "utils/formatting/formattingDuration";
+import GraphButton from "./GraphButton";
 
 interface ControllerProps {
     rvDuration: string;
     isLinkPractice?: boolean;
+    isAnalysis?: boolean;
 }
 
 const Controller = ({
     rvDuration,
     isLinkPractice = false,
+    isAnalysis = false,
 }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
 
@@ -36,7 +39,7 @@ const Controller = ({
 
             <ControlWrapper>
                 <ControlLeft>
-                    <PlayingIcon />
+                    <PlayingButton />
 
                     {!isLinkPractice && (
                         <TimeSpan>
@@ -47,10 +50,11 @@ const Controller = ({
 
                 <ControlRight>
                     <Icon name="controller_loop" />
-                    <MirroredIcon />
                     <Icon name="controller_marker" />
+                    {isAnalysis && <GraphButton />}
+                    <MirroredButton />
                     <PlaybackRate />
-                    <LayoutIcon />
+                    <LayoutButton />
                 </ControlRight>
             </ControlWrapper>
 

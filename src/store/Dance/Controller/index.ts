@@ -7,8 +7,19 @@ export const refVideoRefState = atom<ReactPlayer | null | undefined>({
     dangerouslyAllowMutability: true,
 });
 
+export const userVideoRefState = atom<ReactPlayer | null | undefined>({
+    key: "userVideoRefState",
+    default: null,
+    dangerouslyAllowMutability: true,
+});
+
 export const isPlayingState = atom<boolean>({
     key: "isPlayingState",
+    default: false,
+});
+
+export const isUserVideoPlayingState = atom<boolean>({
+    key: "isUserVideoPlayingState",
     default: false,
 });
 
@@ -25,4 +36,9 @@ export const playbackRateState = atom<number>({
 export const isMirroredState = atom<boolean>({
     key: "isMirroredState",
     default: true,
+});
+
+export const isGraphShowingState = atom<boolean>({
+    key: "isGraphShowingState",
+    default: false,
 });

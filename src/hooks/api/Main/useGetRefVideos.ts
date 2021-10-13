@@ -1,8 +1,10 @@
-import { useRecoilValue } from "recoil";
-import { currentTagState } from "store/Main";
+import { useEffect, useState } from "react";
+import { throttle } from "lodash";
+
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
-import { IRefVideo } from "../useGetRefVideo";
+import { IRefVideo } from "hooks/api/useGetRefVideo";
+import useCurrentTag from "hooks/Common/useCurrentTag";
 
 interface useGetRefVideosProps {
     query?: string;
@@ -13,7 +15,7 @@ const useGetRefVideos = ({
     query = "",
     suspense = false,
 }: useGetRefVideosProps) => {
-    const currentTag = useRecoilValue(currentTagState);
+    const { currentTag } = useCurrentTag();
 
     const { data, error, size, setSize } = useSWRInfinite<IGetRefVideos>(
         (index) =>
@@ -24,27 +26,47 @@ const useGetRefVideos = ({
         { suspense: suspense }
     );
 
-    const refVideos: IRefVideo[] = [];
-    data?.forEach((tempData) => {
-        refVideos.push(...tempData.refVideos);
-    });
+    // const refVideos: IRefVideo[] = [];
+    // data?.forEach((tempData) => {
+    //     refVideos.push(...tempData.refVideos);
+    // });
+    // const isReachingEnd = size >= (PAGE_SIZE as number);
 
     const PAGE_SIZE = data?.[0]?.totalPages;
     const isLoadingInitialData = !data && !error;
+    const isLoadingMore =
+        isLoadingInitialData ||
+        (size > 0 && data && typeof data[size - 1] === "undefined");
     const isEmpty = data?.[0]?.refVideos.length === 0;
-    const isReachingEnd = size >= (PAGE_SIZE as number);
 
-    const loadMore = () => {
+    const [refVideos, setRefVideos] = useState<IRefVideo[]>([]);
+    const [isReachingEnd, setIsReachingEnd] = useState<boolean>(false);
+
+    useEffect(() => {
+        const updateVideos = () => {
+            const tempVideos: IRefVideo[] = [];
+            data?.forEach((tempData) => tempVideos.push(...tempData.refVideos));
+            setRefVideos(tempVideos);
+        };
+
+        updateVideos();
+
+        setIsReachingEnd(size >= (PAGE_SIZE as number));
+    }, [data, size, currentTag, PAGE_SIZE]);
+
+    const loadMore = throttle(() => {
         if (isReachingEnd) return;
         if (isLoadingInitialData) return;
-        setSize(size + 1);
-    };
+        setSize((prev) => prev + 1);
+    }, 1000);
 
     return {
         refVideos,
         isEmpty,
         loadMore,
         isReachingEnd,
+        isLoadingMore,
+        isLoadingInitialData
     };
 };
 

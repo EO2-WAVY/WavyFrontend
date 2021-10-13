@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import useProgress from "hooks/useProgress";
+import useProgress from "hooks/Common/useProgress";
 import { leftInitUpExitVariants } from "constants/motions";
 import { INotification } from "store/Common";
 import { useEffect, useState } from "react";

@@ -1,24 +1,17 @@
 import styled from "styled-components";
 import { AnimateSharedLayout, motion } from "framer-motion";
-import { useHistory } from "react-router-dom";
 
-import Webcam from "components/Common/Dance/Webcam";
+import Webcam from "components/Common/Dance/WrappedControllableWebcam";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import Controller from "components/Common/Dance/Controller";
 
-import { useRouterQuery } from "hooks/useRouterQuery";
 import { defaultPageFadeInVariants } from "constants/motions";
 import { RQ_LINK_YOUTUBUE_CODE } from "constants/routerQuery";
+import useRequiredRouterQuery from "hooks/Common/useRequiredRouterQuery";
 
 const Link = () => {
-    const youtubeCode = useRouterQuery(RQ_LINK_YOUTUBUE_CODE);
-    const history = useHistory();
-
-    if (!youtubeCode) {
-        history.push("/");
-        return <></>;
-    }
+    const youtubeCode = useRequiredRouterQuery(RQ_LINK_YOUTUBUE_CODE);
 
     return (
         <Wrapper

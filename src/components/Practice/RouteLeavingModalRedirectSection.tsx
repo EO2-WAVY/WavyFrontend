@@ -5,7 +5,7 @@ import { motion } from "framer-motion";
 import { useHistory } from "react-router";
 
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
-import useCountdown from "hooks/useCountdown";
+import useCountdown from "hooks/Common/useCountdown";
 
 interface RouteLeavingModalRedirectSectionProps {
     rvSeq: string;
