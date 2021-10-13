@@ -37,7 +37,7 @@ const ControllablePlayer = ({
     };
 
     const onBufferEnd = () => {
-        setIsUserVideoPlaying(true);
+        if (isPlaying) setIsUserVideoPlaying(true);
     };
 
     return (
@@ -72,5 +72,5 @@ const Overlay = styled.div`
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 9;
+    /* z-index: 9; */
 `;

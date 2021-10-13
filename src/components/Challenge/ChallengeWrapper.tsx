@@ -4,7 +4,7 @@ import { AnimateSharedLayout, motion } from "framer-motion";
 
 import Ready from "components/Common/Dance/Ready";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
-import Webcam from "components/Common/Dance/Webcam";
+import Webcam from "components/Common/Dance/WrappedControllableWebcam";
 import YoutubePlayer from "components/Common/Dance/YoutubePlayer";
 
 import useGetRefVideo from "hooks/api/useGetRefVideo";
@@ -75,8 +75,8 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
             </AnimateSharedLayout>
 
             <EndedModal isEnded={isEnded} />
-
-            <RouteLeaveNotification isEnded={isEnded} />
+            
+            <RouteLeaveNotification />
         </Wrapper>
     );
 };

@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { AnimateSharedLayout, motion } from "framer-motion";
 
-import Webcam from "components/Common/Dance/Webcam";
+import Webcam from "components/Common/Dance/WrappedControllableWebcam";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
 import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import Controller from "components/Common/Dance/Controller";

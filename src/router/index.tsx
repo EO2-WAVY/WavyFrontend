@@ -18,7 +18,7 @@ const Router = () => {
             <ScrollToTopElem />
 
             <ErrorBoundary
-                fallback={({ error }) => <FullScreenError error={error} />}
+                fallback={({ error }) => <FullScreenError error={error}/>}
             >
                 <AnimateRouter />
             </ErrorBoundary>

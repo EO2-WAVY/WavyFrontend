@@ -1,16 +1,15 @@
+import { useEffect } from "react";
 import styled from "styled-components";
-// import Webcam from "react-webcam";
+import { AnimateSharedLayout, motion } from "framer-motion";
 
-import { IAnalysis } from "hooks/api/useGetAnalysis";
+import { userVideoRefState } from "store/Dance/Controller";
+import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
+import ControllableWebcam from "components/Common/Dance/ControllableWebcam";
 import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
-import { userVideoRefState } from "store/Dance/Controller";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
-import { useEffect } from "react";
-import { AnimateSharedLayout } from "framer-motion";
-import Webcam from "components/Common/Dance/Webcam";
-import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
+import { IAnalysis } from "hooks/api/useGetAnalysis";
 
 interface VideoSectionProps {
     analysis: IAnalysis;
@@ -32,25 +31,25 @@ const VideoSection = ({ analysis }: VideoSectionProps) => {
                 <ControllablePlayer url={analysis.refVideo.rvUrl} />
             </RefVideoWrapper>
 
-            <WebcamWrapper>
-            {/* {data ? (
-                <ControllablePlayer
-                    url={data.signedUrl}
-                    controllableVideoState={userVideoRefState}
-                />
-            ) : (
-                ""
-            )} */}
+            <WebcamWrapper layout>
+                {data ? (
+                    <ControllablePlayer
+                        url={data.signedUrl}
+                        controllableVideoState={userVideoRefState}
+                    />
+                ) : (
+                    ""
+                )}
 
+                {/* <ControllableWebcam /> */}
             </WebcamWrapper>
-            {/* <Webcam /> */}
         </AnimateSharedLayout>
     );
 };
 
 export default VideoSection;
 
-const WebcamWrapper = styled.section`
+const WebcamWrapper = styled(motion.section)`
     position: relative;
     width: 100%;
     height: 100%;
