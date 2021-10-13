@@ -40,7 +40,7 @@ const VideoCard = ({
     };
 
     return (
-        <Wrapper variants={defaultFadeInUpVariants}>
+        <Wrapper variants={defaultFadeInUpVariants} key={rvSeq}>
             <VideoWrapper onMouseOver={onHoverStart} onMouseLeave={onHoverEnd}>
                 <ReactPlayer
                     url={rvUrl}
