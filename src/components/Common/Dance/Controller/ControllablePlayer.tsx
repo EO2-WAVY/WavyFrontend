@@ -1,3 +1,7 @@
+import styled from "styled-components";
+import ReactPlayer from "react-player";
+
+import { refVideoRefState } from "store/Dance/Controller";
 import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
@@ -5,10 +9,6 @@ import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
 import usePlayerInstance, {
     PlayerState,
 } from "hooks/Dance/Controller/usePlayerInstance";
-import ReactPlayer from "react-player";
-import { refVideoRefState } from "store/Dance/Controller";
-
-import styled from "styled-components";
 
 interface ControllablePlayerProps {
     url: string;
