@@ -8,6 +8,7 @@ import useGetAnalysis from "hooks/api/useGetAnalysis";
 import Controller from "components/Common/Dance/Controller";
 import VideoSection from "components/Analysis/VideoSection";
 import { defaultPageFadeInVariants } from "constants/motions";
+import GraphSection from "components/Analysis/GraphSection";
 
 const Analysis = () => {
     const anSeq = useRequiredRouterQuery(RQ_ANALYSIS_ID);
@@ -24,6 +25,8 @@ const Analysis = () => {
             key="player"
         >
             <VideoSection analysis={data.analysis} />
+
+            <GraphSection />
 
             <Controller rvDuration={data.analysis.refVideo.rvDuration} />
         </Wrapper>

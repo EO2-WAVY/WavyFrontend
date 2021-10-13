@@ -18,11 +18,13 @@ import {
 interface ControllerProps {
     rvDuration: string;
     isLinkPractice?: boolean;
+    isAnalysis?: boolean;
 }
 
 const Controller = ({
     rvDuration,
     isLinkPractice = false,
+    isAnalysis = false,
 }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
 
@@ -47,8 +49,8 @@ const Controller = ({
 
                 <ControlRight>
                     <Icon name="controller_loop" />
-                    <MirroredIcon />
                     <Icon name="controller_marker" />
+                    <MirroredIcon />
                     <PlaybackRate />
                     <LayoutIcon />
                 </ControlRight>
