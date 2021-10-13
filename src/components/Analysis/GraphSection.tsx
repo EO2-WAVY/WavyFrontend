@@ -1,18 +1,29 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import { LineChart, XAxis, Line, Tooltip, ResponsiveContainer, CartesianGrid, YAxis } from "recharts";
+import {
+    LineChart,
+    XAxis,
+    Line,
+    Tooltip,
+    ResponsiveContainer,
+    // CartesianGrid,
+    // YAxis,
+} from "recharts";
+import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
 
 const GraphSection = () => {
+    const { isGraphShowing } = useIsGraphShowing();
+
     return (
-        <Wrapper>
+        <Wrapper isGraphShowing={isGraphShowing}>
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={dummy} margin={{ left: 8, right: 8 }}>
                     <XAxis dataKey="time" />
                     {/* <YAxis /> */}
                     {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <Tooltip />
-                    <Line type="monotone" dataKey="accuracy" />
+                    <Line type="monotone" dataKey="accuracy" stroke="#882BFF" />
                 </LineChart>
             </ResponsiveContainer>
         </Wrapper>
@@ -21,13 +32,23 @@ const GraphSection = () => {
 
 export default GraphSection;
 
-const Wrapper = styled(motion.section)`
+const Wrapper = styled(motion.section)<{ isGraphShowing: boolean }>`
     position: fixed;
     bottom: 48px;
 
     width: 100%;
-    height: 200px;
+    height: 150px;
     z-index: 1;
+
+    transition: transform 0.8s, opacity 0.3s, visibility 0.8s;
+    transform: translate(
+        0,
+        ${({ isGraphShowing }) => (isGraphShowing ? "0" : "60px")}
+    );
+    opacity: ${({ isGraphShowing }) => (isGraphShowing ? 1 : 0)};
+    visibility: ${({ isGraphShowing }) =>
+        isGraphShowing ? "visible" : "hidden"};
+
 
     background: -moz-linear-gradient(
         top,

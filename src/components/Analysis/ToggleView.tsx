@@ -4,6 +4,7 @@ import { motion } from "framer-motion";
 
 import Icon from "components/Common/Icon";
 import { defaultFadeInUpVariants } from "constants/motions";
+import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
 
 interface ToggleViewProps {
     isWebcamView: boolean;
@@ -11,6 +12,8 @@ interface ToggleViewProps {
 }
 
 const ToggleView = ({ isWebcamView, setIsWebcamView }: ToggleViewProps) => {
+    const { isGraphShowing } = useIsGraphShowing();
+
     const toggleIsWebcamView = () => {
         setIsWebcamView((prev) => !prev);
     };
@@ -22,6 +25,7 @@ const ToggleView = ({ isWebcamView, setIsWebcamView }: ToggleViewProps) => {
             animate="animate"
             exit="exit"
             onClick={toggleIsWebcamView}
+            isGraphShowing={isGraphShowing}
         >
             <Icon
                 name="analysis_recorded"
@@ -37,9 +41,9 @@ const ToggleView = ({ isWebcamView, setIsWebcamView }: ToggleViewProps) => {
 
 export default ToggleView;
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(motion.div)<{ isGraphShowing: boolean }>`
     position: fixed;
-    bottom: 60px;
+    bottom: ${({ isGraphShowing }) => (isGraphShowing ? "210px" : "60px")};
     right: 18px;
 
     width: 80px;
@@ -47,6 +51,8 @@ const Wrapper = styled(motion.div)`
     display: flex;
     justify-content: flex-start;
     align-items: flex-start;
+
+    transition: all 0.8s;
 
     & > svg {
         position: absolute;

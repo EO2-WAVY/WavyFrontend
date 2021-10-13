@@ -2,17 +2,16 @@ import { Prompt } from "react-router-dom";
 import useNotification from "hooks/Common/useNotification";
 import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
 
-// interface RouteLeaveNotificationProps {}
 
 const RouteLeaveNotification = () => {
     const { addNotification } = useNotification();
     const { isPlaying } = useIsChallengeVideoPlaying();
 
     const handleRouteLeave = () => {
-        // addNotification({
-        //     title: "계속 하세요 !",
-        //     description: "도전하기 시에는 나갈 수 없습니다",
-        // });
+        addNotification({
+            title: "계속 하세요 !",
+            description: "도전하기 시에는 나갈 수 없습니다",
+        });
 
         return false;
     };

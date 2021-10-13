@@ -28,7 +28,10 @@ const Analysis = () => {
 
             <GraphSection />
 
-            <Controller rvDuration={data.analysis.refVideo.rvDuration} />
+            <Controller
+                rvDuration={data.analysis.refVideo.rvDuration}
+                isAnalysis={true}
+            />
         </Wrapper>
     );
 };
@@ -39,4 +42,6 @@ const Wrapper = styled(motion.main)`
     width: 100vw;
     height: 100vh;
     display: flex;
+
+    overflow: hidden;
 `;
