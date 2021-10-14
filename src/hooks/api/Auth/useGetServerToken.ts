@@ -9,7 +9,7 @@ const useGetServerToken = (code: string) => {
                 params: { code },
             });
 
-            saveToken(response.token); // useDecide의 storage 이벤트 호출
+            saveToken(response.token ? response.token : code); // useDecide의 storage 이벤트 호출
             console.log(response);
             // window.close();
         };
