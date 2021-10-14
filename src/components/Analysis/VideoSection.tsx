@@ -41,7 +41,11 @@ const VideoSection = ({ analysis }: VideoSectionProps) => {
                 exit="exit"
             >
                 <AnimatePresence exitBeforeEnter>
-                    <UserWrapper isWebcamView={isWebcamView} data-type="webcam">
+                    <UserWrapper
+                        isWebcamView={isWebcamView}
+                        data-type="webcam"
+                        key="UserWebcam"
+                    >
                         <ControllableWebcam />
                     </UserWrapper>
 
@@ -49,6 +53,7 @@ const VideoSection = ({ analysis }: VideoSectionProps) => {
                         <UserWrapper
                             isWebcamView={isWebcamView}
                             data-type="video"
+                            key="UserVideo"
                         >
                             <ControllablePlayer
                                 url={data.signedUrl}
@@ -79,6 +84,10 @@ const WebcamWrapper = styled(motion.section)`
 `;
 
 const UserWrapper = styled.div<{ isWebcamView: boolean }>`
+    position: absolute;
+    width: 100%;
+    height: 100%;
+
     transition: opacity 0.3s;
 
     &[data-type="webcam"] {

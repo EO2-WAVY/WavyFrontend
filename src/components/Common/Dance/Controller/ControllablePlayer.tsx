@@ -48,6 +48,7 @@ const ControllablePlayer = ({
         <>
             <Overlay />
             <ReactPlayer
+                playsinline={true}
                 ref={setPlayer}
                 url={url}
                 volume={playerVolume}
@@ -77,4 +78,8 @@ const Overlay = styled.div`
     width: 100%;
     height: 100%;
     /* z-index: 9; */
+
+    & + div > video {
+        object-fit: cover;
+    }
 `;
