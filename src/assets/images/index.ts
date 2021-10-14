@@ -36,6 +36,7 @@ import { ReactComponent as controller_marker } from "assets/images/Controller/ma
 import { ReactComponent as controller_mirror } from "assets/images/Controller/mirror.svg";
 import { ReactComponent as controller_play_circle } from "assets/images/Controller/play_circle.svg";
 import { ReactComponent as controller_play_key } from "assets/images/Controller/play_key.svg";
+import { ReactComponent as controller_sound } from "assets/images/Controller/sound.svg";
 import { ReactComponent as controller_stop_circle } from "assets/images/Controller/stop_circle.svg";
 import { ReactComponent as controller_stop_key } from "assets/images/Controller/stop_key.svg";
 
@@ -95,6 +96,7 @@ export {
     controller_mirror,
     controller_play_circle,
     controller_play_key,
+    controller_sound,
     controller_stop_circle,
     controller_stop_key,
     dance_layout_big,

@@ -15,6 +15,7 @@ import {
     fmToSeconds,
 } from "utils/formatting/formattingDuration";
 import GraphButton from "./GraphButton";
+import SoundSlider from "./SoundSlider";
 
 interface ControllerProps {
     rvDuration: string;
@@ -46,6 +47,8 @@ const Controller = ({
                             <strong>{fmPlayedSecond}</strong> / {fmDuration}
                         </TimeSpan>
                     )}
+
+                    <SoundSlider />
                 </ControlLeft>
 
                 <ControlRight>

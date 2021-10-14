@@ -9,6 +9,7 @@ import usePlaybackRate from "hooks/Dance/Controller/usePlaybackRate";
 import usePlayerInstance, {
     PlayerState,
 } from "hooks/Dance/Controller/usePlayerInstance";
+import usePlayerVolume from "hooks/Dance/usePlayerVolume";
 
 interface ControllablePlayerProps {
     url: string;
@@ -40,13 +41,17 @@ const ControllablePlayer = ({
         if (isPlaying) setIsUserVideoPlaying(true);
     };
 
+    // for volume
+    const { playerVolume } = usePlayerVolume();
+
     return (
         <>
             <Overlay />
             <ReactPlayer
+                playsinline={true}
                 ref={setPlayer}
                 url={url}
-                volume={0}
+                volume={playerVolume}
                 width="100%"
                 height="100%"
                 controls={false}
@@ -73,4 +78,8 @@ const Overlay = styled.div`
     width: 100%;
     height: 100%;
     /* z-index: 9; */
+
+    & + div > video {
+        object-fit: cover;
+    }
 `;

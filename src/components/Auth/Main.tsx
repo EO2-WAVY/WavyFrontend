@@ -31,7 +31,6 @@ const Main = ({ kind }: IMain) => {
         addNotification({
             title: "죄송합니다",
             description: "지원하지 않는 기능입니다.",
-            autoHideDuration: 5,
         });
     };
 
