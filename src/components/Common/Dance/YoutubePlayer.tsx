@@ -5,7 +5,7 @@ import ReactPlayer from "react-player";
 import Countdown from "./Countdown";
 import useNotification from "hooks/Common/useNotification";
 import useIsChallengeVideoPlaying from "hooks/Challenge/useIsChallengeVideoPlaying";
-import usePlayerVolume from "hooks/Dance/usePlayerVolume";
+import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
 
 interface YoutubePlayerProps {
     youtubeCode: string;
@@ -27,7 +27,7 @@ const YoutubePlayer = ({
     const [isCounting, setIsCounting] = useState<boolean>(isCountdown);
 
     const { isPlaying, setIsPlaying } = useIsChallengeVideoPlaying();
-    const { playerVolume } = usePlayerVolume();
+    const { videoCardVolume } = useVideoCardVolume();
 
     const onCountdownEnd = () => {
         setIsCounting(false);
@@ -66,7 +66,7 @@ const YoutubePlayer = ({
 
             <ReactPlayer
                 url={`https://www.youtube.com/watch?v=${youtubeCode}`}
-                volume={playerVolume}
+                volume={videoCardVolume}
                 width="100%"
                 height="100%"
                 playing={isPlaying}
