@@ -1,8 +1,7 @@
 import { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
-import { currentUserState } from "store/Auth";
 import useSWR from "swr";
 import { fetcher } from "utils/api/fetch";
+import useCurrentUser from "hooks/Common/useCurrentUser";
 // import removeToken from "utils/Auth/removeToken";
 
 export interface Member {
@@ -25,7 +24,7 @@ export interface Member {
 const key = "/members/me";
 
 const useCheckCurrentMember = () => {
-    const setCurrentUser = useSetRecoilState(currentUserState);
+    const { setCurrentUser } = useCurrentUser();
     const { data } = useSWR<IGetMember>(key, fetcher);
 
     useEffect(() => {
