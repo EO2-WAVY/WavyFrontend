@@ -22,17 +22,16 @@ export interface Member {
     videoOptionCode: string;
 }
 
-const memberKey = "/members/me";
+const key = "/members/me";
 
 const useCheckCurrentMember = () => {
     const setCurrentUser = useSetRecoilState(currentUserState);
-    const { data } = useSWR<GetMember>(memberKey, fetcher);
+    const { data } = useSWR<IGetMember>(key, fetcher);
 
     useEffect(() => {
         if (data?.statusCode === 403) {
             // removeToken();
             setCurrentUser(null);
-            console.log("ERROR");
             return;
         }
 
@@ -43,7 +42,7 @@ const useCheckCurrentMember = () => {
 
 export default useCheckCurrentMember;
 
-interface GetMember {
+interface IGetMember {
     ok: true;
     member: Member;
     statusCode: number;
