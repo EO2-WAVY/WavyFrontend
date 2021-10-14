@@ -3,7 +3,7 @@ import { useSetRecoilState } from "recoil";
 import { currentUserState } from "store/Auth";
 import useSWR from "swr";
 import { fetcher } from "utils/api/fetch";
-import removeToken from "utils/Auth/removeToken";
+// import removeToken from "utils/Auth/removeToken";
 
 export interface Member {
     mbrSeq: string;
@@ -30,7 +30,7 @@ const useCheckCurrentMember = () => {
 
     useEffect(() => {
         if (data?.statusCode === 403) {
-            removeToken();
+            // removeToken();
             setCurrentUser(null);
             console.log("ERROR");
             return;
