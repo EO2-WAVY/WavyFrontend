@@ -1,15 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import {
-    LineChart,
-    XAxis,
-    Line,
-    Tooltip,
-    ResponsiveContainer,
-    // CartesianGrid,
-    // YAxis,
-} from "recharts";
+import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
 import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
 
 const GraphSection = () => {
@@ -19,9 +11,6 @@ const GraphSection = () => {
         <Wrapper isGraphShowing={isGraphShowing}>
             <ResponsiveContainer width="100%" height="100%">
                 <LineChart data={dummy} margin={{ left: 8, right: 8 }}>
-                    <XAxis dataKey="time" />
-                    {/* <YAxis /> */}
-                    {/* <CartesianGrid strokeDasharray="3 3" /> */}
                     <Tooltip />
                     <Line type="monotone" dataKey="accuracy" stroke="#882BFF" />
                 </LineChart>
@@ -49,23 +38,22 @@ const Wrapper = styled(motion.section)<{ isGraphShowing: boolean }>`
     visibility: ${({ isGraphShowing }) =>
         isGraphShowing ? "visible" : "hidden"};
 
-
     background: -moz-linear-gradient(
         top,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 1) 100%
-    ); /* FF3.6-15 */
+    );
     background: -webkit-linear-gradient(
         top,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 1) 100%
-    ); /* Chrome10-25,Safari5.1-6 */
+    );
     background: linear-gradient(
         to bottom,
         rgba(255, 255, 255, 0) 0%,
         rgba(255, 255, 255, 1) 100%
-    ); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 ); /* IE6-9 */
+    );
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
 `;
 
 const dummy = [

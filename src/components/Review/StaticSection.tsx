@@ -9,11 +9,8 @@ const StaticSection = () => {
 
     if (!data) return null;
 
-    console.log(
-        data.statics.dancesOften.forEach((d) => {
-            console.log(d.name, d.times);
-        })
-    );
+    console.log(data.statics);
+
     return (
         <Wrapper
             variants={staggerOne}

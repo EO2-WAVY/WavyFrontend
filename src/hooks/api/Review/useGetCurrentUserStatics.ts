@@ -6,7 +6,7 @@ import { fetcher } from "utils/api/fetch";
 const useGetCurrentUserStatics = () => {
     const currentUser = useRecoilValue(currentUserState);
     const response = useSWR<IGetStatics>(
-        `/members/${currentUser?.mbrSeq}/statics?dancegoodlimit=5&danceoftenlimit=5`,
+        `/members/${currentUser?.mbrSeq}/statics?dancegoodlimit=3&danceoftenlimit=3`,
         fetcher
     );
     

@@ -72,6 +72,7 @@ const Navbar = styled(motion.nav)<NavbarProps>`
 
 const Layout = styled.div`
     max-width: ${({ theme }) => theme.size.maxWidth};
+    width: 100vw;
     height: 100%;
     margin: 0 auto;
     padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};

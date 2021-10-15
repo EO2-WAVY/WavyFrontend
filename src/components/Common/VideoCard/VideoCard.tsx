@@ -56,6 +56,7 @@ const VideoCard = ({
                             playerVars: { disablekb: 1 },
                         },
                     }}
+                    onError={()=>{console.log("나에러")}}
                 />
                 <AnimatePresence exitBeforeEnter>
                     {isHover && (

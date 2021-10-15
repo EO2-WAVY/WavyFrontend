@@ -51,7 +51,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
         setIsScrolled(yPos > 143);
     });
 
-    const {currentTag, setCurrentTag} = useCurrentTag();
+    const { currentTag, setCurrentTag } = useCurrentTag();
     const onClick = () => {
         setCurrentTag(name);
     };
@@ -85,7 +85,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
                     paddingLeft: titleHoriPaddingAnim,
                     paddingRight: titleHoriPaddingAnim,
                 }}
-                variants={defaultFadeInUpVariants}
+                // variants={defaultFadeInUpVariants}
             >
                 {name}
             </Title>
@@ -96,11 +96,14 @@ const TagElem = ({ name, image }: TagElemProps) => {
 export default TagElem;
 
 const Wrapper = styled(motion.div)`
+    position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
     gap: 20px;
     cursor: pointer;
+
+    width: 100px;
 `;
 
 const ThumbnailWrapper = styled(motion.div)<{ isCurrentTag: boolean }>`
@@ -148,7 +151,12 @@ const Title = styled(motion.span)<TitleProps>`
     font-size: 1.125rem;
     text-align: center;
     border-radius: 32px;
-    transition: background-color 0.5s, color 0.5s, border 0.5s, text-weight 0.5s;
+    /* transition: background-color 0.5s, color 0.5s, border 0.5s, text-weight 0.5s; */
+    transition: all 0.5s;
+
+    overflow: hidden;
+    transform-origin: center;
+    transform: scale(1);
 
     max-width: 100%;
     white-space: nowrap;

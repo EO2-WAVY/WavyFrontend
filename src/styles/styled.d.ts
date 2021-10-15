@@ -16,6 +16,9 @@ declare module "styled-components" {
         };
         shadow: {
             over: string;
-        }
+        };
+        mediaQuery: {
+            mobile: string;
+        };
     }
 }

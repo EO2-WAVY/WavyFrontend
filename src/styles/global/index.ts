@@ -10,7 +10,9 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
     }
 
+    html,
     body {
+        width: 100vw;
         overflow-x: hidden;
     }
 
@@ -21,6 +23,12 @@ const GlobalStyle = createGlobalStyle`
 
     input {
         all: unset;
+    }
+
+    @media (max-width: 767px) {
+        html {
+            font-size: 12px;
+        }
     }
 `;
 
