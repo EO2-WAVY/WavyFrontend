@@ -53,8 +53,7 @@ const AnimateRouter = () => {
                 />
                 <Route
                     path="/setting"
-                    // render={() => pushRootWhenNotSignedIn(<Setting />)}
-                    render={() => <Setting />}
+                    render={() => pushRootWhenNotSignedIn(<Setting />)}
                 />
                 <Route path="/practice" component={Practice} />
                 <Route path="/link" component={Link} />

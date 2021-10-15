@@ -1,10 +1,23 @@
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 import useCurrentUser from "hooks/Common/useCurrentUser";
 
-const RequireInfoSection = () => {
+interface RequireInfoSectionProps {
+    nickname: string;
+    setNickname: Dispatch<SetStateAction<string>>;
+}
+
+const RequireInfoSection = ({
+    nickname,
+    setNickname,
+}: RequireInfoSectionProps) => {
     const { currentUser } = useCurrentUser();
+
+    const onChangeNickname = (e: ChangeEvent<HTMLInputElement>) => {
+        setNickname(e.target.value);
+    };
 
     return (
         <Wrapper
@@ -28,7 +41,13 @@ const RequireInfoSection = () => {
 
             <InputWrapper variants={defaultFadeInUpVariants}>
                 <TextLabel>별명</TextLabel>
-                <TextInput type="text" id="nickname" required />
+                <TextInput
+                    type="text"
+                    id="nickname"
+                    required
+                    value={nickname}
+                    onChange={onChangeNickname}
+                />
             </InputWrapper>
         </Wrapper>
     );

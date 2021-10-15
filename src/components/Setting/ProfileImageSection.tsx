@@ -2,8 +2,44 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 import Icon from "components/Common/Icon";
+import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import useCurrentUser from "hooks/Common/useCurrentUser";
 
-const ProfileImageSection = () => {
+interface ProfileImageSectionProps {
+    previewImage: string;
+    setPreviewImage: Dispatch<SetStateAction<string>>;
+    setProfileImage: Dispatch<SetStateAction<File | null>>;
+}
+
+const ProfileImageSection = ({
+    previewImage,
+    setPreviewImage,
+    setProfileImage,
+}: ProfileImageSectionProps) => {
+    const { currentUser } = useCurrentUser();
+
+    const onChangeProfileImage = (e: ChangeEvent<HTMLInputElement>) => {
+        const {
+            target: { files },
+        } = e;
+        const targetFile = files?.[0];
+        setProfileImage(targetFile ? targetFile : null);
+
+        const reader = new FileReader();
+
+        reader.onloadend = () => {
+            setPreviewImage(reader.result as string);
+        };
+        reader.readAsDataURL(targetFile as Blob);
+    };
+
+    const onClickReset = () => {
+        setProfileImage(null);
+        setPreviewImage(
+            currentUser?.profileImageUrl ? currentUser.profileImageUrl : ""
+        );
+    };
+
     return (
         <Wrapper
             variants={staggerOne}
@@ -12,7 +48,7 @@ const ProfileImageSection = () => {
             exit="exit"
         >
             <ProfileImageWrapper variants={defaultFadeInUpVariants}>
-                <ProfileImage />
+                <ProfileImage src={previewImage} alt="profile image" />
                 <ProfileImageInputLabel htmlFor="profileImageInput">
                     <Icon name="setting_edit" />
                 </ProfileImageInputLabel>
@@ -20,9 +56,15 @@ const ProfileImageSection = () => {
                     id="profileImageInput"
                     type="file"
                     accept="image/*"
+                    onChange={onChangeProfileImage}
                 />
             </ProfileImageWrapper>
-            <DeleteBtn variants={defaultFadeInUpVariants}>삭제</DeleteBtn>
+            <DeleteBtn
+                variants={defaultFadeInUpVariants}
+                onClick={onClickReset}
+            >
+                삭제
+            </DeleteBtn>
         </Wrapper>
     );
 };
