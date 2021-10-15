@@ -30,7 +30,6 @@ const Wrapper = styled(motion.section)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    
     margin: 40px 0;
 `;
 

@@ -67,6 +67,9 @@ import { ReactComponent as nav_magnify } from "assets/images/Nav/magnify.svg";
 import { ReactComponent as nav_sign_after } from "assets/images/Nav/sign_after.svg";
 import { ReactComponent as nav_sign_before } from "assets/images/Nav/sign_before.svg";
 
+// Setting
+import { ReactComponent as setting_edit } from "assets/images/Setting/edit.svg";
+
 export {
     analysis_recorded,
     analysis_webcam,
@@ -119,4 +122,5 @@ export {
     nav_magnify,
     nav_sign_after,
     nav_sign_before,
+    setting_edit,
 };
