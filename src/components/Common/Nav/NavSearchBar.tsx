@@ -78,6 +78,12 @@ const Wrapper = styled.div`
 
     display: flex;
     justify-content: space-between;
+
+    ${({ theme }) => theme.mediaQuery.mobile} {
+        & {
+            width: 140px;
+        }
+    }
 `;
 
 const Input = styled.input`

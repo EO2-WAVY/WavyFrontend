@@ -18,6 +18,7 @@ import { ReactComponent as challenge_star3 } from "assets/images/Challenge/star3
 // Common
 import { ReactComponent as common_challenge } from "assets/images/Common/challenge.svg";
 import { ReactComponent as common_logo_full } from "assets/images/Common/logo_full.svg";
+import { ReactComponent as common_logo_small } from "assets/images/Common/logo_small.svg";
 import { ReactComponent as common_practice } from "assets/images/Common/practice.svg";
 import { ReactComponent as common_refresh } from "assets/images/Common/refresh.svg";
 import { ReactComponent as common_share } from "assets/images/Common/share.svg";
@@ -80,6 +81,7 @@ export {
     challenge_star3,
     common_challenge,
     common_logo_full,
+    common_logo_small,
     common_practice,
     common_refresh,
     common_share,

@@ -10,8 +10,7 @@ const GlobalStyle = createGlobalStyle`
         font-family: 'Noto Sans KR', sans-serif;
     }
 
-    html,
-    body {
+    html{
         width: 100vw;
         overflow-x: hidden;
     }

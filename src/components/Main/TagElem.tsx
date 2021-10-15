@@ -17,7 +17,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
     const wrapperMarginAnim = useTransform(
         scrollY,
         [0, TAG_SCROLLED_YPOS, 400],
-        [16, 16, 6]
+        [20, 20, 6]
     );
     const circleWidthAnim = useTransform(
         scrollY,
@@ -58,6 +58,7 @@ const TagElem = ({ name, image }: TagElemProps) => {
 
     return (
         <Wrapper
+            isScrolled={isScrolled}
             onClick={onClick}
             style={{
                 marginRight: wrapperMarginAnim,
@@ -85,7 +86,6 @@ const TagElem = ({ name, image }: TagElemProps) => {
                     paddingLeft: titleHoriPaddingAnim,
                     paddingRight: titleHoriPaddingAnim,
                 }}
-                // variants={defaultFadeInUpVariants}
             >
                 {name}
             </Title>
@@ -95,15 +95,58 @@ const TagElem = ({ name, image }: TagElemProps) => {
 
 export default TagElem;
 
-const Wrapper = styled(motion.div)`
+interface TitleProps {
+    isScrolled: boolean;
+    isCurrentTag: boolean;
+}
+
+const Title = styled(motion.span)<TitleProps>`
+    font-size: 1.125rem;
+    text-align: center;
+    border-radius: 32px;
+    white-space: nowrap;
+
+    transition: all 0.5s;
+    transform-origin: center;
+    opacity: ${({ isScrolled }) => (isScrolled ? 1 : 0)};
+    transform: translateY(${({ isScrolled }) => (isScrolled ? 0 : "10px")});
+
+    font-weight: ${({ isScrolled }) => (isScrolled ? "bold" : "normal")};
+
+    background-color: ${({ isScrolled, isCurrentTag, theme }) => {
+        if (!isScrolled) return theme.color.white;
+        else if (isCurrentTag) return theme.color.lightPurple;
+        return theme.color.white;
+    }};
+
+    color: ${({ isScrolled, isCurrentTag, theme }) => {
+        if (!isScrolled) return theme.color.black;
+        else if (isCurrentTag) return theme.color.white;
+        return theme.color.lightPurple;
+    }};
+
+    border: ${({ isScrolled, isCurrentTag, theme }) =>
+        isScrolled && !isCurrentTag
+            ? `solid 1.75px ${theme.color.lightPurple}`
+            : `solid 1.75px ${theme.color.white}`};
+`;
+
+const Wrapper = styled(motion.div)<{ isScrolled: boolean }>`
     position: relative;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 20px;
+    gap: 6px;
     cursor: pointer;
 
-    width: 100px;
+    width: ${({ isScrolled }) => (isScrolled ? "auto" : "100px")};
+    transition: all 0.5s;
+    overflow: visible;
+
+    &:hover > ${Title} {
+        opacity: 1;
+        transform: translateY(0);
+    }
 `;
 
 const ThumbnailWrapper = styled(motion.div)<{ isCurrentTag: boolean }>`
@@ -140,43 +183,4 @@ const Thumbnail = styled(motion.img)`
     border-radius: 50%;
     background-color: #c4c4c4;
     object-fit: cover;
-`;
-
-interface TitleProps {
-    isScrolled: boolean;
-    isCurrentTag: boolean;
-}
-
-const Title = styled(motion.span)<TitleProps>`
-    font-size: 1.125rem;
-    text-align: center;
-    border-radius: 32px;
-    /* transition: background-color 0.5s, color 0.5s, border 0.5s, text-weight 0.5s; */
-    transition: all 0.5s;
-
-    overflow: hidden;
-    transform-origin: center;
-    transform: scale(1);
-
-    max-width: 100%;
-    white-space: nowrap;
-
-    font-weight: ${({ isScrolled }) => (isScrolled ? "bold" : "normal")};
-
-    background-color: ${({ isScrolled, isCurrentTag, theme }) => {
-        if (!isScrolled) return theme.color.white;
-        else if (isCurrentTag) return theme.color.lightPurple;
-        return theme.color.white;
-    }};
-
-    color: ${({ isScrolled, isCurrentTag, theme }) => {
-        if (!isScrolled) return theme.color.black;
-        else if (isCurrentTag) return theme.color.white;
-        return theme.color.lightPurple;
-    }};
-
-    border: ${({ isScrolled, isCurrentTag, theme }) =>
-        isScrolled && !isCurrentTag
-            ? `solid 1.75px ${theme.color.lightPurple}`
-            : `solid 1.75px ${theme.color.white}`};
 `;

@@ -53,6 +53,7 @@ interface NavbarProps {
 
 const Navbar = styled(motion.nav)<NavbarProps>`
     position: ${({ isConditional }) => (isConditional ? "absolute" : "sticky")};
+    
     top: 0px;
     width: 100vw;
     height: 104px;
@@ -86,7 +87,7 @@ const LeftElem = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 2.5rem;
 
     & > svg {
         cursor: pointer;
@@ -102,5 +103,5 @@ const RightElem = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 1vw;
+    gap: 1rem;
 `;
