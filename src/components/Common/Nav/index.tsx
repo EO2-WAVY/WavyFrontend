@@ -21,7 +21,7 @@ const Nav = () => {
         <AnimatePresence exitBeforeEnter>
             <Navbar
                 isConditional={isConditional}
-                isHover={mousePosition.y < 104}
+                isHover={mousePosition.y < 90}
             >
                 <Layout>
                     <LeftElem>
@@ -56,7 +56,7 @@ const Navbar = styled(motion.nav)<NavbarProps>`
     
     top: 0px;
     width: 100vw;
-    height: 104px;
+    height: 90px;
     background-color: ${({ theme }) => theme.color.white};
     box-shadow: 0px 10px 25px 4px rgba(0, 0, 0, 0.03);
     z-index: 10;

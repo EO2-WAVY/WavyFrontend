@@ -56,7 +56,9 @@ const VideoCard = ({
                             playerVars: { disablekb: 1 },
                         },
                     }}
-                    onError={()=>{console.log("나에러")}}
+                    onError={() => {
+                        console.log("나에러");
+                    }}
                 />
                 <AnimatePresence exitBeforeEnter>
                     {isHover && (
@@ -91,13 +93,15 @@ const Wrapper = styled(motion.article)`
     display: flex;
     flex-direction: column;
     align-items: center;
+    /* width: 260px; */
+    width: 360px;
 `;
 
 const VideoWrapper = styled(motion.section)`
     position: relative;
     aspect-ratio: 9 / 16;
-    /* width: 270px; */
-    width: 360px;
+    width: 100%;
+
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;
@@ -123,7 +127,8 @@ const VideoStyle: CSSProperties = {
 
 const Title = styled.h2<{ isHover: boolean }>`
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 500;
+    text-align: center;
     color: ${({ theme }) => theme.color.black};
     margin-bottom: 4px;
 

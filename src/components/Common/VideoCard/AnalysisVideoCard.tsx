@@ -105,10 +105,6 @@ const VideoWrapper = styled(motion.div)`
     position: relative;
     aspect-ratio: 9 / 16;
     width: 260px;
-
-
-    /* aspect-ratio: 12 / 9;
-    width: 250px; */
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;
@@ -137,7 +133,8 @@ const VideoStyle: CSSProperties = {
 
 const Title = styled.h2<{ isHover: boolean }>`
     font-size: 16px;
-    font-weight: normal;
+    font-weight: 500;
+    text-align: center;
     color: ${({ theme }) => theme.color.black};
     margin-bottom: 4px;
 

@@ -70,14 +70,14 @@ export default TagSection;
 
 const Wrapper = styled(motion.section)`
     position: relative;
-    top: -20px; // 스크롤됐을 시 높이를 결정하는 요소입니다.
+    top: -32px; // 스크롤됐을 시 높이를 결정하는 요소입니다.
     width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;
     background-color: ${({ theme }) => theme.color.white};
     padding: 0 0 8px 0;
-    margin: 30px 0 0 0;
+    margin: 20px 0 0 0;
     overflow: hidden;
     z-index: 998;
 `;
