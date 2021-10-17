@@ -36,7 +36,7 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
             });
             return;
         }
-
+        console.log(rvSeq);
         toggleBookmark();
     };
 

@@ -48,7 +48,7 @@ const Storage = () => {
                         key="storageEmpty"
                         variants={defaultFadeInUpVariants}
                     >
-                        보관함에 담은 영상이 없습니다
+                        <span>보관함에 담은 영상이 없습니다</span>
                     </EmptyWrapper>
                 ) : (
                     <VideoCardWrapper
@@ -93,6 +93,11 @@ const EmptyWrapper = styled(motion.section)`
     display: flex;
     justify-content: center;
     align-items: center;
+
+    & > span {
+        font-size: 1.25rem;
+        color: ${({ theme }) => theme.color.lightGray};
+    }
 `;
 
 const VideoCardWrapper = styled(motion.section)`
