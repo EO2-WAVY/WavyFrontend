@@ -23,6 +23,7 @@ import { ReactComponent as common_practice } from "assets/images/Common/practice
 import { ReactComponent as common_refresh } from "assets/images/Common/refresh.svg";
 import { ReactComponent as common_share } from "assets/images/Common/share.svg";
 import { ReactComponent as common_storage } from "assets/images/Common/storage.svg";
+import { ReactComponent as common_storaged } from "assets/images/Common/storaged.svg";
 import { ReactComponent as common_trash } from "assets/images/Common/trash.svg";
 
 // Controller
@@ -89,6 +90,7 @@ export {
     common_refresh,
     common_share,
     common_storage,
+    common_storaged,
     common_trash,
     controller_active_marker,
     controller_back_key,

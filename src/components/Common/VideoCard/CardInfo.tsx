@@ -72,7 +72,9 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
             </OverrallSpan>
             <NavWrapper variants={cardNavUpVariants}>
                 <NavElem onClick={onClickStorage}>
-                    <Icon name="common_storage" />
+                    <Icon
+                        name={isStoraged ? "common_storaged" : "common_storage"}
+                    />
                     <span>보관</span>
                 </NavElem>
                 <NavElem onClick={onClickPractice}>

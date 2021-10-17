@@ -1,29 +1,13 @@
-import { useEffect, useState } from "react";
 import { throttle } from "lodash";
-
+import { useEffect, useState } from "react";
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
-import { IRefVideo } from "hooks/api/useGetRefVideo";
-import useCurrentTag from "hooks/Common/useCurrentTag";
+import { IRefVideo } from "../useGetRefVideo";
 
-interface useGetRefVideosProps {
-    query?: string;
-    suspense?: boolean;
-}
-
-const useGetRefVideos = ({
-    query = "",
-    suspense = false,
-}: useGetRefVideosProps) => {
-    const { currentTag } = useCurrentTag();
-
-    const { data, error, size, setSize } = useSWRInfinite<IGetRefVideos>(
-        (index) =>
-            query !== ""
-                ? `/ref-videos/search?page=${index + 1}&query=${query}`
-                : `/ref-videos?page=${index + 1}&tagName=${currentTag}`,
-        fetcher,
-        { suspense: suspense }
+const useGetBookmarks = () => {
+    const { data, error, size, setSize } = useSWRInfinite<IGetBookmarks>(
+        (index) => `/bookmarks?page=${index + 1}`,
+        fetcher
     );
 
     const PAGE_SIZE = data?.[0]?.totalPages;
@@ -31,7 +15,7 @@ const useGetRefVideos = ({
     const isLoadingMore =
         isLoadingInitialData ||
         (size > 0 && data && typeof data[size - 1] === "undefined");
-    const isEmpty = data?.[0]?.refVideos.length === 0;
+    const isEmpty = data?.[0]?.bookmarkedRefVideos.length === 0;
 
     const [refVideos, setRefVideos] = useState<IRefVideo[]>([]);
     const [isReachingEnd, setIsReachingEnd] = useState<boolean>(false);
@@ -39,14 +23,16 @@ const useGetRefVideos = ({
     useEffect(() => {
         const updateVideos = () => {
             const tempVideos: IRefVideo[] = [];
-            data?.forEach((tempData) => tempVideos.push(...tempData.refVideos));
+            data?.forEach((tempData) =>
+                tempVideos.push(...tempData.bookmarkedRefVideos)
+            );
             setRefVideos(tempVideos);
         };
 
         updateVideos();
 
         setIsReachingEnd(size >= (PAGE_SIZE as number));
-    }, [data, size, currentTag, PAGE_SIZE]);
+    }, [data, size, PAGE_SIZE]);
 
     const loadMore = throttle(() => {
         if (isReachingEnd) return;
@@ -60,15 +46,15 @@ const useGetRefVideos = ({
         loadMore,
         isReachingEnd,
         isLoadingMore,
-        isLoadingInitialData
+        isLoadingInitialData,
     };
 };
 
-export default useGetRefVideos;
+export default useGetBookmarks;
 
-interface IGetRefVideos {
+interface IGetBookmarks {
     ok: boolean;
-    totalResult: number;
+    totalResults: number;
     totalPages: number;
-    refVideos: IRefVideo[];
+    bookmarkedRefVideos: IRefVideo[];
 }
