@@ -18,6 +18,7 @@ import { ReactComponent as challenge_star3 } from "assets/images/Challenge/star3
 // Common
 import { ReactComponent as common_challenge } from "assets/images/Common/challenge.svg";
 import { ReactComponent as common_logo_full } from "assets/images/Common/logo_full.svg";
+import { ReactComponent as common_logo_small } from "assets/images/Common/logo_small.svg";
 import { ReactComponent as common_practice } from "assets/images/Common/practice.svg";
 import { ReactComponent as common_refresh } from "assets/images/Common/refresh.svg";
 import { ReactComponent as common_share } from "assets/images/Common/share.svg";
@@ -66,6 +67,9 @@ import { ReactComponent as nav_magnify } from "assets/images/Nav/magnify.svg";
 import { ReactComponent as nav_sign_after } from "assets/images/Nav/sign_after.svg";
 import { ReactComponent as nav_sign_before } from "assets/images/Nav/sign_before.svg";
 
+// Setting
+import { ReactComponent as setting_edit } from "assets/images/Setting/edit.svg";
+
 export {
     analysis_recorded,
     analysis_webcam,
@@ -80,6 +84,7 @@ export {
     challenge_star3,
     common_challenge,
     common_logo_full,
+    common_logo_small,
     common_practice,
     common_refresh,
     common_share,
@@ -117,4 +122,5 @@ export {
     nav_magnify,
     nav_sign_after,
     nav_sign_before,
+    setting_edit,
 };

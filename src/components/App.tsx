@@ -1,7 +1,7 @@
 import GlobalStyle from "styles/global";
 import Router from "router";
-import Mobile from "pages/Mobile";
-import useViewport from "hooks/Common/useViewport";
+// import Mobile from "pages/Mobile";
+// import useViewport from "hooks/Common/useViewport";
 import useCheckCurrentMember from "hooks/api/useCheckCurrentMember";
 
 import * as Sentry from "@sentry/react";
@@ -15,13 +15,14 @@ Sentry.init({
 });
 
 function App() {
-    const { width } = useViewport();
+    // const { width } = useViewport();
     useCheckCurrentMember();
 
     return (
         <>
             <GlobalStyle />
-            {width > 700 ? <Router /> : <Mobile />}
+            {/* {width > 700 ? <Router /> : <Mobile />} */}
+            <Router /> 
         </>
     );
 }

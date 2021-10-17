@@ -60,7 +60,7 @@ export default RefVideoSection;
 
 const VideoCardWrapper = styled(motion.div)`
     width: 100%;
-    margin-top: 40px;
+    margin-top: 12px;
 
     display: flex;
     justify-content: space-evenly;

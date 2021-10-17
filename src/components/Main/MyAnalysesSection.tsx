@@ -58,7 +58,7 @@ export default MyAnalysesSection;
 
 const Wrapper = styled(motion.section)`
     width: 100%;
-    margin: 40px 0 60px 0;
+    margin: 12px 0 60px 0;
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -67,7 +67,7 @@ const Wrapper = styled(motion.section)`
 const CarouselBox = styled(motion.div)`
     width: 90%;
     display: flex;
-    align-items: center;
+    align-items: flex-start;
     overflow: scroll;
     gap: 24px;
 

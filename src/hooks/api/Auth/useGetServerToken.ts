@@ -6,12 +6,14 @@ const useGetServerToken = (code: string) => {
     useEffect(() => {
         const saveTokenFromResponse = async () => {
             const response = await get<ServerToken>("/auth/token", {
-                params: { code },
+                params: { code, redirectUrl: window.location.origin },
             });
 
-            saveToken(response.token ? response.token : code); // useDecide의 storage 이벤트 호출
-            console.log(response);
-            // window.close();
+            if (response.token) {
+                saveToken(response.token); // useDecide의 storage 이벤트 호출
+            }
+
+            window.close();
         };
 
         saveTokenFromResponse();

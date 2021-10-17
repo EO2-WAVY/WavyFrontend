@@ -12,7 +12,7 @@ const NoMoreSection = () => {
             exit="exit"
         >
             <Span variants={defaultFadeInUpVariants}>
-                준비한 동영상이 똑 떨어졌습니다 ㅠ^ㅠ
+                저희가 준비한 영상은 여기까지 입니다 😭
             </Span>
             <BtnInfoSpan variants={defaultFadeInUpVariants}>
                 원하는 춤, 동영상이 없으면 <strong>YouTube 링크</strong>를 통해

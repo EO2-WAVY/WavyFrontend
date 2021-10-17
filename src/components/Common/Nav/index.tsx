@@ -21,7 +21,7 @@ const Nav = () => {
         <AnimatePresence exitBeforeEnter>
             <Navbar
                 isConditional={isConditional}
-                isHover={mousePosition.y < 104}
+                isHover={mousePosition.y < 90}
             >
                 <Layout>
                     <LeftElem>
@@ -53,9 +53,10 @@ interface NavbarProps {
 
 const Navbar = styled(motion.nav)<NavbarProps>`
     position: ${({ isConditional }) => (isConditional ? "absolute" : "sticky")};
+    
     top: 0px;
     width: 100vw;
-    height: 104px;
+    height: 90px;
     background-color: ${({ theme }) => theme.color.white};
     box-shadow: 0px 10px 25px 4px rgba(0, 0, 0, 0.03);
     z-index: 10;
@@ -72,6 +73,7 @@ const Navbar = styled(motion.nav)<NavbarProps>`
 
 const Layout = styled.div`
     max-width: ${({ theme }) => theme.size.maxWidth};
+    width: 100vw;
     height: 100%;
     margin: 0 auto;
     padding: 0 ${({ theme }) => theme.size.layoutHorizonPadding};
@@ -85,7 +87,7 @@ const LeftElem = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 40px;
+    gap: 2.5rem;
 
     & > svg {
         cursor: pointer;
@@ -101,5 +103,5 @@ const RightElem = styled.div`
     height: 100%;
     display: flex;
     align-items: center;
-    gap: 1vw;
+    gap: 1rem;
 `;

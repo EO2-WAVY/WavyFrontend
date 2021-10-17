@@ -7,7 +7,7 @@ import Search from "pages/Search";
 import Auth from "pages/Auth";
 import KakaoRedirect from "pages/Auth/KakaoRedirect";
 import SignUpTerm from "pages/SignUpTerm";
-import MyInfo from "pages/MyInfo";
+import Setting from "pages/Setting";
 import Practice from "pages/Practice";
 import Link from "pages/Link";
 import Challenge from "pages/Challenge";
@@ -52,8 +52,8 @@ const AnimateRouter = () => {
                     render={() => pushRootWhenSignedIn(<SignUpTerm />)}
                 />
                 <Route
-                    path="/info"
-                    render={() => pushRootWhenNotSignedIn(<MyInfo />)}
+                    path="/setting"
+                    render={() => pushRootWhenNotSignedIn(<Setting />)}
                 />
                 <Route path="/practice" component={Practice} />
                 <Route path="/link" component={Link} />

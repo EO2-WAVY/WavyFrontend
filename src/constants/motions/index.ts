@@ -13,17 +13,17 @@ export const staggerOne: Variants = {
 export const defaultPageFadeInVariants: Variants = {
     initial: {
         opacity: 0,
-        transition: { duration: 0.8, ease: defaultEasing },
+        transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
     },
     animate: {
         opacity: 1,
-        transition: { duration: 0.8, ease: defaultEasing },
+        transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
     },
     exit: {
         opacity: 0,
-        transition: { duration: 0.8, ease: defaultEasing },
+        transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
     },
 };

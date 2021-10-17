@@ -1,10 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Spinner from "./Spinner";
-import {
-    defaultFadeInUpVariants,
-    defaultPageFadeInVariants,
-} from "constants/motions";
+import { defaultPageFadeInVariants } from "constants/motions";
 
 const MotionLoading = () => {
     return (
@@ -14,7 +11,7 @@ const MotionLoading = () => {
             animate="animate"
             exit="exit"
         >
-            <SpinnerWrapper variants={defaultFadeInUpVariants}>
+            <SpinnerWrapper>
                 <Spinner />
             </SpinnerWrapper>
         </Wrapper>
