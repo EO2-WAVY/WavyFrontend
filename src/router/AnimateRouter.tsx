@@ -15,6 +15,7 @@ import Analysis from "pages/Analysis";
 import NotFound from "pages/NotFound";
 import Terms from "pages/Terms";
 import Review from "pages/Review";
+import Storage from "pages/Storage";
 
 import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 
@@ -58,7 +59,10 @@ const AnimateRouter = () => {
                 <Route path="/practice" component={Practice} />
                 <Route path="/link" component={Link} />
                 <Route path="/challenge" component={Challenge} />
-
+                <Route
+                    path="/storage"
+                    component={() => pushRootWhenNotSignedIn(<Storage />)}
+                />
                 <Route
                     path="/review"
                     component={() => pushRootWhenNotSignedIn(<Review />)}

@@ -48,7 +48,13 @@ const AnalysisVideoCard = ({
     };
 
     return (
-        <Wrapper variants={defaultFadeInUpVariants}>
+        <Wrapper
+            variants={defaultFadeInUpVariants}
+            initial="initial"
+            animate="animate"
+            exit="exit"
+            key={anSeq}
+        >
             <VideoWrapper onMouseOver={onHoverStart} onMouseLeave={onHoverEnd}>
                 <ReactPlayer
                     url={data?.signedUrl}
@@ -63,6 +69,7 @@ const AnalysisVideoCard = ({
                         },
                     }}
                 />
+
                 <AnimatePresence exitBeforeEnter>
                     {isHover && (
                         <>

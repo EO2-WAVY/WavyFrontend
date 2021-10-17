@@ -13,6 +13,7 @@ import {
 import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 import useNotification from "hooks/Common/useNotification";
+import useToggleBookmark from "hooks/api/Storage/useToggleBookmark";
 
 interface CardInfoProps {
     rvSeq: string;
@@ -23,8 +24,21 @@ interface CardInfoProps {
 const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
     const { isUserSignedIn } = useIsUserSignedIn();
     const { addNotification } = useNotification();
+    const { isStoraged, toggleBookmark } = useToggleBookmark(rvSeq);
 
     const history = useHistory();
+
+    const onClickStorage = () => {
+        if (!isUserSignedIn) {
+            addNotification({
+                title: "로그인 후 사용가능 합니다",
+                description: "",
+            });
+            return;
+        }
+        console.log(rvSeq);
+        toggleBookmark();
+    };
 
     const onClickPractice = () =>
         history.push(`/practice?${RQ_REF_VIDEO_ID}=${rvSeq}`);
@@ -57,8 +71,10 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
                 {rvDuration}s
             </OverrallSpan>
             <NavWrapper variants={cardNavUpVariants}>
-                <NavElem>
-                    <Icon name="common_storage" />
+                <NavElem onClick={onClickStorage}>
+                    <Icon
+                        name={isStoraged ? "common_storaged" : "common_storage"}
+                    />
                     <span>보관</span>
                 </NavElem>
                 <NavElem onClick={onClickPractice}>

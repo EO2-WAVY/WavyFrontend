@@ -29,7 +29,7 @@ const Setting = () => {
                 setProfileImage={setProfileImage}
             />
             <RequireInfoSection nickname={nickname} setNickname={setNickname} />
-            <ButtonSection />
+            <ButtonSection onSubmit={onSubmit} />
         </Layout>
     );
 };

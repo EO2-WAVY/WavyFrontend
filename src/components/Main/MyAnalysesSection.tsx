@@ -1,14 +1,14 @@
 import styled from "styled-components";
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import useGetAnalyses from "hooks/api/useGetAnalyses";
 import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 import AnalysisVideoCard from "../Common/VideoCard/AnalysisVideoCard";
-import { staggerHalf } from "constants/motions";
+import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
 import Icon from "components/Common/Icon";
 import useCarousel from "hooks/Common/useCarousel";
 
 const MyAnalysesSection = () => {
-    const { analyses, loadMore } = useGetAnalyses();
+    const { analyses, loadMore, isEmpty } = useGetAnalyses();
 
     const onIntersect: IntersectionObserverCallback = ([
         { isIntersecting },
@@ -29,28 +29,58 @@ const MyAnalysesSection = () => {
     });
 
     return (
-        <AnimatePresence exitBeforeEnter>
-            <Wrapper
-                variants={staggerHalf}
-                key="analyses"
-                initial="initial"
-                animate="animate"
-                exit="exit"
-            >
-                <CarouselBtn key="carouselLeftBtn" onClick={onClickLeft}>
-                    <Icon name="main_carousel_left" />
-                </CarouselBtn>
-                <CarouselBox key="carouselBox" ref={wrapperRef}>
-                    {analyses.map((analysis, index) => (
-                        <AnalysisVideoCard key={index} analysis={analysis} />
-                    ))}
-                    <IntersectionTarget key="target" ref={setTarget} />
-                </CarouselBox>
-                <CarouselBtn key="carouselRightBtn" onClick={onClickRight}>
-                    <Icon name="main_carousel_right" />
-                </CarouselBtn>
-            </Wrapper>
-        </AnimatePresence>
+        <Wrapper
+            variants={defaultFadeInUpVariants}
+            key="analyses"
+            initial="initial"
+            animate="animate"
+            exit="exit"
+        >
+            {isEmpty ? (
+                <EmptyBox>
+                    <span>
+                        <strong>도전하기</strong>를 통해 내가 부족한 부분이
+                        어딘지 배워보세요 !
+                    </span>
+                </EmptyBox>
+            ) : (
+                <>
+                    <CarouselBtn
+                        key="carouselLeftBtn"
+                        onClick={onClickLeft}
+                        variants={defaultFadeInUpVariants}
+                    >
+                        <Icon name="main_carousel_left" />
+                    </CarouselBtn>
+
+                    <CarouselBox
+                        key="carouselBox"
+                        ref={wrapperRef}
+                        variants={staggerHalf}
+                    >
+                        {analyses.map((analysis, index) => (
+                            <AnalysisVideoCard
+                                key={index}
+                                analysis={analysis}
+                            />
+                        ))}
+                        <IntersectionTarget
+                            key="target"
+                            ref={setTarget}
+                            variants={defaultFadeInUpVariants}
+                        />
+                    </CarouselBox>
+
+                    <CarouselBtn
+                        key="carouselRightBtn"
+                        onClick={onClickRight}
+                        variants={defaultFadeInUpVariants}
+                    >
+                        <Icon name="main_carousel_right" />
+                    </CarouselBtn>
+                </>
+            )}
+        </Wrapper>
     );
 };
 
@@ -62,6 +92,24 @@ const Wrapper = styled(motion.section)`
     display: flex;
     justify-content: space-between;
     align-items: center;
+`;
+
+const EmptyBox = styled(motion.div)`
+    width: 100%;
+    height: 140px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    & > span {
+        font-size: 1rem;
+        color: ${({ theme }) => theme.color.gray};
+
+        & > strong {
+            font-weight: 500;
+            color: ${({ theme }) => theme.color.purple};
+        }
+    }
 `;
 
 const CarouselBox = styled(motion.div)`
@@ -105,7 +153,7 @@ const CarouselBtn = styled(motion.button)`
     }
 `;
 
-const IntersectionTarget = styled.div`
+const IntersectionTarget = styled(motion.div)`
     flex-shrink: 0;
     width: 10px;
     height: 30px;
