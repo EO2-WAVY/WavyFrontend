@@ -2,7 +2,11 @@ import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 
-const ButtonSection = () => {
+interface ButtonSectionProps {
+    onSubmit: () => void;
+}
+
+const ButtonSection = ({ onSubmit }: ButtonSectionProps) => {
     return (
         <Wrapper
             variants={staggerOne}
@@ -14,6 +18,7 @@ const ButtonSection = () => {
                 variants={defaultFadeInUpVariants}
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 1 }}
+                onClick={onSubmit}
             >
                 저장하기
             </SaveBtn>

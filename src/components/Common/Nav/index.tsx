@@ -30,7 +30,7 @@ const Nav = () => {
                         {isUserSignedIn && (
                             <>
                                 <Link to="/review">리뷰</Link>
-                                <Link to="/">보관함</Link>
+                                <Link to="/storage">보관함</Link>
                             </>
                         )}
                     </LeftElem>
