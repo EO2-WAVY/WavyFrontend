@@ -13,6 +13,7 @@ import {
 import { RQ_ANALYSIS_ID } from "constants/routerQuery";
 import useDeleteAnalysis from "hooks/api/Main/useDeleteAnalysis";
 import { useSWRConfig } from "swr";
+import useConfirm from "hooks/Common/useConfirm";
 
 interface AnalysisCardInfoProps {
     anSeq: string;
@@ -35,10 +36,15 @@ const AnalysisCardInfo = ({
 
     const { deleteAnalysis } = useDeleteAnalysis(anSeq);
     const { mutate } = useSWRConfig();
-    const onClickDelete = () => {
+    const onConfirmDelete = () => {
         deleteAnalysis();
         mutate("/analyses?page=1");
     };
+    const onClickDelete = useConfirm({
+        message:
+            "삭제한 분석 영상은 복구할 수 없습니다. 그래도 지우시겠습니까?",
+        onConfirm: onConfirmDelete,
+    });
 
     return (
         <Wrapper
