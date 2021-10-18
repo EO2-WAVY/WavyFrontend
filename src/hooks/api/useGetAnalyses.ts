@@ -11,14 +11,17 @@ const useGetAnalyses = () => {
 
     const analyses: IAnalysis[] = [];
     data?.forEach((tempData) => {
-        console.log(tempData);
-        analyses.push(...tempData.analyses);
+        // 삭제되지 않은 분석 영상만 보여지게
+        const notDeletedAnalyses: IAnalysis[] = [];
+        tempData.analyses.forEach((analysis) => {
+            if (!analysis.anDeleted) notDeletedAnalyses.push(analysis);
+        });
+        analyses.push(...notDeletedAnalyses);
     });
-    console.log(size);
 
     const PAGE_SIZE = data?.[0]?.totalPages;
     const isLoadingInitialData = !data && !error;
-    const isEmpty = data?.[0]?.analyses.length === 0;
+    const isEmpty = data?.[0]?.analyses.length === 0 || analyses.length === 0;
     const isReachingEnd = size >= (PAGE_SIZE as number);
 
     const loadMore = () => {

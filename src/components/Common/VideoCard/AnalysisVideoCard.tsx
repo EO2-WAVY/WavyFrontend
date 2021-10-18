@@ -51,6 +51,8 @@ const AnalysisVideoCard = ({
         [createdDate]
     );
 
+    if (!data) return null;
+
     return (
         <Wrapper
             variants={defaultFadeInUpVariants}
@@ -61,7 +63,7 @@ const AnalysisVideoCard = ({
         >
             <VideoWrapper onMouseOver={onHoverStart} onMouseLeave={onHoverEnd}>
                 <ReactPlayer
-                    url={data?.signedUrl}
+                    url={data.signedUrl}
                     playing={isHover}
                     volume={videoCardVolume}
                     height="100%"
@@ -89,6 +91,7 @@ const AnalysisVideoCard = ({
                                     rvDuration ? rvDuration : "0"
                                 )}
                                 rvDifficultyCd={rvDifficultyCd}
+                                donwloadUrl={data.signedUrl}
                             />
                         </>
                     )}
