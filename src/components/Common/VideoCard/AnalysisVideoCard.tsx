@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useMemo, useState } from "react";
 import ReactPlayer from "react-player";
 import { AnimatePresence, motion } from "framer-motion";
 import styled, { CSSProperties } from "styled-components";
@@ -13,6 +13,7 @@ import useVideoCardVolume from "hooks/Main/useVideoCardVolume";
 import { IAnalysis } from "hooks/api/useGetAnalysis";
 import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
 import AnalysisCardInfo from "./AnalysisCardInfo";
+import { calcStringDateWithCurrentDate } from "utils/formatting/formattingDate";
 
 interface AnalysisVideoCardProps {
     analysis: IAnalysis;
@@ -25,8 +26,6 @@ const AnalysisVideoCard = ({
         anScore,
         anGradeCode,
         refVideo: {
-            rvUrl,
-            rvSeq,
             rvDuration,
             rvDifficultyCd,
             rvSongName,
@@ -46,6 +45,11 @@ const AnalysisVideoCard = ({
     const onHoverEnd = () => {
         setIsHover(false);
     };
+
+    const calcedTime = useMemo(
+        () => calcStringDateWithCurrentDate(createdDate),
+        [createdDate]
+    );
 
     return (
         <Wrapper
@@ -95,7 +99,7 @@ const AnalysisVideoCard = ({
                 {rvSongName} - {rvArtistName}
             </Title>
             <Author isHover={isHover}>{rvSourceAccountName}</Author>
-            <Author isHover={isHover}>{createdDate}</Author>
+            <Author isHover={isHover}>{calcedTime}</Author>
         </Wrapper>
     );
 };
