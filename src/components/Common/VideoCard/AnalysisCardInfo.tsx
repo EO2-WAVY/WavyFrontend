@@ -64,7 +64,7 @@ const AnalysisCardInfo = ({
                     <Icon name="common_refresh" />
                     <span>분석</span>
                 </NavElem>
-                <NavDownload href={donwloadUrl} download>
+                <NavDownload href={donwloadUrl} download target="_blank">
                     <Icon name="common_share" />
                     <span>공유</span>
                 </NavDownload>
