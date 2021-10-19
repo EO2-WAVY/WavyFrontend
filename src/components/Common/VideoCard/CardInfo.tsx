@@ -74,6 +74,7 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
                 <NavElem onClick={onClickStorage}>
                     <Icon
                         name={isStoraged ? "common_storaged" : "common_storage"}
+                        className={isStoraged ? "storaged" : ""}
                     />
                     <span>보관</span>
                 </NavElem>
@@ -151,11 +152,24 @@ const NavElem = styled(motion.div)`
     font-size: 14px;
     cursor: pointer;
 
+    & > span {
+        transition: color 0.3s;
+    }
+
     & > svg {
         width: 20px;
         height: 20px;
         margin-bottom: 6px;
         transition: transform 0.3s;
+
+        &.storaged {
+            & > * {
+                fill: #21ff94;
+            }
+            & ~ span {
+                color: #21ff94;
+            }
+        }
     }
 
     &:hover > svg {

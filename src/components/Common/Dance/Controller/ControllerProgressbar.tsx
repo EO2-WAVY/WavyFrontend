@@ -35,8 +35,6 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
             const seekTime =
                 (clientX * rvDuration) / barRef.current.clientWidth;
 
-            console.log(clientX, seekTime);
-
             seekTo(seekTime);
             userSeekTo(seekTime);
         },

@@ -1,5 +1,5 @@
 import LinkSection from "components/Main/LinkSection";
-import MyAnalysesSection from "./MyAnalysesSection";
+import MyAnalysesSection from "components/Main/MyAnalysesSection";
 
 const MyTagSection = () => {
     return (

@@ -3,16 +3,58 @@ import { motion } from "framer-motion";
 
 import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
 import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
+import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
+import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
+
+interface ILineChartClickEvent {
+    activeCoordinate: {
+        x: number;
+        y: number;
+    };
+    activeLabel: number;
+    activeTooltipIndex: number;
+    chartX: number;
+    chartY: number;
+}
 
 const GraphSection = () => {
     const { isGraphShowing } = useIsGraphShowing();
+    const { seekTo } = usePlayerInstance(refVideoRefState);
+    const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
+
+    const onClickGraph = (e: ILineChartClickEvent) => {
+        if (!e) return;
+        seekTo(e.activeLabel);
+        userSeekTo(e.activeLabel);
+    };
+
+    const labelFormatter = (label: number) => {
+        return dummy[label].time;
+    };
+
+    const valueFormatter = (value: string) => {
+        return [value, "정확도"];
+    };
 
     return (
         <Wrapper isGraphShowing={isGraphShowing}>
             <ResponsiveContainer width="100%" height="100%">
-                <LineChart data={dummy} margin={{ left: 8, right: 8 }}>
-                    <Tooltip />
-                    <Line type="monotone" dataKey="accuracy" stroke="#882BFF" />
+                <LineChart
+                    data={dummy}
+                    // margin={{ left: 8, right: 8 }}
+                    onClick={onClickGraph}
+                >
+                    <Tooltip
+                        formatter={valueFormatter}
+                        labelFormatter={labelFormatter}
+                    />
+                    <Line
+                        type="monotone"
+                        dataKey="accuracy"
+                        stroke="#882BFF"
+                        strokeWidth="2px"
+                        dot={{ r: 5 }}
+                    />
                 </LineChart>
             </ResponsiveContainer>
         </Wrapper>
@@ -120,13 +162,5 @@ const dummy = [
     {
         time: "00:15",
         accuracy: 90,
-    },
-    {
-        time: "00:16",
-        accuracy: 10,
-    },
-    {
-        time: "00:17",
-        accuracy: 50,
     },
 ];

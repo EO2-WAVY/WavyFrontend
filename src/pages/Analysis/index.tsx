@@ -15,7 +15,7 @@ const Analysis = () => {
     const { data } = useGetAnalysis(anSeq);
 
     if (!data) return <></>;
-
+    console.log(data.analysis);
     return (
         <Wrapper
             variants={defaultPageFadeInVariants}
