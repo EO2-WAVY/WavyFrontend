@@ -197,3 +197,19 @@ export const videoCardVolumeVariants: Variants = {
         willChange: "opacity, transform",
     },
 };
+
+export const mobileLogoAnimationVariants: Variants = {
+    animate: {
+        y: [0, -10, 0],
+        scale: [1, 1.6, 1, 1.2, 1, 1.5, 1],
+        rotate: [0, 10, -5, 15, -10, 0],
+        opacity: 1,
+        transition: {
+            duration: 10,
+            ease: defaultEasing,
+            loop: Infinity,
+        },
+
+        willChange: "all",
+    },
+};
