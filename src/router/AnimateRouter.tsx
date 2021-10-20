@@ -18,8 +18,12 @@ import Review from "pages/Review";
 import Storage from "pages/Storage";
 
 import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
+// for google analytics
+import useGa from "hooks/Common/useGa";
 
 const AnimateRouter = () => {
+    useGa();
+
     const location = useLocation();
     const { isUserSignedIn } = useIsUserSignedIn();
 
