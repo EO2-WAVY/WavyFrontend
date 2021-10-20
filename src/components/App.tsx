@@ -6,6 +6,7 @@ import useCheckCurrentMember from "hooks/api/useCheckCurrentMember";
 
 import * as Sentry from "@sentry/react";
 import { Integrations } from "@sentry/tracing";
+import useGa from "hooks/Common/useGa";
 
 Sentry.init({
     dsn: process.env.REACT_APP_SENTRY_DSN,
@@ -17,12 +18,13 @@ Sentry.init({
 function App() {
     // const { width } = useViewport();
     useCheckCurrentMember();
+    useGa();
 
     return (
         <>
             <GlobalStyle />
             {/* {width > 700 ? <Router /> : <Mobile />} */}
-            <Router /> 
+            <Router />
         </>
     );
 }
