@@ -36,11 +36,11 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
     };
 
     const labelFormatter = (label: number) => {
-        return dummy[label].time;
+        return dummy[label].start_time;
     };
 
-    const valueFormatter = (value: string) => {
-        return [value, "정확도"];
+    const valueFormatter = (value: number) => {
+        return [value.toFixed(2), "정확도"];
     };
 
     const { data } = useGetAnalysis(anSeq);
@@ -61,8 +61,8 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
             )}
             <ResponsiveContainer width="100%" height="100%" className="graph">
                 <LineChart
-                    data={dummy}
-                    // margin={{ left: 8, right: 8 }}
+                    data={isAnalysing ? dummy : data?.simularityJson.analyzes}
+                    margin={{ left: 16, right: 16 }}
                     onClick={onClickGraph}
                 >
                     <Tooltip
@@ -71,7 +71,7 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
                     />
                     <Line
                         type="monotone"
-                        dataKey="accuracy"
+                        dataKey="average_score"
                         stroke="#882BFF"
                         strokeWidth="2px"
                         dot={{ r: 5 }}
@@ -139,67 +139,67 @@ const LoadingOverlay = styled.div`
 
 const dummy = [
     {
-        time: "00:00",
-        accuracy: 30,
+        start_time: "00:00",
+        average_score: 30,
     },
     {
-        time: "00:01",
-        accuracy: 50,
+        start_time: "00:01",
+        average_score: 50,
     },
     {
-        time: "00:02",
-        accuracy: 45,
+        start_time: "00:02",
+        average_score: 45,
     },
     {
-        time: "00:03",
-        accuracy: 60,
+        start_time: "00:03",
+        average_score: 60,
     },
     {
-        time: "00:04",
-        accuracy: 65,
+        start_time: "00:04",
+        average_score: 65,
     },
     {
-        time: "00:05",
-        accuracy: 90,
+        start_time: "00:05",
+        average_score: 90,
     },
     {
-        time: "00:06",
-        accuracy: 80,
+        start_time: "00:06",
+        average_score: 80,
     },
     {
-        time: "00:07",
-        accuracy: 80,
+        start_time: "00:07",
+        average_score: 80,
     },
     {
-        time: "00:08",
-        accuracy: 75,
+        start_time: "00:08",
+        average_score: 75,
     },
     {
-        time: "00:09",
-        accuracy: 70,
+        start_time: "00:09",
+        average_score: 70,
     },
     {
-        time: "00:10",
-        accuracy: 60,
+        start_time: "00:10",
+        average_score: 60,
     },
     {
-        time: "00:11",
-        accuracy: 50,
+        start_time: "00:11",
+        average_score: 50,
     },
     {
-        time: "00:12",
-        accuracy: 50,
+        start_time: "00:12",
+        average_score: 50,
     },
     {
-        time: "00:13",
-        accuracy: 30,
+        start_time: "00:13",
+        average_score: 30,
     },
     {
-        time: "00:14",
-        accuracy: 50,
+        start_time: "00:14",
+        average_score: 50,
     },
     {
-        time: "00:15",
-        accuracy: 90,
+        start_time: "00:15",
+        average_score: 90,
     },
 ];
