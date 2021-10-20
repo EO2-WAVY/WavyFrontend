@@ -9,7 +9,9 @@ const StaticSection = () => {
 
     if (!data) return null;
 
-    console.log(data.statics);
+    const {
+        statics: { dancesGoodAt, dancesOften },
+    } = data;
 
     return (
         <Wrapper
@@ -29,10 +31,7 @@ const StaticSection = () => {
             <Column variants={defaultFadeInUpVariants}>
                 <Category>높은 점수를 받은 댄스</Category>
                 <GraphWrapper>
-                    <BarChart
-                        data={data.statics.dancesGoodAt}
-                        layout="vertical"
-                    >
+                    <BarChart data={dancesGoodAt} layout="vertical">
                         <Bar dataKey="bestScore" />
                     </BarChart>
                 </GraphWrapper>
@@ -41,11 +40,7 @@ const StaticSection = () => {
                 <Category>많이 춘 댄스</Category>
                 <GraphWrapper>
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart
-                            data={data.statics.dancesOften}
-                            width={600}
-                            height={100}
-                        >
+                        <BarChart data={dancesOften} width={600} height={100}>
                             <Bar dataKey="times" barSize={26} fill="#DDC1FF" />
                             <XAxis
                                 dataKey="name"
