@@ -14,6 +14,8 @@ const Analysis = () => {
     const anSeq = useRequiredRouterQuery(RQ_ANALYSIS_ID);
     const { data } = useGetAnalysis(anSeq);
 
+    console.log(data);
+
     if (!data) return <></>;
 
     return (
@@ -26,7 +28,7 @@ const Analysis = () => {
         >
             <VideoSection analysis={data.analysis} />
 
-            <GraphSection />
+            <GraphSection anSeq={anSeq} />
 
             <Controller
                 rvDuration={data.analysis.refVideo.rvDuration}

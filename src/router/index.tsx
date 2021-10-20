@@ -11,14 +11,18 @@ import { ErrorBoundary } from "@sentry/react";
 import FullScreenError from "components/Common/HandleAsync/FullScreenError";
 import NotificationWrapper from "components/Common/Notification/NotificationWrapper";
 import useIsMobile from "hooks/Common/useIsMobile";
-import MobileNav from "components/Common/Nav/MobileNav";
+import MoblieNotSupport from "pages/MoblieNotSupport";
+// import MobileNav from "components/Common/Nav/MobileNav";
 
 const Router = () => {
     const isMobile = useIsMobile();
 
+    if (isMobile) return <MoblieNotSupport />;
+
     return (
         <BrowserRouter>
-            {isMobile ? <MobileNav /> : <Nav />}
+            {/* {isMobile ? <MobileNav /> : <Nav />} */}
+            <Nav />
             <ScrollToTopElem />
 
             <ErrorBoundary

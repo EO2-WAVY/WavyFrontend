@@ -6,6 +6,10 @@ const useGetAnalysis = (anSeq: string) => {
     const key = `/analyses/${anSeq}`;
     const response = useSWR<IGetAnalysis>(key, fetcher);
 
+    if (typeof response.data?.simularityJson.analyzes === "undefined") {
+        setTimeout(() => response.mutate(), 1000);
+    }
+
     return response;
 };
 
@@ -27,7 +31,18 @@ export interface IAnalysis {
     rvSeq: string;
 }
 
+export interface ISimularityJson {
+    analyzes: {
+        start_time: string;
+        average_score: number;
+        scores: number[];
+        guides: string[][];
+    }[];
+    wrong_sectons: string[];
+}
+
 interface IGetAnalysis {
     ok: boolean;
     analysis: IAnalysis;
+    simularityJson: ISimularityJson;
 }

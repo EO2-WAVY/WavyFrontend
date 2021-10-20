@@ -9,7 +9,7 @@ const useGetCurrentUserStatics = () => {
         `/members/${currentUser?.mbrSeq}/statics?dancegoodlimit=3&danceoftenlimit=3`,
         fetcher
     );
-    
+
     return response;
 };
 
