@@ -23,7 +23,7 @@ const useNotification = () => {
             description,
             autoHideDuration,
         };
-        console.log(newNoti.index);
+
         setNotificationIndex((prev) => prev + 1);
         setNotifications([...notifications, newNoti]);
     };

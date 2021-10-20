@@ -5,6 +5,9 @@ import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
 import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
+import useGetAnalysis from "hooks/api/useGetAnalysis";
+import { useEffect, useState } from "react";
+import Spinner from "components/Common/Spinner";
 
 interface ILineChartClickEvent {
     activeCoordinate: {
@@ -17,7 +20,11 @@ interface ILineChartClickEvent {
     chartY: number;
 }
 
-const GraphSection = () => {
+interface GraphSectionProps {
+    anSeq: string;
+}
+
+const GraphSection = ({ anSeq }: GraphSectionProps) => {
     const { isGraphShowing } = useIsGraphShowing();
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
@@ -36,9 +43,23 @@ const GraphSection = () => {
         return [value, "정확도"];
     };
 
+    const { data } = useGetAnalysis(anSeq);
+    const [isAnalysing, setIsAnalysing] = useState<boolean>(false);
+
+    useEffect(() => {
+        const tempIsAnalysing =
+            typeof data?.simularityJson.analyzes === "undefined";
+        setIsAnalysing(tempIsAnalysing);
+    }, [data?.simularityJson.analyzes]);
+
     return (
-        <Wrapper isGraphShowing={isGraphShowing}>
-            <ResponsiveContainer width="100%" height="100%">
+        <Wrapper isGraphShowing={isGraphShowing} isAnalysing={isAnalysing}>
+            {isAnalysing && (
+                <LoadingOverlay>
+                    <Spinner widthPercent={5} />
+                </LoadingOverlay>
+            )}
+            <ResponsiveContainer width="100%" height="100%" className="graph">
                 <LineChart
                     data={dummy}
                     // margin={{ left: 8, right: 8 }}
@@ -63,7 +84,12 @@ const GraphSection = () => {
 
 export default GraphSection;
 
-const Wrapper = styled(motion.section)<{ isGraphShowing: boolean }>`
+interface IWrapper {
+    isGraphShowing: boolean;
+    isAnalysing: boolean;
+}
+
+const Wrapper = styled(motion.section)<IWrapper>`
     position: fixed;
     bottom: 48px;
 
@@ -96,6 +122,19 @@ const Wrapper = styled(motion.section)<{ isGraphShowing: boolean }>`
         rgba(255, 255, 255, 1) 100%
     );
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
+
+    & > .graph {
+        opacity: ${({ isAnalysing }) => (isAnalysing ? 0.2 : 1)};
+    }
+`;
+
+const LoadingOverlay = styled.div`
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
 `;
 
 const dummy = [

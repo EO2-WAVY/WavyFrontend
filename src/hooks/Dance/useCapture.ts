@@ -11,7 +11,6 @@ const useCapture = () => {
         if (!data.size) return;
         setRecordedChunks((prev) => prev.concat(data));
         setDataIsAvailable(true);
-        console.log("data available!!!");
     }, []);
 
     const startCapture = useCallback(() => {
