@@ -36,7 +36,9 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
     };
 
     const labelFormatter = (label: number) => {
-        return dummy[label].start_time;
+        if (!data) return dummy[label].start_time;
+        const correctData = isAnalysing ? dummy : data.simularityJson.analyzes;
+        return correctData[label].start_time;
     };
 
     const valueFormatter = (value: number) => {

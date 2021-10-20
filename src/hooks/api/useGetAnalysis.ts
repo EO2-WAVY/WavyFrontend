@@ -6,6 +6,10 @@ const useGetAnalysis = (anSeq: string) => {
     const key = `/analyses/${anSeq}`;
     const response = useSWR<IGetAnalysis>(key, fetcher);
 
+    if (typeof response.data?.simularityJson.analyzes === "undefined") {
+        setTimeout(() => response.mutate(), 1000);
+    }
+
     return response;
 };
 
