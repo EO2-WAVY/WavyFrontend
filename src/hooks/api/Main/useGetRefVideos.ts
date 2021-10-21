@@ -16,12 +16,12 @@ const useGetRefVideos = ({
     suspense = false,
 }: useGetRefVideosProps) => {
     const { currentTag } = useCurrentTag();
-
+    const fmCurrentTag = currentTag.replace("&", "%26");
     const { data, error, size, setSize } = useSWRInfinite<IGetRefVideos>(
         (index) =>
             query !== ""
                 ? `/ref-videos/search?page=${index + 1}&query=${query}`
-                : `/ref-videos?page=${index + 1}&tagName=${currentTag}`,
+                : `/ref-videos?page=${index + 1}&tagName=${fmCurrentTag}`,
         fetcher,
         { suspense: suspense }
     );
@@ -60,7 +60,7 @@ const useGetRefVideos = ({
         loadMore,
         isReachingEnd,
         isLoadingMore,
-        isLoadingInitialData
+        isLoadingInitialData,
     };
 };
 
