@@ -1,4 +1,4 @@
-import styled from "styled-components";
+import styled, { CSSProperties } from "styled-components";
 import { motion } from "framer-motion";
 
 import { LineChart, Line, Tooltip, ResponsiveContainer, YAxis } from "recharts";
@@ -8,6 +8,7 @@ import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useGetAnalysis from "hooks/api/useGetAnalysis";
 import { useEffect, useState } from "react";
 import Spinner from "components/Common/Spinner";
+import ConditionalDot from "./ConditionalDot";
 
 interface ILineChartClickEvent {
     activeCoordinate: {
@@ -64,10 +65,16 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
             <ResponsiveContainer width="100%" height="100%" className="graph">
                 <LineChart
                     data={isAnalysing ? dummy : data?.simularityJson.analyzes}
-                    // margin={{ left: 16, right: 16 }}
+                    margin={{ right: 16 }}
                     onClick={onClickGraph}
                 >
-                    <YAxis type="number" domain={[0, 100]} />
+                    <YAxis
+                        type="number"
+                        domain={[0, 100]}
+                        tickMargin={10}
+                        stroke="#882BFF"
+                        tick={{ style: YAxisTickStyle }}
+                    />
                     <Tooltip
                         formatter={valueFormatter}
                         labelFormatter={labelFormatter}
@@ -77,7 +84,7 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
                         dataKey="average_score"
                         stroke="#882BFF"
                         strokeWidth="2px"
-                        dot={{ r: 5 }}
+                        dot={<ConditionalDot />}
                     />
                 </LineChart>
             </ResponsiveContainer>
@@ -140,6 +147,11 @@ const LoadingOverlay = styled.div`
     z-index: 1;
 `;
 
+const YAxisTickStyle: CSSProperties = {
+    fill: "#8828FF",
+    fontWeight: 700,
+};
+
 const dummy = [
     {
         start_time: "00:00",
@@ -147,19 +159,19 @@ const dummy = [
     },
     {
         start_time: "00:01",
-        average_score: 50,
+        average_score: 90,
     },
     {
         start_time: "00:02",
-        average_score: 45,
+        average_score: 80,
     },
     {
         start_time: "00:03",
-        average_score: 60,
+        average_score: 70,
     },
     {
         start_time: "00:04",
-        average_score: 65,
+        average_score: 30,
     },
     {
         start_time: "00:05",
