@@ -1,14 +1,21 @@
 import { IRefVideo } from "hooks/api/useGetRefVideo";
+import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "utils/api/fetch";
 
 const useGetAnalysis = (anSeq: string) => {
-    const key = `/analyses/${anSeq}`;
-    const response = useSWR<IGetAnalysis>(key, fetcher);
+    const [isAnalysed, setIsAnalysed] = useState<boolean>(false);
 
-    if (typeof response.data?.simularityJson.analyzes === "undefined") {
-        setTimeout(() => response.mutate(), 1000);
-    }
+    const key = `/analyses/${anSeq}`;
+    const response = useSWR<IGetAnalysis>(key, fetcher, {
+        refreshInterval: isAnalysed ? 0 : 5000,
+    });
+
+    useEffect(() => {
+        if (response.data?.simularityJson.analyzes) {
+            setIsAnalysed(true);
+        }
+    }, [response.data?.simularityJson.analyzes]);
 
     return response;
 };
