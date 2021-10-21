@@ -84,7 +84,7 @@ const ProfileImageWrapper = styled(motion.div)`
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: ${({theme}) => theme.color.lightGray};
+    background-color: ${({theme}) => theme.color.lightPurple};
 `;
 
 const ProfileImage = styled.img`
@@ -95,6 +95,7 @@ const ProfileImage = styled.img`
     height: 100%;
     border-radius: 50%;
     object-fit: cover;
+    text-align: center;
 `;
 
 const ProfileImageInputLabel = styled.label`

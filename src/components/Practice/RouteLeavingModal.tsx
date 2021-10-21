@@ -34,7 +34,6 @@ const RouteLeavingModal = () => {
         setIsConfirmed(true);
         closeModal();
         if (lastLocation) {
-            console.log(lastLocation);
             history.push(lastLocation);
         }
     };

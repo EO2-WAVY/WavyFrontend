@@ -12,14 +12,13 @@ const usePostPracticeTime = (rvSeq: string) => {
 
         const date = new Date();
         const fmDate = fmDateToYyyyMmDdHhMmSs(date);
-        const response = await post("/practices", {
+        await post("/practices", {
             ptStarted: practiceStartTime,
             ptFinished: fmDate,
             ptVideoTypeCode: "60002",
             ptVideoUrl: data.refVideo.rvUrl,
         });
 
-        console.log(response);
         startPractice();
     };
 

@@ -1,8 +1,12 @@
-import useNotification from "hooks/Common/useNotification";
+import { useSWRConfig } from "swr";
 import { get, put } from "utils/api/client";
+
+import { key as memberKey } from "hooks/api/useCheckCurrentMember";
+import useNotification from "hooks/Common/useNotification";
 
 const useUpdateMember = () => {
     const { addNotification } = useNotification();
+    const { mutate } = useSWRConfig();
 
     const putMember = async (mbrNickname: string, s3Objectname?: string) => {
         const requestBody: IPutUpdateMemberRequest = {
@@ -12,12 +16,18 @@ const useUpdateMember = () => {
 
         const response = await put<IPutUpdateMember>("/members", requestBody);
 
-        if (!response.ok)
+        if (response.ok) {
+            addNotification({
+                title: "성공적으로 수정하였습니다",
+                description: "",
+            });
+            mutate(memberKey);
+        } else {
             addNotification({
                 title: "수정에 실패하였습니다",
                 description: "",
             });
-        console.log(response);
+        }
     };
 
     const updateMember = async (
@@ -37,7 +47,6 @@ const useUpdateMember = () => {
             }
         );
 
-        console.log(s3Url);
         const xhr = new XMLHttpRequest();
         xhr.open("PUT", s3Url.signedUrl);
         xhr.send(profileImage);
