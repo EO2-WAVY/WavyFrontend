@@ -37,6 +37,7 @@ const useUpdateMember = () => {
             }
         );
 
+        console.log(s3Url);
         const xhr = new XMLHttpRequest();
         xhr.open("PUT", s3Url.signedUrl);
         xhr.send(profileImage);

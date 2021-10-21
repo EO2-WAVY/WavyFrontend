@@ -84,7 +84,7 @@ const ProfileImageWrapper = styled(motion.div)`
     width: 200px;
     height: 200px;
     border-radius: 50%;
-    background-color: green;
+    background-color: ${({theme}) => theme.color.lightGray};
 `;
 
 const ProfileImage = styled.img`

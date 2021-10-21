@@ -1,7 +1,7 @@
 import styled from "styled-components";
 import { motion } from "framer-motion";
 
-import { LineChart, Line, Tooltip, ResponsiveContainer } from "recharts";
+import { LineChart, Line, Tooltip, ResponsiveContainer, YAxis } from "recharts";
 import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
@@ -64,9 +64,10 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
             <ResponsiveContainer width="100%" height="100%" className="graph">
                 <LineChart
                     data={isAnalysing ? dummy : data?.simularityJson.analyzes}
-                    margin={{ left: 16, right: 16 }}
+                    // margin={{ left: 16, right: 16 }}
                     onClick={onClickGraph}
                 >
+                    <YAxis type="number" domain={[0, 100]} />
                     <Tooltip
                         formatter={valueFormatter}
                         labelFormatter={labelFormatter}

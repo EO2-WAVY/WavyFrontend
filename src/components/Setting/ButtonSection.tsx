@@ -1,5 +1,7 @@
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
 import { motion } from "framer-motion";
+import useUserDropOut from "hooks/api/Setting/useUserDropOut";
+import useConfirm from "hooks/Common/useConfirm";
 import styled from "styled-components";
 
 interface ButtonSectionProps {
@@ -7,6 +9,12 @@ interface ButtonSectionProps {
 }
 
 const ButtonSection = ({ onSubmit }: ButtonSectionProps) => {
+    const { userDropOut } = useUserDropOut();
+    const onClickDropOut = useConfirm({
+        message: "정말로 탈퇴하시겠습니까?",
+        onConfirm: userDropOut,
+    });
+
     return (
         <Wrapper
             variants={staggerOne}
@@ -22,7 +30,12 @@ const ButtonSection = ({ onSubmit }: ButtonSectionProps) => {
             >
                 저장하기
             </SaveBtn>
-            <DropOutBtn variants={defaultFadeInUpVariants}>탈퇴하기</DropOutBtn>
+            <DropOutBtn
+                variants={defaultFadeInUpVariants}
+                onClick={onClickDropOut}
+            >
+                탈퇴하기
+            </DropOutBtn>
         </Wrapper>
     );
 };

@@ -21,8 +21,7 @@ const useSignUp = ({ userInfo, checks }: useSignUpProps) => {
             mbrEmail: userInfo.email,
             mbrNickname: userInfo.nickname,
             certificationMethodCode: "30002",
-            profileImageUrl:
-                "https://user-images.githubusercontent.com/26461307/135726385-309594b0-c6d0-4caf-846d-97ca6876dda2.jpg",
+            profileImageUrl: null,
             privacyConsentCode: gcPrivacyConsent(checks[1]),
             marketingConsentCode: gcMarketingConsent(checks[2]),
             videoOptionCode: "40001",
