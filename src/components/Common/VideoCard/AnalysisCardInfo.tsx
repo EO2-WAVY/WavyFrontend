@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import ReactGA from "react-ga";
 
 import Icon from "components/Common/Icon";
 import { gcRefVideoDifficulty } from "utils/groupCode";
@@ -14,6 +15,7 @@ import { RQ_ANALYSIS_ID } from "constants/routerQuery";
 import useDeleteAnalysis from "hooks/api/Main/useDeleteAnalysis";
 import { useSWRConfig } from "swr";
 import useConfirm from "hooks/Common/useConfirm";
+import { GA_CT_ANALYSIS } from "constants/gaCategory";
 
 interface AnalysisCardInfoProps {
     anSeq: string;
@@ -31,12 +33,29 @@ const AnalysisCardInfo = ({
     const history = useHistory();
 
     const onClickAnalysis = () => {
+        ReactGA.event({
+            category: GA_CT_ANALYSIS,
+            action: `분석하기 진입: ${anSeq}`,
+        });
+
         history.push(`/analysis?${RQ_ANALYSIS_ID}=${anSeq}`);
+    };
+
+    const onClickShare = () => {
+        ReactGA.event({
+            category: GA_CT_ANALYSIS,
+            action: `분석 결과 공유: ${anSeq}`,
+        });
     };
 
     const { deleteAnalysis } = useDeleteAnalysis(anSeq);
     const { mutate } = useSWRConfig();
     const onConfirmDelete = () => {
+        ReactGA.event({
+            category: GA_CT_ANALYSIS,
+            action: `분석 결과 삭제: ${anSeq}`,
+        });
+
         deleteAnalysis();
         mutate("/analyses?page=1");
     };
@@ -64,7 +83,12 @@ const AnalysisCardInfo = ({
                     <Icon name="common_refresh" />
                     <span>분석</span>
                 </NavElem>
-                <NavDownload href={donwloadUrl} download target="_blank">
+                <NavDownload
+                    href={donwloadUrl}
+                    download
+                    target="_blank"
+                    onClick={onClickShare}
+                >
                     <Icon name="common_share" />
                     <span>공유</span>
                 </NavDownload>

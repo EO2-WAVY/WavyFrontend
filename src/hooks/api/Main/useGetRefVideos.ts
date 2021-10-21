@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga";
 import { throttle } from "lodash";
 
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
 import { IRefVideo } from "hooks/api/useGetRefVideo";
 import useCurrentTag from "hooks/Common/useCurrentTag";
+import { GA_CT_TAGS } from "constants/gaCategory";
 
 interface useGetRefVideosProps {
     query?: string;
@@ -16,12 +18,12 @@ const useGetRefVideos = ({
     suspense = false,
 }: useGetRefVideosProps) => {
     const { currentTag } = useCurrentTag();
-
+    const fmCurrentTag = currentTag.replace("&", "%26");
     const { data, error, size, setSize } = useSWRInfinite<IGetRefVideos>(
         (index) =>
             query !== ""
                 ? `/ref-videos/search?page=${index + 1}&query=${query}`
-                : `/ref-videos?page=${index + 1}&tagName=${currentTag}`,
+                : `/ref-videos?page=${index + 1}&tagName=${fmCurrentTag}`,
         fetcher,
         { suspense: suspense }
     );
@@ -44,8 +46,12 @@ const useGetRefVideos = ({
         };
 
         updateVideos();
-
         setIsReachingEnd(size >= (PAGE_SIZE as number));
+
+        ReactGA.event({
+            category: GA_CT_TAGS,
+            action: `${currentTag} 태그 클릭`,
+        });
     }, [data, size, currentTag, PAGE_SIZE]);
 
     const loadMore = throttle(() => {
@@ -60,7 +66,7 @@ const useGetRefVideos = ({
         loadMore,
         isReachingEnd,
         isLoadingMore,
-        isLoadingInitialData
+        isLoadingInitialData,
     };
 };
 
