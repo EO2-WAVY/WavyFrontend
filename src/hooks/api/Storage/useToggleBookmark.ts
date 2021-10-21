@@ -15,7 +15,6 @@ const useToggleBookmark = (rvSeq: string) => {
     }, [data]);
 
     const toggleBookmark = async () => {
-        console.log(rvSeq);
         if (isStoraged) {
             await del("/bookmarks", { data: { rvSeq } });
         } else {

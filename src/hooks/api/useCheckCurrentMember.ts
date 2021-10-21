@@ -2,7 +2,8 @@ import { useEffect } from "react";
 import useSWR from "swr";
 import { fetcher } from "utils/api/fetch";
 import useCurrentUser from "hooks/Common/useCurrentUser";
-// import removeToken from "utils/Auth/removeToken";
+import removeToken from "utils/Auth/removeToken";
+
 
 export interface Member {
     mbrSeq: string;
@@ -21,7 +22,7 @@ export interface Member {
     videoOptionCode: string;
 }
 
-const key = "/members/me";
+export const key = "/members/me";
 
 const useCheckCurrentMember = () => {
     const { setCurrentUser } = useCurrentUser();
@@ -29,7 +30,7 @@ const useCheckCurrentMember = () => {
 
     useEffect(() => {
         if (data?.statusCode === 403) {
-            // removeToken();
+            removeToken();
             setCurrentUser(null);
             return;
         }

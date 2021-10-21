@@ -2,6 +2,7 @@ import Layout from "components/Common/Layout";
 import ButtonSection from "components/Setting/ButtonSection";
 import ProfileImageSection from "components/Setting/ProfileImageSection";
 import RequireInfoSection from "components/Setting/RequireInfoSection";
+import useUpdateMember from "hooks/api/Setting/useUpdateMember";
 import useCurrentUser from "hooks/Common/useCurrentUser";
 import { useState } from "react";
 
@@ -17,8 +18,9 @@ const Setting = () => {
         currentUser?.mbrNickname ? currentUser.mbrNickname : ""
     );
 
+    const { updateMember } = useUpdateMember();
     const onSubmit = () => {
-        console.log(profileImage);
+        updateMember(nickname, profileImage);
     };
 
     return (

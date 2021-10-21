@@ -2,7 +2,7 @@ import useSWR from "swr";
 import { fetcher } from "utils/api/fetch";
 
 const useGetAnalysisUserVideo = (anSeq: string) => {
-    const key = `/analysis/s3-download-signed-url?anSeq=${anSeq}`;
+    const key = `/analyses/s3-download-signed-url?anSeq=${anSeq}`;
     const response = useSWR<IGetAnalysisUserVideo>(key, fetcher);
 
     return response;
