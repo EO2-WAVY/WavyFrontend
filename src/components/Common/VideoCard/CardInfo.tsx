@@ -1,6 +1,7 @@
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useHistory } from "react-router";
+import ReactGA from "react-ga";
 
 import Icon from "components/Common/Icon";
 import { gcRefVideoDifficulty } from "utils/groupCode";
@@ -14,14 +15,21 @@ import { RQ_REF_VIDEO_ID } from "constants/routerQuery";
 import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 import useNotification from "hooks/Common/useNotification";
 import useToggleBookmark from "hooks/api/Storage/useToggleBookmark";
+import { GA_CT_CHALLENGE, GA_CT_PRACTICE } from "constants/gaCategory";
 
 interface CardInfoProps {
     rvSeq: string;
     rvDuration: number;
     rvDifficultyCd: string;
+    rvSongName: string;
 }
 
-const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
+const CardInfo = ({
+    rvSeq,
+    rvDuration,
+    rvDifficultyCd,
+    rvSongName,
+}: CardInfoProps) => {
     const { isUserSignedIn } = useIsUserSignedIn();
     const { addNotification } = useNotification();
     const { isStoraged, toggleBookmark } = useToggleBookmark(rvSeq);
@@ -36,19 +44,32 @@ const CardInfo = ({ rvSeq, rvDuration, rvDifficultyCd }: CardInfoProps) => {
             });
             return;
         }
-        
+
         toggleBookmark();
     };
 
-    const onClickPractice = () =>
+    const onClickPractice = () => {
+        ReactGA.event({
+            category: GA_CT_PRACTICE,
+            action: `연습 버튼 클릭 : ${rvSongName}`,
+        });
         history.push(`/practice?${RQ_REF_VIDEO_ID}=${rvSeq}`);
+    };
 
     const onClickChallenge = () => {
         if (isUserSignedIn) {
+            ReactGA.event({
+                category: GA_CT_CHALLENGE,
+                action: `회원 도전하기 클릭 : ${rvSongName}`,
+            });
             history.push(`/challenge?${RQ_REF_VIDEO_ID}=${rvSeq}`);
             return;
         }
 
+        ReactGA.event({
+            category: GA_CT_CHALLENGE,
+            action: `비회원 도전하기 클릭 : ${rvSongName}`,
+        });
         addNotification({
             title: "로그인 후 사용가능 합니다",
             description:

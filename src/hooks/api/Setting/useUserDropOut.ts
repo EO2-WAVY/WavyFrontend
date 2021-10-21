@@ -3,6 +3,8 @@ import useNotification from "hooks/Common/useNotification";
 import { useHistory } from "react-router";
 import { del } from "utils/api/client";
 import removeToken from "utils/Auth/removeToken";
+import ReactGA from "react-ga";
+import { GA_CT_USER } from "constants/gaCategory";
 
 const useUserDropOut = () => {
     const history = useHistory();
@@ -19,6 +21,7 @@ const useUserDropOut = () => {
             return;
         }
 
+        ReactGA.event({ category: GA_CT_USER, action: "회원 탈퇴" });
         await setCurrentUser(null);
         removeToken();
         history.push("/");

@@ -1,6 +1,8 @@
 import { ChangeEvent, useState, useRef, useEffect } from "react";
 import { useHistory, useLocation } from "react-router-dom";
 import { debounce } from "lodash";
+import ReactGA from "react-ga";
+import { GA_CT_SEARCH } from "constants/gaCategory";
 
 import styled from "styled-components";
 import Icon from "components/Common/Icon";
@@ -32,6 +34,7 @@ const NavSearchBar = () => {
             clear();
             return;
         }
+        ReactGA.event({ category: GA_CT_SEARCH, action: `value 검색` });
         setQuery(value);
         debouncedPush(value);
     };

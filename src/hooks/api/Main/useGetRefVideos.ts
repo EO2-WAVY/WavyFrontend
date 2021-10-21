@@ -1,10 +1,12 @@
 import { useEffect, useState } from "react";
+import ReactGA from "react-ga";
 import { throttle } from "lodash";
 
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
 import { IRefVideo } from "hooks/api/useGetRefVideo";
 import useCurrentTag from "hooks/Common/useCurrentTag";
+import { GA_CT_TAGS } from "constants/gaCategory";
 
 interface useGetRefVideosProps {
     query?: string;
@@ -44,8 +46,12 @@ const useGetRefVideos = ({
         };
 
         updateVideos();
-
         setIsReachingEnd(size >= (PAGE_SIZE as number));
+
+        ReactGA.event({
+            category: GA_CT_TAGS,
+            action: `${currentTag} 태그 클릭`,
+        });
     }, [data, size, currentTag, PAGE_SIZE]);
 
     const loadMore = throttle(() => {
