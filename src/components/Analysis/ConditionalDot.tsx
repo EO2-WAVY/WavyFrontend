@@ -2,9 +2,9 @@ const ConditionalDot = (props: any) => {
     const { cx, cy, value } = props;
 
     const colorWithValue = (acc: number) => {
-        if (acc < 60) return "#FF5354";
-        if (acc < 75) return "#51F95D";
-        if (acc < 85) return "#5696FF";
+        if (acc < 85) return "#FF5354";
+        if (acc < 90) return "#51F95D";
+        if (acc < 95) return "#5696FF";
         // if (acc < 69) return "#FF5858";
         // if (acc < 85) return "#21FF94";
         return "#882BFF";
