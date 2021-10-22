@@ -64,18 +64,6 @@ const MyAnalysesSection = () => {
                                 analysis={analysis}
                             />
                         ))}
-                        {analyses.map((analysis, index) => (
-                            <AnalysisVideoCard
-                                key={index}
-                                analysis={analysis}
-                            />
-                        ))}
-                        {analyses.map((analysis, index) => (
-                            <AnalysisVideoCard
-                                key={index}
-                                analysis={analysis}
-                            />
-                        ))}
 
                         <IntersectionTarget
                             key="target"
