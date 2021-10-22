@@ -6,7 +6,7 @@ import useIsGraphShowing from "hooks/Dance/Controller/useIsGraphShowing";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useGetAnalysis from "hooks/api/useGetAnalysis";
-import { useEffect, useState } from "react";
+
 import Spinner from "components/Common/Spinner";
 import ConditionalDot from "./ConditionalDot";
 
@@ -38,7 +38,7 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
 
     const labelFormatter = (label: number) => {
         if (!data) return dummy[label].start_time;
-        const correctData = isAnalysing ? dummy : data.simularityJson.analyzes;
+        const correctData = isAnalysed ? dummy : data.simularityJson.analyzes;
         return correctData[label].start_time;
     };
 
@@ -46,25 +46,18 @@ const GraphSection = ({ anSeq }: GraphSectionProps) => {
         return [value.toFixed(2), "정확도"];
     };
 
-    const { data } = useGetAnalysis(anSeq);
-    const [isAnalysing, setIsAnalysing] = useState<boolean>(false);
-
-    useEffect(() => {
-        const tempIsAnalysing =
-            typeof data?.simularityJson.analyzes === "undefined";
-        setIsAnalysing(tempIsAnalysing);
-    }, [data?.simularityJson.analyzes]);
+    const { data, preprocedAnalyzes, isAnalysed } = useGetAnalysis(anSeq);
 
     return (
-        <Wrapper isGraphShowing={isGraphShowing} isAnalysing={isAnalysing}>
-            {isAnalysing && (
+        <Wrapper isGraphShowing={isGraphShowing} isAnalysed={isAnalysed}>
+            {!isAnalysed && (
                 <LoadingOverlay>
                     <Spinner widthPercent={5} />
                 </LoadingOverlay>
             )}
             <ResponsiveContainer width="100%" height="100%" className="graph">
                 <LineChart
-                    data={isAnalysing ? dummy : data?.simularityJson.analyzes}
+                    data={isAnalysed ? preprocedAnalyzes : dummy}
                     margin={{ right: 16 }}
                     onClick={onClickGraph}
                 >
@@ -96,7 +89,7 @@ export default GraphSection;
 
 interface IWrapper {
     isGraphShowing: boolean;
-    isAnalysing: boolean;
+    isAnalysed: boolean;
 }
 
 const Wrapper = styled(motion.section)<IWrapper>`
@@ -134,7 +127,7 @@ const Wrapper = styled(motion.section)<IWrapper>`
     filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#00ffffff', endColorstr='#ffffff',GradientType=0 );
 
     & > .graph {
-        opacity: ${({ isAnalysing }) => (isAnalysing ? 0.2 : 1)};
+        opacity: ${({ isAnalysed }) => (isAnalysed ? 1 : 0.2)};
     }
 `;
 

@@ -7,7 +7,7 @@ interface ReadyProgressbarProps {
     onEnded: () => void;
 }
 
-const GOAL_TIME: number = 10000;
+const GOAL_TIME: number = 16;
 
 const ReadyProgressbar = ({ onEnded }: ReadyProgressbarProps) => {
     const { remainTime } = useCountdown({ endTime: GOAL_TIME });
@@ -64,7 +64,7 @@ const ProgressInner = styled.div<{ percent: number }>`
     background-color: ${({ theme }) => theme.color.lightPurple};
     border-radius: 40px;
 
-    transition: width 0.4s linear 0s;
+    transition: width 1s linear 0s;
 
     &::before {
         content: "";

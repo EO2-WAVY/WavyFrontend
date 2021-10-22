@@ -111,6 +111,7 @@ export default AnalysisVideoCard;
 
 const Wrapper = styled(motion.article)`
     width: 260px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;

@@ -40,5 +40,5 @@ export const isMirroredState = atom<boolean>({
 
 export const isGraphShowingState = atom<boolean>({
     key: "isGraphShowingState",
-    default: false,
+    default: true,
 });

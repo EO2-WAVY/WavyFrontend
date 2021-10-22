@@ -2,22 +2,32 @@ import { IRefVideo } from "hooks/api/useGetRefVideo";
 import { useEffect, useState } from "react";
 import useSWR from "swr";
 import { fetcher } from "utils/api/fetch";
+import { fmSimularityData } from "utils/formatting/formattingData";
 
 const useGetAnalysis = (anSeq: string) => {
     const [isAnalysed, setIsAnalysed] = useState<boolean>(false);
+    const [isPreproced, setIsPreproced] = useState<boolean>(false);
+    const [preprocedAnalyzes, setPreprocedAnalyzes] = useState<IAnalyze[]>([]);
 
     const key = `/analyses/${anSeq}`;
-    const response = useSWR<IGetAnalysis>(key, fetcher, {
+    const { data } = useSWR<IGetAnalysis>(key, fetcher, {
         refreshInterval: isAnalysed ? 0 : 5000,
     });
 
     useEffect(() => {
-        if (response.data?.simularityJson.analyzes) {
+        if (data?.simularityJson.analyzes) {
             setIsAnalysed(true);
-        }
-    }, [response.data?.simularityJson.analyzes]);
 
-    return response;
+            if (!isPreproced) {
+                setPreprocedAnalyzes(
+                    fmSimularityData(data.simularityJson.analyzes)
+                );
+                setIsPreproced(true);
+            }
+        }
+    }, [isPreproced, data?.simularityJson]);
+
+    return { data, preprocedAnalyzes, isAnalysed };
 };
 
 export default useGetAnalysis;
@@ -38,13 +48,15 @@ export interface IAnalysis {
     rvSeq: string;
 }
 
+export interface IAnalyze {
+    start_time: string;
+    average_score: number;
+    scores: number[];
+    guides: string[][];
+}
+
 export interface ISimularityJson {
-    analyzes: {
-        start_time: string;
-        average_score: number;
-        scores: number[];
-        guides: string[][];
-    }[];
+    analyzes: IAnalyze[];
     wrong_sectons: string[];
 }
 
