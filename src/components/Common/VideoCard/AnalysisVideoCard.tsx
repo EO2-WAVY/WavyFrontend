@@ -110,6 +110,8 @@ const AnalysisVideoCard = ({
 export default AnalysisVideoCard;
 
 const Wrapper = styled(motion.article)`
+    width: 260px;
+    flex-shrink: 0;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -118,7 +120,7 @@ const Wrapper = styled(motion.article)`
 const VideoWrapper = styled(motion.div)`
     position: relative;
     aspect-ratio: 9 / 16;
-    width: 260px;
+    width: 100%;
     border-radius: 12px;
     overflow: hidden;
     margin-bottom: 12px;

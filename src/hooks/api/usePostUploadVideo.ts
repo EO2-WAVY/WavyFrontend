@@ -13,7 +13,7 @@ const usePostUploadVideo = () => {
     const uploadVideo = async ({ blob, rvSeq }: uploadVideoProps) => {
         // 녹화 영상 업로드 URL을 받아오기 위한 호출
         const data = await get<IS3UploadSignedUrl>(
-            "/analysis/s3-upload-signed-url"
+            "/analyses/s3-upload-signed-url"
         );
 
         // XHRRequest
@@ -43,7 +43,7 @@ const usePostUploadVideo = () => {
             captureMessage(`챌린지 업로드 실패 ${event}`);
             addNotification({
                 title: "업로드 실패",
-                description: "계속 실패할 시 운영자에게 문의 부탁드립니다F",
+                description: "계속 실패할 시 운영자에게 문의 부탁드립니다",
             });
         });
     };

@@ -8,6 +8,7 @@ const theme: DefaultTheme = {
         lightGray: "#c9c9c9",
         purple: "#882BFF",
         lightPurple: "#9E61FF",
+        red: "#FF5858",
     },
     size: {
         maxWidth: "1200px",

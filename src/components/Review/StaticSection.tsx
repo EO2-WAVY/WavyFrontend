@@ -2,7 +2,14 @@ import styled, { CSSProperties } from "styled-components";
 import { motion } from "framer-motion";
 import useGetCurrentUserStatics from "hooks/api/Review/useGetCurrentUserStatics";
 import { defaultFadeInUpVariants, staggerOne } from "constants/motions";
-import { Bar, BarChart, ResponsiveContainer, Tooltip, XAxis } from "recharts";
+import {
+    Bar,
+    BarChart,
+    ResponsiveContainer,
+    Tooltip,
+    XAxis,
+    YAxis,
+} from "recharts";
 
 const StaticSection = () => {
     const { data } = useGetCurrentUserStatics();
@@ -31,16 +38,54 @@ const StaticSection = () => {
             <Column variants={defaultFadeInUpVariants}>
                 <Category>높은 점수를 받은 댄스</Category>
                 <GraphWrapper>
-                    <BarChart data={dancesGoodAt} layout="vertical">
-                        <Bar dataKey="bestScore" />
-                    </BarChart>
+                    <ResponsiveContainer width="100%" height="100%">
+                        <BarChart
+                            layout="vertical"
+                            data={dancesGoodAt}
+                            width={600}
+                            height={100}
+                        >
+                            <Bar
+                                dataKey="bestScore"
+                                barSize={20}
+                                fill="#882BFF"
+                            />
+
+                            <XAxis
+                                type="number"
+                                style={XAxisStyle}
+                                domain={[0, 100]}
+                            />
+                            <YAxis
+                                type="category"
+                                dataKey="name"
+                                style={XAxisStyle}
+                                hide
+                            />
+
+                            <Tooltip
+                                cursor={false}
+                                labelStyle={{ fontSize: "12px" }}
+                                contentStyle={{ fontSize: "16px" }}
+                                formatter={(value: string) => [
+                                    `${value}점`,
+                                    null,
+                                ]}
+                            />
+                        </BarChart>
+                    </ResponsiveContainer>
                 </GraphWrapper>
             </Column>
             <Column variants={defaultFadeInUpVariants}>
                 <Category>많이 춘 댄스</Category>
                 <GraphWrapper>
                     <ResponsiveContainer width="100%" height="100%">
-                        <BarChart data={dancesOften} width={600} height={100}>
+                        <BarChart
+                            key="often"
+                            data={dancesOften}
+                            width={600}
+                            height={100}
+                        >
                             <Bar dataKey="times" barSize={26} fill="#DDC1FF" />
                             <XAxis
                                 dataKey="name"
@@ -72,7 +117,6 @@ const Wrapper = styled(motion.section)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* padding-left: 5rem; */
 `;
 
 const Column = styled(motion.article)`

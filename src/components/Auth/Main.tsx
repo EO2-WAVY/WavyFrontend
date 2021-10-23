@@ -1,6 +1,8 @@
+import { MouseEvent } from "react";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import { Link } from "react-router-dom";
+import ReactGA from "react-ga";
 
 import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
 
@@ -10,6 +12,7 @@ import kakao from "assets/images/Auth/kakao.svg";
 import facebook from "assets/images/Auth/facebook.svg";
 import useGetKakaoLogInUrl from "hooks/api/Auth/useGetKakaoLogInUrl";
 import useNotification from "hooks/Common/useNotification";
+import { GA_CT_USER } from "constants/gaCategory";
 
 interface IMain {
     kind: string;
@@ -27,16 +30,22 @@ const Main = ({ kind }: IMain) => {
     const { onClickLoginBtn } = useGetKakaoLogInUrl();
     const { addNotification } = useNotification();
 
-    const onClickDisabled = () => {
+    const onClickDisabled = (e: MouseEvent<HTMLButtonElement>) => {
+        const { id } = e.target as HTMLButtonElement;
         addNotification({
             title: "죄송합니다",
             description: "아직 지원하지 않는 기능입니다",
+        });
+        ReactGA.event({
+            category: GA_CT_USER,
+            action: `지원되지 않는 ${id} 로그인 클릭`,
         });
     };
 
     return (
         <MainWrapper variants={staggerHalf}>
             <ProviderBtn
+                id="google"
                 variants={defaultFadeInUpVariants}
                 provider={google}
                 className="disabled"
@@ -45,6 +54,7 @@ const Main = ({ kind }: IMain) => {
                 구글로 로그인
             </ProviderBtn>
             <ProviderBtn
+                id="naver"
                 variants={defaultFadeInUpVariants}
                 provider={naver}
                 className="disabled"
@@ -53,6 +63,7 @@ const Main = ({ kind }: IMain) => {
                 네이버로 로그인
             </ProviderBtn>
             <ProviderBtn
+                id="kakao"
                 variants={defaultFadeInUpVariants}
                 provider={kakao}
                 onClick={onClickLoginBtn}
@@ -60,6 +71,7 @@ const Main = ({ kind }: IMain) => {
                 카카오톡으로 로그인
             </ProviderBtn>
             <ProviderBtn
+                id="facebook"
                 variants={defaultFadeInUpVariants}
                 provider={facebook}
                 className="disabled"

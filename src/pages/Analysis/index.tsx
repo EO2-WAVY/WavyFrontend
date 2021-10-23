@@ -9,12 +9,29 @@ import Controller from "components/Common/Dance/Controller";
 import VideoSection from "components/Analysis/VideoSection";
 import { defaultPageFadeInVariants } from "constants/motions";
 import GraphSection from "components/Analysis/GraphSection";
+import { useEffect, useState } from "react";
+import useNotification from "hooks/Common/useNotification";
 
 const Analysis = () => {
     const anSeq = useRequiredRouterQuery(RQ_ANALYSIS_ID);
     const { data } = useGetAnalysis(anSeq);
 
-    console.log(data);
+    const { addNotification } = useNotification();
+    const [isNotificated, setIsNotificated] = useState<boolean>(false);
+
+    useEffect(() => {
+        if (!data) return;
+
+        if (!data?.simularityJson.analyzes) {
+            if (!isNotificated) {
+                addNotification({
+                    title: "아직 분석중입니다",
+                    description: "분석이 끝나는대로 보여드릴게요!",
+                });
+                setIsNotificated(true);
+            }
+        }
+    }, [addNotification, data, data?.simularityJson.analyzes, isNotificated]);
 
     if (!data) return <></>;
 

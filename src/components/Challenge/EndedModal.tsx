@@ -8,6 +8,9 @@ import { modalCenterFadeInUpVariants } from "constants/motions";
 import useViewport from "hooks/Common/useViewport";
 import ModalImageWrapper from "./ModalImageWrapper";
 import { useHistory } from "react-router";
+import useGetAnalyses from "hooks/api/useGetAnalyses";
+import { RQ_ANALYSIS_ID } from "constants/routerQuery";
+
 interface EndedModalProps {
     isEnded: boolean;
 }
@@ -15,9 +18,12 @@ interface EndedModalProps {
 const EndedModal = ({ isEnded }: EndedModalProps) => {
     const { width, height } = useViewport();
     const history = useHistory();
+    const { mutate, analyses } = useGetAnalyses();
 
-    const onClickReview = () => {
-        history.push("/review");
+    const onClickReview = async () => {
+        await mutate();
+        const { anSeq } = analyses[0];
+        history.push(`/analysis?${RQ_ANALYSIS_ID}=${anSeq}`);
     };
 
     const onClickMain = () => {

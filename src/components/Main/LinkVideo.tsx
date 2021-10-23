@@ -71,7 +71,7 @@ const VideoWrapper = styled(motion.div)<VideoWrapperProps>`
 
     aspect-ratio: 9 / 16;
     width: 200px;
-    background-color: red;
+    background-color: ${({ theme }) => theme.color.lightGray};
 `;
 
 const VideoOverlay = styled.div`

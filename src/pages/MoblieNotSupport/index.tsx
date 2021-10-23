@@ -1,3 +1,5 @@
+import { useEffect } from "react";
+import ReactGA from "react-ga";
 import styled from "styled-components";
 import { motion } from "framer-motion";
 import Icon from "components/Common/Icon";
@@ -7,7 +9,13 @@ import {
     staggerOne,
 } from "constants/motions";
 
+
 const MoblieNotSupport = () => {
+    useEffect(() => {
+        ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID as string);
+        ReactGA.pageview("/mobile");
+    }, []);
+
     return (
         <Wrapper
             variants={staggerOne}

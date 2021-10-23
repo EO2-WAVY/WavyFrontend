@@ -70,6 +70,7 @@ const VideoCard = ({
                                 rvSeq={rvSeq}
                                 rvDuration={fmToSeconds(rvDuration)}
                                 rvDifficultyCd={rvDifficultyCd}
+                                rvSongName={rvSongName}
                             />
                         </>
                     )}

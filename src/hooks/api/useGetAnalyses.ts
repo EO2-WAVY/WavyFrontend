@@ -3,7 +3,7 @@ import { fetcher } from "utils/api/fetch";
 import { IAnalysis } from "hooks/api/useGetAnalysis";
 
 const useGetAnalyses = () => {
-    const { data, error, size, setSize } = useSWRInfinite<IGetAnalyses>(
+    const { data, error, size, setSize, mutate } = useSWRInfinite<IGetAnalyses>(
         (index) => `/analyses?page=${index + 1}`,
         fetcher,
         { suspense: true }
@@ -30,7 +30,7 @@ const useGetAnalyses = () => {
         setSize(size + 1);
     };
 
-    return { analyses, isEmpty, loadMore, isReachingEnd };
+    return { analyses, isEmpty, loadMore, isReachingEnd, mutate };
 };
 
 export default useGetAnalyses;

@@ -1,6 +1,7 @@
+import { useEffect } from "react";
 import styled from "styled-components";
 import * as Sentry from "@sentry/react";
-import { useEffect } from "react";
+import ReactGA from "react-ga";
 
 interface FullScreenErrorProps {
     error: Error;
@@ -10,6 +11,10 @@ const FullScreenError = ({ error }: FullScreenErrorProps) => {
     useEffect(() => {
         Sentry.captureException(error);
         Sentry.captureMessage(error.message);
+        ReactGA.exception({
+            description: `${error} Error ocurred`,
+            fatal: true,
+        });
     }, [error]);
 
     const onClickReset = () => {
@@ -40,7 +45,7 @@ const Wrapper = styled.div`
         color: ${({ theme }) => theme.color.purple};
     }
 
-    & > p{
+    & > p {
         margin-bottom: 50px;
     }
 
