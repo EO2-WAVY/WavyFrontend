@@ -1,7 +1,6 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 
-import Icon from "components/Common/Icon";
 import ControllerProgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
 import PlayingButton from "components/Common/Dance/Controller/PlayingButton";
 import PlaybackRate from "components/Common/Dance/Controller/PlaybackRate";
@@ -52,8 +51,8 @@ const Controller = ({
                 </ControlLeft>
 
                 <ControlRight>
-                    <Icon name="controller_loop" />
-                    <Icon name="controller_marker" />
+                    {/* <Icon name="controller_loop" />
+                    <Icon name="controller_marker" /> */}
                     {isAnalysis && <GraphButton />}
                     <MirroredButton />
                     <PlaybackRate />

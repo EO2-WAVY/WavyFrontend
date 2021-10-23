@@ -97,12 +97,3 @@ const Inner = styled.div<{ percent: number }>`
     height: 100%;
     background-color: ${({ theme }) => theme.color.purple};
 `;
-
-const Wrong = styled.div`
-    position: absolute;
-    top: 0;
-    left: 50vw;
-    width: 100px;
-    height: 100%;
-    background-color: ${({ theme }) => theme.color.red};
-`;

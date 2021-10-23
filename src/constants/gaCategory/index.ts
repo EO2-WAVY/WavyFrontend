@@ -11,3 +11,5 @@ export const GA_CT_PRACTICE: string = "Practice";
 export const GA_CT_CHALLENGE: string = "Challenge";
 
 export const GA_CT_ANALYSIS: string = "Analysis";
+
+export const GA_CT_LINK: string = "Youtube Link";

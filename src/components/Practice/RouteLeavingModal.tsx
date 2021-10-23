@@ -54,7 +54,6 @@ const RouteLeavingModal = () => {
             <ModalWrapper isShowing={isShowing}>
                 <ModalOverlay key="modalOverlay" handleClose={closeModal} />
 
-                {/* 여기서 로그인 상태에 따라 다르게 호출하자 */}
                 <RouteLeavingModalContent
                     key="modalContent"
                     closeModal={closeModal}

@@ -44,12 +44,10 @@ const AnalysisCardInfo = ({
             addNotification({ title: "삭제된 영상입니다", description: "" });
             return;
         }
-
         ReactGA.event({
             category: GA_CT_ANALYSIS,
             action: `분석하기 진입: ${anSeq}`,
         });
-
         history.push(`/analysis?${RQ_ANALYSIS_ID}=${anSeq}`);
     };
 
@@ -58,7 +56,6 @@ const AnalysisCardInfo = ({
             addNotification({ title: "삭제된 영상입니다", description: "" });
             return;
         }
-
         ReactGA.event({
             category: GA_CT_ANALYSIS,
             action: `분석 결과 공유: ${anSeq}`,
@@ -76,7 +73,6 @@ const AnalysisCardInfo = ({
             title: "성공적으로 삭제되었습니다",
             description: "",
         });
-
         setIsDeleted(true);
         deleteAnalysis();
         mutate();
