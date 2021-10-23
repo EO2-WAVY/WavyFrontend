@@ -2,10 +2,12 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import { useHistory } from "react-router-dom";
 import styled from "styled-components";
 import { motion } from "framer-motion";
+import ReactGA from "react-ga";
 
 import { defaultFadeInUpVariants } from "constants/motions";
 import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
 import useNotification from "hooks/Common/useNotification";
+import { GA_CT_LINK } from "constants/gaCategory";
 
 const youtubeRegex =
     /^(?:https?:\/\/)?(?:www\.)?(?:youtu\.be\/|youtube\.com\/(?:embed\/|v\/|watch\?v=|watch\?.+&v=))((\w|-){11})(?:\S+)?$/;
@@ -29,9 +31,11 @@ const LinkInput = () => {
             });
             return;
         }
-
         const youtubeCode = fmYouTubeURLToCode(value);
-
+        ReactGA.event({
+            category: GA_CT_LINK,
+            action: `youtube link ${youtubeCode}`,
+        });
         history.push(`/link?y=${youtubeCode}`);
     };
 

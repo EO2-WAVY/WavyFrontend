@@ -9,6 +9,7 @@ declare module "styled-components" {
             lightGray: string;
             purple: string;
             lightPurple: string;
+            red: string;
         };
         size: {
             maxWidth: string;

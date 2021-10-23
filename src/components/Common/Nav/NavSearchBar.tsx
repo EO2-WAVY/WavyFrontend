@@ -34,7 +34,7 @@ const NavSearchBar = () => {
             clear();
             return;
         }
-        ReactGA.event({ category: GA_CT_SEARCH, action: `value 검색` });
+        ReactGA.event({ category: GA_CT_SEARCH, action: `${value} 검색` });
         setQuery(value);
         debouncedPush(value);
     };

@@ -34,7 +34,7 @@ const Analysis = () => {
     }, [addNotification, data, data?.simularityJson.analyzes, isNotificated]);
 
     if (!data) return <></>;
-
+    
     return (
         <Wrapper
             variants={defaultPageFadeInVariants}
