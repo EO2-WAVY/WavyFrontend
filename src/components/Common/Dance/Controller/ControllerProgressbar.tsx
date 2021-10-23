@@ -75,6 +75,8 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
     return (
         <Outer onClick={onClick} ref={barRef} onMouseDown={onMouseDown}>
             <Inner percent={percent} />
+            <Wrong />
+            <Wrong1 />
         </Outer>
     );
 };
@@ -96,4 +98,22 @@ const Inner = styled.div<{ percent: number }>`
     width: ${({ percent }) => percent}%;
     height: 100%;
     background-color: ${({ theme }) => theme.color.purple};
+`;
+
+const Wrong = styled.div`
+    position: absolute;
+    top: 0;
+    left: 50vw;
+    width: 100px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.color.red};
+`;
+
+const Wrong1 = styled.div`
+    position: absolute;
+    top: 0;
+    left: 20vw;
+    width: 60px;
+    height: 100%;
+    background-color: ${({ theme }) => theme.color.red};
 `;
