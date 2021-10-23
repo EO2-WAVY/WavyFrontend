@@ -30,6 +30,7 @@ const useGetAnalyses = () => {
         setSize(size + 1);
     };
 
+
     return { analyses, isEmpty, loadMore, isReachingEnd, mutate };
 };
 

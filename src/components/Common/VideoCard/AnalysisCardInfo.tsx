@@ -1,3 +1,4 @@
+import { useState } from "react";
 import { motion } from "framer-motion";
 import styled from "styled-components";
 import { useHistory } from "react-router";
@@ -13,9 +14,11 @@ import {
 } from "constants/motions";
 import { RQ_ANALYSIS_ID } from "constants/routerQuery";
 import useDeleteAnalysis from "hooks/api/Main/useDeleteAnalysis";
-import { useSWRConfig } from "swr";
+
 import useConfirm from "hooks/Common/useConfirm";
 import { GA_CT_ANALYSIS } from "constants/gaCategory";
+import useGetAnalyses from "hooks/api/useGetAnalyses";
+import useNotification from "hooks/Common/useNotification";
 
 interface AnalysisCardInfoProps {
     anSeq: string;
@@ -31,8 +34,17 @@ const AnalysisCardInfo = ({
     donwloadUrl,
 }: AnalysisCardInfoProps) => {
     const history = useHistory();
+    const { mutate } = useGetAnalyses();
+
+    const [isDeleted, setIsDeleted] = useState<boolean>(false);
+    const { addNotification } = useNotification();
 
     const onClickAnalysis = () => {
+        if (isDeleted) {
+            addNotification({ title: "삭제된 영상입니다", description: "" });
+            return;
+        }
+
         ReactGA.event({
             category: GA_CT_ANALYSIS,
             action: `분석하기 진입: ${anSeq}`,
@@ -42,6 +54,11 @@ const AnalysisCardInfo = ({
     };
 
     const onClickShare = () => {
+        if (isDeleted) {
+            addNotification({ title: "삭제된 영상입니다", description: "" });
+            return;
+        }
+
         ReactGA.event({
             category: GA_CT_ANALYSIS,
             action: `분석 결과 공유: ${anSeq}`,
@@ -49,16 +66,22 @@ const AnalysisCardInfo = ({
     };
 
     const { deleteAnalysis } = useDeleteAnalysis(anSeq);
-    const { mutate } = useSWRConfig();
+
     const onConfirmDelete = () => {
         ReactGA.event({
             category: GA_CT_ANALYSIS,
             action: `분석 결과 삭제: ${anSeq}`,
         });
+        addNotification({
+            title: "성공적으로 삭제되었습니다",
+            description: "",
+        });
 
+        setIsDeleted(true);
         deleteAnalysis();
-        mutate("/analyses?page=1");
+        mutate();
     };
+
     const onClickDelete = useConfirm({
         message:
             "삭제한 분석 영상은 복구할 수 없습니다. 그래도 지우시겠습니까?",
@@ -84,9 +107,9 @@ const AnalysisCardInfo = ({
                     <span>분석</span>
                 </NavElem>
                 <NavDownload
-                    href={donwloadUrl}
-                    download
-                    target="_blank"
+                    href={isDeleted ? "" : donwloadUrl}
+                    download={!isDeleted}
+                    target={isDeleted ? "" : "_blank"}
                     onClick={onClickShare}
                 >
                     <Icon name="common_share" />

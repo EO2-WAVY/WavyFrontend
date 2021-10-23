@@ -27,6 +27,7 @@ const useGetAnalysis = (anSeq: string) => {
         }
     }, [isPreproced, data?.simularityJson]);
 
+
     return { data, preprocedAnalyzes, isAnalysed };
 };
 
@@ -57,7 +58,7 @@ export interface IAnalyze {
 
 export interface ISimularityJson {
     analyzes: IAnalyze[];
-    wrong_sectons: string[];
+    wrong_sections: string[];
 }
 
 interface IGetAnalysis {

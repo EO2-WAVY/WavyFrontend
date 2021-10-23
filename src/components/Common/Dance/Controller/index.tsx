@@ -2,7 +2,7 @@ import { useMemo } from "react";
 import styled from "styled-components";
 
 import Icon from "components/Common/Icon";
-import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
+import ControllerProgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
 import PlayingButton from "components/Common/Dance/Controller/PlayingButton";
 import PlaybackRate from "components/Common/Dance/Controller/PlaybackRate";
 import LayoutButton from "components/Common/Dance/Controller/LayoutButton";
@@ -36,7 +36,7 @@ const Controller = ({
 
     return (
         <Wrapper>
-            <ControllerPorgressbar rvDuration={numDuration} />
+            <ControllerProgressbar rvDuration={numDuration} />
 
             <ControlWrapper>
                 <ControlLeft>
