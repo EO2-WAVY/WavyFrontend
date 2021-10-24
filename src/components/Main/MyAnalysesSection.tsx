@@ -6,6 +6,7 @@ import AnalysisVideoCard from "../Common/VideoCard/AnalysisVideoCard";
 import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
 import Icon from "components/Common/Icon";
 import useCarousel from "hooks/Common/useCarousel";
+import AnalysesEmpty from "components/Common/AnalysesEmpty";
 
 const MyAnalysesSection = () => {
     const { analyses, loadMore, isEmpty } = useGetAnalyses();
@@ -37,12 +38,7 @@ const MyAnalysesSection = () => {
             exit="exit"
         >
             {isEmpty ? (
-                <EmptyBox>
-                    <span>
-                        <strong>도전하기</strong>를 통해 내가 부족한 부분이
-                        어딘지 배워보세요 !
-                    </span>
-                </EmptyBox>
+                <AnalysesEmpty />
             ) : (
                 <>
                     <CarouselBtn
@@ -93,24 +89,6 @@ const Wrapper = styled(motion.section)`
     display: flex;
     justify-content: space-between;
     align-items: center;
-`;
-
-const EmptyBox = styled(motion.div)`
-    width: 100%;
-    height: 240px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    & > span {
-        font-size: 1rem;
-        color: ${({ theme }) => theme.color.gray};
-
-        & > strong {
-            font-weight: 500;
-            color: ${({ theme }) => theme.color.purple};
-        }
-    }
 `;
 
 const CarouselBox = styled(motion.div)`
