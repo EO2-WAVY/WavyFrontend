@@ -1,7 +1,12 @@
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
-import { staggerHalf, staggerOne } from "constants/motions";
-import { useState } from "react";
+import {
+    defaultFadeInUpStaggerHalfVariants,
+    defaultFadeInUpVariants,
+    staggerHalf,
+    staggerOne,
+} from "constants/motions";
+import { ChangeEvent, useState } from "react";
 import useGetAnalysesSearch from "hooks/api/Review/useGetAnalysesSearch";
 import AnalysisVideoCard from "components/Common/VideoCard/AnalysisVideoCard";
 import MotionLoading from "components/Common/MotionLoading";
@@ -19,6 +24,11 @@ const AnalysesSection = () => {
             orderBy,
         });
 
+    const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
+        const { value } = e.target;
+        setQuery(value);
+    };
+
     return (
         <Wrapper
             variants={staggerOne}
@@ -26,11 +36,18 @@ const AnalysesSection = () => {
             animate="animate"
             exit="exit"
         >
-            <Header>
-                <h1>나의 댄스영상</h1>
+            <Header variants={staggerHalf}>
+                <Title variants={defaultFadeInUpVariants}>나의 댄스영상</Title>
 
-                <SettingWrapper>
-                    <SearchInput type="text" placeholder="검색" required />
+                <SettingWrapper variants={staggerHalf}>
+                    <SearchInput
+                        variants={defaultFadeInUpVariants}
+                        type="text"
+                        placeholder="검색"
+                        value={query}
+                        onChange={onChangeQuery}
+                        required
+                    />
                     <select>
                         <option value="asdf" />
                         <option value="asdf" />
@@ -45,10 +62,10 @@ const AnalysesSection = () => {
                 ) : (
                     <AnalysesVideoWrapper
                         key="review analyses wrapper"
-                        variants={staggerHalf}
+                        variants={defaultFadeInUpStaggerHalfVariants}
                     >
                         {isEmpty ? (
-                            <AnalysesEmpty />
+                            <AnalysesEmpty key="reviw analyses empty" query={query}/>
                         ) : (
                             analyses.map((analysis, index) => (
                                 <AnalysisVideoCard
@@ -78,10 +95,10 @@ const Header = styled(motion.div)`
     justify-content: space-between;
     align-items: center;
     margin-bottom: 50px;
+`;
 
-    & > h1 {
-        font-weight: normal;
-    }
+const Title = styled(motion.h1)`
+    font-weight: normal;
 `;
 
 const SettingWrapper = styled(motion.div)`
@@ -106,6 +123,7 @@ const SearchInput = styled(motion.input)`
 
 const AnalysesVideoWrapper = styled(motion.div)`
     width: 100%;
+    min-height: 400px;
     margin-bottom: 50px;
 
     display: flex;

@@ -2,7 +2,11 @@ import styled from "styled-components";
 import { motion } from "framer-motion";
 import { defaultFadeInUpVariants } from "constants/motions";
 
-const AnalysesEmpty = () => {
+interface AnalysesEmptyProps {
+    query?: string;
+}
+
+const AnalysesEmpty = ({ query }: AnalysesEmptyProps) => {
     return (
         <Wrapper
             variants={defaultFadeInUpVariants}
@@ -10,10 +14,16 @@ const AnalysesEmpty = () => {
             animate="animate"
             exit="exit"
         >
-            <span>
-                <strong>도전하기</strong>를 통해 내가 부족한 부분이 어딘지
-                배워보세요 !
-            </span>
+            {query !== "" ? (
+                <span>
+                    <strong>{query}</strong>를 도전한 기록은 없습니다
+                </span>
+            ) : (
+                <span>
+                    <strong>도전하기</strong>를 통해 내가 부족한 부분이 어딘지
+                    배워보세요 !
+                </span>
+            )}
         </Wrapper>
     );
 };
