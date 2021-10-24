@@ -34,7 +34,7 @@ const Analysis = () => {
     }, [addNotification, data, data?.simularityJson.analyzes, isNotificated]);
 
     if (!data) return <></>;
-    
+
     return (
         <Wrapper
             variants={defaultPageFadeInVariants}
@@ -50,6 +50,7 @@ const Analysis = () => {
             <Controller
                 rvDuration={data.analysis.refVideo.rvDuration}
                 isAnalysis={true}
+                wrong_sections={data.simularityJson.wrong_sections}
             />
         </Wrapper>
     );
