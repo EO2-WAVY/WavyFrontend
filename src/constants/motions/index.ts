@@ -49,6 +49,31 @@ export const defaultFadeInUpVariants: Variants = {
     },
 };
 
+export const defaultFadeInUpStaggerHalfVariants: Variants = {
+    initial: {
+        y: 60,
+        opacity: 0,
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    animate: {
+        y: 0,
+        opacity: 1,
+        transition: {
+            duration: 0.6,
+            ease: defaultEasing,
+            staggerChildren: 0.05,
+        },
+        willChange: "opacity, transform",
+    },
+    exit: {
+        y: 60,
+        opacity: 0,
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+};
+
 export const defaultBtnSwapVariants: Variants = {
     initial: {
         y: -20,

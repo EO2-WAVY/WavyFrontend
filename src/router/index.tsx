@@ -12,7 +12,6 @@ import FullScreenError from "components/Common/HandleAsync/FullScreenError";
 import NotificationWrapper from "components/Common/Notification/NotificationWrapper";
 import useIsMobile from "hooks/Common/useIsMobile";
 import MoblieNotSupport from "pages/MoblieNotSupport";
-// import MobileNav from "components/Common/Nav/MobileNav";
 
 const Router = () => {
     const isMobile = useIsMobile();
@@ -21,7 +20,6 @@ const Router = () => {
 
     return (
         <BrowserRouter>
-            {/* {isMobile ? <MobileNav /> : <Nav />} */}
             <Nav />
             <ScrollToTopElem />
 

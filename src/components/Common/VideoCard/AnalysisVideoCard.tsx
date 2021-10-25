@@ -23,8 +23,6 @@ const AnalysisVideoCard = ({
     analysis: {
         createdDate,
         anSeq,
-        anScore,
-        anGradeCode,
         refVideo: {
             rvDuration,
             rvDifficultyCd,

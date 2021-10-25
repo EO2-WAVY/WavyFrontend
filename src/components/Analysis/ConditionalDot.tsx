@@ -13,7 +13,7 @@ const ConditionalDot = (props: any) => {
             r="5"
             type="monotone"
             stroke={colorWithValue(value)}
-            stroke-width="2px"
+            strokeWidth="2px"
             fill="#fff"
             width="776"
             height="140"

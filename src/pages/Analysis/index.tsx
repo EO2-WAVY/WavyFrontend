@@ -50,6 +50,7 @@ const Analysis = () => {
             <Controller
                 rvDuration={data.analysis.refVideo.rvDuration}
                 isAnalysis={true}
+                wrong_sections={data.simularityJson.wrong_sections}
             />
         </Wrapper>
     );

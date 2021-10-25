@@ -1,8 +1,7 @@
 import { useMemo } from "react";
 import styled from "styled-components";
 
-import Icon from "components/Common/Icon";
-import ControllerPorgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
+import ControllerProgressbar from "components/Common/Dance/Controller/ControllerProgressbar";
 import PlayingButton from "components/Common/Dance/Controller/PlayingButton";
 import PlaybackRate from "components/Common/Dance/Controller/PlaybackRate";
 import LayoutButton from "components/Common/Dance/Controller/LayoutButton";
@@ -21,12 +20,14 @@ interface ControllerProps {
     rvDuration: string;
     isLinkPractice?: boolean;
     isAnalysis?: boolean;
+    wrong_sections?: string[];
 }
 
 const Controller = ({
     rvDuration,
     isLinkPractice = false,
     isAnalysis = false,
+    wrong_sections = [],
 }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
 
@@ -36,7 +37,10 @@ const Controller = ({
 
     return (
         <Wrapper>
-            <ControllerPorgressbar rvDuration={numDuration} />
+            <ControllerProgressbar
+                rvDuration={numDuration}
+                wrong_sections={wrong_sections}
+            />
 
             <ControlWrapper>
                 <ControlLeft>
@@ -52,8 +56,8 @@ const Controller = ({
                 </ControlLeft>
 
                 <ControlRight>
-                    <Icon name="controller_loop" />
-                    <Icon name="controller_marker" />
+                    {/* <Icon name="controller_loop" />
+                    <Icon name="controller_marker" /> */}
                     {isAnalysis && <GraphButton />}
                     <MirroredButton />
                     <PlaybackRate />
