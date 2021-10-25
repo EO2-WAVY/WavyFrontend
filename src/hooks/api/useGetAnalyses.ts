@@ -41,7 +41,7 @@ const useGetAnalyses = () => {
 
 export default useGetAnalyses;
 
-interface IGetAnalyses {
+export interface IGetAnalyses {
     ok: boolean;
     error: string;
     totalPages: number;
