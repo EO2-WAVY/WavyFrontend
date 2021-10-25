@@ -40,8 +40,9 @@ const WrongSections = ({
 
     return (
         <>
-            {wrongSections.map((wrongSection) => (
+            {wrongSections.map((wrongSection, index) => (
                 <WrongElem
+                    key={index}
                     startPos={wrongSection.startPos}
                     width={wrongSection.width}
                 />
