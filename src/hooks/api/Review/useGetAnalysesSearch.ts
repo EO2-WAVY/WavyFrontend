@@ -32,6 +32,9 @@ const useGetAnalysesSearch = ({
 
     const PAGE_SIZE = data?.[0]?.totalPages;
     const isLoadingInitialData = !data && !error;
+    const isLoadingMore =
+        isLoadingInitialData ||
+        (size > 0 && data && typeof data[size - 1] === "undefined");
     const isEmpty = data?.[0]?.analyses.length === 0 || analyses.length === 0;
     const isReachingEnd = size >= (PAGE_SIZE as number);
 
@@ -48,6 +51,7 @@ const useGetAnalysesSearch = ({
         isReachingEnd,
         mutate,
         isLoadingInitialData,
+        isLoadingMore,
     };
 };
 

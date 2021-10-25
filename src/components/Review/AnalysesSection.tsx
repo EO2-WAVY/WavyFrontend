@@ -10,6 +10,7 @@ import AnalysisVideoCard from "components/Common/VideoCard/AnalysisVideoCard";
 import MotionLoading from "components/Common/MotionLoading";
 import AnalysesEmpty from "components/Common/AnalysesEmpty";
 import AnalysesHeader from "./AnalysesHeader";
+import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
 
 export type orderByType =
     | "latest"
@@ -24,9 +25,21 @@ const AnalysesSection = () => {
     const [query, setQuery] = useState<string>("");
     const [orderBy, setOrderBy] = useState<orderByType>("latest");
 
-    const { analyses, isEmpty, isLoadingInitialData } = useGetAnalysesSearch({
-        query,
-        orderBy,
+    const { analyses, isEmpty, isLoadingInitialData, loadMore, isLoadingMore } =
+        useGetAnalysesSearch({
+            query,
+            orderBy,
+        });
+
+    const onIntersect: IntersectionObserverCallback = ([
+        { isIntersecting },
+    ]) => {
+        if (!isIntersecting) return;
+        loadMore();
+    };
+
+    const { setTarget } = useIntersectionObserver({
+        onIntersect,
     });
 
     return (
@@ -64,6 +77,10 @@ const AnalysesSection = () => {
                                         key={analysis.anSeq}
                                     />
                                 ))}
+
+                                {!isLoadingMore && (
+                                    <div key="observerTarget" ref={setTarget} />
+                                )}
                             </>
                         )}
                     </AnalysesVideoWrapper>
