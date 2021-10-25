@@ -14,7 +14,7 @@ const AnalysesEmpty = ({ query }: AnalysesEmptyProps) => {
             animate="animate"
             exit="exit"
         >
-            {query !== "" ? (
+            {typeof query === "string" && query !== "" ? (
                 <span>
                     <strong>{query}</strong>를 도전한 기록은 없습니다
                 </span>

@@ -82,7 +82,11 @@ const StaticSection = () => {
                     <ResponsiveContainer width="100%" height="100%">
                         <BarChart
                             key="often"
-                            data={dancesOften}
+                            data={
+                                dancesOften.length
+                                    ? dancesOften
+                                    : [{ name: "" }]
+                            }
                             width={600}
                             height={100}
                         >
