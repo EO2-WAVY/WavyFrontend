@@ -1,15 +1,19 @@
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
+
+import Icon from "components/Common/Icon";
+import AnalysesEmpty from "components/Common/AnalysesEmpty";
+import MotionLoading from "components/Common/MotionLoading";
+import AnalysisVideoCard from "components/Common/VideoCard/AnalysisVideoCard";
+
+import useCarousel from "hooks/Common/useCarousel";
 import useGetAnalyses from "hooks/api/useGetAnalyses";
 import useIntersectionObserver from "hooks/Common/useIntersectionObserver";
-import AnalysisVideoCard from "../Common/VideoCard/AnalysisVideoCard";
 import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
-import Icon from "components/Common/Icon";
-import useCarousel from "hooks/Common/useCarousel";
-import AnalysesEmpty from "components/Common/AnalysesEmpty";
 
 const MyAnalysesSection = () => {
-    const { analyses, loadMore, isEmpty } = useGetAnalyses();
+    const { analyses, loadMore, isEmpty, isLoadingInitialData } =
+        useGetAnalyses();
 
     const onIntersect: IntersectionObserverCallback = ([
         { isIntersecting },
@@ -37,46 +41,59 @@ const MyAnalysesSection = () => {
             animate="animate"
             exit="exit"
         >
-            {isEmpty ? (
-                <AnalysesEmpty />
-            ) : (
-                <>
-                    <CarouselBtn
-                        key="carouselLeftBtn"
-                        onClick={onClickLeft}
+            <AnimatePresence exitBeforeEnter>
+                {isLoadingInitialData ? (
+                    <MotionLoading
+                        key="mytag analyses loading"
+                        height="400px"
+                    />
+                ) : isEmpty ? (
+                    <AnalysesEmpty key="mytag analyses empty" />
+                ) : (
+                    <CarouselWrapper
+                        key="mytage analyses result"
                         variants={defaultFadeInUpVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
                     >
-                        <Icon name="main_carousel_left" />
-                    </CarouselBtn>
-
-                    <CarouselBox
-                        key="carouselBox"
-                        ref={wrapperRef}
-                        variants={staggerHalf}
-                    >
-                        {analyses.map((analysis, index) => (
-                            <AnalysisVideoCard
-                                key={index}
-                                analysis={analysis}
-                            />
-                        ))}
-
-                        <IntersectionTarget
-                            key="target"
-                            ref={setTarget}
+                        <CarouselBtn
+                            key="carouselLeftBtn"
+                            onClick={onClickLeft}
                             variants={defaultFadeInUpVariants}
-                        />
-                    </CarouselBox>
+                        >
+                            <Icon name="main_carousel_left" />
+                        </CarouselBtn>
 
-                    <CarouselBtn
-                        key="carouselRightBtn"
-                        onClick={onClickRight}
-                        variants={defaultFadeInUpVariants}
-                    >
-                        <Icon name="main_carousel_right" />
-                    </CarouselBtn>
-                </>
-            )}
+                        <CarouselBox
+                            key="carouselBox"
+                            ref={wrapperRef}
+                            variants={staggerHalf}
+                        >
+                            {analyses.map((analysis, index) => (
+                                <AnalysisVideoCard
+                                    key={index}
+                                    analysis={analysis}
+                                />
+                            ))}
+
+                            <IntersectionTarget
+                                key="target"
+                                ref={setTarget}
+                                variants={defaultFadeInUpVariants}
+                            />
+                        </CarouselBox>
+
+                        <CarouselBtn
+                            key="carouselRightBtn"
+                            onClick={onClickRight}
+                            variants={defaultFadeInUpVariants}
+                        >
+                            <Icon name="main_carousel_right" />
+                        </CarouselBtn>
+                    </CarouselWrapper>
+                )}
+            </AnimatePresence>
         </Wrapper>
     );
 };
@@ -85,7 +102,15 @@ export default MyAnalysesSection;
 
 const Wrapper = styled(motion.section)`
     width: 100%;
+    min-height: 400px;
     margin: 12px 0 60px 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+`;
+
+const CarouselWrapper = styled(motion.section)`
+    width: 100%;
     display: flex;
     justify-content: space-between;
     align-items: center;

@@ -1,6 +1,5 @@
 import { ComponentProps, FunctionComponent, ReactNode, Suspense } from "react";
 import { ErrorBoundary } from "@sentry/react";
-import { AnimatePresence } from "framer-motion";
 
 type RejectFallbackProps = { error: Error; resetError: () => void };
 type SuspenseProps = ComponentProps<typeof Suspense>;
@@ -22,9 +21,7 @@ const AsyncBoundary = ({
                 <RejectedFallback error={error} resetError={resetError} />
             )}
         >
-            <AnimatePresence exitBeforeEnter>
-                <Suspense fallback={PendingFallback}>{children}</Suspense>
-            </AnimatePresence>
+            <Suspense fallback={PendingFallback}>{children}</Suspense>
         </ErrorBoundary>
     );
 };
