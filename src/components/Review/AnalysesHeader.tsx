@@ -1,18 +1,67 @@
-import { ChangeEvent, Dispatch, SetStateAction } from "react";
+import {
+    ChangeEvent,
+    Dispatch,
+    SetStateAction,
+    MouseEvent,
+    useMemo,
+} from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 import { defaultFadeInUpVariants, staggerHalf } from "constants/motions";
+import { orderByType, isOrderByType } from "./AnalysesSection";
+import useToggle from "hooks/Common/useToggle";
 
 interface AnalysesHeaderProps {
     query: string;
     setQuery: Dispatch<SetStateAction<string>>;
+    orderBy: orderByType;
+    setOrderBy: Dispatch<SetStateAction<orderByType>>;
 }
 
-const AnalysesHeader = ({ query, setQuery }: AnalysesHeaderProps) => {
+const AnalysesHeader = ({
+    query,
+    setQuery,
+    orderBy,
+    setOrderBy,
+}: AnalysesHeaderProps) => {
     const onChangeQuery = (e: ChangeEvent<HTMLInputElement>) => {
         const { value } = e.target;
         setQuery(value);
     };
+
+    const [isSelectOpen, toggleIsSelectOpen] = useToggle(false);
+
+    const onClickSelect = (e: MouseEvent<HTMLDivElement>) => {
+        const { id } = e.target as HTMLElement;
+        if (id === "option") return;
+        toggleIsSelectOpen();
+    };
+
+    const onClickOption = (e: MouseEvent<HTMLSpanElement>) => {
+        const {
+            dataset: { orderby },
+        } = e.target as HTMLSpanElement;
+        if (typeof orderby !== "string") return;
+
+        if (isOrderByType(orderby)) {
+            setOrderBy(orderby as orderByType);
+        }
+    };
+
+    const koreanOrderBy = useMemo(() => {
+        switch (orderBy) {
+            case "latest":
+                return "최근순";
+            case "oldest":
+                return "과거순";
+            case "highest-score":
+                return "높은 점수순";
+            case "lowest-score":
+                return "낮은 점수순";
+            default:
+                return "";
+        }
+    }, [orderBy]);
 
     return (
         <Header
@@ -32,11 +81,53 @@ const AnalysesHeader = ({ query, setQuery }: AnalysesHeaderProps) => {
                     onChange={onChangeQuery}
                     required
                 />
-                <select>
-                    <option value="asdf" />
-                    <option value="asdf" />
-                    <option value="asdf" />
-                </select>
+
+                <SelectWrapper
+                    variants={defaultFadeInUpVariants}
+                    onClick={onClickSelect}
+                >
+                    <span>{koreanOrderBy}</span>
+
+                    <AnimatePresence exitBeforeEnter>
+                        {isSelectOpen && (
+                            <OptionWrapper
+                                variants={defaultFadeInUpVariants}
+                                initial="initial"
+                                animate="animate"
+                                exit="exit"
+                            >
+                                <Option
+                                    id="option"
+                                    data-orderby="latest"
+                                    onClick={onClickOption}
+                                >
+                                    최근순
+                                </Option>
+                                <Option
+                                    id="option"
+                                    data-orderby="oldest"
+                                    onClick={onClickOption}
+                                >
+                                    과거순
+                                </Option>
+                                <Option
+                                    id="option"
+                                    data-orderby="highest-score"
+                                    onClick={onClickOption}
+                                >
+                                    높은 점수순
+                                </Option>
+                                <Option
+                                    id="option"
+                                    data-orderby="lowest-score"
+                                    onClick={onClickOption}
+                                >
+                                    낮은 점수순
+                                </Option>
+                            </OptionWrapper>
+                        )}
+                    </AnimatePresence>
+                </SelectWrapper>
             </SettingWrapper>
         </Header>
     );
@@ -73,5 +164,45 @@ const SearchInput = styled(motion.input)`
     &:focus,
     &:valid {
         border-color: ${({ theme }) => theme.color.purple};
+    }
+`;
+
+const SelectWrapper = styled(motion.div)`
+    position: relative;
+    width: 120px;
+    height: 50px;
+    padding-left: 1rem;
+    display: flex;
+    align-items: center;
+
+    border-radius: 40px;
+    border: solid 2px ${({ theme }) => theme.color.purple};
+    cursor: pointer;
+    z-index: 1;
+`;
+
+const OptionWrapper = styled(motion.div)`
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 100%;
+    height: 200px;
+    padding-left: 1rem;
+    background-color: ${({ theme }) => theme.color.white};
+    border-radius: 40px;
+    border: solid 2px ${({ theme }) => theme.color.purple};
+
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+`;
+
+const Option = styled.span`
+    color: ${({ theme }) => theme.color.gray};
+    cursor: pointer;
+    transition: color 0.3s;
+
+    &:hover {
+        color: ${({ theme }) => theme.color.purple};
     }
 `;

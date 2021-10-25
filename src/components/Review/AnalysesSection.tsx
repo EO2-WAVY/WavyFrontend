@@ -11,7 +11,14 @@ import MotionLoading from "components/Common/MotionLoading";
 import AnalysesEmpty from "components/Common/AnalysesEmpty";
 import AnalysesHeader from "./AnalysesHeader";
 
-type orderByType = "latest" | "oldest" | "highest-score" | "lowest-score";
+export type orderByType =
+    | "latest"
+    | "oldest"
+    | "highest-score"
+    | "lowest-score";
+
+export const isOrderByType = (s: string) =>
+    ["latest", "oldest", "highest-score", "lowest-score"].includes(s);
 
 const AnalysesSection = () => {
     const [query, setQuery] = useState<string>("");
@@ -22,7 +29,6 @@ const AnalysesSection = () => {
         orderBy,
     });
 
-    console.log(setOrderBy);
     return (
         <Wrapper
             variants={staggerOne}
@@ -30,14 +36,19 @@ const AnalysesSection = () => {
             animate="animate"
             exit="exit"
         >
-            <AnalysesHeader query={query} setQuery={setQuery} />
+            <AnalysesHeader
+                query={query}
+                setQuery={setQuery}
+                orderBy={orderBy}
+                setOrderBy={setOrderBy}
+            />
 
             <AnimatePresence exitBeforeEnter>
                 {isLoadingInitialData ? (
                     <MotionLoading key="review analyses loading" />
                 ) : (
                     <AnalysesVideoWrapper
-                        key="review analyses wrapper"
+                        key={`review analyses wrapper ${query} ${orderBy}`}
                         variants={defaultFadeInUpStaggerHalfVariants}
                     >
                         {isEmpty ? (
@@ -47,10 +58,10 @@ const AnalysesSection = () => {
                             />
                         ) : (
                             <>
-                                {analyses.map((analysis, index) => (
+                                {analyses.map((analysis) => (
                                     <AnalysisVideoCard
                                         analysis={analysis}
-                                        key={index}
+                                        key={analysis.anSeq}
                                     />
                                 ))}
                             </>

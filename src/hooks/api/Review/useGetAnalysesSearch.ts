@@ -15,7 +15,7 @@ const useGetAnalysesSearch = ({
         useSWRInfinite<IGetAnalysesSearch>(
             (index) =>
                 `/analyses/search?page=${index + 1}&orderby=${orderBy}${
-                    query !== "" && `&q=${query}`
+                    query !== "" ? `&q=${query}` : ""
                 }`,
             fetcher
         );
