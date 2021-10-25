@@ -27,7 +27,8 @@ const Ready = ({ index, setNextStep }: ReadyProps) => {
             <ReadyPictogram />
 
             <NotiTitle layoutType={layout}>
-                화면에 전신이 나오도록{layout === "drag" && <br />} 위치해주세요!
+                화면에 전신이 나오도록{layout === "drag" && <br />}{" "}
+                위치해주세요!
             </NotiTitle>
             <NotiDsc layoutType={layout}>
                 시작한 후 중간에 멈추거나 다시 출 수 없습니다
