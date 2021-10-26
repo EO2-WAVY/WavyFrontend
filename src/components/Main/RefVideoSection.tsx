@@ -14,7 +14,7 @@ const RefVideoSection = () => {
     const currentTag = useRecoilValue(currentTagState);
     const { refVideos, loadMore, isReachingEnd, isLoadingMore } =
         useGetRefVideos({
-            suspense: true,
+            suspense: false,
         });
 
     const onIntersect: IntersectionObserverCallback = ([

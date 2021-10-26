@@ -12,12 +12,17 @@ import useProgress from "hooks/Common/useProgress";
 import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlayedSecond";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
+import WrongSections from "./WrongSections";
 
 interface ControllerProgressbarProps {
     rvDuration: number;
+    wrong_sections?: string[];
 }
 
-const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
+const ControllerProgressbar = ({
+    rvDuration,
+    wrong_sections = [],
+}: ControllerProgressbarProps) => {
     const barRef = useRef<HTMLDivElement>(null);
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
@@ -75,6 +80,13 @@ const ControllerProgressbar = ({ rvDuration }: ControllerProgressbarProps) => {
     return (
         <Outer onClick={onClick} ref={barRef} onMouseDown={onMouseDown}>
             <Inner percent={percent} />
+            {wrong_sections && (
+                <WrongSections
+                    wrong_sections={wrong_sections}
+                    barRef={barRef}
+                    rvDuration={rvDuration}
+                />
+            )}
         </Outer>
     );
 };

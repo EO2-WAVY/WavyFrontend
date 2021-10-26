@@ -20,6 +20,7 @@ import Storage from "pages/Storage";
 import useIsUserSignedIn from "hooks/Common/useIsUserSignedIn";
 // for google analytics
 import useGa from "hooks/Common/useGa";
+import React, { ReactNode, useCallback } from "react";
 
 const AnimateRouter = () => {
     useGa();
@@ -27,11 +28,17 @@ const AnimateRouter = () => {
     const location = useLocation();
     const { isUserSignedIn } = useIsUserSignedIn();
 
-    const pushRootWhenSignedIn = (Page: JSX.Element) =>
-        isUserSignedIn ? <Redirect to="/" /> : Page;
+    const pushRootWhenSignedIn = useCallback(
+        (Page: ReactNode): ReactNode =>
+            isUserSignedIn ? <Redirect to="/" /> : Page,
+        [isUserSignedIn]
+    );
 
-    const pushRootWhenNotSignedIn = (Page: JSX.Element) =>
-        !isUserSignedIn ? <Redirect to="/" /> : Page;
+    const pushRootWhenNotSignedIn = useCallback(
+        (Page: ReactNode): ReactNode =>
+            !isUserSignedIn ? <Redirect to="/" /> : Page,
+        [isUserSignedIn]
+    );
 
     return (
         <AnimatePresence initial exitBeforeEnter>
@@ -65,11 +72,11 @@ const AnimateRouter = () => {
                 <Route path="/challenge" component={Challenge} />
                 <Route
                     path="/storage"
-                    component={() => pushRootWhenNotSignedIn(<Storage />)}
+                    render={() => pushRootWhenNotSignedIn(<Storage />)}
                 />
                 <Route
                     path="/review"
-                    component={() => pushRootWhenNotSignedIn(<Review />)}
+                    render={() => pushRootWhenNotSignedIn(<Review />)}
                 />
 
                 <Route path="/analysis" component={Analysis} />

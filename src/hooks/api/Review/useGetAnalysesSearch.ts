@@ -1,12 +1,24 @@
 import useSWRInfinite from "swr/infinite";
 import { fetcher } from "utils/api/fetch";
-import { IAnalysis } from "hooks/api/useGetAnalysis";
+import { IAnalysis } from "../useGetAnalysis";
 
-const useGetAnalyses = () => {
-    const { data, error, size, setSize, mutate } = useSWRInfinite<IGetAnalyses>(
-        (index) => `/analyses?page=${index + 1}`,
-        fetcher
-    );
+interface useGetAnalysesSearchProps {
+    orderBy: string;
+    query: string;
+}
+
+const useGetAnalysesSearch = ({
+    orderBy,
+    query,
+}: useGetAnalysesSearchProps) => {
+    const { data, error, size, setSize, mutate } =
+        useSWRInfinite<IGetAnalysesSearch>(
+            (index) =>
+                `/analyses/search?page=${index + 1}&orderby=${orderBy}${
+                    query !== "" ? `&q=${query}` : ""
+                }`,
+            fetcher
+        );
 
     const analyses: IAnalysis[] = [];
     data?.forEach((tempData) => {
@@ -20,6 +32,9 @@ const useGetAnalyses = () => {
 
     const PAGE_SIZE = data?.[0]?.totalPages;
     const isLoadingInitialData = !data && !error;
+    const isLoadingMore =
+        isLoadingInitialData ||
+        (size > 0 && data && typeof data[size - 1] === "undefined");
     const isEmpty = data?.[0]?.analyses.length === 0 || analyses.length === 0;
     const isReachingEnd = size >= (PAGE_SIZE as number);
 
@@ -36,12 +51,13 @@ const useGetAnalyses = () => {
         isReachingEnd,
         mutate,
         isLoadingInitialData,
+        isLoadingMore,
     };
 };
 
-export default useGetAnalyses;
+export default useGetAnalysesSearch;
 
-export interface IGetAnalyses {
+interface IGetAnalysesSearch {
     ok: boolean;
     error: string;
     totalPages: number;

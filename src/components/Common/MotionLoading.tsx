@@ -3,13 +3,18 @@ import { motion } from "framer-motion";
 import Spinner from "./Spinner";
 import { defaultPageFadeInVariants } from "constants/motions";
 
-const MotionLoading = () => {
+interface MotionLoadingProps {
+    height?: string;
+}
+
+const MotionLoading = ({ height = "100vh" }: MotionLoadingProps) => {
     return (
         <Wrapper
             variants={defaultPageFadeInVariants}
             initial="initial"
             animate="animate"
             exit="exit"
+            height={height}
         >
             <SpinnerWrapper>
                 <Spinner />
@@ -20,9 +25,9 @@ const MotionLoading = () => {
 
 export default MotionLoading;
 
-const Wrapper = styled(motion.div)`
+const Wrapper = styled(motion.div)<{ height: string }>`
     width: 100%;
-    height: 100vh;
+    height: ${({ height }) => height};
 
     display: flex;
     justify-content: center;

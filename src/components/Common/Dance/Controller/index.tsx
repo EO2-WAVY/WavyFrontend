@@ -20,12 +20,14 @@ interface ControllerProps {
     rvDuration: string;
     isLinkPractice?: boolean;
     isAnalysis?: boolean;
+    wrong_sections?: string[];
 }
 
 const Controller = ({
     rvDuration,
     isLinkPractice = false,
     isAnalysis = false,
+    wrong_sections = [],
 }: ControllerProps) => {
     const { playedSecond } = useControllerPlayedSecond();
 
@@ -35,7 +37,10 @@ const Controller = ({
 
     return (
         <Wrapper>
-            <ControllerProgressbar rvDuration={numDuration} />
+            <ControllerProgressbar
+                rvDuration={numDuration}
+                wrong_sections={wrong_sections}
+            />
 
             <ControlWrapper>
                 <ControlLeft>

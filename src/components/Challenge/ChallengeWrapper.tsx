@@ -15,6 +15,7 @@ import { fmYouTubeURLToCode } from "utils/formatting/formattingYoutubeCode";
 import EndedModal from "./EndedModal";
 import RouteLeaveNotification from "./RouteLeaveNotification";
 import { defaultPageFadeInVariants } from "constants/motions";
+import MirrorPopup from "./MirrorPopup";
 
 interface ChallengeWrapperProps {
     rvSeq: string;
@@ -74,8 +75,10 @@ const ChallengeWrapper = ({ rvSeq }: ChallengeWrapperProps) => {
                 <Webcam webcamRef={setWebcamRef} />
             </AnimateSharedLayout>
 
+            <MirrorPopup />
+
             <EndedModal isEnded={isEnded} />
-            
+
             <RouteLeaveNotification />
         </Wrapper>
     );
