@@ -9,8 +9,8 @@ const useGa = () => {
     useEffect(() => {
         if (!window.location.href.includes("localhost")) {
             ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID as string);
+            setInitialized(true);
         }
-        setInitialized(true);
     }, []);
 
     useEffect(() => {
