@@ -39,8 +39,8 @@ const Controller = ({
 
     return (
         <Wrapper>
-            <MarkerWrapper />
-            
+            <MarkerWrapper rvDuration={numDuration} />
+
             <ControllerProgressbar
                 rvDuration={numDuration}
                 wrong_sections={wrong_sections}

@@ -1,9 +1,14 @@
 import useMarker from "hooks/Dance/Controller/useMarker";
-import { useEffect } from "react";
+import { useEffect, useRef } from "react";
 import styled from "styled-components";
 import Marker from "./Marker";
 
-const MarkerWrapper = () => {
+interface MarkerWrapperProps {
+    rvDuration: number;
+}
+
+const MarkerWrapper = ({ rvDuration }: MarkerWrapperProps) => {
+    const markerWrapperRef = useRef<HTMLDivElement>(null);
     const { markers, removeMarker, clearMarkers } = useMarker();
 
     useEffect(() => {
@@ -13,10 +18,12 @@ const MarkerWrapper = () => {
     }, [clearMarkers]);
 
     return (
-        <Wrapper>
+        <Wrapper ref={markerWrapperRef}>
             {markers.map((marker) => (
                 <Marker
                     key={marker.index}
+                    rvDuration={rvDuration}
+                    wrapperRef={markerWrapperRef}
                     index={marker.index}
                     time={marker.time}
                     clientX={marker.clientX}
