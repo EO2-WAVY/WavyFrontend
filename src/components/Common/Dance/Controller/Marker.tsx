@@ -53,14 +53,17 @@ const Marker = ({
 
     const onDrag = (e: globalThis.MouseEvent | TouchEvent | PointerEvent) => {
         const { left } = (e.target as HTMLElement).getBoundingClientRect();
-        console.log(left);
         setXPos(left);
     };
 
     const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
         e.preventDefault();
         toggleIsContextOpen();
-        console.log("context");
+    };
+
+    const onClickRemoveMarker = (e: MouseEvent<HTMLButtonElement>) => {
+        e.stopPropagation();
+        handleClose();
     };
 
     return (
@@ -79,7 +82,7 @@ const Marker = ({
             dragConstraints={wrapperRef}
             whileHover={{ scale: 1.1 }}
         >
-            <Icon name="controller_active_marker" />
+            <Icon name="controller_active_marker" id="svg" />
 
             <AnimatePresence exitBeforeEnter>
                 {isContextOpen && (
@@ -94,7 +97,11 @@ const Marker = ({
                             initial="initial"
                             animate="animate"
                             exit="exit"
-                        ></ContextWrapper>
+                        >
+                            <ContextButton onClick={onClickRemoveMarker}>
+                                X
+                            </ContextButton>
+                        </ContextWrapper>
                     </>
                 )}
             </AnimatePresence>
@@ -120,6 +127,7 @@ const Wrapper = styled(motion.div)<WrapperProps>`
     & > svg {
         width: 100%;
         height: 100%;
+        z-index: -1;
     }
 
     &:active {
@@ -135,4 +143,10 @@ const ContextWrapper = styled(motion.div)`
     width: 60px;
     height: 30px;
     background-color: white;
+`;
+
+const ContextButton = styled.button`
+    font-size: 12px;
+    padding: 4px;
+    background-color: red;
 `;
