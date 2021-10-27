@@ -25,7 +25,6 @@ const MarkerWrapper = ({ rvDuration }: MarkerWrapperProps) => {
                     rvDuration={rvDuration}
                     wrapperRef={markerWrapperRef}
                     index={marker.index}
-                    time={marker.time}
                     clientX={marker.clientX}
                     handleClose={() => removeMarker(marker.index)}
                 />

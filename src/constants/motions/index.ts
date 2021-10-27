@@ -239,7 +239,6 @@ export const mobileLogoAnimationVariants: Variants = {
     },
 };
 
-
 export const markerFadeInDownVariants: Variants = {
     initial: {
         y: -30,
@@ -255,6 +254,33 @@ export const markerFadeInDownVariants: Variants = {
     },
     exit: {
         y: -30,
+        opacity: 0,
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+};
+
+export const markerContextVariants: Variants = {
+    initial: {
+        y: 30,
+        x: "-50%",
+        scaleX: 0.4,
+        opacity: 0,
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    animate: {
+        y: 0,
+        x: "-50%",
+        scaleX: 1,
+        opacity: 1,
+        transition: { duration: 0.6, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    exit: {
+        y: 30,
+        x: "-50%",
+        scaleX: 0.4,
         opacity: 0,
         transition: { duration: 0.3, ease: defaultEasing },
         willChange: "opacity, transform",

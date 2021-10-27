@@ -1,12 +1,17 @@
-import { MouseEvent, RefObject, useCallback, useState } from "react";
+import { RefObject, useCallback, useRef, useState, MouseEvent } from "react";
 import styled from "styled-components";
-import { motion } from "framer-motion";
+import { AnimatePresence, motion } from "framer-motion";
 
 import Icon from "components/Common/Icon";
 import { IMarker } from "store/Common";
-import { markerFadeInDownVariants } from "constants/motions";
+import {
+    markerContextVariants,
+    markerFadeInDownVariants,
+} from "constants/motions";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
+import useToggle from "hooks/Common/useToggle";
+import EmptyOverlay from "components/Common/EmptyOverlay";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
@@ -17,13 +22,17 @@ const Marker = ({
     index,
     rvDuration,
     wrapperRef,
-    time,
     clientX,
     handleClose,
 }: MarkerProps) => {
+    // 시점 이동을 위해
     const [xPos, setXPos] = useState<number>(clientX);
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
+
+    // context menu를 위해
+    const [isContextOpen, toggleIsContextOpen] = useToggle(false);
+    const currentMarkerRef = useRef<HTMLDivElement>(null);
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
@@ -44,25 +53,51 @@ const Marker = ({
 
     const onDrag = (e: globalThis.MouseEvent | TouchEvent | PointerEvent) => {
         const { left } = (e.target as HTMLElement).getBoundingClientRect();
-
+        console.log(left);
         setXPos(left);
+    };
+
+    const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
+        e.preventDefault();
+        toggleIsContextOpen();
+        console.log("context");
     };
 
     return (
         <Wrapper
+            ref={currentMarkerRef}
             initialXPos={clientX}
             onClick={onClick}
+            onContextMenu={onContextMenu}
             variants={markerFadeInDownVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            drag="x"
+            drag={isContextOpen ? false : "x"}
             dragTransition={{ power: 0 }}
             onDrag={onDrag}
             dragConstraints={wrapperRef}
             whileHover={{ scale: 1.1 }}
         >
             <Icon name="controller_active_marker" />
+
+            <AnimatePresence exitBeforeEnter>
+                {isContextOpen && (
+                    <>
+                        <EmptyOverlay
+                            key={`${index} overlay`}
+                            handleClose={toggleIsContextOpen}
+                        />
+                        <ContextWrapper
+                            key={`${index} context`}
+                            variants={markerContextVariants}
+                            initial="initial"
+                            animate="animate"
+                            exit="exit"
+                        ></ContextWrapper>
+                    </>
+                )}
+            </AnimatePresence>
         </Wrapper>
     );
 };
@@ -80,9 +115,24 @@ const Wrapper = styled(motion.div)<WrapperProps>`
     height: 24px;
     z-index: 999;
     transform-origin: bottom;
+    cursor: grab;
 
     & > svg {
         width: 100%;
         height: 100%;
     }
+
+    &:active {
+        cursor: grabbing;
+    }
+`;
+
+const ContextWrapper = styled(motion.div)`
+    position: absolute;
+    bottom: calc(100% + 6px);
+    left: 50%;
+
+    width: 60px;
+    height: 30px;
+    background-color: white;
 `;

@@ -10,7 +10,6 @@ const useMarker = () => {
         ({ clientX }: addMarkerProps) => {
             const newMarker: IMarker = {
                 index: markerIndex,
-                time: 123,
                 clientX: clientX,
             };
 

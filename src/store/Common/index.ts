@@ -19,7 +19,6 @@ export const notificationIndexState = atom<number>({
 
 export interface IMarker {
     index: number;
-    time: number;
     clientX: number;
 }
 
