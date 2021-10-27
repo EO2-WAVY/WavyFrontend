@@ -113,6 +113,10 @@ const Wrapper = styled(motion.article)`
     display: flex;
     flex-direction: column;
     align-items: center;
+
+    &:last-child {
+        margin-right: auto;
+    }
 `;
 
 const VideoWrapper = styled(motion.div)`
