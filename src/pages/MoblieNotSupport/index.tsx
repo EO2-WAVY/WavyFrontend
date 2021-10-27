@@ -9,7 +9,6 @@ import {
     staggerOne,
 } from "constants/motions";
 
-
 const MoblieNotSupport = () => {
     useEffect(() => {
         ReactGA.initialize(process.env.REACT_APP_GA_TRACKING_ID as string);
@@ -23,14 +22,18 @@ const MoblieNotSupport = () => {
             animate="animate"
             exit="exit"
         >
-            <StyledH1 variants={defaultFadeInUpVariants}>죄송합니다</StyledH1>
-            <StyledH2 variants={defaultFadeInUpVariants}>
-                현재 Wavy는
-                <br />
-                모바일 환경을
-                <br />
-                지원하고 있지 않습니다
-            </StyledH2>
+            <section>
+                <StyledH1 variants={defaultFadeInUpVariants}>
+                    죄송합니다
+                </StyledH1>
+                <StyledH2 variants={defaultFadeInUpVariants}>
+                    현재 Wavy는
+                    <br />
+                    모바일 환경을
+                    <br />
+                    지원하고 있지 않습니다
+                </StyledH2>
+            </section>
 
             <LogoWrapper variants={mobileLogoAnimationVariants}>
                 <Icon name="common_logo_small" className="logo" />
@@ -52,10 +55,12 @@ export default MoblieNotSupport;
 const Wrapper = styled(motion.main)`
     width: 100vw;
     height: 100vh;
-    padding: 8% 6% 30% 6%;
+    padding: 8% 6% 20% 6%;
 
     display: flex;
     flex-direction: column;
+    justify-content: space-between;
+    
 `;
 
 const StyledH1 = styled(motion.h1)`
@@ -74,8 +79,7 @@ const StyledH2 = styled(motion.h2)`
 `;
 
 const LogoWrapper = styled(motion.div)`
-    margin-top: auto;
-    width: 50vw;
+    width: 200px;
     align-self: center;
 
     & > .logo {
@@ -85,7 +89,6 @@ const LogoWrapper = styled(motion.div)`
 `;
 
 const StyledP = styled(motion.p)`
-    margin-top: auto;
     font-size: 17px;
     word-break: keep-all;
     white-space: pre-wrap;
