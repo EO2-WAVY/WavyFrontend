@@ -64,7 +64,7 @@ const VideoCardWrapper = styled(motion.div)`
 
     display: flex;
     justify-content: space-evenly;
-    flex-wrap: wrap;
     align-items: center;
+    flex-wrap: wrap;
     row-gap: 32px;
 `;
