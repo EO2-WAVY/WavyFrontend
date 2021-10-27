@@ -26,14 +26,21 @@ const Ready = ({ index, setNextStep }: ReadyProps) => {
         >
             <ReadyPictogram />
 
-            <NotiTitle layoutType={layout}>
-                화면에 전신이 나오도록{layout === "drag" && <br />}{" "}
-                위치해주세요!
-            </NotiTitle>
-            <NotiDsc layoutType={layout}>
-                시작한 후 중간에 멈추거나 다시 출 수 없습니다
-            </NotiDsc>
+            <NotiSetion layoutType={layout}>
+                <NotiTitle layoutType={layout}>
+                    화면에 전신이 나오도록{layout === "drag" && <br />}{" "}
+                    위치해주세요!
+                </NotiTitle>
+                <NotiDsc layoutType={layout}>
+                    시작한 후 중간에 멈추거나 다시 출 수 없습니다
+                </NotiDsc>
+                <NotiDsc layoutType={layout}>
+                    웹캠에 한 명 이상이 감지될 시 정확도가 낮아질 수 있습니다
+                </NotiDsc>
+            </NotiSetion>
+
             <ReadyProgressbar onEnded={setNextStep ? setNextStep : () => {}} />
+
             <SkipBtn
                 onClick={setNextStep}
                 whileHover={{ scale: 1.05 }}
@@ -62,13 +69,20 @@ const Wrapper = styled(motion.aside)<{ layoutType: layoutType }>`
     text-align: center;
 `;
 
+const NotiSetion = styled.section<{ layoutType: layoutType }>`
+    margin-bottom: ${({ layoutType }) => (layoutType === "drag" ? 1 : 4)}em;
+`;
+
 const NotiTitle = styled(motion.h3)<{ layoutType: layoutType }>`
     margin-bottom: 0.25em;
 `;
 
-const NotiDsc = styled(motion.span)<{ layoutType: layoutType }>`
+const NotiDsc = styled.p<{ layoutType: layoutType }>`
     opacity: 0.5;
-    margin-bottom: ${({ layoutType }) => (layoutType === "drag" ? 2 : 4)}em;
+    font-size: ${({ layoutType }) => (layoutType === "drag" ? 0.725 : 0.8)}em;
+    word-break: keep-all;
+    white-space: pre-wrap;
+    margin-bottom: 2px;
 `;
 
 const SkipBtn = styled(motion.button)`

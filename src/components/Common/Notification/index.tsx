@@ -70,6 +70,8 @@ const Wrapper = styled(motion.div)`
     padding: 16px 24px;
     background-color: white;
     box-shadow: ${({ theme }) => theme.shadow.over};
+    word-break: keep-all;
+    white-space: pre-wrap;
 `;
 
 const TitleSection = styled.div`
