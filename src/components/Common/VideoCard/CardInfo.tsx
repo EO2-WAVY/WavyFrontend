@@ -119,12 +119,13 @@ const Wrapper = styled(motion.div)`
     bottom: 0;
     left: 0;
     width: 100%;
+    height: 100%;
 `;
 
 const LevelSpan = styled(motion.span)`
     position: absolute;
-    bottom: 106px;
-    left: 20px;
+    bottom: calc(80px + 3%);
+    left: 5%;
 
     padding: 6px 25px;
     background: rgba(194, 146, 255, 0.3);
@@ -136,8 +137,8 @@ const LevelSpan = styled(motion.span)`
 
 const OverrallSpan = styled(motion.span)`
     position: absolute;
-    bottom: 106px;
-    right: 20px;
+    bottom: calc(80px + 3%);
+    right: 5%;
 
     padding: 11px;
     background: rgba(194, 146, 255, 0.3);
