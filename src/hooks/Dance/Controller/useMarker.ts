@@ -20,7 +20,17 @@ const useMarker = () => {
         [markerIndex, markers, setMarkerIndex, setMarkers]
     );
 
-    return { addMarker };
+    const removeMarker = (id: number) => {
+        setMarkers((prevMarkers) =>
+            prevMarkers.filter((marker) => marker.index !== id)
+        );
+    };
+
+    const clearMarkers = useCallback(() => {
+        setMarkers([]);
+    }, [setMarkers]);
+
+    return { markers, addMarker, removeMarker, clearMarkers };
 };
 
 export default useMarker;
