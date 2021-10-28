@@ -7,11 +7,13 @@ import { IMarker } from "store/Dance/Controller";
 import {
     markerContextVariants,
     markerFadeInDownVariants,
+    markerIconWrapperVariants,
 } from "constants/motions";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useToggle from "hooks/Common/useToggle";
 import useIsLoop from "hooks/Dance/Controller/useIsLoop";
+import useMarker from "hooks/Dance/Controller/useMarker";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
@@ -21,6 +23,7 @@ interface MarkerProps extends IMarker {
 const Marker = ({
     index,
     rvDuration,
+    isLoopMarker,
     wrapperRef,
     clientX,
     handleClose,
@@ -32,6 +35,7 @@ const Marker = ({
 
     // loop를 위해
     const { isLoop } = useIsLoop();
+    const { toggleLoopMarker } = useMarker();
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
@@ -48,11 +52,14 @@ const Marker = ({
 
     const onClick = () => {
         if (isLoop) {
+            toggleLoopMarker(index);
         }
         seekToWithPos(xPos);
     };
 
     const onDrag = (e: globalThis.MouseEvent | TouchEvent | PointerEvent) => {
+        // e.stopPropagation();
+        e.stopImmediatePropagation();
         const { left } = (e.target as HTMLElement).getBoundingClientRect();
         setXPos(left);
     };
@@ -86,7 +93,29 @@ const Marker = ({
                 setIsHover(false);
             }}
         >
-            <Icon name="controller_active_marker" id="svg" />
+            <AnimatePresence exitBeforeEnter>
+                {isLoopMarker ? (
+                    <IconWrapper
+                        key={`${index} loop marker`}
+                        variants={markerIconWrapperVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <Icon name="controller_loop_marker" />
+                    </IconWrapper>
+                ) : (
+                    <IconWrapper
+                        key={`${index} normal marker`}
+                        variants={markerIconWrapperVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <Icon name="controller_active_marker" />
+                    </IconWrapper>
+                )}
+            </AnimatePresence>
 
             <AnimatePresence exitBeforeEnter>
                 {isHover && (
@@ -122,14 +151,18 @@ const Wrapper = styled(motion.div)<WrapperProps>`
     transform-origin: bottom;
     cursor: grab;
 
-    & > svg {
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-
     &:active {
         cursor: grabbing;
+    }
+`;
+
+const IconWrapper = styled(motion.div)`
+    width: 100%;
+    height: 100%;
+
+    & > svg {
+        height: 100%;
+        z-index: -1;
     }
 `;
 

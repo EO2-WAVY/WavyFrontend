@@ -25,6 +25,7 @@ const MarkerWrapper = ({ rvDuration }: MarkerWrapperProps) => {
                     rvDuration={rvDuration}
                     wrapperRef={markerWrapperRef}
                     index={marker.index}
+                    isLoopMarker={marker.isLoopMarker}
                     clientX={marker.clientX}
                     handleClose={() => removeMarker(marker.index)}
                 />

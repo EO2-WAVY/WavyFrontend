@@ -45,6 +45,7 @@ export const isGraphShowingState = atom<boolean>({
 
 export interface IMarker {
     index: number;
+    isLoopMarker: boolean;
     clientX: number;
 }
 
