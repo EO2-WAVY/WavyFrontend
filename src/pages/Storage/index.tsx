@@ -51,16 +51,18 @@ const Storage = () => {
                         <span>보관함에 담은 영상이 없습니다</span>
                     </EmptyWrapper>
                 ) : (
-                    <VideoCardWrapper
-                        key="storageVideoWrapper"
-                        variants={staggerHalf}
-                    >
-                        {refVideos.map((refVideo) => (
-                            <VideoCard
-                                key={`storage${refVideo.rvSeq}`}
-                                refVideo={refVideo}
-                            />
-                        ))}
+                    <>
+                        <VideoCardWrapper
+                            key="storageVideoWrapper"
+                            variants={staggerHalf}
+                        >
+                            {refVideos.map((refVideo) => (
+                                <VideoCard
+                                    key={`storage${refVideo.rvSeq}`}
+                                    refVideo={refVideo}
+                                />
+                            ))}
+                        </VideoCardWrapper>
                         {!isLoadingMore && (
                             <div
                                 key="observerTarget"
@@ -68,7 +70,7 @@ const Storage = () => {
                                 style={{ position: "absolute" }}
                             ></div>
                         )}
-                    </VideoCardWrapper>
+                    </>
                 )}
             </AnimatePresence>
         </Layout>
@@ -105,8 +107,7 @@ const VideoCardWrapper = styled(motion.section)`
     margin: 12px 0 50px 0;
 
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: center;
     row-gap: 32px;
 `;

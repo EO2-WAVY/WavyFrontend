@@ -59,31 +59,25 @@ const AnalysesSection = () => {
             <AnimatePresence exitBeforeEnter>
                 {isLoadingInitialData ? (
                     <MotionLoading key="review analyses loading" />
+                ) : isEmpty ? (
+                    <AnalysesEmpty key="reviw analyses empty" query={query} />
                 ) : (
-                    <AnalysesVideoWrapper
-                        key={`review analyses wrapper ${query} ${orderBy}`}
-                        variants={defaultFadeInUpStaggerHalfVariants}
-                    >
-                        {isEmpty ? (
-                            <AnalysesEmpty
-                                key="reviw analyses empty"
-                                query={query}
-                            />
-                        ) : (
-                            <>
-                                {analyses.map((analysis) => (
-                                    <AnalysisVideoCard
-                                        analysis={analysis}
-                                        key={analysis.anSeq}
-                                    />
-                                ))}
-
-                                {!isLoadingMore && (
-                                    <div key="observerTarget" ref={setTarget} />
-                                )}
-                            </>
+                    <>
+                        <AnalysesVideoWrapper
+                            key={`review analyses wrapper ${query} ${orderBy}`}
+                            variants={defaultFadeInUpStaggerHalfVariants}
+                        >
+                            {analyses.map((analysis) => (
+                                <AnalysisVideoCard
+                                    analysis={analysis}
+                                    key={analysis.anSeq}
+                                />
+                            ))}
+                        </AnalysesVideoWrapper>
+                        {!isLoadingMore && (
+                            <div key="observerTarget" ref={setTarget} />
                         )}
-                    </AnalysesVideoWrapper>
+                    </>
                 )}
             </AnimatePresence>
         </Wrapper>
@@ -104,9 +98,8 @@ const AnalysesVideoWrapper = styled(motion.div)`
     margin-bottom: 50px;
 
     display: flex;
-    justify-content: space-evenly;
     flex-wrap: wrap;
-    align-items: center;
+    justify-content: center;
     row-gap: 32px;
 
     & > span {

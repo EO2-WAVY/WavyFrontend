@@ -35,11 +35,13 @@ const Header = styled.header`
 `;
 
 const Title = styled.h1`
-    font-size: 40px;
+    font-size: 2rem;
 `;
 
 const Main = styled.main`
     margin: 60px 0;
-    font-size: 24px;
+    font-size: 1rem;
     color: #424242;
+    word-break: keep-all;
+    white-space: pre-wrap;
 `;

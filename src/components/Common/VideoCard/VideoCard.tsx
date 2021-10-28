@@ -91,8 +91,12 @@ const Wrapper = styled(motion.article)`
     display: flex;
     flex-direction: column;
     align-items: center;
-    /* width: 260px; */
-    width: 360px;
+    margin: 0 4px;
+    width: calc(25% - 8px);
+
+    &:last-child {
+        margin-right: auto;
+    }
 `;
 
 const VideoWrapper = styled(motion.section)`
@@ -129,6 +133,8 @@ const Title = styled.h2<{ isHover: boolean }>`
     text-align: center;
     color: ${({ theme }) => theme.color.black};
     margin-bottom: 4px;
+    word-break: keep-all;
+    white-space: pre-wrap;
 
     ${Wrapper}:hover & {
         color: ${({ theme }) => theme.color.purple};

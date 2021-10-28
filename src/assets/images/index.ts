@@ -29,6 +29,7 @@ import { ReactComponent as common_trash } from "assets/images/Common/trash.svg";
 // Controller
 import { ReactComponent as controller_active_marker } from "assets/images/Controller/active_marker.svg";
 import { ReactComponent as controller_back_key } from "assets/images/Controller/back_key.svg";
+import { ReactComponent as controller_close_marker } from "assets/images/Controller/close_marker.svg";
 import { ReactComponent as controller_forward_key } from "assets/images/Controller/forward_key.svg";
 import { ReactComponent as controller_fullscreen } from "assets/images/Controller/fullscreen.svg";
 import { ReactComponent as controller_graph } from "assets/images/Controller/graph.svg";
@@ -94,6 +95,7 @@ export {
     common_trash,
     controller_active_marker,
     controller_back_key,
+    controller_close_marker,
     controller_forward_key,
     controller_fullscreen,
     controller_graph,

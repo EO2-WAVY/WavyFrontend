@@ -15,6 +15,8 @@ import {
 } from "utils/formatting/formattingDuration";
 import GraphButton from "./GraphButton";
 import SoundSlider from "./SoundSlider";
+import MarkerButton from "./MarkerButton";
+import MarkerWrapper from "./MarkerWrapper";
 
 interface ControllerProps {
     rvDuration: string;
@@ -37,6 +39,8 @@ const Controller = ({
 
     return (
         <Wrapper>
+            <MarkerWrapper rvDuration={numDuration} />
+
             <ControllerProgressbar
                 rvDuration={numDuration}
                 wrong_sections={wrong_sections}
@@ -58,6 +62,8 @@ const Controller = ({
                 <ControlRight>
                     {/* <Icon name="controller_loop" />
                     <Icon name="controller_marker" /> */}
+                    
+                    <MarkerButton />
                     {isAnalysis && <GraphButton />}
                     <MirroredButton />
                     <PlaybackRate />

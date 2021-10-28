@@ -1,3 +1,4 @@
+import { useCallback } from "react";
 import { useRecoilState } from "recoil";
 import {
     INotification,
@@ -12,26 +13,34 @@ const useNotification = () => {
         notificationIndexState
     );
 
-    const addNotification = ({
-        title,
-        description,
-        autoHideDuration = 3,
-    }: addNotificationProps) => {
-        const newNoti: INotification = {
-            index: notificationIndex,
+    const addNotification = useCallback(
+        ({
             title,
             description,
-            autoHideDuration,
-        };
+            autoHideDuration = 3,
+        }: addNotificationProps) => {
+            const newNoti: INotification = {
+                index: notificationIndex,
+                title,
+                description,
+                autoHideDuration,
+            };
 
-        setNotificationIndex((prev) => prev + 1);
-        setNotifications([...notifications, newNoti]);
-    };
+            setNotificationIndex((prev) => prev + 1);
+            setNotifications([...notifications, newNoti]);
+        },
+        [
+            notificationIndex,
+            notifications,
+            setNotificationIndex,
+            setNotifications,
+        ]
+    );
 
     const removeNotification = (id: number) => {
-        setNotifications((prevNotifications) => {
-            return prevNotifications.filter((noti) => noti.index !== id);
-        });
+        setNotifications((prevNotifications) =>
+            prevNotifications.filter((noti) => noti.index !== id)
+        );
     };
 
     return { addNotification, removeNotification, notifications };
