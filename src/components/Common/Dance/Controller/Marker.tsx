@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useRef, useState, MouseEvent } from "react";
+import { RefObject, useCallback, useState, MouseEvent } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -11,7 +11,6 @@ import {
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useToggle from "hooks/Common/useToggle";
-import EmptyOverlay from "components/Common/EmptyOverlay";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
@@ -29,10 +28,6 @@ const Marker = ({
     const [xPos, setXPos] = useState<number>(clientX);
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
-
-    // context menu를 위해
-    const [isContextOpen, toggleIsContextOpen] = useToggle(false);
-    const currentMarkerRef = useRef<HTMLDivElement>(null);
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
@@ -56,10 +51,9 @@ const Marker = ({
         setXPos(left);
     };
 
-    const onContextMenu = (e: MouseEvent<HTMLDivElement>) => {
-        e.preventDefault();
-        toggleIsContextOpen();
-    };
+    // 삭제를 위해
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const [isHover, _, setIsHover] = useToggle(false);
 
     const onClickRemoveMarker = (e: MouseEvent<HTMLButtonElement>) => {
         e.stopPropagation();
@@ -68,41 +62,39 @@ const Marker = ({
 
     return (
         <Wrapper
-            ref={currentMarkerRef}
             initialXPos={clientX}
             onClick={onClick}
-            onContextMenu={onContextMenu}
             variants={markerFadeInDownVariants}
             initial="initial"
             animate="animate"
             exit="exit"
-            drag={isContextOpen ? false : "x"}
+            drag={"x"}
             dragTransition={{ power: 0 }}
             onDrag={onDrag}
             dragConstraints={wrapperRef}
-            whileHover={{ scale: 1.1 }}
+            whileHover={{ scale: 1.2 }}
+            onHoverStart={() => {
+                setIsHover(true);
+            }}
+            onHoverEnd={() => {
+                setIsHover(false);
+            }}
         >
             <Icon name="controller_active_marker" id="svg" />
 
             <AnimatePresence exitBeforeEnter>
-                {isContextOpen && (
-                    <>
-                        <EmptyOverlay
-                            key={`${index} overlay`}
-                            handleClose={toggleIsContextOpen}
+                {isHover && (
+                    <CloseBtnWrapper
+                        variants={markerContextVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <Icon
+                            name="controller_close_marker"
+                            onClick={onClickRemoveMarker}
                         />
-                        <ContextWrapper
-                            key={`${index} context`}
-                            variants={markerContextVariants}
-                            initial="initial"
-                            animate="animate"
-                            exit="exit"
-                        >
-                            <ContextButton onClick={onClickRemoveMarker}>
-                                X
-                            </ContextButton>
-                        </ContextWrapper>
-                    </>
+                    </CloseBtnWrapper>
                 )}
             </AnimatePresence>
         </Wrapper>
@@ -135,18 +127,20 @@ const Wrapper = styled(motion.div)<WrapperProps>`
     }
 `;
 
-const ContextWrapper = styled(motion.div)`
+const CloseBtnWrapper = styled(motion.div)`
     position: absolute;
-    bottom: calc(100% + 6px);
-    left: 50%;
+    bottom: 0;
+    left: 0;
 
-    width: 60px;
-    height: 30px;
-    background-color: white;
-`;
+    width: calc(100% + 14px);
+    height: calc(100% + 14px);
+    display: flex;
+    justify-content: flex-end;
+    align-items: flex-start;
 
-const ContextButton = styled.button`
-    font-size: 12px;
-    padding: 4px;
-    background-color: red;
+    & > svg {
+        width: 14px;
+        height: 14px;
+        cursor: pointer;
+    }
 `;

@@ -62,6 +62,7 @@ const Controller = ({
                 <ControlRight>
                     {/* <Icon name="controller_loop" />
                     <Icon name="controller_marker" /> */}
+                    
                     <MarkerButton />
                     {isAnalysis && <GraphButton />}
                     <MirroredButton />

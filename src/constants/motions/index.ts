@@ -262,25 +262,25 @@ export const markerFadeInDownVariants: Variants = {
 
 export const markerContextVariants: Variants = {
     initial: {
-        y: 30,
-        x: "-50%",
-        scaleX: 0.4,
+        y: 15,
+        x: -15,
+        
         opacity: 0,
         transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
     },
     animate: {
         y: 0,
-        x: "-50%",
-        scaleX: 1,
+        x: 0,
+        
         opacity: 1,
         transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
     },
     exit: {
-        y: 30,
-        x: "-50%",
-        scaleX: 0.4,
+        y: 15,
+        x: -15,
+        
         opacity: 0,
         transition: { duration: 0.3, ease: defaultEasing },
         willChange: "opacity, transform",

@@ -7,7 +7,7 @@ interface IconProps {
     name: IconType;
     id?: string;
     className?: string;
-    onClick?: () => void;
+    onClick?: (e?: any) => void;
     style?: CSSProperties;
 }
 
