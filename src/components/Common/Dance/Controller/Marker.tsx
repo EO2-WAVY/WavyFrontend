@@ -3,7 +3,7 @@ import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
 import Icon from "components/Common/Icon";
-import { IMarker } from "store/Common";
+import { IMarker } from "store/Dance/Controller";
 import {
     markerContextVariants,
     markerFadeInDownVariants,
@@ -11,6 +11,7 @@ import {
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useToggle from "hooks/Common/useToggle";
+import useIsLoop from "hooks/Dance/Controller/useIsLoop";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
@@ -29,6 +30,9 @@ const Marker = ({
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
 
+    // loop를 위해
+    const { isLoop } = useIsLoop();
+
     const seekToWithPos = useCallback(
         (clientX: number) => {
             if (!wrapperRef.current) return;
@@ -43,6 +47,8 @@ const Marker = ({
     );
 
     const onClick = () => {
+        if (isLoop) {
+        }
         seekToWithPos(xPos);
     };
 

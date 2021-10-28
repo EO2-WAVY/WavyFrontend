@@ -42,3 +42,23 @@ export const isGraphShowingState = atom<boolean>({
     key: "isGraphShowingState",
     default: true,
 });
+
+export interface IMarker {
+    index: number;
+    clientX: number;
+}
+
+export const markersState = atom<IMarker[]>({
+    key: "markersState",
+    default: [],
+});
+
+export const markerIndexState = atom<number>({
+    key: "markerIndexState",
+    default: 0,
+});
+
+export const isLoopState = atom<boolean>({
+    key: "isLoopState",
+    default: false,
+});
