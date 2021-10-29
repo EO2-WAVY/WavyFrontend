@@ -31,7 +31,7 @@ const Footer = () => {
                     <InfoText>
                         본 프로젝트는 SW 마에스트로 사업의 지원을 받아
                         만들어졌습니다. <br />
-                        문의 : wavy@example.com Team EO2
+                        문의 : wavy.dance.info@gmail.com Team EO2
                     </InfoText>
 
                     <ScrollTopBtn onClick={ScrollToTop}>
