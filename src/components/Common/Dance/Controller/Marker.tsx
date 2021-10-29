@@ -35,7 +35,7 @@ const Marker = ({
 
     // loop를 위해
     const { isLoop } = useIsLoop();
-    const { toggleLoopMarker } = useMarker();
+    const { toggleLoopMarker, updateLoopMarkerXPos } = useMarker();
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
@@ -58,10 +58,10 @@ const Marker = ({
     };
 
     const onDrag = (e: globalThis.MouseEvent | TouchEvent | PointerEvent) => {
-        // e.stopPropagation();
         e.stopImmediatePropagation();
         const { left } = (e.target as HTMLElement).getBoundingClientRect();
         setXPos(left);
+        updateLoopMarkerXPos(index, left);
     };
 
     // 삭제를 위해

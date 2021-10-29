@@ -27,7 +27,26 @@ const useMarker = () => {
         [markerIndex, markers, setMarkerIndex, setMarkers]
     );
 
+    const updateLoopMarkerXPos = (id: number, xPos: number) => {
+        setLoopMarkers((prevMarkers) => {
+            const tempMarkers = [...prevMarkers];
+            const resultMarkers = tempMarkers.map((marker) => {
+                const tempMarker = { ...marker };
+
+                if (tempMarker.index === id) {
+                    console.log(xPos);
+                    tempMarker.clientX = xPos;
+                }
+                return tempMarker;
+            });
+
+            return resultMarkers;
+        });
+        console.log(loopMarkers);
+    };
+
     const toggleLoopMarker = (id: number) => {
+        let isAppend: boolean = false;
         let clickedMarker: IMarker;
 
         setMarkers((prevMarkers) => {
@@ -39,6 +58,7 @@ const useMarker = () => {
                     tempMarker.isLoopMarker = !isLoopMarker;
 
                     // loop marker 처리를 위해
+                    isAppend = !isLoopMarker;
                     clickedMarker = tempMarker;
                 }
                 return tempMarker;
@@ -46,6 +66,16 @@ const useMarker = () => {
 
             return reseultMarkers;
         });
+
+        // 기존 반복 마커 삭제일 시
+        if (!isAppend) {
+            setLoopMarkers((prev) =>
+                prev.filter(
+                    (loopMarker) => loopMarker.index !== clickedMarker.index
+                )
+            );
+            return;
+        }
 
         // 반복 마커가 2개 이상일 시
         if (loopMarkers.length >= 2) {
@@ -90,7 +120,14 @@ const useMarker = () => {
         setMarkers([]);
     }, [setMarkers]);
 
-    return { markers, addMarker, removeMarker, clearMarkers, toggleLoopMarker };
+    return {
+        markers,
+        addMarker,
+        updateLoopMarkerXPos,
+        removeMarker,
+        clearMarkers,
+        toggleLoopMarker,
+    };
 };
 
 export default useMarker;
