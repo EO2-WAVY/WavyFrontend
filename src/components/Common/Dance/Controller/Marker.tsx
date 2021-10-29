@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useState, MouseEvent } from "react";
+import { RefObject, useCallback, useState, MouseEvent, useRef } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -32,6 +32,7 @@ const Marker = ({
     const [xPos, setXPos] = useState<number>(clientX);
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
+    const markerRef = useRef<HTMLDivElement>(null);
 
     // loop를 위해
     const { isLoop } = useIsLoop();
@@ -57,10 +58,11 @@ const Marker = ({
         seekToWithPos(xPos);
     };
 
-    const onDrag = (e: globalThis.MouseEvent | TouchEvent | PointerEvent) => {
-        e.stopImmediatePropagation();
-        const { left } = (e.target as HTMLElement).getBoundingClientRect();
+    const onDragEnd = () => {
+        if (!markerRef.current) return;
+        const { left } = markerRef.current.getBoundingClientRect();
         setXPos(left);
+        seekToWithPos(left);
         updateLoopMarkerXPos(index, left);
     };
 
@@ -76,6 +78,7 @@ const Marker = ({
     return (
         <Wrapper
             initialXPos={clientX}
+            ref={markerRef}
             onClick={onClick}
             variants={markerFadeInDownVariants}
             initial="initial"
@@ -83,7 +86,8 @@ const Marker = ({
             exit="exit"
             drag={"x"}
             dragTransition={{ power: 0 }}
-            onDrag={onDrag}
+            
+            onDragEnd={onDragEnd}
             dragConstraints={wrapperRef}
             whileHover={{ scale: 1.2 }}
             onHoverStart={() => {

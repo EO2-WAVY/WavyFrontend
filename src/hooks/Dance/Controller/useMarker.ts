@@ -34,7 +34,6 @@ const useMarker = () => {
                 const tempMarker = { ...marker };
 
                 if (tempMarker.index === id) {
-                    console.log(xPos);
                     tempMarker.clientX = xPos;
                 }
                 return tempMarker;
@@ -42,7 +41,7 @@ const useMarker = () => {
 
             return resultMarkers;
         });
-        console.log(loopMarkers);
+        // console.log(loopMarkers);
     };
 
     const toggleLoopMarker = (id: number) => {
