@@ -63,3 +63,8 @@ export const isLoopState = atom<boolean>({
     key: "isLoopState",
     default: false,
 });
+
+export const loopMarkersState = atom<IMarker[]>({
+    key: "loopMarkersState",
+    default: [],
+});
