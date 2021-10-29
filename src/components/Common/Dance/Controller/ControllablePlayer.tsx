@@ -29,6 +29,10 @@ const ControllablePlayer = ({
         setIsPlaying(false);
     };
 
+    const onProgress = ({ playedSeconds }: { [key: string]: number }) => {
+        if (!isUserVideo) setPlayedSecond(playedSeconds);
+    };
+
     // for analysis
     const isUserVideo = controllableVideoState !== refVideoRefState;
     const { isUserVideoPlaying, setIsUserVideoPlaying } = useUserVideoPlaying();
@@ -58,9 +62,7 @@ const ControllablePlayer = ({
                 progressInterval={50}
                 playing={isUserVideo ? isUserVideoPlaying : isPlaying}
                 playbackRate={playbackRate}
-                onProgress={({ playedSeconds }) => {
-                    if (!isUserVideo) setPlayedSecond(playedSeconds);
-                }}
+                onProgress={onProgress}
                 onEnded={onEnded}
                 onBuffer={onBuffer}
                 onBufferEnd={onBufferEnd}
