@@ -2,9 +2,10 @@ import Icon from "components/Common/Icon";
 import useNotification from "hooks/Common/useNotification";
 import useIsLoop from "hooks/Dance/Controller/useIsLoop";
 import useMarker from "hooks/Dance/Controller/useMarker";
+import { useEffect } from "react";
 
 const LoopButton = () => {
-    const { isLoop, toggleIsLoop } = useIsLoop();
+    const { isLoop, toggleIsLoop, setIsLoop } = useIsLoop();
     const { markers } = useMarker();
     const { addNotification } = useNotification();
 
@@ -19,6 +20,12 @@ const LoopButton = () => {
 
         toggleIsLoop();
     };
+
+    useEffect(() => {
+        return () => {
+            setIsLoop(false);
+        };
+    });
 
     return (
         <Icon

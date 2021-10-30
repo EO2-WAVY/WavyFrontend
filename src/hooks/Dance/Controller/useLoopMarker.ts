@@ -64,8 +64,6 @@ const useLoopMarker = () => {
             setLoopMarkers((prev) => {
                 const tempLoopMarkers = [...prev];
                 deletedMarker = tempLoopMarkers.shift();
-
-                console.log(xPos);
                 return [...tempLoopMarkers, newMarker];
             });
 

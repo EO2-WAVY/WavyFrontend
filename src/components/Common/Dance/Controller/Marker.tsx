@@ -52,7 +52,6 @@ const Marker = ({
     );
 
     const onClick = () => {
-        console.log("나클릭");
         if (isLoop) {
             toggleLoopMarker(index, xPos);
         }
@@ -88,7 +87,6 @@ const Marker = ({
             drag={"x"}
             dragTransition={{ power: 0 }}
             onDragEnd={onDragEnd}
-            // dragConstraints={controllerProgressbarRef && controllerProgressbarRef}
             whileHover={{ scale: 1.2 }}
             onHoverStart={() => {
                 setIsHover(true);
