@@ -1,54 +1,75 @@
-import { RefObject, useCallback, useState, MouseEvent } from "react";
+import { useCallback, useState, MouseEvent, useRef } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
 import Icon from "components/Common/Icon";
-import { IMarker } from "store/Common";
+import { IMarker } from "store/Dance/Controller";
 import {
     markerContextVariants,
     markerFadeInDownVariants,
+    markerIconWrapperVariants,
 } from "constants/motions";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useToggle from "hooks/Common/useToggle";
+import useIsLoop from "hooks/Dance/Controller/useIsLoop";
+import useLoopMarker from "hooks/Dance/Controller/useLoopMarker";
+import useControllerProgressbarRef from "hooks/Dance/Controller/useControllerProgressbarRef";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
     handleClose: () => void;
-    wrapperRef: RefObject<HTMLDivElement>;
 }
 const Marker = ({
     index,
     rvDuration,
-    wrapperRef,
+    isLoopMarker,
     clientX,
     handleClose,
 }: MarkerProps) => {
     // 시점 이동을 위해
+    const { controllerProgressbarRef } = useControllerProgressbarRef();
     const [xPos, setXPos] = useState<number>(clientX);
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
+    const markerRef = useRef<HTMLDivElement>(null);
+
+    // loop를 위해
+    const { isLoop } = useIsLoop();
+    const { toggleLoopMarker, updateLoopMarkerXPos } = useLoopMarker();
+    const [isDragging, setIsDragging] = useState<boolean>(false);
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
-            if (!wrapperRef.current) return;
+            if (!controllerProgressbarRef) return;
 
             const seekTime =
-                (clientX * rvDuration) / wrapperRef.current.clientWidth;
+                (clientX * rvDuration) / controllerProgressbarRef.clientWidth;
 
             seekTo(seekTime);
             userSeekTo(seekTime);
         },
-        [rvDuration, seekTo, userSeekTo, wrapperRef]
+        [controllerProgressbarRef, rvDuration, seekTo, userSeekTo]
     );
 
     const onClick = () => {
+        if (isLoop && !isDragging) {
+            toggleLoopMarker(index, xPos);
+        }
         seekToWithPos(xPos);
     };
 
-    const onDrag = (e: globalThis.MouseEvent | TouchEvent | PointerEvent) => {
-        const { left } = (e.target as HTMLElement).getBoundingClientRect();
+    const onDragStart = () => {
+        setIsDragging(true);
+    };
+
+    const onDragEnd = () => {
+        if (!markerRef.current) return;
+        const { left } = markerRef.current.getBoundingClientRect();
+        setTimeout(() => setIsDragging(false), 50);
         setXPos(left);
+        seekToWithPos(left);
+        updateLoopMarkerXPos(index, left);
     };
 
     // 삭제를 위해
@@ -63,15 +84,16 @@ const Marker = ({
     return (
         <Wrapper
             initialXPos={clientX}
-            onClick={onClick}
+            ref={markerRef}
+            onClick={isDragging ? undefined : onClick}
             variants={markerFadeInDownVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             drag={"x"}
             dragTransition={{ power: 0 }}
-            onDrag={onDrag}
-            dragConstraints={wrapperRef}
+            onDragStart={onDragStart}
+            onDragEnd={onDragEnd}
             whileHover={{ scale: 1.2 }}
             onHoverStart={() => {
                 setIsHover(true);
@@ -80,7 +102,29 @@ const Marker = ({
                 setIsHover(false);
             }}
         >
-            <Icon name="controller_active_marker" id="svg" />
+            <AnimatePresence exitBeforeEnter>
+                {isLoopMarker ? (
+                    <IconWrapper
+                        key={`${index} loop marker`}
+                        variants={markerIconWrapperVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <Icon name="controller_loop_marker" />
+                    </IconWrapper>
+                ) : (
+                    <IconWrapper
+                        key={`${index} normal marker`}
+                        variants={markerIconWrapperVariants}
+                        initial="initial"
+                        animate="animate"
+                        exit="exit"
+                    >
+                        <Icon name="controller_active_marker" />
+                    </IconWrapper>
+                )}
+            </AnimatePresence>
 
             <AnimatePresence exitBeforeEnter>
                 {isHover && (
@@ -116,14 +160,18 @@ const Wrapper = styled(motion.div)<WrapperProps>`
     transform-origin: bottom;
     cursor: grab;
 
-    & > svg {
-        width: 100%;
-        height: 100%;
-        z-index: -1;
-    }
-
     &:active {
         cursor: grabbing;
+    }
+`;
+
+const IconWrapper = styled(motion.div)`
+    width: 100%;
+    height: 100%;
+
+    & > svg {
+        height: 100%;
+        z-index: -1;
     }
 `;
 

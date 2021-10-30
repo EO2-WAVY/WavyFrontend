@@ -10,14 +10,18 @@ import usePlayerInstance, {
     PlayerState,
 } from "hooks/Dance/Controller/usePlayerInstance";
 import usePlayerVolume from "hooks/Dance/usePlayerVolume";
+import useIsLoop from "hooks/Dance/Controller/useIsLoop";
+import useLoopMarker from "hooks/Dance/Controller/useLoopMarker";
 
 interface ControllablePlayerProps {
     url: string;
+    rvDuration?: number;
     controllableVideoState?: PlayerState;
 }
 
 const ControllablePlayer = ({
     url,
+    rvDuration,
     controllableVideoState = refVideoRefState,
 }: ControllablePlayerProps) => {
     const { setPlayer } = usePlayerInstance(controllableVideoState);
@@ -25,8 +29,18 @@ const ControllablePlayer = ({
     const { setPlayedSecond } = useControllerPlayedSecond();
     const { playbackRate } = usePlaybackRate();
 
+    const { isLoop } = useIsLoop();
+    const { applyLoopAtOnProgress } = useLoopMarker();
+
     const onEnded = () => {
         setIsPlaying(false);
+    };
+
+    const onProgress = ({ playedSeconds }: { [key: string]: number }) => {
+        if (isUserVideo) return;
+        setPlayedSecond(playedSeconds);
+        if (isLoop && rvDuration)
+            applyLoopAtOnProgress(playedSeconds, rvDuration);
     };
 
     // for analysis
@@ -58,9 +72,7 @@ const ControllablePlayer = ({
                 progressInterval={50}
                 playing={isUserVideo ? isUserVideoPlaying : isPlaying}
                 playbackRate={playbackRate}
-                onProgress={({ playedSeconds }) => {
-                    if (!isUserVideo) setPlayedSecond(playedSeconds);
-                }}
+                onProgress={onProgress}
                 onEnded={onEnded}
                 onBuffer={onBuffer}
                 onBufferEnd={onBufferEnd}

@@ -1,15 +1,23 @@
 import { useCallback } from "react";
-import { useRecoilState } from "recoil";
-import { IMarker, markerIndexState, markersState } from "store/Common";
+import { useRecoilState, useSetRecoilState } from "recoil";
+import {
+    IMarker,
+    loopMarkersState,
+    markerIndexState,
+    markersState,
+} from "store/Dance/Controller";
+import useIsLoop from "./useIsLoop";
 
 const useMarker = () => {
     const [markers, setMarkers] = useRecoilState(markersState);
     const [markerIndex, setMarkerIndex] = useRecoilState(markerIndexState);
+    const setLoopMarkers = useSetRecoilState(loopMarkersState);
 
     const addMarker = useCallback(
         ({ clientX }: addMarkerProps) => {
             const newMarker: IMarker = {
                 index: markerIndex,
+                isLoopMarker: false,
                 clientX: clientX,
             };
 
@@ -19,9 +27,18 @@ const useMarker = () => {
         [markerIndex, markers, setMarkerIndex, setMarkers]
     );
 
+    const { setIsLoop } = useIsLoop();
     const removeMarker = (id: number) => {
+        if (markers.length <= 2) {
+            setIsLoop(false);
+        }
+
         setMarkers((prevMarkers) =>
             prevMarkers.filter((marker) => marker.index !== id)
+        );
+
+        setLoopMarkers((prevMarkers) =>
+            prevMarkers.filter((loopMarker) => loopMarker.index !== id)
         );
     };
 
@@ -29,7 +46,13 @@ const useMarker = () => {
         setMarkers([]);
     }, [setMarkers]);
 
-    return { markers, addMarker, removeMarker, clearMarkers };
+    return {
+        markers,
+        setMarkers,
+        addMarker,
+        removeMarker,
+        clearMarkers,
+    };
 };
 
 export default useMarker;

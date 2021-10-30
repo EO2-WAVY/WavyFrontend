@@ -264,7 +264,6 @@ export const markerContextVariants: Variants = {
     initial: {
         y: 15,
         x: -15,
-        
         opacity: 0,
         transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
@@ -272,7 +271,6 @@ export const markerContextVariants: Variants = {
     animate: {
         y: 0,
         x: 0,
-        
         opacity: 1,
         transition: { duration: 0.6, ease: defaultEasing },
         willChange: "opacity, transform",
@@ -280,7 +278,27 @@ export const markerContextVariants: Variants = {
     exit: {
         y: 15,
         x: -15,
-        
+        opacity: 0,
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+};
+
+export const markerIconWrapperVariants: Variants = {
+    initial: {
+        scale: 0.8,
+        opacity: 0,
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    animate: {
+        scale: 1,
+        opacity: 1,
+        transition: { duration: 0.3, ease: defaultEasing },
+        willChange: "opacity, transform",
+    },
+    exit: {
+        scale: 0.8,
         opacity: 0,
         transition: { duration: 0.3, ease: defaultEasing },
         willChange: "opacity, transform",

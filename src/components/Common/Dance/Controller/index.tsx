@@ -17,6 +17,7 @@ import GraphButton from "./GraphButton";
 import SoundSlider from "./SoundSlider";
 import MarkerButton from "./MarkerButton";
 import MarkerWrapper from "./MarkerWrapper";
+import LoopButton from "./LoopButton";
 
 interface ControllerProps {
     rvDuration: string;
@@ -60,9 +61,7 @@ const Controller = ({
                 </ControlLeft>
 
                 <ControlRight>
-                    {/* <Icon name="controller_loop" />
-                    <Icon name="controller_marker" /> */}
-                    
+                    <LoopButton />
                     <MarkerButton />
                     {isAnalysis && <GraphButton />}
                     <MirroredButton />

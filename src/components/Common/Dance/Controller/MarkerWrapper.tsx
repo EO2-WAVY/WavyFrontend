@@ -1,6 +1,7 @@
-import useMarker from "hooks/Dance/Controller/useMarker";
-import { useEffect, useRef } from "react";
+import { useEffect } from "react";
 import styled from "styled-components";
+
+import useMarker from "hooks/Dance/Controller/useMarker";
 import Marker from "./Marker";
 
 interface MarkerWrapperProps {
@@ -8,7 +9,6 @@ interface MarkerWrapperProps {
 }
 
 const MarkerWrapper = ({ rvDuration }: MarkerWrapperProps) => {
-    const markerWrapperRef = useRef<HTMLDivElement>(null);
     const { markers, removeMarker, clearMarkers } = useMarker();
 
     useEffect(() => {
@@ -18,13 +18,13 @@ const MarkerWrapper = ({ rvDuration }: MarkerWrapperProps) => {
     }, [clearMarkers]);
 
     return (
-        <Wrapper ref={markerWrapperRef}>
+        <Wrapper>
             {markers.map((marker) => (
                 <Marker
                     key={marker.index}
                     rvDuration={rvDuration}
-                    wrapperRef={markerWrapperRef}
                     index={marker.index}
+                    isLoopMarker={marker.isLoopMarker}
                     clientX={marker.clientX}
                     handleClose={() => removeMarker(marker.index)}
                 />
