@@ -13,6 +13,12 @@ export const userVideoRefState = atom<ReactPlayer | null | undefined>({
     dangerouslyAllowMutability: true,
 });
 
+export const controllerProgressBarRefState = atom<HTMLDivElement | null>({
+    key: "controllerProgressBarRefState",
+    default: null,
+    dangerouslyAllowMutability: true,
+});
+
 export const isPlayingState = atom<boolean>({
     key: "isPlayingState",
     default: false,

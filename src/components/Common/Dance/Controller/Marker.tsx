@@ -1,4 +1,4 @@
-import { RefObject, useCallback, useState, MouseEvent, useRef } from "react";
+import { useCallback, useState, MouseEvent, useRef } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -6,7 +6,7 @@ import Icon from "components/Common/Icon";
 import { IMarker } from "store/Dance/Controller";
 import {
     markerContextVariants,
-    markerFadeInDownVariants, 
+    markerFadeInDownVariants,
     markerIconWrapperVariants,
 } from "constants/motions";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
@@ -14,21 +14,21 @@ import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useToggle from "hooks/Common/useToggle";
 import useIsLoop from "hooks/Dance/Controller/useIsLoop";
 import useLoopMarker from "hooks/Dance/Controller/useLoopMarker";
+import useControllerProgressbarRef from "hooks/Dance/Controller/useControllerProgressbarRef";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
     handleClose: () => void;
-    wrapperRef: RefObject<HTMLDivElement>;
 }
 const Marker = ({
     index,
     rvDuration,
     isLoopMarker,
-    wrapperRef,
     clientX,
     handleClose,
 }: MarkerProps) => {
     // 시점 이동을 위해
+    const { controllerProgressbarRef } = useControllerProgressbarRef();
     const [xPos, setXPos] = useState<number>(clientX);
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
@@ -40,15 +40,15 @@ const Marker = ({
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
-            if (!wrapperRef.current) return;
+            if (!controllerProgressbarRef) return;
 
             const seekTime =
-                (clientX * rvDuration) / wrapperRef.current.clientWidth;
+                (clientX * rvDuration) / controllerProgressbarRef.clientWidth;
 
             seekTo(seekTime);
             userSeekTo(seekTime);
         },
-        [rvDuration, seekTo, userSeekTo, wrapperRef]
+        [controllerProgressbarRef, rvDuration, seekTo, userSeekTo]
     );
 
     const onClick = () => {
@@ -87,7 +87,7 @@ const Marker = ({
             drag={"x"}
             dragTransition={{ power: 0 }}
             onDragEnd={onDragEnd}
-            dragConstraints={wrapperRef}
+            // dragConstraints={controllerProgressbarRef && controllerProgressbarRef}
             whileHover={{ scale: 1.2 }}
             onHoverStart={() => {
                 setIsHover(true);

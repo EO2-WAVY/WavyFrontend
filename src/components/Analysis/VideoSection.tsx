@@ -11,6 +11,7 @@ import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
 import { IAnalysis } from "hooks/api/useGetAnalysis";
+import { fmToSeconds } from "utils/formatting/formattingDuration";
 
 interface VideoSectionProps {
     analysis: IAnalysis;
@@ -31,7 +32,10 @@ const VideoSection = ({ analysis }: VideoSectionProps) => {
     return (
         <AnimateSharedLayout>
             <RefVideoWrapper showLayoutBtn={false}>
-                <ControllablePlayer url={analysis.refVideo.rvUrl} />
+                <ControllablePlayer
+                    url={analysis.refVideo.rvUrl}
+                    rvDuration={fmToSeconds(analysis.refVideo.rvDuration)}
+                />
             </RefVideoWrapper>
 
             <WebcamWrapper

@@ -4,7 +4,7 @@ import { fmMmSsToSs } from "utils/formatting/formattingDuration";
 
 interface WrongSectionsProps {
     wrong_sections: string[];
-    barRef: RefObject<HTMLDivElement>;
+    barRef: HTMLDivElement | null;
     rvDuration: number;
 }
 
@@ -16,8 +16,8 @@ const WrongSections = ({
     const [wrongSections, setWrongSections] = useState<WrongSection[]>([]);
 
     useEffect(() => {
-        if (!barRef.current) return;
-        const { clientWidth } = barRef.current;
+        if (!barRef) return;
+        const { clientWidth } = barRef;
 
         const timeToClientX = (time: number): number => {
             return (time * clientWidth) / rvDuration;

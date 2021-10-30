@@ -15,11 +15,13 @@ import useLoopMarker from "hooks/Dance/Controller/useLoopMarker";
 
 interface ControllablePlayerProps {
     url: string;
+    rvDuration?: number;
     controllableVideoState?: PlayerState;
 }
 
 const ControllablePlayer = ({
     url,
+    rvDuration,
     controllableVideoState = refVideoRefState,
 }: ControllablePlayerProps) => {
     const { setPlayer } = usePlayerInstance(controllableVideoState);
@@ -37,7 +39,8 @@ const ControllablePlayer = ({
     const onProgress = ({ playedSeconds }: { [key: string]: number }) => {
         if (isUserVideo) return;
         setPlayedSecond(playedSeconds);
-        if (isLoop) applyLoopAtOnProgress(playedSeconds);
+        if (isLoop && rvDuration)
+            applyLoopAtOnProgress(playedSeconds, rvDuration);
     };
 
     // for analysis

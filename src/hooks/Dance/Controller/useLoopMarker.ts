@@ -83,9 +83,9 @@ const useLoopMarker = () => {
         }
     };
 
-    const applyLoopAtOnProgress = (playedSeconds: number) => {
+    const applyLoopAtOnProgress = (playedSeconds: number, rvDuration: number) => {
         if (loopMarkers.length < 2) return;
-        console.log("loop");
+        console.log(rvDuration);
     };
 
     return {
