@@ -5,7 +5,7 @@ import useMarker from "hooks/Dance/Controller/useMarker";
 import { useEffect } from "react";
 
 const LoopButton = () => {
-    const { isLoop, toggleIsLoop, setIsLoop } = useIsLoop();
+    const { isLoop, toggleIsLoop, resetIsLoop } = useIsLoop();
     const { markers } = useMarker();
     const { addNotification } = useNotification();
 
@@ -23,9 +23,9 @@ const LoopButton = () => {
 
     useEffect(() => {
         return () => {
-            setIsLoop(false);
+            resetIsLoop();
         };
-    }, [setIsLoop]);
+    }, [resetIsLoop]);
 
     return (
         <Icon

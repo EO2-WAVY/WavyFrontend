@@ -1,3 +1,4 @@
+import useMarker from "hooks/Dance/Controller/useMarker";
 import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fmMmSsToSs } from "utils/formatting/formattingDuration";
@@ -14,6 +15,7 @@ const WrongSections = ({
     rvDuration,
 }: WrongSectionsProps) => {
     const [wrongSections, setWrongSections] = useState<WrongSection[]>([]);
+    const { addMarker } = useMarker();
 
     useEffect(() => {
         if (!barRef) return;
@@ -34,9 +36,10 @@ const WrongSections = ({
                 startPos,
                 width: endPos - startPos,
             };
+            addMarker({ clientX: startPos });
             setWrongSections((prev) => [...prev, newWrongSection]);
         });
-    }, [barRef, rvDuration, wrong_sections]);
+    }, [addMarker, barRef, rvDuration, wrong_sections]);
 
     return (
         <>

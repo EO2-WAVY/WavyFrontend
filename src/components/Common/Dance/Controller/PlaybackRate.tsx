@@ -1,4 +1,4 @@
-import { MouseEvent } from "react";
+import { MouseEvent, useEffect } from "react";
 import styled from "styled-components";
 import { AnimatePresence, motion } from "framer-motion";
 
@@ -14,7 +14,14 @@ const PlaybackRate = () => {
         toggleIsShowing();
     };
 
-    const { playbackRate, onClickPlaybackRate } = usePlaybackRate();
+    const { playbackRate, onClickPlaybackRate, resetPlaybackRate } =
+        usePlaybackRate();
+
+    useEffect(() => {
+        return () => {
+            resetPlaybackRate();
+        };
+    }, [resetPlaybackRate]);
 
     return (
         <Span onClick={onClickWrapper} playbackRate={playbackRate}>
