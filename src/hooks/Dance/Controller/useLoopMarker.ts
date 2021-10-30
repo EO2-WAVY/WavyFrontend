@@ -1,6 +1,13 @@
 import { useRecoilState } from "recoil";
-import { IMarker, loopMarkersState } from "store/Dance/Controller";
+import {
+    IMarker,
+    loopMarkersState,
+    refVideoRefState,
+    userVideoRefState,
+} from "store/Dance/Controller";
+import useControllerProgressbarRef from "./useControllerProgressbarRef";
 import useMarker from "./useMarker";
+import usePlayerInstance from "./usePlayerInstance";
 
 const useLoopMarker = () => {
     const { setMarkers } = useMarker();
@@ -8,28 +15,22 @@ const useLoopMarker = () => {
 
     const updateLoopMarkerXPos = (id: number, xPos: number) => {
         setLoopMarkers((prevMarkers) => {
-            const tempMarkers = [...prevMarkers];
-            const resultMarkers = tempMarkers.map((marker) => {
+            return prevMarkers.map((marker) => {
                 const tempMarker = { ...marker };
-
                 if (tempMarker.index === id) {
                     tempMarker.clientX = xPos;
                 }
                 return tempMarker;
             });
-
-            return resultMarkers;
         });
-        // console.log(loopMarkers);
     };
 
-    const toggleLoopMarker = (id: number) => {
+    const toggleLoopMarker = (id: number, xPos: number) => {
         let isAppend: boolean = false;
-        let clickedMarker: IMarker;
 
+        // 일반 마커 속성 변경
         setMarkers((prevMarkers) => {
-            const tempMarkers = [...prevMarkers];
-            const reseultMarkers = tempMarkers.map((marker) => {
+            return prevMarkers.map((marker) => {
                 const tempMarker = { ...marker };
                 if (tempMarker.index === id) {
                     const { isLoopMarker } = tempMarker;
@@ -37,23 +38,24 @@ const useLoopMarker = () => {
 
                     // loop marker 처리를 위해
                     isAppend = !isLoopMarker;
-                    clickedMarker = tempMarker;
                 }
                 return tempMarker;
             });
-
-            return reseultMarkers;
         });
 
         // 기존 반복 마커 삭제일 시
         if (!isAppend) {
             setLoopMarkers((prev) =>
-                prev.filter(
-                    (loopMarker) => loopMarker.index !== clickedMarker.index
-                )
+                prev.filter((loopMarker) => loopMarker.index !== id)
             );
             return;
         }
+
+        const newMarker: IMarker = {
+            index: id,
+            clientX: xPos,
+            isLoopMarker: true,
+        };
 
         // 반복 마커가 2개 이상일 시
         if (loopMarkers.length >= 2) {
@@ -62,7 +64,9 @@ const useLoopMarker = () => {
             setLoopMarkers((prev) => {
                 const tempLoopMarkers = [...prev];
                 deletedMarker = tempLoopMarkers.shift();
-                return [...tempLoopMarkers, clickedMarker];
+
+                console.log(xPos);
+                return [...tempLoopMarkers, newMarker];
             });
 
             // 해제된 반복 마커를 적용
@@ -79,13 +83,60 @@ const useLoopMarker = () => {
                 return resultMarkers;
             });
         } else {
-            setLoopMarkers((prev) => [...prev, clickedMarker]);
+            setLoopMarkers((prev) => [...prev, newMarker]);
         }
     };
 
-    const applyLoopAtOnProgress = (playedSeconds: number, rvDuration: number) => {
+    const { controllerProgressbarRef } = useControllerProgressbarRef();
+    const { seekTo } = usePlayerInstance(refVideoRefState);
+    const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
+
+    const getTimeWithPos = (
+        xPos: number,
+        rvDuration: number,
+        clientWidth: number
+    ) => {
+        return (xPos * rvDuration) / clientWidth;
+    };
+
+    const applyLoopAtOnProgress = (
+        playedSeconds: number,
+        rvDuration: number
+    ) => {
         if (loopMarkers.length < 2) return;
-        console.log(rvDuration);
+        if (!controllerProgressbarRef) return;
+
+        const tempLoopMarkers = [...loopMarkers];
+        const [{ clientX: minXPos }, { clientX: maxXPos }] =
+            tempLoopMarkers.sort((st, nd) => {
+                if (st.clientX > nd.clientX) {
+                    return 1;
+                }
+                if (st.clientX < nd.clientX) {
+                    return -1;
+                }
+                return 0;
+            });
+
+        const minTime = getTimeWithPos(
+            minXPos,
+            rvDuration,
+            controllerProgressbarRef.clientWidth
+        );
+        const maxTime = getTimeWithPos(
+            maxXPos,
+            rvDuration,
+            controllerProgressbarRef.clientWidth
+        );
+
+        if (playedSeconds < minTime) {
+            seekTo(minTime);
+            userSeekTo(minTime);
+        }
+        if (maxTime < playedSeconds) {
+            seekTo(minTime);
+            userSeekTo(minTime);
+        }
     };
 
     return {

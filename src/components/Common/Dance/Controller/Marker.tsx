@@ -52,8 +52,9 @@ const Marker = ({
     );
 
     const onClick = () => {
+        console.log("나클릭");
         if (isLoop) {
-            toggleLoopMarker(index);
+            toggleLoopMarker(index, xPos);
         }
         seekToWithPos(xPos);
     };
