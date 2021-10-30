@@ -39,7 +39,8 @@ const WrongSections = ({
             addMarker({ clientX: startPos });
             setWrongSections((prev) => [...prev, newWrongSection]);
         });
-    }, [addMarker, barRef, rvDuration, wrong_sections]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [barRef, rvDuration, wrong_sections]);
 
     return (
         <>
