@@ -37,6 +37,7 @@ const Marker = ({
     // loop를 위해
     const { isLoop } = useIsLoop();
     const { toggleLoopMarker, updateLoopMarkerXPos } = useLoopMarker();
+    const [isDragging, setIsDragging] = useState<boolean>(false);
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
@@ -52,15 +53,20 @@ const Marker = ({
     );
 
     const onClick = () => {
-        if (isLoop) {
+        if (isLoop && !isDragging) {
             toggleLoopMarker(index, xPos);
         }
         seekToWithPos(xPos);
     };
 
+    const onDragStart = () => {
+        setIsDragging(true);
+    };
+
     const onDragEnd = () => {
         if (!markerRef.current) return;
         const { left } = markerRef.current.getBoundingClientRect();
+        setTimeout(() => setIsDragging(false), 50);
         setXPos(left);
         seekToWithPos(left);
         updateLoopMarkerXPos(index, left);
@@ -79,13 +85,14 @@ const Marker = ({
         <Wrapper
             initialXPos={clientX}
             ref={markerRef}
-            onClick={onClick}
+            onClick={isDragging ? undefined : onClick}
             variants={markerFadeInDownVariants}
             initial="initial"
             animate="animate"
             exit="exit"
             drag={"x"}
             dragTransition={{ power: 0 }}
+            onDragStart={onDragStart}
             onDragEnd={onDragEnd}
             whileHover={{ scale: 1.2 }}
             onHoverStart={() => {

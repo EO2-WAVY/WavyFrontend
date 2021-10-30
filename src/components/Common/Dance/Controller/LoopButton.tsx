@@ -25,7 +25,7 @@ const LoopButton = () => {
         return () => {
             setIsLoop(false);
         };
-    });
+    }, [setIsLoop]);
 
     return (
         <Icon
