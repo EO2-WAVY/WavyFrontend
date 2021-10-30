@@ -108,7 +108,6 @@ const AnalysisVideoCard = ({
 export default AnalysisVideoCard;
 
 const Wrapper = styled(motion.article)`
-    /* width: 260px; */
     width: calc(25% - 8px);
     flex-shrink: 0;
     display: flex;

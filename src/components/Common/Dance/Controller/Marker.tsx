@@ -6,14 +6,14 @@ import Icon from "components/Common/Icon";
 import { IMarker } from "store/Dance/Controller";
 import {
     markerContextVariants,
-    markerFadeInDownVariants,
+    markerFadeInDownVariants, 
     markerIconWrapperVariants,
 } from "constants/motions";
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import useToggle from "hooks/Common/useToggle";
 import useIsLoop from "hooks/Dance/Controller/useIsLoop";
-import useMarker from "hooks/Dance/Controller/useMarker";
+import useLoopMarker from "hooks/Dance/Controller/useLoopMarker";
 
 interface MarkerProps extends IMarker {
     rvDuration: number;
@@ -36,7 +36,7 @@ const Marker = ({
 
     // loop를 위해
     const { isLoop } = useIsLoop();
-    const { toggleLoopMarker, updateLoopMarkerXPos } = useMarker();
+    const { toggleLoopMarker, updateLoopMarkerXPos } = useLoopMarker();
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
@@ -86,7 +86,6 @@ const Marker = ({
             exit="exit"
             drag={"x"}
             dragTransition={{ power: 0 }}
-            
             onDragEnd={onDragEnd}
             dragConstraints={wrapperRef}
             whileHover={{ scale: 1.2 }}
