@@ -84,6 +84,7 @@ const AnalysisVideoCard = ({
                                 exit="exit"
                             />
                             <AnalysisCardInfo
+                                key={`${anSeq} card info`}
                                 anSeq={anSeq}
                                 rvDuration={fmToSeconds(
                                     rvDuration ? rvDuration : "0"
