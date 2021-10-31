@@ -22,9 +22,9 @@ const useMarker = () => {
             };
 
             setMarkerIndex((prev) => prev + 1);
-            setMarkers([...markers, newMarker]);
+            setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
         },
-        [markerIndex, markers, setMarkerIndex, setMarkers]
+        [markerIndex, setMarkerIndex, setMarkers]
     );
 
     const { setIsLoop } = useIsLoop();
