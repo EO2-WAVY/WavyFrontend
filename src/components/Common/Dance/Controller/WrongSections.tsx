@@ -36,7 +36,7 @@ const WrongSections = ({
                 startPos,
                 width: endPos - startPos,
             };
-            console.log("dd");
+            
             addMarker({ clientX: startPos });
             setWrongSections((prev) => [...prev, newWrongSection]);
         });

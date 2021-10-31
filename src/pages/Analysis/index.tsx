@@ -35,7 +35,6 @@ const Analysis = () => {
 
     if (!data) return <></>;
 
-    console.log(data);
     return (
         <Wrapper
             variants={defaultPageFadeInVariants}
