@@ -73,9 +73,9 @@ const AnalysisCardInfo = ({
             title: "성공적으로 삭제되었습니다",
             description: "",
         });
-        setIsDeleted(true);
         deleteAnalysis();
         mutate();
+        setIsDeleted(true);
     };
 
     const onClickDelete = useConfirm({
@@ -102,15 +102,24 @@ const AnalysisCardInfo = ({
                     <Icon name="common_refresh" />
                     <span>분석</span>
                 </NavElem>
-                <NavDownload
-                    href={isDeleted ? "" : donwloadUrl}
-                    download={!isDeleted}
-                    target={isDeleted ? "" : "_blank"}
-                    onClick={onClickShare}
-                >
-                    <Icon name="common_share" />
-                    <span>공유</span>
-                </NavDownload>
+
+                {isDeleted ? (
+                    <NavElem onClick={onClickShare}>
+                        <Icon name="common_share" />
+                        <span>공유</span>
+                    </NavElem>
+                ) : (
+                    <NavDownload
+                        href={donwloadUrl}
+                        download
+                        target="_blank"
+                        onClick={onClickShare}
+                    >
+                        <Icon name="common_share" />
+                        <span>공유</span>
+                    </NavDownload>
+                )}
+
                 <NavElem onClick={onClickDelete}>
                     <Icon name="common_trash" />
                     <span>삭제</span>
