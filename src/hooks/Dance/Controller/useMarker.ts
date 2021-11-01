@@ -10,21 +10,24 @@ import useIsLoop from "./useIsLoop";
 
 const useMarker = () => {
     const [markers, setMarkers] = useRecoilState(markersState);
-    const [markerIndex, setMarkerIndex] = useRecoilState(markerIndexState);
+    const setMarkerIndex = useSetRecoilState(markerIndexState);
     const setLoopMarkers = useSetRecoilState(loopMarkersState);
 
     const addMarker = useCallback(
         ({ clientX }: addMarkerProps) => {
             const newMarker: IMarker = {
-                index: markerIndex,
+                index: 0,
                 isLoopMarker: false,
                 clientX: clientX,
             };
 
-            setMarkerIndex((prev) => prev + 1);
+            setMarkerIndex((prev) => {
+                newMarker.index = prev + 1;
+                return prev + 1;
+            });
             setMarkers((prevMarkers) => [...prevMarkers, newMarker]);
         },
-        [markerIndex, setMarkerIndex, setMarkers]
+        [setMarkerIndex, setMarkers]
     );
 
     const { setIsLoop } = useIsLoop();
