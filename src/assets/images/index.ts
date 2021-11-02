@@ -1,5 +1,10 @@
 // Analysis
+import { ReactComponent as analysis_lHandWrong } from "assets/images/Analysis/lHandWrong.svg";
+import { ReactComponent as analysis_lLegWrong } from "assets/images/Analysis/lLegWrong.svg";
+import { ReactComponent as analysis_pictogram } from "assets/images/Analysis/pictogram.svg";
 import { ReactComponent as analysis_recorded } from "assets/images/Analysis/recorded.svg";
+import { ReactComponent as analysis_rHandWrong } from "assets/images/Analysis/rHandWrong.svg";
+import { ReactComponent as analysis_rLegWrong } from "assets/images/Analysis/rLegWrong.svg";
 import { ReactComponent as analysis_webcam } from "assets/images/Analysis/webcam.svg";
 
 // Auth
@@ -73,7 +78,12 @@ import { ReactComponent as nav_sign_before } from "assets/images/Nav/sign_before
 import { ReactComponent as setting_edit } from "assets/images/Setting/edit.svg";
 
 export {
+    analysis_lHandWrong,
+    analysis_lLegWrong,
+    analysis_pictogram,
     analysis_recorded,
+    analysis_rHandWrong,
+    analysis_rLegWrong,
     analysis_webcam,
     auth_facebook,
     auth_google,
