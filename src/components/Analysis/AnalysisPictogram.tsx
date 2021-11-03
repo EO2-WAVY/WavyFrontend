@@ -44,7 +44,6 @@ const AnalysisPictogram = ({ anSeq }: AnalysisPictogramProps) => {
             }
             return false;
         };
-        console.log(flooredPlayedSecond);
 
         setLHandWrong(isWrong(5, 7, 9));
         setRHandWrong(isWrong(6, 8, 10));
@@ -61,11 +60,23 @@ const AnalysisPictogram = ({ anSeq }: AnalysisPictogramProps) => {
                     animate="animate"
                     exit="exit"
                 >
-                    <Icon name="analysis_pictogram" />
-                    {isLHandWrong && <Icon name="analysis_lHandWrong" />}
-                    {isRHandWrong && <Icon name="analysis_rHandWrong" />}
-                    {isLLegWrong && <Icon name="analysis_lLegWrong" />}
-                    {isRLegWrong && <Icon name="analysis_rLegWrong" />}
+                    <Icon name="analysis_pictogram" className="display" />
+                    <Icon
+                        name="analysis_lHandWrong"
+                        className={isLHandWrong ? "display" : ""}
+                    />
+                    <Icon
+                        name="analysis_rHandWrong"
+                        className={isRHandWrong ? "display" : ""}
+                    />
+                    <Icon
+                        name="analysis_lLegWrong"
+                        className={isLLegWrong ? "display" : ""}
+                    />
+                    <Icon
+                        name="analysis_rLegWrong"
+                        className={isRLegWrong ? "display" : ""}
+                    />
                 </Wrapper>
             )}
         </AnimatePresence>
@@ -92,5 +103,11 @@ const Wrapper = styled(motion.div)`
     & > svg {
         position: absolute;
         height: 70%;
+        opacity: 0;
+        transition: opacity 0.25s;
+
+        &.display {
+            opacity: 1;
+        }
     }
 `;
