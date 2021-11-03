@@ -28,6 +28,7 @@ const AnalysisPictogram = ({ anSeq }: AnalysisPictogramProps) => {
             index3: number
         ): boolean => {
             if (!data) return false;
+            if (!data.simularityJson.analyzes) return false;
             const { analyzes } = data.simularityJson;
             const { scores } = analyzes[flooredPlayedSecond]
                 ? analyzes[flooredPlayedSecond]
