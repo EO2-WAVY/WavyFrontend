@@ -1,5 +1,10 @@
 // Analysis
+import { ReactComponent as analysis_lHandWrong } from "assets/images/Analysis/lHandWrong.svg";
+import { ReactComponent as analysis_lLegWrong } from "assets/images/Analysis/lLegWrong.svg";
+import { ReactComponent as analysis_pictogram } from "assets/images/Analysis/pictogram.svg";
 import { ReactComponent as analysis_recorded } from "assets/images/Analysis/recorded.svg";
+import { ReactComponent as analysis_rHandWrong } from "assets/images/Analysis/rHandWrong.svg";
+import { ReactComponent as analysis_rLegWrong } from "assets/images/Analysis/rLegWrong.svg";
 import { ReactComponent as analysis_webcam } from "assets/images/Analysis/webcam.svg";
 
 // Auth
@@ -29,6 +34,7 @@ import { ReactComponent as common_trash } from "assets/images/Common/trash.svg";
 // Controller
 import { ReactComponent as controller_active_marker } from "assets/images/Controller/active_marker.svg";
 import { ReactComponent as controller_back_key } from "assets/images/Controller/back_key.svg";
+import { ReactComponent as controller_close_marker } from "assets/images/Controller/close_marker.svg";
 import { ReactComponent as controller_forward_key } from "assets/images/Controller/forward_key.svg";
 import { ReactComponent as controller_fullscreen } from "assets/images/Controller/fullscreen.svg";
 import { ReactComponent as controller_graph } from "assets/images/Controller/graph.svg";
@@ -72,7 +78,12 @@ import { ReactComponent as nav_sign_before } from "assets/images/Nav/sign_before
 import { ReactComponent as setting_edit } from "assets/images/Setting/edit.svg";
 
 export {
+    analysis_lHandWrong,
+    analysis_lLegWrong,
+    analysis_pictogram,
     analysis_recorded,
+    analysis_rHandWrong,
+    analysis_rLegWrong,
     analysis_webcam,
     auth_facebook,
     auth_google,
@@ -94,6 +105,7 @@ export {
     common_trash,
     controller_active_marker,
     controller_back_key,
+    controller_close_marker,
     controller_forward_key,
     controller_fullscreen,
     controller_graph,

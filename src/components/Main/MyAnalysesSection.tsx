@@ -121,7 +121,6 @@ const CarouselBox = styled(motion.div)`
     display: flex;
     align-items: flex-start;
     overflow: scroll;
-    gap: 24px;
 
     -ms-overflow-style: none; /* IE and Edge */
     scrollbar-width: none; /* Firefox */

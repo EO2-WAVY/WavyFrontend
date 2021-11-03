@@ -84,6 +84,7 @@ const AnalysisVideoCard = ({
                                 exit="exit"
                             />
                             <AnalysisCardInfo
+                                key={`${anSeq} card info`}
                                 anSeq={anSeq}
                                 rvDuration={fmToSeconds(
                                     rvDuration ? rvDuration : "0"
@@ -108,9 +109,10 @@ const AnalysisVideoCard = ({
 export default AnalysisVideoCard;
 
 const Wrapper = styled(motion.article)`
-    width: 260px;
+    width: calc(25% - 8px);
     flex-shrink: 0;
     display: flex;
+    margin: 0 4px;
     flex-direction: column;
     align-items: center;
 

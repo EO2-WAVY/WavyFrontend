@@ -11,6 +11,8 @@ import useGetAnalysisUserVideo from "hooks/api/useGetAnalysisUserVideo";
 import useControllerPlaying from "hooks/Dance/Controller/useControllerPlaying";
 import useUserVideoPlaying from "hooks/Analysis/useUserVideoPlayingState";
 import { IAnalysis } from "hooks/api/useGetAnalysis";
+import { fmToSeconds } from "utils/formatting/formattingDuration";
+import AnalysisPictogram from "./AnalysisPictogram";
 
 interface VideoSectionProps {
     analysis: IAnalysis;
@@ -31,7 +33,10 @@ const VideoSection = ({ analysis }: VideoSectionProps) => {
     return (
         <AnimateSharedLayout>
             <RefVideoWrapper showLayoutBtn={false}>
-                <ControllablePlayer url={analysis.refVideo.rvUrl} />
+                <ControllablePlayer
+                    url={analysis.refVideo.rvUrl}
+                    rvDuration={fmToSeconds(analysis.refVideo.rvDuration)}
+                />
             </RefVideoWrapper>
 
             <WebcamWrapper
@@ -40,6 +45,8 @@ const VideoSection = ({ analysis }: VideoSectionProps) => {
                 animate="animate"
                 exit="exit"
             >
+                <AnalysisPictogram anSeq={analysis.anSeq} />
+
                 <AnimatePresence exitBeforeEnter>
                     <UserWrapper
                         isWebcamView={isWebcamView}
@@ -81,6 +88,7 @@ const WebcamWrapper = styled(motion.section)`
     width: 100%;
     height: 100%;
     overflow: hidden;
+    box-shadow: ${({ theme }) => theme.shadow.over};
 `;
 
 const UserWrapper = styled.div<{ isWebcamView: boolean }>`

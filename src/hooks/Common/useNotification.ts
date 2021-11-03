@@ -38,9 +38,9 @@ const useNotification = () => {
     );
 
     const removeNotification = (id: number) => {
-        setNotifications((prevNotifications) => {
-            return prevNotifications.filter((noti) => noti.index !== id);
-        });
+        setNotifications((prevNotifications) =>
+            prevNotifications.filter((noti) => noti.index !== id)
+        );
     };
 
     return { addNotification, removeNotification, notifications };

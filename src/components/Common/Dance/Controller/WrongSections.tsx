@@ -1,10 +1,11 @@
-import { RefObject, useEffect, useState } from "react";
+import useMarker from "hooks/Dance/Controller/useMarker";
+import { useEffect, useState } from "react";
 import styled from "styled-components";
 import { fmMmSsToSs } from "utils/formatting/formattingDuration";
 
 interface WrongSectionsProps {
     wrong_sections: string[];
-    barRef: RefObject<HTMLDivElement>;
+    barRef: HTMLDivElement | null;
     rvDuration: number;
 }
 
@@ -14,10 +15,11 @@ const WrongSections = ({
     rvDuration,
 }: WrongSectionsProps) => {
     const [wrongSections, setWrongSections] = useState<WrongSection[]>([]);
+    const { addMarker } = useMarker();
 
     useEffect(() => {
-        if (!barRef.current) return;
-        const { clientWidth } = barRef.current;
+        if (!barRef) return;
+        const { clientWidth } = barRef;
 
         const timeToClientX = (time: number): number => {
             return (time * clientWidth) / rvDuration;
@@ -34,8 +36,11 @@ const WrongSections = ({
                 startPos,
                 width: endPos - startPos,
             };
+            
+            addMarker({ clientX: startPos });
             setWrongSections((prev) => [...prev, newWrongSection]);
         });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [barRef, rvDuration, wrong_sections]);
 
     return (

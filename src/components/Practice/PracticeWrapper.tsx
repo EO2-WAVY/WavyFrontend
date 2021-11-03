@@ -1,3 +1,6 @@
+import { useEffect } from "react";
+import styled from "styled-components";
+
 import Controller from "components/Common/Dance/Controller";
 import ControllablePlayer from "components/Common/Dance/Controller/ControllablePlayer";
 import RefVideoWrapper from "components/Common/Dance/RefVideoWrapper";
@@ -7,9 +10,7 @@ import { defaultPageFadeInVariants } from "constants/motions";
 import { AnimateSharedLayout, motion } from "framer-motion";
 import useGetRefVideo from "hooks/api/useGetRefVideo";
 import usePracticeStartTime from "hooks/Practice/usePracticeStartTime";
-import { useEffect } from "react";
-import styled from "styled-components";
-
+import { fmToSeconds } from "utils/formatting/formattingDuration";
 interface PracticeWrapperProps {
     rvSeq: string;
 }
@@ -33,7 +34,10 @@ const PracticeWrapper = ({ rvSeq }: PracticeWrapperProps) => {
         >
             <AnimateSharedLayout>
                 <RefVideoWrapper showLayoutBtn={false}>
-                    <ControllablePlayer url={data.refVideo.rvUrl} />
+                    <ControllablePlayer
+                        url={data.refVideo.rvUrl}
+                        rvDuration={fmToSeconds(data.refVideo.rvDuration)}
+                    />
                 </RefVideoWrapper>
 
                 <WrappedControllableWebcam />

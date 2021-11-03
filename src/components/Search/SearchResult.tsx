@@ -36,7 +36,7 @@ const SearchResult = ({ query }: SearchResultProps) => {
             {isEmpty ? (
                 <NoneData query={query} key={query} />
             ) : (
-                <AnimatePresence exitBeforeEnter>
+                <>
                     <VideoCardWrapper
                         variants={staggerHalf}
                         key={query}
@@ -54,7 +54,7 @@ const SearchResult = ({ query }: SearchResultProps) => {
 
                     {isReachingEnd && <NoMoreSection key="NoMoreSection" />}
                     <div key="observerTarget" ref={setTarget}></div>
-                </AnimatePresence>
+                </>
             )}
         </AnimatePresence>
     );

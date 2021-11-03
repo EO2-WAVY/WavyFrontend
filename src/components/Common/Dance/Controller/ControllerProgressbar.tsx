@@ -2,7 +2,6 @@ import {
     MouseEvent as ReactMouseEvent,
     useCallback,
     useEffect,
-    useRef,
     useState,
 } from "react";
 import styled from "styled-components";
@@ -13,6 +12,7 @@ import useControllerPlayedSecond from "hooks/Dance/Controller/useControllerPlaye
 import usePlayerInstance from "hooks/Dance/Controller/usePlayerInstance";
 import { refVideoRefState, userVideoRefState } from "store/Dance/Controller";
 import WrongSections from "./WrongSections";
+import useControllerProgressbarRef from "hooks/Dance/Controller/useControllerProgressbarRef";
 
 interface ControllerProgressbarProps {
     rvDuration: number;
@@ -23,7 +23,8 @@ const ControllerProgressbar = ({
     rvDuration,
     wrong_sections = [],
 }: ControllerProgressbarProps) => {
-    const barRef = useRef<HTMLDivElement>(null);
+    const { controllerProgressbarRef, setControllerProgressbarRef } =
+        useControllerProgressbarRef();
     const { seekTo } = usePlayerInstance(refVideoRefState);
     const { seekTo: userSeekTo } = usePlayerInstance(userVideoRefState);
 
@@ -35,15 +36,15 @@ const ControllerProgressbar = ({
 
     const seekToWithPos = useCallback(
         (clientX: number) => {
-            if (!barRef.current) return;
+            if (!controllerProgressbarRef) return;
 
             const seekTime =
-                (clientX * rvDuration) / barRef.current.clientWidth;
+                (clientX * rvDuration) / controllerProgressbarRef.clientWidth;
 
             seekTo(seekTime);
             userSeekTo(seekTime);
         },
-        [rvDuration, seekTo, userSeekTo]
+        [controllerProgressbarRef, rvDuration, seekTo, userSeekTo]
     );
 
     const onClick = (e: ReactMouseEvent<HTMLDivElement>) => {
@@ -78,12 +79,16 @@ const ControllerProgressbar = ({
     }, [isMouseDown, onMouseUp, seekToWithPos]);
 
     return (
-        <Outer onClick={onClick} ref={barRef} onMouseDown={onMouseDown}>
+        <Outer
+            onClick={onClick}
+            ref={setControllerProgressbarRef}
+            onMouseDown={onMouseDown}
+        >
             <Inner percent={percent} />
             {wrong_sections && (
                 <WrongSections
                     wrong_sections={wrong_sections}
-                    barRef={barRef}
+                    barRef={controllerProgressbarRef}
                     rvDuration={rvDuration}
                 />
             )}

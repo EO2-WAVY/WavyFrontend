@@ -90,10 +90,11 @@ const Wrapper = styled(motion.section)`
     width: 100%;
     display: flex;
     flex-direction: column;
+    align-items: center;
 `;
 
 const AnalysesVideoWrapper = styled(motion.div)`
-    width: 100%;
+    width: 90%;
     min-height: 400px;
     margin-bottom: 50px;
 
