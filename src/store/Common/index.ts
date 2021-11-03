@@ -16,4 +16,3 @@ export const notificationIndexState = atom<number>({
     key: "notificationIndexState",
     default: 0,
 });
-
