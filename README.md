@@ -59,53 +59,61 @@ Wavy - Client </h1>
 
 ## Features
 
-|                                                              Main - Video card                                                              |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 2 37 28](https://user-images.githubusercontent.com/26461307/140163003-00b4cc90-82e9-45e7-849e-24929dfab220.gif) |
+|                                                     Main - Video card                                                     |
+| :-----------------------------------------------------------------------------------------------------------------------: |
+| ![main-video-card](https://user-images.githubusercontent.com/26461307/140163003-00b4cc90-82e9-45e7-849e-24929dfab220.gif) |
 
-|                                                                 Main - Tag                                                                  |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 2 42 27](https://user-images.githubusercontent.com/26461307/140163545-80ff0f4d-ad06-44c2-a483-eebf1dad528b.gif) |
+|                                                     Main - Tag                                                     |
+| :----------------------------------------------------------------------------------------------------------------: |
+| ![main-tag](https://user-images.githubusercontent.com/26461307/140163545-80ff0f4d-ad06-44c2-a483-eebf1dad528b.gif) |
 
-|                                                              Main - Tag scroll                                                              |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 2 52 03](https://user-images.githubusercontent.com/26461307/140165458-586631a1-4fdc-417a-b659-854294f94be9.gif) |
+|                                                     Main - Tag scroll                                                     |
+| :-----------------------------------------------------------------------------------------------------------------------: |
+| ![main-tag-scroll](https://user-images.githubusercontent.com/26461307/140165458-586631a1-4fdc-417a-b659-854294f94be9.gif) |
 
-|                                                                 Practice                                                                 |
-| :--------------------------------------------------------------------------------------------------------------------------------------: |
-| ![연습하기_드래그갔다가_다시연습](https://user-images.githubusercontent.com/26461307/140170137-82781c9f-a504-46ff-be9d-cd9441cd22bf.gif) |
+|                                                      Practice                                                      |
+| :----------------------------------------------------------------------------------------------------------------: |
+| ![practice](https://user-images.githubusercontent.com/26461307/140170137-82781c9f-a504-46ff-be9d-cd9441cd22bf.gif) |
 
-|                                                      Challenge - start                                                      |
+|                                                     Challenge - start                                                     |
+| :-----------------------------------------------------------------------------------------------------------------------: |
+| ![challenge-start](https://user-images.githubusercontent.com/26461307/140171096-c2b7442c-262b-4f74-9350-2e733fee3de9.gif) |
+
+|                                                     Challenge - end                                                     |
+| :---------------------------------------------------------------------------------------------------------------------: |
+| ![challenge-end](https://user-images.githubusercontent.com/26461307/140171317-597d9b01-03ba-4c4d-90b1-7a45f9b37669.gif) |
+
+|                                                      Analysis                                                      |
+| :----------------------------------------------------------------------------------------------------------------: |
+| ![analysis](https://user-images.githubusercontent.com/26461307/140172018-1a760c56-bef8-442d-bc47-47b2e2c408c2.gif) |
+
+|                                                     Player - Marker and Loop                                                     |
+| :------------------------------------------------------------------------------------------------------------------------------: |
+| ![player-marker-and-loop](https://user-images.githubusercontent.com/26461307/140172663-1307ca38-d239-4886-a026-1b834738af60.gif) |
+
+|                                                     Review - Statistics                                                     |
 | :-------------------------------------------------------------------------------------------------------------------------: |
-| ![도전하기_메인까지](https://user-images.githubusercontent.com/26461307/140171096-c2b7442c-262b-4f74-9350-2e733fee3de9.gif) |
+| ![review-statistics](https://user-images.githubusercontent.com/26461307/140385202-77be3dbb-df9e-481b-9ac2-1b6fc710c544.gif) |
 
-|                                                       Challenge - end                                                        |
-| :--------------------------------------------------------------------------------------------------------------------------: |
-| ![도전하기_메인까지1](https://user-images.githubusercontent.com/26461307/140171317-597d9b01-03ba-4c4d-90b1-7a45f9b37669.gif) |
+|                                                     Reviw - Search                                                      |
+| :---------------------------------------------------------------------------------------------------------------------: |
+| ![review-search](https://user-images.githubusercontent.com/26461307/140385210-bb9ec854-6f8f-4164-9f13-aa417574a767.gif) |
 
-|                                                                  Analysis                                                                   |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 3 35 25](https://user-images.githubusercontent.com/26461307/140172018-1a760c56-bef8-442d-bc47-47b2e2c408c2.gif) |
+|                                                      Search                                                      |
+| :--------------------------------------------------------------------------------------------------------------: |
+| ![search](https://user-images.githubusercontent.com/26461307/140166336-60db2217-dc90-4cbd-84c1-e2f885a21492.gif) |
 
-|                                                          Player - Marker and Loop                                                           |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 3 40 15](https://user-images.githubusercontent.com/26461307/140172663-1307ca38-d239-4886-a026-1b834738af60.gif) |
+|                                                      Sign in                                                      |
+| :---------------------------------------------------------------------------------------------------------------: |
+| ![sign-in](https://user-images.githubusercontent.com/26461307/140167024-66f3692d-2b5d-4483-b2f6-7cf12b72f5ae.gif) |
 
-|                                                                   Search                                                                    |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 2 58 06](https://user-images.githubusercontent.com/26461307/140166336-60db2217-dc90-4cbd-84c1-e2f885a21492.gif) |
+|                                                     Storage - Empty                                                     |
+| :---------------------------------------------------------------------------------------------------------------------: |
+| ![storage-empty](https://user-images.githubusercontent.com/26461307/140167345-e10ca4c8-e3b8-4c06-a248-080a9da5a008.gif) |
 
-|                                                                   Sign in                                                                   |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 3 02 49](https://user-images.githubusercontent.com/26461307/140167024-66f3692d-2b5d-4483-b2f6-7cf12b72f5ae.gif) |
-
-|                                                               Storage - Empty                                                               |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 3 05 15](https://user-images.githubusercontent.com/26461307/140167345-e10ca4c8-e3b8-4c06-a248-080a9da5a008.gif) |
-
-|                                                                    Store                                                                    |
-| :-----------------------------------------------------------------------------------------------------------------------------------------: |
-| ![화면 기록 2021-11-04 오전 3 06 13](https://user-images.githubusercontent.com/26461307/140167564-d73ee23e-cb53-424c-8fa1-4eafe6ff7cbf.gif) |
+|                                                      Store                                                      |
+| :-------------------------------------------------------------------------------------------------------------: |
+| ![store](https://user-images.githubusercontent.com/26461307/140167564-d73ee23e-cb53-424c-8fa1-4eafe6ff7cbf.gif) |
 
 ## Directory Structure
 
@@ -138,6 +146,58 @@ src
 
 ```
 
+기본적으로 [파일 유형 이후 라우트에 의한 분리](https://ko.reactjs.org/docs/faq-structure.html#grouping-by-file-type)를 적용하였습니다.
+
+## Data Structure
+
+상태 관리 라이브러리는 [Recoil](https://recoiljs.org/)을 사용하였습니다.
+
+#### store
+
+```ts
+// ConcreteDecorator
+import { atom } from "recoil";
+
+export const isPlayingState = atom<boolean>({
+    key: "isPlayingState",
+    default: false,
+});
+```
+
+#### hook
+
+```ts
+// Decorator
+import { useRecoilState } from "recoil";
+import { isPlayingState } from "store";
+
+const useControllerPlaying = () => {
+    const [isPlaying, setIsPlaying] = useRecoilState(isPlayingState);
+    const toggleIsPlaying = () => setIsPlaying((prev) => !prev);
+
+    return { isPlaying, setIsPlaying, toggleIsPlaying };
+};
+
+export default useControllerPlaying;
+```
+
+#### component
+
+```tsx
+// Component
+import useControllerPlaying from "hooks/useControllerPlaying";
+
+const someComponent = () => {
+    const { isPlaying, toggleIsPlaying } = useControllerPlaying();
+
+    return (
+        <button onClick={toggleIsPlaying}>{isPlaying ? "중지" : "재생"}</button>
+    );
+};
+```
+
+전역 상태의 경우 store의 atom을 `ConcreteDecorator` 로써, hook을 `Decorator` 로써, Component를 `Component` 역할로써 [Decorator 패턴](https://ko.wikipedia.org/wiki/%EB%8D%B0%EC%BD%94%EB%A0%88%EC%9D%B4%ED%84%B0_%ED%8C%A8%ED%84%B4)을 각색하여 개발 및 사용하였습니다.
+
 ## Developer
 
 해당 프로젝트는 [소프트웨어 마에스트로](https://www.swmaestro.org/sw/main/main.do) 사업의 지원을 받아 개발되었습니다.
@@ -148,4 +208,4 @@ src
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+**Wavy**는 [MIT License](https://opensource.org/licenses/MIT)를 적용하고 있습니다.
