@@ -5,11 +5,12 @@ import Slider from "rc-slider";
 import usePlayerVolume from "hooks/Dance/usePlayerVolume";
 
 const SoundSlider = () => {
-    const { playerVolume, onPlayerVolumeChange } = usePlayerVolume();
+    const { playerVolume, onPlayerVolumeChange, togglePlayerVolume } =
+        usePlayerVolume();
 
     return (
         <Wrapper>
-            <Icon name="controller_sound" />
+            <Icon name="controller_sound" onClick={togglePlayerVolume} />
 
             <SliderWrapper>
                 <Slider

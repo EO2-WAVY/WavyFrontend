@@ -16,7 +16,7 @@ const AnalysesEmpty = ({ query }: AnalysesEmptyProps) => {
         >
             {typeof query === "string" && query !== "" ? (
                 <span>
-                    <strong>{query}</strong>를 도전한 기록은 없습니다
+                    <strong>{query}</strong>(을)를 도전한 기록은 없습니다
                 </span>
             ) : (
                 <span>
